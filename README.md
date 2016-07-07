@@ -1,4 +1,4 @@
 MultEdu
 =======
 
-Source of the MultEdu lecure preparation in LaTeX
+Source of the MultEdu lecture preparation in LaTeX
