@@ -1,0 +1,51 @@
+%%% Basically, the following main formats can be generated from the same single source
+%%% 1./ A book-like handout for the students. To produce it, define \def\LBook{YES}
+%%% It has several sub-formats
+%%% 		1.a/ A 'memoir-book' format: a LateX-'memoir'  based format, a really beautiful, printable, book quality format
+%%% 		1.b/ A 'simple-book' format: a LateX-'book' based format,  uses simple (less fancy, but cusomizable) 'book' format
+%%% 		1.c/ A 'WEB-book' format: browsable (optimized for screen appearence), also for mobile devices
+%%% The another main purpose for producing slides for the lectures
+%%% 2./ A presentation (slide series) for the lecturer. To produce it, undefine (i.e. comment out) \def\LBook{YES}
+%%% It has several sub-formats
+%%%		 2.a/ A 'beamer-slide' format: to produce beautiful slides, for presentation; using 'Beamer-LaTeX'
+%%%		 2.b/ A 'WEB-slide' format, browsable (optimized for screen appearence), also for mobile devices, using AcroTeX
+%%%
+%%% The base format is LaTeX-Beamer, so in non-beamer case beamerarticle class is used
+%%% In the book formats, extra material (relative to the slides) will also be printed
+	
+%% Define the lecture-specific strings, by commenting/uncommenting the option lines
+%% These are the output specifications, declare them first
+%\def\LectureEncoding{latin1}			% By default, it is  UTF-8
+
+\def\LectureLanguage{magyar}
+%% Define the author, title and publisher
+%% Please use accents, no encoding and fonts defined
+\ifx\LectureLanguage\undefined
+	% printing in Hungarian
+	\def\LectureAuthor{V\'egh J\'anos}
+	\def\LectureTitle{Hogyan használjuk a MultEdu csomagot} 
+	\def\LectureSubtitle{(Hogyan készítsünk érdekes tananyagot)} %opcionális
+%	\def\LecturePublisher{Miskolci Egyetem \dots és Informatikai Kara}
+\else
+	% In English
+	\def\LectureAuthor{J\'anos V\'egh}
+	\def\LectureTitle{How to use package MultEdu}
+	\def\LectureSubtitle{(How to prepare interesting and attractive teaching material)} %Optional
+%	\def\LecturePublisher{Miskolc University Faculty of \dots and Informatics}
+\fi %% LectureLanguage
+\def\LectureRevision{V0.01 (using \MERevision) \at 2016.07.15}
+\def\LectureEmail{Janos.Vegh\at unideb.hu}
+	
+	
+%% Define the bibliography file
+%% By default, no file assumed. Allows for language-dependent bibliographies
+\ifx\LectureLanguage\undefined
+\def\LectureBibliography{src/Bibliography}
+\else
+
+\IfFileExists{src/Bibliographyhu}
+{\def\LectureBibliography{src/Bibliography,src/Bibliographyhu}}
+{\def\LectureBibliography{src/Bibliography}}
+\fi
+
+	
