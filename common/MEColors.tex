@@ -1,1 +1,79 @@
+%%%%%%%%%%%%%%%%%%%%%%
+%% Colors used by MultEdu
+%%%%%%%%%%%%%%%%%%%%%%
 
+\definecolor{ForestGreen}{rgb}{0.0, 0.4, 0.0}
+\definecolor{bronze}{rgb}{0.8, 0.5, 0.2}
+\definecolor{uclagold}{rgb}{1.0, 0.7, 0.0}
+%%% Maybe for listings
+%\definecolor{wheat}{rgb}{0.96, 0.87, 0.7}
+%\definecolor{vanilla}{rgb}{0.95, 0.9, 0.67}
+\definecolor{timberwolf}{rgb}{0.86, 0.84, 0.82}
+\definecolor{platinum}{rgb}{0.9, 0.89, 0.89}
+\definecolor{pearl}{rgb}{0.94, 0.92, 0.84}
+%\definecolor{navajowhite}{rgb}{1.0, 0.87, 0.68}
+\definecolor{moccasin}{rgb}{0.98, 0.92, 0.84}
+\definecolor{cream}{rgb}{1.0, 0.99, 0.82}
+\definecolor{burntorange}{rgb}{0.8, 0.33, 0.0}
+\definecolor{bronze}{rgb}{0.8, 0.5, 0.2}
+\definecolor{yellowgreen}{HTML}{ADFF2F}
+\definecolor{coral}{rgb}{1.0, 0.5, 0.31}
+\definecolor{deeppeach}{rgb}{1.0, 0.8, 0.64}
+%
+%%Maybe for boxes
+\definecolor{desertsand}{rgb}{0.93, 0.79, 0.69}
+%\definecolor{deepchampagne}{rgb}{0.98, 0.84, 0.65}
+\definecolor{celadon}{rgb}{0.67, 0.88, 0.69}
+\definecolor{almond}{rgb}{0.94, 0.87, 0.8}
+\definecolor{NavyBlue}{rgb}{0.0, 0.0, 0.5}
+\definecolor{RoyalBlue}{HTML}{4169E1}
+\definecolor{firebrick}{rgb}{0.7, 0.13, 0.13}
+%
+%
+%%Maybe for headings
+\definecolor{uclagold}{rgb}{1.0, 0.7, 0.0}
+\definecolor{darkmagenta}{rgb}{0.55, 0.0, 0.55}
+\definecolor{ultramarine}{rgb}{0.07, 0.04, 0.56}
+\definecolor{champagne}{rgb}{0.97, 0.91, 0.81}
+\definecolor{mediumchampagne}{rgb}{0.95, 0.9, 0.67}
+\definecolor{bubbles}{rgb}{0.91, 1.0, 1.0}
+\definecolor{ivory}{rgb}{1.0, 1.0, 0.94}
+\definecolor{goldenrod}{rgb}{0.85, 0.65, 0.13}
+\definecolor{ufogreen}{rgb}{0.24, 0.82, 0.44}
+
+\ifx\LectureForWEB\undefined
+ 	\colorlet{HighlightColor}{bronze}
+	\definecolor{webgreen}{rgb}{0,.5,0}
+	\definecolor{webbrown}{rgb}{.6,0,0}
+	\definecolor{webyellow}{rgb}{0.98,0.92,0.73}
+	\definecolor{webgray}{rgb}{.753,.753,.753}
+	\definecolor{webblue}{rgb}{0,0,.8}
+\else
+ 	\colorlet{HighlightColor}{uclagold}
+\fi
+
+
+%% Allow for redefining used colors
+\ifx\HeadingColor\undefined
+% \colorlet{HeadingColor}{NavyBlue}
+% \colorlet{HeadingColor}{RoyalBlue}
+  \colorlet{HeadingColor}{ForestGreen}
+\fi
+\ifx\ListingColor\undefined
+  \colorlet{ListingColor}{ivory}
+\fi
+\ifx\BookColor\undefined
+  \colorlet{BookColor}{NavyBlue}
+\fi
+	\colorlet{SeparatorColor}{burntorange}
+
+%%%
+%%% Colors for tables
+%%%
+%%\colorlet{tableheadcolor}{HeadingColor!25} % Table header colour = 25% gray
+\colorlet{tableheadcolor}{HeadingColor!25} % Table header colour = 25% gray
+\newcommand{\headcol}{\rowcolor{tableheadcolor}} %
+\colorlet{tablerowcolor}{HeadingColor!10} % Table row separator colour = 10% gray
+\newcommand{\rowcol}{\rowcolor{tablerowcolor}} %
+
+\MEDebugMessage{MEColors loaded}
