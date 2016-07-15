@@ -1,1 +1,22 @@
+%% This is main file for Demo of  the MultEdu system
+%% It is ONLY available in  printed hardcopy form (both in PDF)
+%% Due to difficulties and differences between environments,
+%% all auxiliary and output files are put in the root.
+%% However, sources are stored outside, in the /src subdirectory
+%% Printed formats, based on memoir;
+% \input{../../common/formats/memoir_eBook} % An eBook format for students (mainly mobile devices)
+%  \input{../../common/formats/memoir_WEB}	% A WEB browsable, landscape, big letter version
+ \input{../../common/formats/memoir_A4Fancy}	% A fancy memoir book
+
+%% This is the beginning of the user document
+\begin{document}
+\nocite{*}
+	\MEfrontmatter
+	\MEmainmatter
+	\index{this}
+	\gls{computer}\gls{abc}\gls{def}
+	\input{src/Organizing}	%% How to organize a document
+	\MEbackmatter
+\end{document}
+
 
