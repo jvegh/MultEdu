@@ -1,0 +1,79 @@
+% %
+% % The macros for the MultEdu system
+% %
+	\MEDebugMessage{MEMacros: started to load}
+	\def\MERevision{MultEdu V0.01}
+
+%% A simple dual language text handler
+\newcommand{\MEDtext}[2]{ 
+{\ifx\LectureLanguage\undefined#1\else#2\fi}}
+
+%%% This output goes only to the handout, but not to slides
+\newcommand\articleonly[1]{\ifx\LecturePrintable\undefined\else{{\rmfamily #1}}\fi}
+\newcommand\ao[1]{\articleonly{#1}}
+
+
+	% A macro to use ifstrequal 			
+%	\newcommand\myifstrequal{\expandafter\ifstrequal\expandafter}
+	\makeatletter
+	% % % ========= Macros using kexval =========
+	% ========= KEY DEFINITIONS =========
+	\define@key{MEMacros}{color}[green]{\def\ME@color{#1}}
+	\define@key{MEMacros}{decorations}{\def\ME@decorations{#1}}
+	\define@key{MEMacros}{iconheight}[10pt]{\def\ME@color{#1}}
+	\define@key{MEMacros}{language}{\def\ME@language{#1}}
+	\define@key{MEMacros}{number}{\def\ME@number{#1}}
+	\define@key{MEMacros}{options}{\def\ME@options{#1}}
+	\define@key{MEMacros}{plain}[true]{\def\ME@plain{#1}}		
+	\define@key{MEMacros}{resize}[true]{\def\ME@resize{#1}}
+	\define@key{MEMacros}{shrink}[true]{\def\ME@shrink{#1}}		
+	\define@key{MEMacros}{tall}[true]{\def\ME@tall{#1}}
+	\define@key{MEMacros}{title}{\def\ME@title{#1}}
+	\define@boolkey{MEMacros}{wide}[true]{\def\ME@wide{#1}}
+	\define@key{MEMacros}{width}[3cm]{\def\ME@width{#1}}
+	\presetkeys{MEMacros}{color=green}{}%
+	\presetkeys{MEMacros}{number=1}{}%
+	\presetkeys{MEMacros}{plain=false}{}%
+	\presetkeys{MEMacros}{resize=false}{}% 
+	\presetkeys{MEMacros}{shrink=false}{}%
+	\presetkeys{MEMacros}{tall=false}{}% 
+	\presetkeys{MEMacros}{wide=false}{}%
+	\presetkeys{MEMacros}{width=3cm}{}%
+\makeatother
+
+			
+%%%%
+%%% These macros allow conditional printing of ListOfXXX
+%%%%
+\makeatletter
+\AtEndEnvironment{figure}{\gdef\there@is@a@figure{}} 
+\AtEndEnvironment{table}{\gdef\there@is@a@table{}} 
+\AtEndEnvironment{program}{\gdef\there@is@a@program{}} 
+\AtEndDocument{
+\ \par
+	\ifdefined\there@is@a@figure\label{fig:was:used:in:doc}\fi
+	\ifdefined\there@is@a@table\label{tab:was:used:in:doc}\fi
+	\ifdefined\there@is@a@program\label{prog:was:used:in:doc}\fi
+	} 
+\newcommand{\conditionalLoF}{\@ifundefined{r@fig:was:used:in:doc}{}{\clearpage\listoffigures}}%
+\newcommand{\conditionalLoT}{\@ifundefined{r@tab:was:used:in:doc}{}{\clearpage\listoftables}}%
+\newcommand{\conditionalLoP}{\@ifundefined{r@prog:was:used:in:doc}{}{\clearpage\lstlistoflistings}}%
+\makeatother
+
+%%%
+%%% General purpose macros
+%%%
+%%% Make the text argument highlighted
+\makeatletter
+\newcommand{\highlighted}[2][]{%
+	\setkeys{MEMacros}{color=darkmagenta!40!black!80,#1}% 
+	{\textit{\textbf
+			{\textcolor{\expandafter\ME@color\expandafter}{#2}}}}%
+}
+\makeatother % Needed to terminate keyval-related macros
+
+% Used to mark part of text, as 'teletype text'
+\newcommand{\ttext}[1]{{\bfseries\sffamily #1}}
+% Used to mark part of text as 'computer text'
+\newcommand{\ctext}[1]{{\ttfamily\bfseries
+		 #1}}
