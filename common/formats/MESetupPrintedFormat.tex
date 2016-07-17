@@ -1,0 +1,512 @@
+% % Part of Multedu: set up printed PDF formats 
+%% This is the common part, included in the format specific files
+%%% Define macro to print out a message if requested
+\newcommand\MEDebugMessage[1]{\ifx\EnableDebug\undefined \else  \par\message{====MultEdu====:#1}\fi}
+\providecommand\titlepage{}	% % Must define title page format somewhere
+%
+\usepackage{beamerarticle}	% % The source text uses 'beamer' macros
+\usepackage[most]{tcolorbox}	% rounded color boxes
+\usepackage{wallpaper}
+\usepackage[ISBN=978-80-85955-35-4]{ean13isbn}
+\usepackage{url}
+\tcbuselibrary{breakable}
+
+%% Set up options for the session, global, user or none
+% % The user can have his own options in his own /src directory,
+% % otherwise default ones are used
+\IfFileExists{src/Options.tex}
+	{\input{src/Options.tex}
+	\MEDebugMessage{Using user's own options}
+	}	% % User options
+	{\IfFileExists{../../common/MEOptions.tex}
+		{\input{../../common/MEOptions.tex}
+	     \MEDebugMessage{Using system wide options}
+		}	% % Default options
+		{
+	      \MEDebugMessage{Using NO options}
+		} % % No options at all
+	} % Options
+
+%% Set up document-wide settings like title, subtitle, publisher, etc.
+% % The user should have his own definitions in his own /src directory,
+% % otherwise de default ones are used
+\IfFileExists{src/Heading.tex}
+	{\input{src/Heading.tex}}	% % User heading
+	{ %% No heading is to be used
+	      \MEDebugMessage{NO heading information found}
+	} % Options
+
+
+\setsecnumdepth{subsection}
+\settocdepth{subsection}
+\input{../../common/MEColors}		% Set up used colors
+\input{../../common/MELanguages}	% Set up selected language
+
+%\ifx\DisableLogo\undefined
+%%% Define logo images
+%\IfFileExists{fig/LogoImageLeft.png}
+%{\def\LogoImageLeft{fig/LogoImageLeft.png}} % User has own 1st logo
+%{\IfFileExists{../../common/images/LogoImageLeft.png}% No, try to use default logo
+%	{\def\LogoImageLeft{../../common/images/LogoImageLeft.png}}
+%	{}	% % No logo is available
+%}
+%\IfFileExists{fig/LogoImageRight.png}
+%{\def\LogoImageRight{fig/LogoImageRight.png}} % User has own 1st logo
+%{\IfFileExists{../../common/images/LogoImageRight.png}	% No, try to use default logo
+%	{\def\LogoImageRight{../../common/images/LogoImageRight.png}}
+%	{}	% % No logo is available
+%}
+%%% Define logo file, if any
+%\IfFileExists{src/Logo1}
+%{\input{src/Logo1}}	% User has own 1st logo
+%{\IfFileExists{../../common/MELogo1}}
+%{\input{../../common/MELogo1}}
+%{}	% % No logo is available
+%\IfFileExists{src/Logo2}
+%{\input{src/Logo2}}	% User has own 2nd logo
+%{\IfFileExists{../../common/MELogo2}}
+%{\input{../../common/MELogo2}}
+%{}	% % No logo is available
+%\else			
+%\MEDebugMessage{ Logo making disabled}
+%\fi % DisableLogo
+%
+%% % Declare author, title, publisher, etc
+%%\input{src/Heading}			% Define title, publisher, etc
+%%\usepackage{bookman}	% Font type
+%
+\input{../../common/MEPackages}	% Use the common packets
+\input{../../common/MEMacros}
+\usepackage[plainpages=false,pdfpagelabels,colorlinks=true,linkcolor=ForestGreen,citecolor=ForestGreen]{hyperref}
+\usepackage{midfloat}
+	\IfFileExists{src/Glossary.tex}
+	{
+		\input{src/Glossary}
+	}
+	{} % Glossary
+%
+%
+%
+%\ifx\DisableGlossary\undefined
+%	\IfFileExists{src/Glossary.tex}
+%	{
+%		%%\LDebugMessage{Glossary initialized}
+%		\usepackage[toc,acronym]{glossaries}
+%			\ifx\LecturePrintable\undefined\else\makeglossaries\fi
+%			
+%			
+%%%%http://tex.stackexchange.com/questions/20034/glossaries-print-first-occurence-by-using-acronym-desc
+%%\AtBeginDocument{%
+%%	\defglsdisplayfirst[\acronymtype]{%
+%%		\glsentryshort{\glslabel} (\glsentrylong{\glslabel})#4%
+%%%		\glsentryshort{\glslabel} \footnote{\glsentrylong{\glslabel})#4}%
+%%	}%
+%%}
+%			
+%%%% http://archive.cs.uu.nl/mirror/CTAN/macros/latex/contrib/glossaries/samples/sample-custom-acronym.tex
+%%  % This is a sample file to illustrate how to define a custom
+%%  % acronym style. This example defines the acronyms so that on first use
+%%  % they display the short form in the text and with the long form
+%%  % and description in a footnote. In the main body of the
+%%  % document the short form will be displayed in small caps, but in
+%%  % the list of acronyms the short form is displayed in normal
+%%  % capitals. To ensure this, the short form should be written in
+%%  % lower case when the acronym is defined, and \MakeTextUppercase is
+%%  % used when it's displayed in the list of acronyms.
+%%  
+%%  \newacronymstyle{custom-fn}% new style name
+%%  {% Check for long form in case of a mixed glossary
+%%  	\ifglshaslong{\glslabel}{\glsgenacfmt}{\glsgenentryfmt}%
+%%  }%
+%%  {% Style definitions:
+%%  	% User needs to supply the description:
+%%  	\renewcommand*{\GenericAcronymFields}{}%
+%%  	% Need to ensure hyperlinks are switched off on first use:
+%%  	\glshyperfirstfalse
+%%  	% Redefine the commands used by \glsgenacfmt on first use:
+%%  	\renewcommand*{\genacrfullformat}[2]{%
+%%  		\firstacronymfont{\glsentryshort{##1}}##2%
+%%  		\footnote{\glsentrylong{##1}: \glsentrydesc{##1}}%
+%%  	}%
+%%  	\renewcommand*{\Genacrfullformat}[2]{%
+%%  		\firstacronymfont{\Glsentryshort{##1}}##2%
+%%  		\footnote{\glsentrylong{##1}: \glsentrydesc{##1}}%
+%%  	}%
+%%%  	\renewcommand*{\genplacrfullformat}[2]{%
+%%%  		\firstacronymfont{\glsentryshortpl{##1}}##2%
+%%%  		\footnote{\glsentrylongpl{##1}: \glsentrydesc{##1}}%
+%%%  	}%
+%%%  	\renewcommand*{\Genplacrfullformat}[2]{%
+%%%  		\firstacronymfont{\Glsentryshortpl{##1}}##2%
+%%%  		\footnote{\glsentrylongpl{##1}: \glsentrydesc{##1}}%
+%%%  	}%
+%%%  	% Redefine the no-link full forms:
+%%%  	\renewcommand*{\glsentryfull}[1]{%
+%%%  		\glsentrylong{##1}\space(\acronymfont{\glsentryshort{##1}})%
+%%%  	}%
+%%%  	\renewcommand*{\Glsentryfull}[1]{%
+%%%  		\Glsentrylong{##1}\space(\acronymfont{\glsentryshort{##1}})%
+%%%  	}%
+%%%  	\renewcommand*{\glsentryfullpl}[1]{%
+%%%  		\glsentrylongpl{##1}\space(\acronymfont{\glsentryshortpl{##1}})%
+%%%  	}%
+%%%  	\renewcommand*{\Glsentryfullpl}[1]{%
+%%%  		\Glsentrylongpl{##1}\space(\acronymfont{\glsentryshortpl{##1}})%
+%%%  	}%
+%%%  	% Redefine the link full forms:
+%%%  	\renewcommand*{\acrfullfmt}[3]{%
+%%%  		\glslink[##1]{##2}{%
+%%%  			\glsentrylong{##2}##3\space(\acronymfont{\glsentryshort{##2}})%
+%%%  		}%
+%%%  	}%
+%%%  	\renewcommand*{\Acrfullfmt}[3]{%
+%%%  		\glslink[##1]{##2}{%
+%%%  			\Glsentrylong{##2}##3\space(\acronymfont{\glsentryshort{##2}})%
+%%%  		}%
+%%%  	}%
+%%%  	\renewcommand*{\ACRfullfmt}[3]{%
+%%%  		\glslink[##1]{##2}{%
+%%%  			\MakeTextUppercase{%
+%%%  				\glsentrylong{##2}##3\space
+%%%  				(\acronymfont{\glsentryshort{##2}})%
+%%%  			}%
+%%%  		}%
+%%%  	}%
+%%%  	\renewcommand*{\acrfullplfmt}[3]{%
+%%%  		\glslink[##1]{##2}{%
+%%%  			\glsentrylongpl{##2}##3\space
+%%%  			(\acronymfont{\glsentryshortpl{##2}})%
+%%%  		}%
+%%%  	}%
+%%%  	\renewcommand*{\Acrfullplfmt}[3]{%
+%%%  		\glslink[##1]{##2}{%
+%%%  			\Glsentrylongpl{##2}##3\space
+%%%  			(\acronymfont{\glsentryshortpl{##2}})%
+%%%  		}%
+%%%  	}%
+%%%  	\renewcommand*{\ACRfullplfmt}[3]{%
+%%%  		\glslink[##1]{##2}{%
+%%%  			\MakeTextUppercase{%
+%%%  				\glsentrylongpl{##2}##3\space
+%%%  				(\acronymfont{\glsentryshortpl{##2}})%
+%%%  			}%
+%%%  		}%
+%%%  	}%
+%%%  	% Use smallcaps for the acronym in the document text:
+%%%  	\renewcommand*{\acronymfont}[1]{\textsc{##1}}%
+%%%  	\renewcommand*{\acrpluralsuffix}{\glstextup{\glspluralsuffix}}%
+%%%  	% Sort acronyms according to the long form:
+%%%  	\renewcommand*{\acronymsort}[2]{##2}%
+%%%  	% Set the name in the list of acronyms to the long form followed by
+%%%  	% the short form (in upper case) in parentheses:
+%%%  	\renewcommand*{\acronymentry}[1]{%
+%%%  		\Glsentrylong{##1}\space(\MakeTextUppercase{\glsentryshort{##1}})}%
+%%  }
+%% % Now set the new acronym style (to override the default style)
+%% \setacronymstyle{custom-fn}
+%%\setabbreviationstyle[acronym]
+%
+%			
+%		{\input{src/Glossary}}
+%	}
+%	{} % Glossary
+%\fi% \DisableGlossary
+%
+%%\ifx\DisableGlossary\undefined
+%%		\usepackage[toc,acronym]{glossaries}
+%%			\ifx\LecturePrintable\undefined\else\makeglossaries\fi
+%%\fi
+%%\usepackage{memhfixc} %Any re­cent ver­sion of hy­per­ref will au­to­mat­i­cally load this pack­age if it finds it­self run­ning un­der the mem­oir class.
+%
+%%\LDebugMessage{Preparing eBook-style book started}
+%%\usepackage{tocloft}% http://ctan.org/pkg/tocloft
+%%\setlength{\cftsubsecnumwidth}{3em}% Set length of number width in ToC for \subsection
+%%		\usepackage[margin=10pt,font=small,labelfont=bf,labelsep=endash,
+%%		font={color=HeadingColor},textfont={sf}]{caption} % Format float captions
+%
+%
+%\title{\LectureTitle}
+%\ifx\LectureSubtitle\undefined
+%\else
+%\subtitle{\LectureSubtitle}
+%\fi
+%\author{\LectureAuthor}
+%\ifx\LectureRevision\undefined
+%	\date{\today}
+%\else
+%	\date{\LectureRevision}
+%\fi
+
+\newsavebox{\ChpNumBox}
+%\definecolor{ChapBlue}{rgb}{0.00,0.65,0.65}
+\makeatletter
+\newcommand*{\thickhrulefill}{%
+\leavevmode\leaders\hrule height 1\p@ \hfill \kern \z@}
+\newcommand*\BuildChpNum[2]{%
+\begin{tabular}[t]{@{}c@{}}
+\makebox[0pt][c]{#1\strut} \\[.5ex]
+\colorbox{HeadingColor}{%
+\ifx\eBook\undefined
+	\ifx\WEBBook\undefined
+	\rule[-10em]{0pt}{0pt}%
+	\else
+	\rule[-5em]{0pt}{0pt}%
+	\fi
+\else
+	\rule[-5em]{0pt}{0pt}%
+\fi
+\rule{1ex}{0pt}\color{white}#2\strut
+\rule{1ex}{0pt}}%
+\end{tabular}}
+
+\makechapterstyle{BlueBox}{%
+\renewcommand{\chapnamefont}{\large\scshape}
+\renewcommand{\chapnumfont}{\huge\bfseries}
+\renewcommand{\chaptitlefont}{\raggedright\huge\bfseries}
+\setlength{\beforechapskip}{10pt}
+\setlength{\midchapskip}{16pt}
+\setlength{\afterchapskip}{20pt}
+\renewcommand{\printchaptername}{}
+\renewcommand{\chapternamenum}{}
+\renewcommand{\printchapternum}{%
+\sbox{\ChpNumBox}{%
+\BuildChpNum{\chapnamefont\@chapapp}%
+{\chapnumfont\thechapter}}}
+\renewcommand{\printchapternonum}{%
+\sbox{\ChpNumBox}{%
+\BuildChpNum{\chapnamefont\vphantom{\@chapapp}}%
+{\chapnumfont\hphantom{\thechapter}}}}
+\renewcommand{\afterchapternum}{}
+\renewcommand{\printchaptertitle}[1]{%
+\usebox{\ChpNumBox}\hfill
+\parbox[t]{\hsize-\wd\ChpNumBox-1em}{%
+\vspace{\midchapskip}%
+\thickhrulefill\par
+\chaptitlefont ##1\par}}%
+}
+\chapterstyle{BlueBox}
+\setsecheadstyle{\color{HeadingColor}\bfseries\memRTLraggedright}
+\setsubsecheadstyle{\color{HeadingColor}\bfseries\small\memRTLraggedright}
+
+\setlength{\parskip}{4pt plus 2pt minus 3pt}
+\setlength{\parindent}{0pt}
+%
+	\raggedbottom
+		% Alter some LaTeX defaults for better treatment of figures:
+    % See p.105 of "TeX Unbound" for suggested values.
+    % See pp. 199-200 of Lamport's "LaTeX" book for details.
+    %   General parameters, for ALL pages:
+    \renewcommand{\topfraction}{0.9}	% max fraction of floats at top
+    \renewcommand{\bottomfraction}{0.8}	% max fraction of floats at bottom
+    %   Parameters for TEXT pages (not float pages):
+    \setcounter{topnumber}{4}
+    \setcounter{bottomnumber}{4}
+    \setcounter{totalnumber}{6}     % 2 may work better
+    \setcounter{dbltopnumber}{4}    % for 2-column pages
+    \renewcommand{\dbltopfraction}{0.9}	% fit big float above 2-col. text
+    \renewcommand{\textfraction}{0.1}	% allow minimal text w. figs
+    %   Parameters for FLOAT pages (not text pages):
+    \renewcommand{\floatpagefraction}{0.8}	% require fuller float pages
+	% N.B.: floatpagefraction MUST be less than topfraction !!
+    \renewcommand{\dblfloatpagefraction}{0.8}	% require fuller float pages
+
+	\setlength\parskip{0pt}
+	\setlength{\parindent}{6pt}
+%\setlist{nosep,before=\vspace{-0.5\baselineskip},after=\vspace{-0.5\baselineski‌​p}}
+%\tightlists
+
+% Set page headings
+\makeevenhead{headings}{\color{burntorange}\thepage}{}{\color{burntorange}\scriptsize\slshape\leftmark}
+\makeoddhead{headings}{\color{burntorange}\scriptsize\slshape\rightmark}{}{\color{burntorange}\thepage}
+
+%%			
+%%%	% % % A macro for representing the front matter needed in the selected form
+%
+\newcommand\MEfrontmatterRoot{
+	%% Check if the user wants to have his own front matter
+	\IfFileExists{src/FrontMatter.tex}
+	{%% Have his own frontmatter things; use it
+		\input{src/FrontMatter.tex}
+		\MEDebugMessage{MESetupPrintedFormat: Using user's FrontMatter}
+	}
+	{%% No, we need to use the built-in front matter
+		\pagenumbering{gobble}
+		\maketitle
+		\frontmatter
+		
+{\footnotesize
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\baselineskip}
+
+\ifx\DisableCopyright\undefined
+  \IfFileExists{src/Copyright.tex}
+  { % The user has his own copyright
+    \input{src/Copyright.tex}
+    \MEDebugMessage{MESetupPrintedFormat: Using user's copyright}
+  }
+  {
+	\input{../../common/defaults/Copyright.tex}
+    \MEDebugMessage{MESetupPrintedFormat: Using default copyright}
+  }
+\fi  
+
+\ifx\DisableAbstract\undefined
+	\IfFileExists{src/Abstract}
+	{
+	    {\bfseries \MEAbstract}\par
+	     \input{src/Abstract} %\vspace{2cm}
+	}
+	{\vspace{10cm}\MEDebugMessage{MESetupPrintedFormat: Abstract info not found}}
+\fi
+\vskip2\baselineskip
+}%of footnotesize
+
+
+%\ifx\DisableLogo\undefined
+%    \pgfdeclaremask{UC}{../../common/images/under_construction-mask}
+%		\pgfdeclareimage[width=3.7cm]{um-logo}{../../common/images/um-logo}
+%		\pgfdeclareimage[mask=UC,width=3cm]{UC-logo}{../../common/images/under_construction}
+%\begin{center}
+%\begin{tabular}{ccc}
+%	& %Possible supporter 
+%	\pgfuseimage{um-logo}
+%	& %Publisher, if available
+% %   \pgfuseimage{UC-logo}
+%	\\ % %Under construction
+%\end{tabular}
+%\end{center}
+%\fi %\DisableLogo
+
+\begin{center}
+\begin{tabular}{ll}
+First edition:                        & July 2016 \\
+\end{tabular}
+\end{center}
+\vfill
+\ifx\LectureLogo\undefined
+\else
+	\LectureLogo
+\fi
+\vfill
+\noindent
+
+
+\begin{center}
+\LectureRevision\\
+10 09 08 07 06 05 04 03 02 01\hspace{2em}19 18 17 16 15 14 13
+\end{center}
+
+\clearpage
+		
+\pagenumbering{roman}			
+\ifx\DisableTableOfContents\undefined
+	\tableofcontents	
+\fi
+}
+}%FrontMatterRoot
+
+
+%	% % % A macro for representing the back matter needed in the selected form
+%	% % %
+%	%% Usage MEbackmatter
+\newcommand\MEbackmatter{
+	%	%% Check if the user wants to have his own back matter
+	\ao{
+		%%% Printing a kind of PDF book
+		% http://tex.stackexchange.com/questions/472/how-can-i-have-two-or-more-distinct-indexes
+		% http://www.latex-community.org/forum/viewtopic.php?f=51&t=8096
+		\ifx\DisableIndex\undefined
+		
+			\clearpage\printindex
+		\else 
+			\MEDebugMessage{Index printing disabled}
+		\fi
+		\IfFileExists{src/Glossary.tex}
+		{
+			\glossarystyle{altlisthypergroup}
+			\ifx\DisableAcronyms\undefined
+			\clearpage
+			\printglossary[type=acronym]
+			\else 
+			\MEDebugMessage{Printing acronyms disabled}
+			\fi
+			\ifx\DisableGlossary\undefined
+			  \clearpage
+			  \printglossary
+			\else 
+			  \MEDebugMessage{Printing glossary disabled}
+			\fi
+		}
+		{\MEDebugMessage{No Glossary.tex file found}
+		}	% % If no glossary file exists, make nothing
+		\conditionalLoT    % Print list of tables, if any
+		\conditionalLoF    % Print list of figures, if any
+		\conditionalLoP	   % Print list of program listings, if any
+		%						
+		%
+		\onecolumn		
+		\ifx\DisableBibliography\undefined
+			\ifx\LectureBibliography\undefined
+				\MEDebugMessage{MESetupPrintedFormat:No bibliography file found}
+			\else
+				\clearpage\printbibliography
+			\fi			
+		\else
+			\MEDebugMessage{MESetupPrintedFormat: Bibliography printing disabled}
+		\fi %\DisableBibliography
+		\IfFileExists{src/BackMatter.tex}
+		{%% Have his own backmatter things; use it
+			\input{src/BackMatter.tex}
+		}
+		{%% No, we need to use the built-in main matter
+			\backmatter
+		}
+\ifx\FancyBook\undefined
+\else
+\cleartoverso
+%%%%%%%%%%%%%%%%%%%%%%
+%% Back cover
+%%%%%%%%%%%%%%%%%%%%%%
+
+%% Temporarily enlarge this page to push
+%% down the bottom margin
+%\enlargethispage{3\baselineskip}
+\thispagestyle{empty}
+\pagecolor[HTML]{0C0303}
+%\pagecolor[HTML]{0E0407}
+%\pagecolor[HTML]{030C03}
+\begin{center}
+\begin{minipage}{.8\textwidth}
+\color{pearl}\Large\bfseries
+\IfFileExists{src/BackCoverText}
+   { 
+   \input{src/BackCoverText}
+   }
+	{%% No back cover text provided
+	  {\bfseries Back cover}
+		\MEDebugMessage{MESetupPrintedFormat: Back cover text not found}
+	}
+
+\end{minipage}
+\end{center}
+
+\vspace*{\stretch{1}}
+
+\begin{center}
+%\colorbox{white}{\EANisbn[SC4]}
+
+%\vspace*{\baselineskip}
+%
+%\textbf{\textcolor{LightGoldenrod!50!Gold}{\LecturePublisher \textbullet\ \texttt{http://www.inf.unideb.hu/\~{}jvegh}}}
+%
+%\vspace*{\baselineskip}
+\ifx\LecturePublisher\undefined
+\else
+  \textbf{\textcolor{pearl}{Cover Illustration by  \textbullet\ \texttt{\LecturePublisher}}}
+\fi
+\end{center}
+
+\fi		
+	}% \articleonly
+}
+

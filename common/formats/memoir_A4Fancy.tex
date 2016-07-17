@@ -1,0 +1,215 @@
+% % 
+% % This is the preamble for printing a document in eBook (native PDF)  form
+% %
+\def\LecturePrintable{Book}				% It is a kind of printable format 
+\def\MayFloat{YES}							% Some environments are allowed to float
+\def\FancyBook{YES}
+
+\documentclass[english,13pt,
+pdftex, twocolumn,
+bookmarks, %bookmarksnumbered=true,bookmarksopen=true,
+a4paper, twoside,openany, %titlepage,
+hidelinks,		%no boxes around hyperref links
+colorlinks=true, 
+%nodirectory, 
+tight, breaklinks=true,
+%			linkcolor=webgreen,filecolor=webbrown,citecolor=webgreen, urlcolor=webbrown,
+pdfpagemode=UseNone,pdfstartview=Fit
+]{memoir}
+	
+% % Set up the page size	
+\setstocksize{303mm}{216mm}
+\settrimmedsize{\stockheight}{\stockwidth}{*}
+
+%% Adjust margins around typeblock
+\setlrmarginsandblock{23mm}{18mm}{*}
+\setulmarginsandblock{23mm}{23mm}{*}
+
+%% Header and footer heights
+\setheadfoot{\baselineskip}{10mm}
+\setlength\headsep{7mm}
+\checkandfixthelayout
+%
+\checkandfixthelayout[fixed]
+
+\input{../../common/formats/MESetupPrintedFormat}
+
+
+%%%%%%%%%%%%%%
+%% Cover page
+%%%%%%%%%%%%%%
+\renewcommand{\maketitle}
+{
+%% No header nor footer on the cover
+\thispagestyle{empty}
+
+
+%% Cover illustration
+\ifx\LectureCoverIllustration\undefined
+  \IfFileExists{fig/CoverIllustration.jpeg}
+  {
+    \ThisLLCornerWallPaper{1}{fig/CoverIllustration}
+  }
+  {
+    \ThisLLCornerWallPaper{1}{../../common/fig/CoverIllustration}
+  }
+\else
+  \ThisLLCornerWallPaper{1}{\LectureCoverIllustration}
+\fi % of CoverIllustration
+\onecolumn  	
+
+%% Bar across the top
+\tikz[remember picture,overlay]%
+\node[fill=HeadingColor,text=white,font=\LARGE\bfseries,text=cream,%
+minimum width=\paperwidth,minimum height=5em,anchor=north]%
+at (current page.north){\LectureSubtitle};
+
+%% Bar across the bottom
+\tikz[remember picture,overlay]%
+\node[fill=HeadingColor,text=white,font=\LARGE\bfseries,text=cream,%
+minimum width=\paperwidth,minimum height=5em,anchor=south]%
+at (current page.south){\hfill%\Copyright 
+\copyright\ 2010-\the\year\ (\LectureEmail)};
+
+
+\vspace*{-3\baselineskip}
+  
+
+{\bfseries\itshape\color{HeadingColor}\fontsize{36pt}{46pt}\selectfont
+	\LectureTitle\par}
+
+\vspace*{2\baselineskip}
+
+{\bfseries\LARGE\color{HeadingColor}
+	\LectureAuthor\par
+}
+
+\ifx\LecturePublisher\undefined
+\else
+\tikz[remember picture,overlay]%
+\node[fill=HeadingColor,font=\LARGE\bfseries,text=white,%
+minimum width=\paperwidth,minimum height=3em,anchor=south]%
+at (current page.south) {\LecturePublisher};
+\fi
+\onecolumn
+
+% % %\ThisLLCornerWallPaper{1}{../../common/images/me_logo_cimer.jpg}
+%\tikz[remember picture,overlay]%
+%\node[fill=HeadingColor,font=\LARGE\bfseries,text=white,%
+%minimum width=\paperwidth,minimum height=3em,anchor=south]%
+%at (current page.center) {\includepraphics{../../common/images/me_logo_cimer}};
+
+}
+
+
+%%			
+%%%	% % % A macro for representing the front matter needed in the selected form
+%
+\newcommand\MEfrontmatter{
+  \MEfrontmatterRoot
+%	%% Check if the user wants to have his own front matter
+%	\IfFileExists{src/FrontMatter.tex}
+%	{%% Have his own frontmatter things; use it
+%		\input{src/FrontMatter.tex}
+%		\MEDebugMessage{MESetupPrintedFormat: Using user's FrontMatter}
+%	}
+%	{%% No, we need to use the built-in front matter
+%		\pagenumbering{gobble}
+%		\maketitle
+%		\frontmatter
+%\thispagestyle{empty}
+%		
+%{\footnotesize
+%\setlength{\parindent}{0pt}
+%\setlength{\parskip}{\baselineskip}
+%
+%\ifx\DisableCopyright\undefined
+%  \IfFileExists{src/Copyright.tex}
+%  { % The user has his own copyright
+%    \input{src/Copyright.tex}
+%    \MEDebugMessage{MESetupPrintedFormat: Using user's copyright}
+%  }
+%  {
+%	\input{../../common/defaults/Copyright.tex}
+%    \MEDebugMessage{MESetupPrintedFormat: Using default copyright}
+%  }
+%\fi  
+%
+%\ifx\DisableAbstract\undefined
+%	\IfFileExists{src/Abstract}
+%	{
+%	    {\bfseries \MEAbstract}\par
+%	     \input{src/Abstract}\vspace{2cm}
+%	}
+%	{\vspace{10cm}\MEDebugMessage{MESetupPrintedFormat: Abstract info not found}}
+%\fi
+%\vskip2\baselineskip
+%}%of footnotesize
+%
+%\begin{center}
+%\begin{tabular}{ll}
+%First edition:                        & July 2016 \\
+%%Second edition:                       & July 2010 \\
+%\end{tabular}
+%\end{center}
+%\vfill
+%\ifx\LectureLogo\undefined
+%\else
+%	\LectureLogo
+%\fi
+%\vfill
+%\noindent
+%
+%
+%\LectureRevision
+%\begin{center}
+%10 09 08 07 06 05 04 03 02 01\hspace{2em}19 18 17 16 15 14 13
+%\end{center}
+%
+%\clearpage
+%		
+%\pagenumbering{roman}			
+%\ifx\DisableTableOfContents\undefined
+%	\tableofcontents	
+%\fi
+%}
+\twocolumn
+}
+
+
+%% A macro for representing the main matter needed in the selected form
+%% Usage MEmainmatter
+\newcommand\MEmainmatter{
+	%% Check if the user wants to have his own main matter
+	\IfFileExists{src/MainMatter.tex}
+	{%% Have his own mainmatter things; use it
+		\input{src/MainMatter.tex}
+	}
+	{%% No, we need to use the built-in main matter
+		\mainmatter
+		\pagenumbering{arabic}
+	}
+}
+
+
+%% Set the uniform width of the colour box
+%% displaying the page number in footer
+%% to the width of "99"
+\newlength\pagenumwidth
+\settowidth{\pagenumwidth}{999}
+
+%% Define style of page number colour box
+\tikzset{pagefooter/.style={
+		anchor=base,font=\sffamily\bfseries\small,
+		text=white,fill=HeadingColor,text centered,
+		text depth=17mm,text width=\pagenumwidth}}
+
+%%%%%%%%%%
+%%% Re-define running footers on odd and even pages
+%%% i.e. display the page number on the right
+%%%%%%%%%%
+\makeoddfoot{headings}{}{}{%
+	\tikz[baseline]\node[pagefooter]{\thepage};}
+\makeoddfoot{plain}{}{}{\tikz[baseline]\node[pagefooter]{\thepage};}
+\makeevenfoot{headings}{\tikz[baseline]\node[pagefooter]{\thepage};}{}{}
+\makeevenfoot{plain}{\tikz[baseline]\node[pagefooter]{\thepage};}{}{}

@@ -1,0 +1,59 @@
+%%% Now select the language
+
+\MEDebugMessage{MELanguages: started to load}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%\usepackage[latin2]{inputenc}
+\usepackage{t1enc}
+\usepackage{ifthen}
+
+% % The default is the English text
+% % \LectureLanguage can change to another language
+% % \UseSecondLanguage allows to use two languages simultanously
+%
+\ifx\LectureLanguage\undefined
+% % Using English only
+  	\hyphenpenalty=2000
+  	\tolerance=20000
+	\def\MEAbstract{Abstract}
+  \MEDebugMessage{MELanguages: Configured to use English only}
+\else
+  % % Some other language must be used
+  %% Check if using Hungarian
+  \ifthenelse{\equal{\LectureLanguage}{magyar}}
+  { % % implement Hungarian documenting
+    \ifx\UseSecondLanguage\undefined
+	  \usepackage[english,magyar]{babel}
+    \else
+	  \usepackage[magyar]{babel}
+    \fi
+	\selectlanguage{magyar}
+	\frenchspacing
+  	\hyphenpenalty=2000
+  	\tolerance=20000
+	\let\Aref\relax	%% Needed for workaround \Aref bug
+	\def\MEAbstract{Kivonat}
+  	\MEDebugMessage{MELanguages: Hungarian language selected}
+  % % http://tex.stackexchange.com/questions/195491/ifthenelse-equal-string-comparison-fails
+  }% true
+  {\MEDebugMessage{MELanguages: NOT Hungarian}% false
+  }
+  \ifthenelse{\equal{\LectureLanguage}{german}}
+  {
+  \MEDebugMessage{MELanguages: German}
+  
+  % % Just an example how to implement further languages
+  }% true
+  {  \MEDebugMessage{MELanguages: NOT German}
+  
+  }% false
+\fi %\LectureLanguage
+
+\providecommand*{\at}{\symbol{64}}	% To avoid the special handling for the @ symbol 
+\providecommand*{\bs}{\symbol{92}}	%% back slash
+\providecommand*{\bq}{\symbol{96}}	%% back quote
+\providecommand*{\qs}{\symbol{34}}	%% quote symbol
+\providecommand*{\xor}{\symbol{94}}	%% Up arrow  symbol
+\providecommand*{\bbar}{\symbol{124}}	%% Up arrow  symbol
+\MEDebugMessage{MELanguages: successfully loaded}
+

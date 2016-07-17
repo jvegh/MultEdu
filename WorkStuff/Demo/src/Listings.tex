@@ -1,0 +1,509 @@
+%%%
+%%% This is the chapter about sectioning documents for the MultEdu system
+
+\MEDchapter{Preparing program listings}{}{Program listák készítése}
+
+
+\MESetListingFormat[basicstyle=\ttfamily\color{black}\normalsize]{TeX}
+
+
+\MEDframe{Preparing program listings}
+{
+When teaching programming, it is a frequent need to display program listings.
+Through using package 'listings', MultEdu can implement this in very good quality.
+For details not described here see documentation of package 'listings'.
+
+Notice that here the ratio of the listings within the text is unusually high,
+so it is very hard for the compiler to find good positioning. In the case of 
+real texts, the page is much more aesthetic.
+}
+{Program listák készítése}
+{
+Programozás tanításakor alapvető követelmény programlisták megjelenítése.
+A 'listings' csomag felhasználásával a MultEdu ezt jó minőségben tudja biztosítani.
+Az itt nem ismertetett részletekért lásd a 'listings' csomag leírását.
+
+Ebben a szakaszban szokatlanul sok elhelyezendő programlista van,
+ami nagyon megnehezíti a fordítóprogram dolgát. Valódi szövegek esetén
+az készített oldal sokkal esztétikusabb.
+}
+\index{package!listings}
+
+\MEDsection{Setting appearance}{}{A megjelenítés beállítása}
+
+\MEDframe{Setting appearance}
+{
+Package 'listings' allows to set up the style of displaying program listings
+according to our taste (and the requirements).
+MultEdu pre-sets some style and allows to modify it as much as you like.
+
+Macro \par\noindent\lstinline|\\MESetStandardListingFormat| sets up a default appearance,
+and no programming language. Macro \par\noindent\lstinline|\\MESetListingFormat[options]\{language\}|
+\par\noindent sets the language, the same appearance as macro \par\noindent\lstinline|\\MESetStandardListingFormat|
+\par\noindent and also allows to overwrite parameters of 'listings' through 'options'.
+}
+{A megjelenítés beállítása}
+{
+A 'listings' csomag számos lehetőséget biztosít arra, hogy a programlista megjelenítés stílusát ízlésünknek
+(és a követelményeknek) megfelelően állítsuk be.
+
+\noindent\lstinline|\\MESetStandardListingFormat| 
+\par\noindent beállít egy alap-megjelenítést,
+de nem állít be programnyelvet.
+\par\noindent \lstinline|\\MESetListingFormat[options]\{language\}|
+\par\noindent beállítja a nyelvet, és
+\par\noindent\lstinline|\\MESetStandardListingFormat| 
+\par\noindent szerinti alap-megjelenítést
+és 'options' használatával lehetővé teszi a 'listings' alapértelmezett argumentumainak felülírását.
+}
+\index{MESetStandardListingFormat@\bs MESetStandardListingFormat}
+\index{MESetListingFormat@\bs MESetListingFormat}
+
+
+\MEDsection{Displaying inline fragments}{}{Sorközi töredék megjelenítése}
+
+\MEDframe{Displaying inline fragments}
+{
+A tipical task is to display a shorter fragment, like a line or a keyword.
+It is possible using \lstinline!\\lstinline|code|!.
+
+The LaTeX commands appearing in this documentation are produced in such a way that
+at the beginning of the chapter commands
+
+
+\noindent\lstinline|\\MESetListingFormat\{TeX\}|\par
+\noindent\lstinline|\\lstset\{basicstyle= \\ttfamily\\color\{black\}\\normalsize\}|
+
+\noindent or
+
+\noindent\lstinline|\\MESetListingFormat[basicstyle= \\ttfamily\\color\{black\}\\normalsize]\{TeX\}|
+
+\noindent are issued (otherwise the character size of the program text will be too small).
+}
+{Sorközi töredék megjelenítése}
+{
+Gyakori feladat egy rövidebb töredék, mint egyetlen sor vagy akár kulcsszó/változó
+megjelenítése. Ezt a  \lstinline!\\lstinline|code|! módon tehetjük meg.
+
+Az ebben a leírásban is kiterjedten használt LaTeX parancsok megjelenítéséhez
+a fejezet elején használok egy 
+
+
+\noindent\lstinline|\\MESetListingFormat\{TeX\}|\par
+\noindent\lstinline|\\lstset\{basicstyle= \\ttfamily\\color\{black\}\\normalsize\}|
+
+\noindent vagy
+
+\noindent\lstinline|\\MESetListingFormat[basicstyle= \\ttfamily\\color\{black\}\\normalsize]\{TeX\}|
+
+\noindent parancsot. (különben túl kicsi lesz a megjelenített program kód karaktereinek mérete)
+}
+
+\MEDsection{Displaying program listings}{}{Teljes programlista megjelenítése}
+
+\MEDframe{Displaying program listings}
+{
+
+\MESourceFile[language={[ISO]C++}]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way}{lst:hello.cpp}{}
+
+Program listings can be displayed using macro
+\par\noindent\lstinline|\\MESourceFile[keys] \{filename\} \{caption\} \{label\}\{scale\}|.
+\par\noindent The command used to display Listing~\ref{lst:hello.cpp} was
+\par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\}] \{lst/HelloWorld.cpp\} \{A "Hello World"- C++ program\} \{lst:hello.cpp\}\{\}|
+
+}
+{Teljes programlista megjelenítése}
+{
+A
+\par\noindent\lstinline|\\MESourceFile[keys] \{filename\} \{caption\} \{label\}\{scale\}|
+\par\noindent makróval jeleníthetők meg programlisták.
+Lehetséges kulcs: \lstinline|wide,decorations|.
+A \ref{lst:hello.cpp} programlista megjelenítéshez használt programsor:
+\par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\}] \{lst/HelloWorld.cpp\} \{A "Hello World"- C++ program\} \{lst:hello.cpp\}\{\}|
+
+\MESourceFile[language={[ISO]C++}]{lst/HelloWorld.cpp}{A "Hello World"- C++ program}{lst:hello.cpp}{}
+
+
+A programlisták ún. lebegő objektumok, tehát nem feltétlenül a forrásnyelvi helynek 
+megfelelő helyen jelennek meg a nyomtatott változatban, viszont a dia képeken igen.
+Ezért a nyomtatott változatban nem érdemes 'A következő ábrán' módon hivatkozni. Helyette
+a \lstinline|A\ \\ref\{lst:hello.cpp\}\ programlista| mód javasolt.
+
+A dia képeken viszont  a megfelelő helyen van az ábra, de nincs száma.
+Ezért a \lstinline|A\ \\ao\{\\ref\{lst:hello.cpp\}\}\ programlista| mód az igazi.
+Vigyázzunk rá, hogy a mondat minden változatban értelmes legyen.
+}
+\index{MESourceFile@\bs MESourceFile}
+
+\MEDframe{Wide program listings}
+{
+
+\MESourceFile[language={[ISO]C++},wide]{lst/HelloWorld.cpp}{A "Hello World"- C++ program, wide}{lst:Whello.cpp}{}
+\index{MESourceFile@\bs MESourceFile}
+
+Many times one needs wider program listings.
+In the case of the two-column printing, 
+the listing shall fill the width of the two columns.
+The wide listings can be placed even hardly on the printed page
+(the first proper place, relative to the appearance of the macro
+is the top of the next page), and in addition, the orders of 
+normal and wide listings cannot be changed.
+Because of this, the place where the listing appears,
+might be relatively far from the place of referencing it.
+
+The command used to display Listing \ref{lst:Whello.cpp} :
+\par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},wide] \{lst/HelloWorld.cpp\} \{A "Hello World"- C++ program, wide\} \{lst:Whello.cpp\}\{\}|
+}
+{Széles programlista megjelenítése}
+{
+
+\MESourceFile[language={[ISO]C++},wide]{lst/HelloWorld.cpp}{A "Hello World"- C++ program, wide}{lst:Whello.cpp}{}
+
+\index{MESourceFile@\bs MESourceFile}
+
+Sokszor van szükség szélesebb programlista megjelenítésére. Ennek hatására a két
+oszlopos nyomtatás teljes szélességében jelenik meg a lista.
+A széles programlistákat még nehezebb elhelyezni az oldalon (a megjelenítő utasítás helye
+utáni oldal tetejére kerülhet legelőször), ráadásul nem is szabad
+felcserélni a normál és széles programlisták sorrendjét.
+Emiatt a megjelenési hely eléggé messze is kerülhet
+a hivatkozás helyétől.
+A \ref{lst:Whello.cpp} programlista megjelenítéséhez használt programsor:
+\par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},wide] \{lst/HelloWorld.cpp\} \{A "Hello World"- C++ program, wide\} \{lst:Whello.cpp\}\{\}|
+}
+
+\MEDsection{Decorations on listings}{}{Programlista díszítései}
+
+\MEDframe{Decorations on listings}
+{
+Different decorations can be placed on top of listings.
+To do so, one has to use the keyword  \lstinline|decorations|,
+and to insert as arguments the macros presented in this section.
+
+The general form:
+\par\noindent\lstinline|\\MESourceFile[options,
+decorations=\{
+list of decorations
+\}
+] \{source file\} \{caption\} \{label\}\{\}|
+\par\noindent where the list of decorations may contain any of the 
+decoration macros presented in the section.
+\index{MESourceFile!decorations@\bs MESourceFile decorations}
+}
+{Programlista díszítései}
+{
+A programlistán különféle díszítményeket helyezhetünk el.
+Ehhez a programlista készítésekor használnunk kell a \lstinline|decorations| kulcsszót
+és annak argumentumaként az e szakaszban bemutatott makrókat kell megadni.
+
+Az általános forma:
+\par\noindent\lstinline|\\MESourceFile[options,
+decorations=\{
+list of decorations
+\}
+] \{source file\} \{caption\} \{label\}\{\}|
+\par\noindent ahol a dekorációk listája a szakaszban felsorolt 
+bármelyik fajta dekorációt tartalmazhatja.\ao{\footnote{
+A program az első menetben elhelyezi a programlistát és egy újabb fordítás során tudja 
+a díszítéseket is felrakni.}}
+\index{MESourceFile!díszítés@\bs MESourceFile díszítés}
+}
+
+\MEDsubsection{Highlighting lines}{}{Programsorok kijelölése}
+
+\MEDframe{Highlighting lines}
+{
+In a program listing, a range of source lines can be highlighted using macro 
+\par\noindent\lstinline|\\MESourcelinesHighlight\{BallonName\} \{SourceName\} \{FirstLine\} \{LastLine\}|.
+\par\noindent Here  \lstinline|BallonName| is a new label, which denotes the 
+newly created source line region highlighting box, \lstinline|SourceName| 
+is the label of the source file. That is, to highlight a program body in listing
+ \ref{lst:HLhello.cpp} the macro
+
+\par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},
+decorations=\{
+\\MESourcelinesHighlight\{HelloBalloon\} \{lst:HLhello.cpp\} \{6\}\{8\}
+\}
+] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, kijelölt\} \{lst:HLhello.cpp\}\{\}|
+
+\par\noindent shall be used.
+
+\MESourceFile[language={[ISO]C++},
+decorations={
+\MESourcelinesHighlight{HelloBalloon}{lst:HLhello.cpp}{6}{8}
+}
+]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, highlighted}{lst:HLhello.cpp}{}
+\index{MESourceFile!highlighting@\bs MESourceFile highlighting}
+}
+{Programsorok kijelölése}
+{
+Egy programlistán a
+\par\noindent\lstinline|\\MESourcelinesHighlight\{BallonName\} \{SourceName\} \{FirstLine\} \{LastLine\}|
+\par\noindent makró használatával jelölhetünk ki programsorokat. Itt \lstinline|BallonName|
+az az új címke, amit az így létrehozott sortartomány kap, \lstinline|SourceName| pedig a
+forrásfájl címkéje. Azaz a \ref{lst:HLhello.cpp} programlistán a programtörzs utasításainak
+kijelöléséhez a
+
+
+\par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},
+decorations=\{
+\\MESourcelinesHighligh\{HelloBalloon\} \{lst:HLhello.cpp\} \{6\}\{8\}
+\}
+] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, kijelölt\} \{lst:HLhello.cpp\}\{\}|
+
+\par\noindent parancsot kell kiadni.
+
+\MESourceFile[language={[ISO]C++},
+decorations={
+\MEHighlightLines{HelloBalloon}{lst:HLhello.cpp}{6}{8}
+}
+]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, kijelölt}{lst:HLhello.cpp}{}
+\index{MESourceFile!sorkijelölés@\bs MESourceFile sorkijelölés}
+}
+\index{MESourcelinesHighlight@\bs MESourcelinesHighlight}
+
+\MEDsubsection{Commenting highlighted lines}{}{Megjegyzés kijelölt programsorokhoz}
+
+\MEDframe{Commenting highlighted lines}
+{
+The higlighting box can also be commented. Using macro
+\par\noindent\lstinline|\\MESourceBalloonComment[keys]\{BallonName\} \{ShiftPosition\} \{Comment\} \{CommentShape\}|
+\par\noindent allows to comment the balloon created previously.
+Here \lstinline|BallonName| is the first argument of  \lstinline|\\MESourcelinesHighlight|,
+\lstinline|ShiftPosition| is the shift of the comment box, \lstinline|Comment| is the comment text.
+Possible keys, with defaults are:
+\par\noindent \lstinline|width[=3cm]| and \lstinline|color[=deeppeach]|.
+
+Listing \ref{lst:HLChello.cpp} is produced using macro
+\par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},wide,
+decorations=\{
+\\MESourcelinesHighlight\{HelloBalloon\} \{lst:HLChello.cpp\} \{6\}\{8\}
+\\MESourceBalloonComment\{HelloCBalloon\} \{0cm,0cm\} \{This is the body\} \{CommentShape\}
+\} 
+] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, commenting highlighted\} \{lst:HLhello.cpp\}\{\}|
+
+\MESourceFile[language={[ISO]C++},wide,
+decorations={
+\MESourcelinesHighlight{HelloCBalloon}{lst:HLChello.cpp}{6}{8}
+\MESourceBalloonComment{HelloCBalloon}{0cm,0cm}{This is the body}{CommentShape}
+}
+]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, commenting highlighted}{lst:HLChello.cpp}{.3}
+\index{MESourceFile!highlighting@\bs MESourceFile highlighting}
+}
+{Megjegyzés a kijelöléshez}
+{
+Az előbbi programlistán a kijelöléshez megjegyzést is fűzhetünk.
+Ennek formája 
+\par\noindent\lstinline|\\MEBalloonComment[keys]\{BallonName\} \{ShiftPosition\} \{Comment\} \{CommentShape\}|
+amivel az előzőleg felrajzolt ballonhoz fűzhetünk megjegyzést.
+Itt \lstinline|BallonName| az \lstinline|\\MEHighlightLines| első argumentuma,
+\lstinline|ShiftPosition| a megjegyzésdoboz eltolása, \lstinline|Comment| pedig maga 
+a megjegyzés.
+A lehetséges opciók: \lstinline|width[=3cm]| és \lstinline|color[=deeppeach]|.
+
+A \ref{lst:HLChello.cpp} programlista készítéséhez a
+
+\par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},
+decorations=\{
+\\MESourcefileHighlight\{HelloBalloonC\} \{lst:HLChello.cpp\} \{6\}\{8\}
+\\MEBalloonComment\{HelloBalloonC\} \{0cm,0cm\} \{This is the body\} \{CommentShape\}
+\}
+] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, megjegyzés a kijelöléshez\} \{lst:HLChello.cpp\}\{\}|
+
+parancsot kell kiadni.
+
+\MESourceFile[language={[ISO]C++},
+decorations={
+\MESourcelineHighlight{HelloBalloonC}{lst:HLChello.cpp}{6}{8}
+\MEBalloonComment{HelloBalloonC}{0cm,0cm}{This is the body}{CommentShape}
+}
+]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, megjegyzés a kijelöléshez}{lst:HLChello.cpp}{.3}
+\index{MESourceFile!tartomány kijelölés@\bs MESourceFile tartomány kijelölés}
+}
+\index{MESourcelinesHighlight@\bs MESourcelinesHighlight}
+
+\MEDsubsection{Commenting source lines}{}{Megjegyzés forráskód programsorhoz}
+
+\MEDframe{Commenting source lines}
+{
+The individual source lines can also be commented, see Listing \ref{lst:Chello.cpp}.
+To produce it, the command
+\par\noindent\lstinline|
+\\MESourceFile[language=\{[ISO]C++\},wide,
+decorations=\{
+\\MESourcelineComment\{lst:Chello.cpp\} \{6\} \{0cm,0cm\} \{This is a comment\} \{CommentShape\}
+\}
+]\{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, commenting source lines\} \{lst:Chello.cpp\}\{\}
+|
+
+\MESourceFile[language={[ISO]C++},wide,
+decorations={
+\MESourcelineComment{lst:Chello.cpp}{6}{0cm,0cm}{This is a comment}{CommentShape}
+}
+]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, commenting source lines}{lst:Chello.cpp}{}
+\index{MESourceFile!commenting@\bs MESourceFile commenting}
+}
+{Megjegyzés a forrásprogramhoz}
+{
+Az egyes forráskód sorokhoz is fűzhetünk megjegyzéseket, lásd  \ref{lst:Chello.cpp} programlista.
+Ehhez a
+\par\noindent\lstinline|
+\\MESourceFile[language=\{[ISO]C++\},wide,
+decorations=\{
+\\MESourcelineComment\{lst:Chello.cpp\}\{6\}\{0cm,0cm\}\{This is a comment\}\{CommentShape\}
+\}
+]\{lst/HelloWorld.cpp\}\{"Hello World" -- a C++ way, megjegyzés a forráskód soráho\}\{lst:Chello.cpp\}\{\}
+|\par\noindent parancsot kellett kiadnunk.
+
+\MESourceFile[language={[ISO]C++},wide,
+decorations={
+\MESourcelineComment{lst:Chello.cpp}{6}{0cm,0cm}{This is a comment}{CommentShape}
+}
+]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, megjegyzés a forráskód sorához}{lst:Chello.cpp}{}
+\index{MESourceFile!megjegyzés@\bs MESourceFile megjegyzés}
+}
+\index{MESourcelineComment@\bs MESourcelineComment}
+
+\MEDsubsection{Numbered balls to listing}{}{Hivatkozási pontok elhelyezése a programlistán}
+
+\MEDframe{Numbered balls to listing}
+{
+On the program listing numbered balls can also be located, for referencing the 
+lines from the text. This can be done using macro
+\par\noindent\lstinline|\\MESourcelineListBalls[keys]\{ListingLabel\}\{List of lines\}|
+\par\noindent which puts a numbered ball at the end of the listed lines.
+Here \lstinline|ListingLabel| is the label of the listing, \lstinline|List of lines|
+is the list of sequence numbers of the lines to be marked.
+Possible key, with defaults:
+\par\noindent\lstinline|color[=orange]| and \lstinline|number[=1]|. 
+
+
+Notes:
+\begin{itemize}
+\item When making slides, the balls will be put to separated slides.
+\item The positioning using geometrical positions, does not consider 'firstline'.
+\end{itemize}
+
+To produce Listing \ref{lst:LBhello.cpp}, the macro
+
+\par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},
+decorations=\{
+\\MESourcelineListBalls\{lst:LBhello.cpp\}\{3,8,5\}
+\}
+] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, with balls\} \{lst:LBhello.cpp\}\{\}|
+\par\noindent has been used
+
+\MESourceFile[language={[ISO]C++},
+decorations={
+\MESourcelineListBalls{lst:LBhello.cpp}{3,8,5}
+}
+]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way,  with balls}{lst:LBhello.cpp}{.3}
+
+The marked lines can then be referenced through the balls like (\MEBall{lst:LBhello.cpp}{2})
+is the return istruction. It can be produced using 
+\par\noindent\lstinline|\\MEBall\{lst:LBhello.cpp\}\{2\}|
+}
+{Hivatkozási pontok elhelyezése a programlistán}
+{
+Az előbbi programlistán különböző programsorokat is megjelölhetünk.
+Ennek formája 
+\par\noindent\lstinline|\\MESourceListBalls[keys]\{ListingLabel\}\{List of lines\}|
+\par\noindent amivel a megjelölt programsorok végére kerül egy-egy számozott golyó.
+Itt \lstinline|ListingLabel| a programlista címkéje, \lstinline|List of lines|
+pedig azon sorszámok listája, ahová golyót szeretnénk elhelyezni.
+Lehetséges kulcsok, az alapértelmezett értékkel:
+\par\noindent\lstinline|color[=orange]| and \lstinline|number[=1]|. 
+
+
+Megjegyzések:
+\begin{itemize}
+\item Dia készítéskor az egyes golyók a egy dia sorozatra kerülnek
+\item A golyók elhelyezése csak geometria pozíció alapján történik, nem veszi figyelembe
+a 'firstline' paramétert.
+\end{itemize}
+
+A \ref{lst:LBhello.cpp} lista készítéséhez a
+\par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},
+decorations=\{
+\\MESourcelineListBalls{lst:LBhello.cpp}{3,8,5}
+\}
+] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, golyókkal\} \{lst:LBhello.cpp\}\{\}|
+parancsot kell kiadni.
+
+\MESourceFile[language={[ISO]C++},
+decorations={
+\MESourcelineListBalls{lst:LBhello.cpp}{3,8,5}
+}
+]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, golyókkal}{lst:LBhello.cpp}{.3}
+
+Az így megjelölt sorokra később így hivatkozhatunk: "(\MEBall{lst:LBhello.cpp}{2})
+a programtörzset lezáró visszatérési utasítás".
+Ehhez a 
+\par\noindent\lstinline|\\MEBall\{lst:LBhello.cpp\}\{2\}| makrót kell használnunk.
+
+}
+
+\index{MESourceListBalls@\bs MESourceListBalls}
+
+\MEDsubsection{Figure to listing}{}{Ábra elhelyezése a programlistán}
+
+\MEDframe{Figure to listing}
+{
+Sometimes one might need to insert figures into the listing.
+The macro is
+\par\noindent\lstinline|\\MESourcelineFigure[keys] \{SourceLabel\} \{LineNo\} \{ShiftPosition\} \{GraphicsFile\}|.
+Possible key is \lstinline|width[=3cm]|
+
+To produce Listing \ref{lst:forloops.v},
+ macro
+\par\noindent\lstinline|
+\\MESourceFile[language={Verilog},wide,
+decorations=\{
+\\MESourcelineFigure[width=5.2cm] \{lst:forloops.v\}\{8\} \{4.4,.0\} \{fig/forloops\}
+\}
+] \{lst/forloops.v\} \{Implementing \\ctext\{for\} loop with repeating HW\} \{lst:forloops.v\}\{\}|
+\par\noindent was used.
+
+\MESourceFile[language={Verilog},wide,
+decorations={
+\MESourcelineFigure[width=5.2cm]{lst:forloops.v}{8}{4.4,.0}{fig/forloops}
+}
+]{lst/forloops.v}{Implementing \ctext{for} loop with repeating HW}{lst:forloops.v}{}
+}
+{Ábra elhelyezése a programlistán}
+{
+\MESourceFile[language={Verilog},wide,
+decorations={
+\MESourcelineFigure[width=5.2cm]{lst:forloops.v}{8}{4.4,.0}{fig/forloops}
+}
+]{lst/forloops.v}{%\ctext{for} 
+ciklus megvalósítása HW ismétléssel}{lst:forloops.v}{}
+}
+\index{MESourcelineFigure@\bs MESourcelineFigure}
+
+\MEDsubsection{Extra program languages}{}{További program nyelvek}
+
+\MEDframe{Extra program languages}
+{ For my own goals, in addition to the programming languages
+defined in package 'listings', some further languages
+have been defined:
+\begin{itemize}
+\item diff
+\item {[DIY]Assembler}
+\item {[ARM]Assembler}
+\item {[x64]Assembler}
+\item {[y86]Assembler}
+\end{itemize}
+}
+{További program nyelvek}
+{
+Saját céljaimra a 'listings' csomagban definiáltakon felül,
+további program nyelveket definiáltam:
+\begin{itemize}
+\item diff
+\item {[DIY]Assembler}
+\item {[ARM]Assembler}
+\item {[x64]Assembler}
+\item {[y86]Assembler}
+\end{itemize}
+}
