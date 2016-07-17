@@ -481,7 +481,74 @@ ciklus megvalósítása HW ismétléssel}{lst:forloops.v}{}
 }
 \index{MESourcelineFigure@\bs MESourcelineFigure}
 
-\MEDsubsection{Extra program languages}{}{További program nyelvek}
+
+\MEDsection{Other related macros}{}{Kapcsolódó egyéb makrók}
+
+\MEDsubsection{Comparing source files}{}{Forrás fájlok összehasonlítása}
+
+
+\MEDframe{Comparing source files}
+{
+Sometimes it is worth to compare source files, side by side.
+The macro for this is
+\par\noindent\lstinline|\\MESourceFileCompare[keys]\{source file1\} \{source file2\} \{caption\} \{label\}|
+\par\noindent The command to produce Listing \ref{lst:lower12.c} is
+\par\noindent\lstinline|\\MESourceFileCompare[language=\{[ANSI]C\}] \{lst/lower1.c\} \{lst/lower2.c\} \{Comparing two routines for converting string to lower case\} \{lst:lower12.c\}|
+
+\MESourceFileCompare[language={[ANSI]C}]{lst/lower1.c}{lst/lower2.c}{Comparing two routines for converting string to lower case}{lst:lower12.c}
+
+%
+}
+{Kapcsolódó egyéb makrók}
+{
+Néha érdemes forrás kód fájlokat egymás mellé helyezve összehasonlítani.
+Az erre szolgáló makró
+\par\noindent\lstinline|\\MESourceFileCompare[keys]\{source file1\} \{source file2\} \{caption\} \{label\}|
+\par\noindent A \ref{lst:lower12.c} programlista előállításához használt
+utasítás
+\par\noindent\lstinline|\\MESourceFileCompare[language=\{[ANSI]C\}] \{lst/lower1.c\} \{lst/lower2.c\} \{Comparing two routines for converting string to lower case\} \{lst:lower12.c\}|
+
+\MESourceFileCompare[language={[ANSI]C}]{lst/lower1.c}{lst/lower2.c}{A két kisbetűssé alakí­tó rutin összehasonlí­tása}{lst:lower12.c}
+
+}
+\index{\MESourceFileCompare@\bs MESourceFileCompare}
+
+
+\MEDframe{Source with output}
+{
+It is also useful sometimes to show the source file with its output.
+The macro 
+\par\noindent\lstinline|\\MESourceFileWithResult\}[keys]\{source file\} \{result file\} \{caption\} \{label\}|
+\par\noindent allows to do that. For producing Listing \ref{lst:calculatorwithresult}
+the command 
+\par\noindent\lstinline|\\MESourceFileWithResult[language=C++,wide,decorations=\{
+	\\MESourcelineListBalls\{lst:calculatorwithresult\} \{13,14,16,18,19\}
+\}] \{lst/expensive_calculator.cpp\}
+\{lst/calculatorresult.txt\} \{The calculator program with its result\} \{lst:calculatorwithresult\}|
+\par\noindent was used.
+
+\MESourceFileWithResult[language=C++,wide=true,decorations={
+	\MESourcelineListBalls{lst:calculatorwithresult}{13,14,16,18,19}
+}]{lst/expensive_calculator.cpp}
+{lst/calculatorresult.txt}{The calculator program with its result}{lst:calculatorwithresult}
+
+
+}
+{Forrás fájl eredménnyel}
+{
+Néha hasznos egy forrásfájlt a futtatás eredményével együtt megmutatni.
+A
+\par\noindent\lstinline|\\MESourceFileWithResult[keys]\{source file\} \{result file\} \{caption\} \{label\}|
+\par\noindent makró ezt teszi lehetővé.
+
+\MESourceFileWithResult[language=C++,wide=true,decorations={
+	\MESourcelineListBalls{lst:calculatorwithresult}{13,14,16,18,19}
+}]{lst/expensive_calculator.cpp}
+{lst/calculatorresult.txt}{A kalkulator program és eredménye}{lst:calculatorwithresult}
+}
+\index{\MESourceFileWithResult@\bs MESourceFileWithResult}
+
+\MEDsection{Extra program languages}{}{További program nyelvek}
 
 \MEDframe{Extra program languages}
 { For my own goals, in addition to the programming languages
