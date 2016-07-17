@@ -15,19 +15,10 @@
 % % Using English only
   	\hyphenpenalty=2000
   	\tolerance=20000
+	\def\MEAbstract{Abstract}
   \MEDebugMessage{MELanguages: Configured to use English only}
 \else
   % % Some other language must be used
-  % % http://tex.stackexchange.com/questions/195491/ifthenelse-equal-string-comparison-fails
-  \ifthenelse{\equal{\LectureLanguage}{german}}
-  {
-  \MEDebugMessage{MELanguages: German}
-  
-  % % Just an example how to implement further languages
-  }% true
-  {  \MEDebugMessage{MELanguages: NOT German}
-  
-  }% false
   %% Check if using Hungarian
   \ifthenelse{\equal{\LectureLanguage}{magyar}}
   { % % implement Hungarian documenting
@@ -41,13 +32,23 @@
   	\hyphenpenalty=2000
   	\tolerance=20000
 	\let\Aref\relax	%% Needed for workaround \Aref bug
+	\def\MEAbstract{Kivonat}
   	\MEDebugMessage{MELanguages: Hungarian language selected}
+  % % http://tex.stackexchange.com/questions/195491/ifthenelse-equal-string-comparison-fails
   }% true
   {\MEDebugMessage{MELanguages: NOT Hungarian}% false
+  }
+  \ifthenelse{\equal{\LectureLanguage}{german}}
+  {
+  \MEDebugMessage{MELanguages: German}
+  
+  % % Just an example how to implement further languages
+  }% true
+  {  \MEDebugMessage{MELanguages: NOT German}
+  
+  }% false
 \fi %\LectureLanguage
 
-% Please use \usepackage[latin2]{inputenc} with
-% \usepackage[magyar]{babel}
 \providecommand*{\at}{\symbol{64}}	% To avoid the special handling for the @ symbol 
 \providecommand*{\bs}{\symbol{92}}	%% back slash
 \providecommand*{\bq}{\symbol{96}}	%% back quote

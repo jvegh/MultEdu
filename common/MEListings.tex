@@ -1,0 +1,412 @@
+%%
+%% The program-listings related macros for the MultEdu system
+%%
+% % It uses some definitions from MEMacros, so it should be after that file
+% %
+\ifx\MayFloat\undefined
+\else
+	\floatstyle{plaintop}
+	\newfloat{program}{thp}{lpp}[chapter]
+	\ifx\LectureLanguage\undefined
+	\floatname{program}{Listing}
+	\else
+	  \ifthenelse{\equal{\LectureLanguage}{magyar}}
+	   {\floatname{program}{Programlista}
+	   \MEDebugMessage{MEListings: Changed name to Programlista by \LectureLanguage}
+	   }
+	   {	   \MEDebugMessage{MEListings:  name not changed to Programlista by \LectureLanguage}
+	   }%false
+	\fi
+\fi
+
+\ifx\eBook\undefined
+	\def\lstsize{\scriptsize}
+\else
+	\def\lstsize{\tiny}
+\fi
+
+%% Set parameters for the appearance of the listings
+
+\newcommand{\MESetStandardListingFormat}
+{
+	\lstset{
+	    literate=% allow Hungarian umlauts
+         {á}{{\'}a}1
+         {Á}{{\'}Á}1
+         {é}{{\'}e}1
+         {É}{{\'}E}1
+         {í}{{\'i}}1
+         {Í}{{\'I}}1
+         {ó}{{\'}o}1
+         {Ó}{{\'}O}1
+         {ú}{{\'u}}1
+         {Ú}{{\'}u}1
+         {ö}{{\"o}}1
+         {Ö}{{\"}Ö}1
+         {ü}{{\"}u}1
+         {Ü}{{\"}U}1
+	    {ő}{{\H{}o}}1
+	    {ö}{{\H{}O}}1
+	    {ű}{{\H{}U}}1
+	    {Ű}{{\H{}u}}1
+	    	}	    
+	\lstset{
+		%         numbers=left,               % Place for line numbers
+		numberstyle=\tiny,          % Style of line numbers
+		numbersep=5pt,              % Distance of line numbers from source
+		tabsize=2,                 	 % Size of Tabs
+		inputencoding=utf8/latin2,	% input encoding, allow accented chars
+		extendedchars=true,         %
+		escapechar=\@,
+		breaklines=true,        % sets automatic line breaking
+		columns=fullflexible,  % eliminates the spacing:
+		breakatwhitespace=true,    % sets if automatic breaks should only happen at whitespace
+        keepspaces=true,
+        escapeinside={\%*}{*)},          % if you want to add a comment within your code
+		frame=tb, 
+		framerule=.5pt, 
+		rulecolor= \color{SeparatorColor},
+		backgroundcolor=\color{ivory},
+%		basicstyle=\ttfamily\color{black}\lstsize\bfseries, 
+		basicstyle=\ttfamily\color{black}\normalsize\bfseries, 
+		keywordstyle=\bfseries\color{darkmagenta},
+		identifierstyle=\bfseries\color{NavyBlue},
+		commentstyle=\itshape\bfseries\color{ForestGreen},
+		stringstyle=\itshape\bfseries\color{burntorange}, % Color for strings
+		lineskip=0pt,aboveskip=4pt,belowskip=2pt,
+		framesep=4pt,rulesep=2pt, %framerule=.25pt,
+		showspaces=false,           % 
+		showtabs=false,             % 
+		framexleftmargin=0pt,
+		framexrightmargin=0pt,
+		showstringspaces=false      % Show empty spaces? 	
+	}	%Take optional arguments
+}%\MESetStandardListingFormat
+
+\newcommand\MESetListingFormat[2][]	% Optional is the extra arguments
+{
+    \MESetStandardListingFormat
+    \lstset
+    	{
+%		#1,
+		language={#2},		% Select the language	
+        numberstyle=\tiny,          % Style of line numbers
+        numbersep=5pt,              % Distance of line numbers from source
+        tabsize=2,                 	 % Size of Tabs
+        inputencoding=utf8/latin2,	% input encoding, allow Hungarian umlauts
+        extendedchars=true,         %
+        escapechar=\@,
+		breaklines=true,        % sets automatic line breaking
+		breakatwhitespace=true,    % sets if automatic breaks should only happen at whitespace
+		escapeinside={\%*}{*)},          % if you want to add a comment within your code
+		frame=tb, 
+		framerule=.5pt, 
+		rulecolor= \color{SeparatorColor},
+		backgroundcolor=\color{ivory},
+        basicstyle=\ttfamily\color{black}\lstsize , 
+        keywordstyle=\bfseries\color{magenta},
+        identifierstyle=\bfseries\color{NavyBlue},
+ 		commentstyle=\itshape\bfseries\color{ForestGreen},
+        stringstyle=\itshape\bfseries\color{burntorange}, % Color for strings
+        lineskip=0pt,aboveskip=4pt,belowskip=2pt,
+        framesep=4pt,rulesep=2pt, %framerule=.25pt,
+        showspaces=false,           % 
+        showtabs=false,             % 
+        xleftmargin=-1pt,
+        framexbottommargin=4pt,
+        framextopmargin=4pt,
+        gobble=5,
+		framexleftmargin=0pt,
+		framexrightmargin=0pt,
+         showstringspaces=false      % Show empty spaces? 	
+	}	%Take optional arguments
+	\lstset{#1}
+}%MESetListingFormat
+
+\newlength{\FigWidth}\newlength{\FigHeight}
+\makeatletter
+%% Insert a source file in the text, with optional decorations
+%%%Usage \MESourceFile[keys]{source file}{caption}{label}{ScaleFactor}
+\newcommand\MESourceFile[5][]{
+	\setkeys{MEMacros}{wide=false,language={[ANSI]C},options={}, decorations={},#1}% 
+	% Define the environment: a 'Program' if it might float, a simple caption if not
+	\MESetStandardListingFormat
+	\ifx\MayFloat\undefined % A kind of slides
+		\def\startsource{
+			              \setlength{\FigWidth}{#5\textwidth}
+		                  {\color{HeadingColor}}%\bfseries\scriptsize #3
+			              \par
+		                }
+		\def\stopsource{}
+	\else %% Some printable form, either A4 book,  WEB book or eBook
+		\ifKV@MEMacros@wide %% It is a wide floating version
+		   \def\startsource{
+			                \setlength{\FigWidth}{#5\textwidth} 
+			                \begin{program*}[!hbt] 
+			               }
+			\def\stopsource{\end{program*}}			
+		\else % It is the narrow (one-column} version)
+			\if@twocolumn
+			  \setlength{\FigWidth}{#5\columnwidth}
+			\else
+			  \setlength{\FigWidth}{.7\textwidth}
+			  \setlength{\FigWidth}{#5\FigWidth}
+			 \fi
+			\def\startsource{\begin{program}[!hbt]}
+			\def\stopsource{\end{program}}
+		\fi
+	\fi
+	%% Start printing the figure here:
+	\setlength{\FigHeight}{.8\textheight} 
+	\noindent\startsource\hskip-1em
+%	\maxsizebox{#5\FigWidth}{#5\FigHeight}
+	{
+		\mbox{}\phantomsection
+		\noindent\begingroup\protected@edef\x{\endgroup\noexpand
+			\lstinputlisting[language={\ME@language}, \ME@options, label=#4, name=#4,
+			caption ={#3}
+			]{#2}}
+		\x
+		\ME@decorations % Decorating comments
+	}					
+	\stopsource
+}
+\makeatother
+
+%\newlength{\mywidth} % Used in defining listing width
+% http://mirror.unl.edu/ctan/graphics/pgf/contrib/tikzmark/tikzmark.pdf
+% % Prepare for some decorations on the listing files
+\makeatletter
+\newif\iflst@linemark
+	
+\lst@AddToHook{EveryLine}{%
+ \begingroup
+ \advance\c@lstnumber by 1\relax
+ \pgfmark{line-\lst@name-\the\c@lstnumber-start}%
+ \endgroup
+}
+	
+\lst@AddToHook{EOL}{\pgfmark{line-\lst@name-\the\c@lstnumber-end}%
+	\global\lst@linemarktrue
+}
+	
+\lst@AddToHook{OutputBox}{%
+ \iflst@linemark
+ \pgfmark{line-\lst@name-\the\c@lstnumber-first}%
+ \global\lst@linemarkfalse
+ \fi
+}
+	
+\def\tkzlst@fnum#1\relax#2\@STOP{%
+ \def\@test{#2}%
+ \ifx\@test\@empty
+ \def\tkzlst@start{0}%
+ \else
+ \@tempcnta=#1\relax
+ \advance\@tempcnta by -1\relax
+ \def\tkzlst@start{\the\@tempcnta}%
+ \fi
+}
+	
+\lst@AddToHook{Init}{%
+ \expandafter\tkzlst@fnum\lst@firstnumber\relax\@STOP
+ \pgfmark{line-\lst@name-\tkzlst@start-start}%
+}
+
+% % Put a balloon around some lines in a source
+% Usage: \MESourcelinesHighlight{BallonName}{SourceName}{FirstLine}{LastLine}
+\newcommand\MESourcelinesHighlight[4]{%
+  \pgfmathtruncatemacro\pgf@temp{%
+   #3-1
+  }%
+  \iftikzmark{line-#2-\pgf@temp-start}{%
+   \iftikzmark{line-#2-#3-first}{%
+     \xdef\b@lines{({pic cs:line-#2-\pgf@temp-start} -| {pic cs:line-#2-#3-first})}%
+   }{%
+     \iftikzmark{line-#2-#3-start}{%
+       \xdef\b@lines{({pic cs:line-#2-\pgf@temp-start} -| {pic cs:line-#2-#3-start})}%
+     }{%
+       \xdef\b@lines{(pic cs:line-#2-\pgf@temp-start)}%
+     }%
+   }%
+  }{%
+   \xdef\b@lines{}%
+  }%
+  \foreach \k in {#3,...,#4} {%
+   \iftikzmark{line-#2-\k-first}{%
+     \xdef\b@lines{\b@lines (pic cs:line-#2-\k-first) }
+   }{}
+   \iftikzmark{line-#2-\k-end}{%
+     \xdef\b@lines{\b@lines (pic cs:line-#2-\k-end) }
+   }{}
+  }%
+  \ifx\b@lines\pgfutil@empty
+  \else
+  \edef\pgf@temp{\noexpand\tikz[remember picture,overlay]\noexpand\node[fit={\b@lines}, color=ForestGreen,yshift=-2pt,
+     draw, fill=green!30, opacity=0.4,  inner sep=0pt, rounded corners=2pt] (#1) {};
+  }%
+		\pgf@temp
+  \fi
+		}
+\makeatother
+
+% Prepare a comment relating to a balloon as rounded rectangle 
+% Usage \MESourceBalloonComment[keys]{Balloon}{ShiftPosition}{Comment}{CommentShape}
+% Keys: width[=3cm]
+% 		color[=deeppeach]
+\makeatletter
+% ========= KEY DEFINITIONS =========
+\newcommand\MESourceBalloonComment[5][]
+{	% First draw the text box
+	\setkeys{MEMacros}{width=3cm,#1}% 
+	\setkeys{MEMacros}{color=deeppeach,#1}% 
+   \begingroup%
+  \tikz[remember picture,overlay]
+  \node[rectangle, draw,  rounded corners,drop shadow,  align=left,  fill=\ME@color, text width=\ME@width, font=\lstsize] %\bfseries]
+ at  ($(#2.east)+(\ME@width,0) +(#3)$) (#5) {\begin{minipage}{\ME@width}\lstsize#4\end{minipage}} ;
+   % Now draw the connecting arrow
+   \tikz[remember picture,overlay] 
+   \draw[->,thick,color=burntorange] 
+    (#5.west) --  ($ (#5.west) + (-.2cm,0) $)  |- (#2.east)  ;
+	\endgroup
+}
+\makeatother
+
+\makeatletter
+% % Put numbered balls after the line 'Lineno'  in source 'Source'
+% Usage: \MESourcelineListBalls[keys]{ListingLabel}{List of lines}
+% Possible keys: color	% Color of the balls
+%                        number	% Starting seq number
+\newcounter{qan}\newcounter{qano}
+\newcommand\MESourcelineListBalls[3][]{%
+	\setkeys{MEMacros}{color=orange,#1}% 
+	\setkeys{MEMacros}{number=1,#1}% 
+\setcounter{qan}{\ME@number-1}
+\setcounter{qano}{0}
+   \begingroup%
+    \foreach \x in {#3}
+    {  \addtocounter{qan}{1}
+    	\addtocounter{qano}{1}
+      \only<\arabic{qano}>%
+  {\tikz[remember picture,overlay]
+    {\expandafter\node[circle, inner sep=2pt, draw,fill=\ME@color,ball color=\ME@color, shading=ball, font=\scriptsize\bfseries, drop shadow]
+   at  ([xshift=+10pt,yshift=+2pt]{pic cs:line-#2-\x-end}) {\lstsize\arabic{qan}};\expandafter}}
+   }
+	\endgroup
+}
+\makeatother
+
+%% Put a numbered ball in the text, to reference balls on a listing
+%% Usage: \MEBall{ListingLabel}{Number}
+\newcommand{\MEBall}[2]{%
+{\tiny#1}~\hskip-4pt\raisebox{-.08cm}{
+\tikz \node (1ex,1ex)
+ [circle,draw,ball color=green, shading=ball,  font=\bfseries, scale=0.55] {#2};}%
+~\hskip-4pt}% MEBall
+
+
+\makeatletter
+% Prepare a source comment relating to a source line
+% Usage \MESourcelineComment[keys]{Sourcelabel}{LineNo}{ShiftPosition}{Comment}{CommentShape}
+% Keys: width[=3cm]
+% ========= KEY DEFINITIONS =========
+%	\newlength{\commentboxlength}
+\newcommand\MESourcelineComment[6][]
+{
+	\setkeys{MEMacros}{width=3cm,#1}% 
+	\setkeys{MEMacros}{color=deeppeach,#1}% 
+%	\setlength{\commentboxlength}{\ME@width}
+   \begingroup%
+		  \tikz[remember picture,overlay]
+		  \node[rectangle, draw,  rounded corners,drop shadow,  align=left,
+				fill=\ME@color, text width=\ME@width, font=\lstsize]
+		   at  ($(#4) +(\ME@width,0) +({pic cs:line-#2-#3-end})$) (#6) {\begin{minipage}{\ME@width}\lstsize #5 \end{minipage}} ;
+%		\tikz[remember picture,overlay] \draw[->,thick,color=burntorange]  (#6.south) |- ({pic cs:line-#2-#3-end});
+		\tikz[remember picture,overlay] \draw[->,thick,color=burntorange]  (#6.west)  --  ($ (#6.west) + (-.2cm,0) $) |- ({pic cs:line-#2-#3-end});
+	\endgroup
+}
+\makeatother
+
+
+\makeatletter
+% Prepare a figure comment relating to a source text
+% Usage \MESourcelineFigure[keys]{SourceName}{LineNo}{ShiftPosition}{Graphics file}
+% Keys: width[=3cm]
+% ========= KEY DEFINITIONS =========
+\define@key{MESourcelineFigure}{width}{\def\pb@width{#1}}
+\newcommand\MESourcelineFigure[5][]
+{
+	\setkeys{MESourcelineFigure}{width=3cm,#1}% 
+	\begingroup%
+	\tikz[remember picture,overlay]
+	\node[ rectangle,  draw,  rounded corners, drop shadow]
+	at  ($(#4)+({pic cs:line-#2-#3-end})$)  {\includegraphics[width=\pb@width]{#5}} ;
+	\endgroup
+}
+\makeatother
+
+% % Define new "language" for diff viewers
+\lstdefinelanguage{diff}{
+  morecomment=[f][\color{blue}]{@@},     % group identifier
+  morecomment=[f][\color{red}]-,         % deleted lines 
+  morecomment=[f][\color{green}]+,       % added lines
+  morecomment=[f][\color{magenta}]{---}, % Diff header lines (must appear after +,-)
+  morecomment=[f][\color{magenta}]{+++},
+}
+%% Define the Do It Yourself calculator language
+%%
+\lstdefinelanguage{[DIY]Assembler}
+{morekeywords={NOP, HALT, SETIM, CLRIM, ADD, ADDC, SUB, SUBC, AND, OR, XOR, CMPA,
+							SHL, SHR, ROLC, RORC, INCA, DECA, INCX, DECX, LDA, STA,
+							BLDX, BLDSP, BSTSP, BLDIV, PUSHA, POPA, PUSHSR, POPSR, JMP, JSR,
+							JZ, JNZ, JN, JNN, LC, JNC, JO, JNO, RTS, RTI},
+%directives={.ORG,.END,.BYTE},
+sensitive=false,
+morecomment=[l]{\#},
+}
+
+%% Define the ARM processor mnemonics
+%%
+\lstdefinelanguage{[ARM]Assembler}
+{morekeywords={
+	ADC, ADD, AND, ADR,
+							B, BEQ, BNE, BCS, BHS, BCC, BLO, BMI, BPL, BVS, BVC,
+			BIC, BL, BX, CMN, CMP, EOR, LDM, LDR, 
+								MLA, MOV, MRS, MSR, MOV, MVN, ORR, RSB, RSC, SBC,
+								STM, STR, SUB, SUBS,
+								SWI, SWP, TEQ, TST},
+%directives={AREA,CODE,READONLY,ENTRY,END},
+sensitive=false,
+morecomment=[l]{;},
+}
+
+% % Define x86-64 mnemonics
+\lstdefinelanguage
+   [x64]{Assembler}     % add a "x64" dialect of Assembler
+   [x86masm]{Assembler} % based on the "x86masm" dialect
+   % with these extra keywords:
+   {morekeywords={CDQE,CQO,CMPSQ,CMPXCHG16B,JRCXZ,LODSQ,MOVSXD, %
+                  POPFQ,PUSHFQ,SCASQ,STOSQ,IRETQ,RDTSCP,SWAPGS, %
+                  rax,rdx,rcx,rbx,rsi,rdi,rsp,rbp, %
+                  r8,r8d,r8w,r8b,r9,r9d,r9w,r9b}} % etc.
+
+
+% % Define x86-64 mnemonics
+\lstdefinelanguage
+   [y86]{Assembler}     % add a "Y86" dialect of Assembler
+   [x86masm]{Assembler} % based on the "x86masm" dialect
+   % with these extra keywords:
+   {morekeywords={ halt, nop, movl, rrmovl, irmovl, rmmovl, mrmovl, rrmovl, jump,%
+                  xorl, andl, je, addl, jne, subl, pushl, popl, jXX,%
+                  cmovXX, cmovl, cmovle, cmove, cmovne, cmovge, cmovg, return,%
+                   rax,rbx,rcx,rdx,xmm0,rbp, load,mulss,%
+                   OPl, ZF, SF, OF,%
+                   eno, ecc, esv,
+                   QCreate, QTCreate, QFCreate, QTerm, QCall, QAlloc,
+                   QWait, QPWait, QIWait, QInt
+                  },
+      morecomment=[l]{\#},
+      sensitive=false,
+%     directives={.pos, .align, .long,}
+     } % etc.                 
+

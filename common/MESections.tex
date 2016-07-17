@@ -1,0 +1,280 @@
+%% 
+%% The document sectioning related macros for the MultEdu system
+%%
+%% The basic building block is the frame, because 'beamer' requires it
+
+%%% A simple single-language frame for avoiding unnecessary typing
+%%% Usage: \MEframe[keys and values]{frame subtitle}{content of the intended frame}
+%% % Possible keys: shrink
+%% %                         plain
+%%% Actually, this is two implementations: one for the printed formats and one for the slides
+\makeatletter
+\ifx\LecturePrintable\undefined	% Making slides
+\newcommand{\MEframe}[3][]
+{
+	\MEframelabel{#2}
+	\setkeys{MEMacros}{shrink=true, plain=false, #1}% 
+%	\begingroup
+		\expandafter\ifstrequal\expandafter{\ME@shrink}{true}
+			{\def\myshrink{yes}}{}
+		\expandafter\ifstrequal\expandafter{\ME@plain}{true}
+			{\def\myplain{yes}}{}
+			
+			\ifx\LecturePrintable\undefined	% Making slides
+						\begin{frame}[shrink] {\framelabel}{}
+	%					Just normal\par
+	\vspace{-1\baselineskip}\par
+						#3\par\phantom{-}
+						\end{frame}
+%				\ifx\myshrink\undefined
+%					\ifx\myplain\undefined
+%						%\begin{frame} {#2}{\framelabel}
+%						\begin{frame} {MyTitle}{MySubtitle}
+%	%					Just normal\par
+%						#3\par\phantom{-}
+%						\end{frame}
+%					\else	%  plain
+%						\begin{frame}[plain]
+%	%					plain 
+%						#3\par\phantom{-}
+%						\end{frame}
+%					\fi
+%				\else % Anyhow, shrink defined
+%					\ifx\myplain\undefined
+%						\begin{frame}[shrink]  {#2}{\framelabel}
+%	%					shrink\par
+%						#3\par\phantom{-}
+%						\end{frame}
+%					\else	% shrink AND plain
+%						\begin{frame}[shrink,plain] 
+%	%					plain shrink
+%						#3\par\phantom{-}
+%						\end{frame}
+%					\fi %  shrink and plain
+%				\fi %shrink
+			\else	% Making book
+			\begin{frame}%
+						#3
+			\end{frame}%
+			\fi
+%	\endgroup%
+	
+	
+	%	\begingroup%
+	%	\ifx\LecturePrintable\undefined
+	%		\expandafter\ifstrequal\expandafter{\ME@plain}{true}
+	%			{ % It is a plain frame
+	%				\expandafter\ifstrequal\expandafter{\ME@shrink}{true}
+	%				{\begin{frame}[plain,shrink] {#2}{\framelabel}
+	%			%	it was PLAIN  and SHRINK
+	%				}
+	%				{\begin{frame}[plain]{#2}{\framelabel}
+	%			%	It was just PLAIN
+	%				}
+	%		  	}
+	%		  	{ % It is not plain
+	%				\expandafter\ifstrequal\expandafter{\ME@shrink}{true}
+	%				{\begin{frame}[shrink]{#2}{\framelabel}
+	%			%	It was ONLY shrink
+	%				}
+	%			  	 {\begin{frame}{#2}{\framelabel}
+	%			  	% It was just empty
+	%			  	 }
+	%		  	}
+	%		 \else
+	%		 \fi
+	%	\endgroup%
+	%\par The key was: #1\par
+	%\begin{frame}{#2}{\framelabel}
+	%#3
+	%\ifx\LecturePrintable\undefined\phantom{-}\fi
+	%\end{frame}
+} % \MEframe
+\else % Making some printed version
+	\newcommand{\MEframe}[3][]
+	{
+		\begin{frame}%{}{}
+			#3
+		\end{frame}
+	}
+\fi % \LecturePrintable
+
+%% A dual-language frame for avoiding unnecessary typing
+%% Usage: \MEDframe[keys and values]
+%{frame subtitle, \LectureLanguage}{content }
+%{frame subtitle, \SecondLanguage}{content}
+% % Possible keys: shrink
+% %                         plain
+
+\newcommand{\MEDframe}[5][]{
+	\ifx\UseSecondLanguage\undefined
+	    \MEframe[{#1}]{#2}{#3}%
+	\else
+		\MEframe[{#1}]{#4}{#5}%
+	\fi
+}
+
+%%%% The base input is formatted as 'beamer' frames
+%%%% Frame specific definitions
+%%%%
+%% Define frame subtitle 
+\ifx\LecturePrintable\undefined
+%% Implementation for the slides
+\newcommand{\MEframelabel}[1]{
+	\def\framelabel{#1}
+}
+\else
+%% Implementation for the printed versions
+\newcommand{\MEframelabel}[1]{
+	\def\framelabel{#1}
+	\ifx\undefined\eBook\else \markright{#1}\fi
+	\ifx\FancyBook\undefined\else\markright{#1}\fi
+}
+\fi
+
+%%% Sectioning macros 
+%%% except A4 size, limit float range and start new page
+%%%
+\newcommand{\WEBpagebreak}{%
+	\ifx\LecturePrintable\undefined
+	\else
+		\ifx\undefined\eBook\else\FloatBarrier\clearpage\fi
+		\ifx\undefined\WEBBook\else\FloatBarrier\clearpage\fi
+	\fi
+}
+
+%%% Use one level less for the slides, so 'book' format can be used
+%%% Abandon error message for 'chapter' keyword in slides 
+%%% These macros use 'book' terminology, and transform it properly for slides
+%%% Usage: \MEchapter{short title}{long title}
+%%%
+\newcommand{\MEchapter}[2][]{
+	\WEBpagebreak	% Start on new page for browsing
+	\phantomsection	% for hyperreferencing
+	\ifx\LecturePrintable\undefined\MEframelabel{#2}\fi
+	\ifx\LecturePrintable\undefined % Making slides
+			\section[#1]{#2}
+	\else %Printing book
+		\chapter[#1]{#2}
+	\fi
+	\ifx\LecturePrintable\undefined\else\MEframelabel{#2}\fi
+}
+
+%%% Abandon extra typing for 'section' keyword
+%%% Usage: \MEsection{short title}{long title}
+%%%
+\newcommand{\MEsection}[2][]{
+	
+	\WEBpagebreak	% Start of new browser page
+	\phantomsection % for hyperreferencing
+
+	% Check whether the short title is empty
+		\ifx\LecturePrintable\undefined % Making slides
+			\ifthenelse{\isempty{#1}}{\subsection{#2}}{\subsection[#1]{#2}}
+		\else %Printing book
+			\ifthenelse{\isempty{#1}}{\section{#2}}{\section[#1]{#2}}
+		\fi
+	\MEframelabel{#2}
+}
+
+
+%% Abandone extra typing for 'subsection' keyword
+%%% Usage: \MEsubsection{short title}{long title}
+\newcommand{\MEsubsection}[2][]{
+%	\WEBpagebreak	% Start of new browser page, usually not needed
+	\phantomsection
+	\ifx\LecturePrintable\undefined % Making slides
+			\ifthenelse{\isempty{#1}}{\subsubsection{#2}}{\subsubsection[#1]{#2}}
+	\else %Printing book
+		\ifthenelse{\isempty{#1}}{\subsection{#2}}{\subsection[#1]{#2}}
+	\fi
+}
+
+%%% Usage: \MEsubsubsection{short title}{long title}
+\newcommand{\MEsubsubsection}[2][]{
+	\phantomsection % A hook for hyper references
+	\ifx\LecturePrintable\undefined % Making slides
+		%	\ifthenelse{\isempty{#1}}{}{\bfseries #2}
+	\else %Printing book
+		\ifthenelse{\isempty{#1}}{\subsubsection{#2}}{\subsubsection[#1]{#2}}
+	\fi %Printable
+}
+
+% Abandon error message for 'chapter' keyword in slides, 2 languages
+\newcommand{\MEDchapter}[4][]
+{
+	\ifx\UseSecondLanguage\undefined
+		\MEchapter[#1]{#2}
+	\else
+		\MEchapter[#3]{#4}
+	\fi
+}
+ 
+%%% Abandon extra typing for 'section' keyword, 2 languages
+\newcommand{\MEDsection}[4][]
+{
+	\ifx\UseSecondLanguage\undefined
+		\MEsection[#1]{#2}
+	\else
+		\MEsection[#3]{#4}
+	\fi
+}
+
+%% Abandon extra typing for 'subsection' keyword, 2 languages
+\newcommand{\MEDsubsection}[4][]
+{
+	\ifx\UseSecondLanguage\undefined
+		\MEsubsection[#1]{#2}
+	\else
+		\MEsubsection[#3]{#4}
+	\fi
+}
+
+%% Abandone extra typing for 'subsubsection' keyword, 2 languages
+\newcommand{\MEDsubsubsection}[4][]
+{
+	\ifx\UseSecondLanguage\undefined
+		\MEsubsubsection[#1]{#2}
+	\else
+		\MEsubsubsection[#3]{#4}
+	\fi
+}
+
+
+%% Give the new illustration of chapter in memoir/fancy mode
+\newcommand\MEchapterillustration[1]
+{
+	\ifx\DisableChapterIllustration\undefined
+		\ifthenelse{\isempty{#1}}
+		{	
+			\IfFileExists{fig/DefaultIllustration.png}
+				{\def\myfile{fig/DefaultIllustration.png}}
+				{}	
+		}			
+		{	% The argument is not empty
+		\IfFileExists{#1}
+			{\def\myfile{#1}}	% Explicit file present, use that file
+			{%\DebugMessage{File '#1' not found}
+				}
+		}
+		
+		
+	\ifx\myfile\undefined
+			% No file was found, exit
+	\else
+		\ifx\LecturePrintable\undefined
+			\def\framelabel{}
+			\MEframe[plain]{}
+				{
+					\includegraphics[width=\textwidth]{\myfile}
+				}
+		\else % We are printing a book
+			\ifx\FancyBook\undefined
+				\par\noindent\includegraphics[width=\paperwidth]{\myfile}
+			\else
+				\renewcommand\chapterillustration{\myfile}
+			\fi
+		\fi
+	\fi% \myfile
+	\fi%\DisableChapterIllustration
+}%\MEchapterillustration
