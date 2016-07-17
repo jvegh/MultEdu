@@ -1,0 +1,118 @@
+% % 
+% % This is the preamble for printing a document in eBook (native PDF)  form
+% %
+\def\LecturePrintable{Book}				% It is a kind of printable format 
+\def\MayFloat{YES}							% Some environments are allowed to float
+
+\documentclass[english,13pt,
+pdftex, twocolumn,
+bookmarks, %bookmarksnumbered=true,bookmarksopen=true,
+a4paper, twoside,openany, %titlepage,
+hidelinks,		%no boxes around hyperref links
+colorlinks=true, 
+%nodirectory, 
+tight, breaklinks=true,
+linkcolor=webgreen,filecolor=webbrown,citecolor=webgreen, urlcolor=webbrown,
+pdfpagemode=UseNone,pdfstartview=Fit
+]{memoir}
+	
+% % Set up the page size	
+\setstocksize{303mm}{216mm}
+\settrimmedsize{\stockheight}{\stockwidth}{*}
+
+%% Adjust margins around typeblock
+\setlrmarginsandblock{23mm}{18mm}{*}
+\setulmarginsandblock{23mm}{23mm}{*}
+
+%% Header and footer heights
+\setheadfoot{\baselineskip}{10mm}
+\setlength\headsep{7mm}
+%\checkandfixthelayout
+%
+\checkandfixthelayout[fixed]
+
+\input{../../common/formats/MESetupPrintedFormat}
+%\usepackage[section]{placeins}	%  for eBook, restrict floats to chapters
+
+%% the usual "plain" style used
+%		\newcommand{\maketitlepage}[0]{%
+%		  \cleardoublepage%
+%  		{%
+%		  \fontsize{18}{20}\selectfont\par\noindent\textcolor{green}{\rmfamily\itshape\textbf\LectureAuthor}%
+%		  \vspace{11.5pc}%
+%		  \fontsize{40}{48}\selectfont\par\noindent\textcolor{HeadingColor}{\rmfamily\itshape\textbf\LectureTitle}%
+% 		 \ifx\LectureSubtitle\undefined
+%  		\else
+%	  		 \vspace{1.5pc}%
+%	 		 \fontsize{24}{28}\selectfont\par\noindent\textcolor{HeadingColor}{\rmfamily\itshape\LectureSubtitle}%
+%  		 \fi
+% 		 \vfill%
+%		 \par
+%		\ifx\LectureLogo\undefined
+%		\else
+%			\LectureLogo
+%		\fi  
+%		\par
+%  		\fontsize{14}{16}\selectfont\par\noindent\textcolor{HeadingColor}{{\LecturePublisher}}%\\
+%  		%\fontsize{10}{12}\selectfont\par\noindent\textcolor{HeadingColor}{{\LectureRevision}}%
+%	  }
+% 	 \thispagestyle{empty}%
+%  	\clearpage%
+%}
+
+
+\renewcommand{\maketitle}
+{
+%	\begin{center}\normalfont\bfseries\color{HeadingColor}
+%%  \hspace*{.08cm}%
+%%  %\rule{.15\textwidth}{1.5cm}% \includegraphics for logo 1 goes here
+%%  \ifx\LectureLogo\undefined
+%	  {\message{ Lecture Logo not found}}
+%	 % \includegraphics[width=3cm]{\LectureLogo}
+%%	  \else
+%%	  {\pgfuseimage{\LectureLogo}}	  
+%%	  \fi
+%%  \hfill
+%%  \ifx\LectureLogo2\undefined
+%%	  {\message{ Lecture Logo2 not found}}
+%%	  \else
+%%	  {\pgfuseimage{\LectureLogo2}}
+%%	  \fi
+%%%  \pgfuseimage{IISLogo}\par
+%\raisebox{1.2cm}{ \hspace*{.1cm}\normalsize\color{HeadingColor}\LecturePublisher \hspace*{.1cm}}%
+%     \end{center}
+%\vskip -1cm
+\onecolumn
+\begin{tcolorbox}[]
+{
+\begin{center}
+\normalfont\bfseries\large{\bfseries\Large\color{HeadingColor}\LectureAuthor}\\
+%
+         {\bfseries\Large\color{HighlightColor}\LectureTitle}\\
+     \ifx\LectureSubtitle\undefined\else  { \normalsize\color{HeadingColor} \LectureSubtitle}\fi
+%
+\end{center}
+}
+\end{tcolorbox}
+
+%\vfill
+\noindent
+Copyright \copyright\ 2009-\the\year\\(\LectureEmail)
+
+\noindent
+\LectureRevision
+\twocolumn
+%\clearpage
+%\IfFileExists{src/Abstract}
+%	{\input{src/Abstract}}
+%	{\message{Abstract information not found}}
+%\vglue1\baselineskip
+%\clearpage
+%\IfFileExists{src/Copyright}
+%	{\input{src/Copyright}\clearpage}
+%	{\IfFileExists{../../common/MECopyright}
+%		{\input{../../common/MECopyright}\clearpage}
+%		{}
+%	}
+}
+
