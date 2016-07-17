@@ -1,0 +1,254 @@
+%%%
+%%% This is the chapter about sectioning documents for the MultEdu system
+
+\MEDchapter{Sectioning document}{}{A dokumentum tagolása}
+
+
+\MESetListingFormat{TeX}
+\lstset{ basicstyle=\ttfamily\color{black}\normalsize}
+\MEDsection[]{Document units}{}{Dokumentum egységek}
+
+\MEDframe{Document units}
+{
+Basically, the document is organized as 'beamer' needs it,
+but to print it in a book-like form, the sectioning must be changed,
+and also the package 'beamerarticle' must be used.
+In order to provide a uniform wrapper around sectioning, MultEdu introduces
+its own sectioning units.
+}
+{Dokumentum egységek}
+{
+A dokumentumok a 'beamer' csomag követelményeinek megfelelően van szervezve.
+A nyomtatható formában való megjelenítéshez a MultEdu  a 'beamerarticle' csomagot használja,
+és a tagolást is megfelelően változtatni kell.
+Ennek érdekében a MultEdu saját tagolási egységeket vezet be, amelyek valójában
+a 'book' formátumnak felelnek meg, és amelyeket dia készítéshez megfelelően átalakít.
+}
+\index{package!beamer}
+\index{package!beamerarticle}
+
+\MEDsubsection{Frames}{}{Dia keretek}
+\MEDframe{Frames}
+{
+These units actually correspond to the ones used in format 'book',
+and MultEdu transforms them properly when preparing slides.
+
+Usage:\par
+\noindent\lstinline|\\MEframe[keys]\{subtitle\}\{content\}|
+
+Legal keys are 
+
+\noindent\lstinline!shrink=true|false! and \lstinline!plain=true|false!
+
+By default, both are false.
+}
+{Dia keretek}
+{
+
+Használata:\par
+\noindent\lstinline|\\MEframe[keys]\{subtitle\}\{content\}|
+
+Értelmezett kulcsok 
+
+\noindent\lstinline!shrink=true|false! and \lstinline!plain=true|false!
+
+Alapértelmezetten mindkettő false.
+}
+
+\index{MEframe@\bs MEframe}
+
+\MEDsubsection{Chapter}{}{Fejezet}
+\MEDframe{Chapter}
+{
+Correspondingly, the biggest unit is the 'chapter'.
+(As mentioned, for slides it is transformed to 'section'.)
+Usage:\par
+\noindent\lstinline|\\MEchapter[short title]\{long title\}|
+
+}
+{Fejezet}
+{
+
+A dokumentum legnagyobb egysége a fejezet.
+
+Használata:\par
+\noindent\lstinline|\\MEchapter[short title]\{long title\}|
+
+}
+\index{MEchapter@\bs MEchapter}
+
+\MEDsubsection{Section and below}{}{Szakasz és az alatt}
+\MEDframe{Chapter}
+{
+The next, smaller unit is the 'section'.
+(As mentioned, for slides it is transformed to 'subsection'.)
+Usage:\par
+\noindent\lstinline|\\MEsection[short title]\{long title\}|
+
+In a similar way, there exists \lstinline|\\MEsubsection[short title]\{long title\}|
+and \lstinline|\\MEsubsubsection[short title]\{long title\}|; the latter one is
+transformed for slides to \lstinline|\\paragraph|
+}
+{Fejezet}
+{
+A következő, kisebb egység a szakasz
+Használata:\par
+\noindent\lstinline|\\MEsection[r\"ovid cím]\{hosszú cím\}|
+
+Hasonló módon létezik \lstinline|\\MEsubsection[rövid cím]\{hosszú cím\}|
+és \lstinline|\\MEsubsubsection[rövid cím]\{hosszú cím\}|; 
+ez utóbbi dia készítés esetén \lstinline|\\paragraph| alakot ölt.
+
+}
+\index{MEsection@\bs MEsection}
+
+\MEDsection{Dual language sources}{}{Kétnyelvű forráskódok}
+
+\MEDframe{Dual language sources}
+{
+It happens, that I teach the same course in my mother tongue for my domestic students,
+and in English, for foreign students.
+The course material is the same, and it must be developed in parallel.
+Obviously it is advantageous, if they are located in the same source file, side by side;
+so they can be developed in the same action.
+The \lstinline|\\UseSecondLanguage| macro supports this method.
+
+The macros introduced above have a version with prefix 'MED' rather than 'ME only,
+which takes double argument sets (arguments for both languages). Depending on whether \lstinline|\\UseSecondLanguage| is defined,
+the first or the second argument set is used. In this way, just the 'src/Heading.tex'
+source file shall be edited, and the other language output will be prepared.
+}
+{Kétnyelvű forráskódok}
+{
+Előfordul, hogy ugyanazt az anyagot saját nyelvemen oktatom hazai hallgatóknak,
+és angolul, külföldi hallgatóknak. A tananyag megegyezik, és együtt kell fejleszteni.
+Nyilván előnyös, ha a két anyag ugyanabban a forrásnyelvi fájlban, egymás mellett fejleszthető.
+
+Erre szolgál a \lstinline|\\UseSecondLanguage|. A fent bevezetett makróknak van egy 'D' (Dual) taggal
+kibővített változata, amelyikben mind az elsődleges, mind a másodlagos nyelven 
+megadjuk a szükséges tartalmakat. A 'Heading.tex' file megváltoztatásával készíthetünk 
+más nyelvű dokumentumot.
+}
+\index{UseSecondLanguage@\bs UseSecondLanguage}
+\MEDsubsection{Switching between languages}{}{Átváltás a nyelvek között}
+
+\MEDframe{Switching between languages}
+{
+
+Usage:
+
+\noindent\lstinline|\\UseSecondLanguage\{YES\}|
+
+\noindent where the argument \lstinline|\{\}| is not relavant, only if this macro is defined or not.
+Traditionally, it is defined in 'src/Heading.tex'.
+
+The two kinds of macros can be mixed, but only the 'D' macros 
+are sensitive to changing the language.
+}
+{Átváltás a nyelvek között}
+{
+
+Használata:
+
+\noindent\lstinline|\\UseSecondLanguage\{YES\}|
+
+\noindent ahol az \lstinline|\{\}| nem számít, csak az, hogy definiálva van-e ez a makro.
+Hagyományosan az 'src/Heading.tex' fájlban definiáljuk.
+
+A kétféle makrókészlet keverhető, de csak a 'D' makrók reagálnak 
+a nyelv változtatásra.
+}
+
+\MEDsubsection{Frames}{}{Dia keretek}
+
+\MEDframe{Frames}
+{
+In dual language documents, usually 
+\par\noindent\lstinline|\\MEDframe[keys]\{subtitle, first language\} \{content, first language \} \{subtitle, second language\} \{content, second language\}|
+\par\noindent is used. I.e. the user provides titles and contents in both languages,
+and for preparing the output, selects one of them with \lstinline|\\UseSecondLanguage|.
+}
+{Dia keretek}
+{
+Kétnyelvű dokumentumokban általában a
+\par\noindent\lstinline|\\MEDframe[keys]\{subtitle, first language\} \{content, first language \} \{subtitle, second language\} \{content, second language\}|
+\par\noindent  keretet használjuk. Azaz a felhasználó megadja mindkét nyelven
+a címet és a tartalmat, majd fordítás előtt \lstinline|\\UseSecondLanguage|
+használatával kiválasztja az egyik nyelvet.
+}
+
+\index{MEDframe@\bs MEDframe}
+
+\MEDsubsection{Chapter}{}{Fejezet}
+
+\MEDframe{Chapter}
+{
+Correspondingly, the biggest unit in a dual language document is the 'Dchapter'.
+(As mentioned, for slides it is transformed to 'Dsection'.)
+Usage:\par
+\noindent\lstinline|\\MEDchapter[short title1]\{long title1\}\{short title2\}\{long title2\}|
+\par\noindent which is transformed to
+\par\noindent\lstinline|\\MEchapter[short title1]\{long title1\}| or
+\par\noindent\lstinline|\\MEchapter[short title2]\{long title2\}| calls,
+\par\noindent depending on whether \lstinline|\\UseSecondLanguage| is or is not defined.
+}
+{Fejezet}
+{
+
+Hasonlóképpen, a kétnyelvű dokumentum legnagyobb egysége a 'Dchapter'.
+(Amint említettük, dia készítéskor ez átalakul 'Dsection' egységgé.)
+Használata:\par
+\noindent\lstinline|\\MEDchapter[rövid cím1]\{hosszú cím1\}\{rövid cím2\}\{hosszú cím2\}|
+\par\noindent ami aztán átalakul 
+\par\noindent\lstinline|\\MEchapter[rövid cím1]\{hosszú cím1\}| vagy
+\par\noindent\lstinline|\\MEchapter[rövid cím2]\{hosszú cím2\}| 
+\par\noindent attól függően, hogy  \lstinline|\\UseSecondLanguage| definiált vagy sem.
+}
+\index{MEDchapter@\bs MEDchapter}
+
+
+\MEDsubsection{Section and below}{}{Szakasz és az alatt}
+
+\MEDframe{Section and below}
+{
+The usage of the lower units is absolutely analogous.
+}
+{Szakasz és az alatt}
+{
+Teljesen hasonló a kisebb formázási egységek használata is.
+}
+\index{MEDsection@\bs MEDsection}
+
+\MEDsection[]{Chapter illustration}{}{Fejezet illusztráció}
+
+\MEDframe{Chapter illustration}
+{
+Some book styles also allow presenting some illustration at the beginning of the chapters.
+\par Usage:\par
+\noindent\lstinline|\\MEchapterillustration\{file\}|
+
+\noindent For slides, the illustration appears in a 'plain' style style.
+For books, the picture is placed at the beginning of the chapter.
+If the file name is empty, a 'fig/DefaultIllustration.png' file is searched.
+If the file not found, no illustration generated.
+
+If macro \lstinline|\\DisableChapterIllustration| is defined, no picture generated.
+
+}
+{Fejezet illusztráció}
+{
+Néhány könyv stílus lehetővé teszi, hogy a fejezetek elején egy illusztrációt helyezzünk el.
+\par Használata:\par
+\noindent\lstinline|\\MEchapterillustration\{file\}|
+
+\noindent Dia készítéskor, a kép egy 'plain' dián jelenik meg.
+Nyomtatható változatban a fejezet elején jelenik meg a kép.
+
+Ha a fájl név üres, a csomag a 'fig/DefaultIllustration.png' képet keresi.
+Ha a fájl nem található, nem készül illusztráció.
+
+Ha definiáljuk a  \lstinline|\\DisableChapterIllustration|  makrót,
+a csomag nem generál képet. 
+}
+\index{MEchapterillustration@\bs MEchapterillustration}
+
