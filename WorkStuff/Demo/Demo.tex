@@ -7,6 +7,30 @@
 % \input{../../common/formats/memoir_eBook} % An eBook format for students (mainly mobile devices)
 %  \input{../../common/formats/memoir_WEB}	% A WEB browsable, landscape, big letter version
  \input{../../common/formats/memoir_A4Fancy}	% A fancy memoir book
+\usepackage{layouts}
+
+\makeatletter
+\renewcommand{\subsubsection}{\@startsection%
+{subsubsection}%       name
+{3}%                   level
+{0mm}%                 indent
+{-\baselineskip}%      beforeskip
+{0.5\baselineskip}%    afterskip
+{}
+}%     style
+\makeatother
+
+%\makeatletter
+%\renewcommand{\subsection}{\@startsection%
+%{subsection}%       name
+%{2}%                   level
+%{0mm}%                 indent
+%{-.7\baselineskip}%      beforeskip
+%{0.6\baselineskip}%    afterskip
+%{}
+%}%     style
+%\makeatother
+
 
 %% This is the beginning of the user document
 \begin{document}

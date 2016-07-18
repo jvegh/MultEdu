@@ -285,12 +285,15 @@
 \chaptitlefont ##1\par}}%
 }
 \chapterstyle{BlueBox}
-\setsecheadstyle{\color{HeadingColor}\bfseries\memRTLraggedright}
-\setsubsecheadstyle{\color{HeadingColor}\bfseries\small\memRTLraggedright}
+	\setsecheadstyle{\color{HeadingColor}\bfseries\memRTLraggedright}
+	\setsubsecheadstyle{\color{HeadingColor}\bfseries\small\memRTLraggedright}
 
-\setlength{\parskip}{4pt plus 2pt minus 3pt}
-\setlength{\parindent}{0pt}
-%
+	\setlength{\parskip}{4pt plus 2pt minus 3pt}
+	\setlength{\parindent}{0pt}
+	\setlength{\textfloatsep}{6.0pt plus 1.0pt minus 2.0pt}
+	\setlength{\floatsep}{6.0pt plus 1.0pt minus 2.0pt}
+	\setlength{\intextsep}{6.0pt plus 1.0pt minus 2.0pt}
+% http://ctan.ijs.si/tex-archive/macros/latex/contrib/layouts/layman.pdf
 	\raggedbottom
 		% Alter some LaTeX defaults for better treatment of figures:
     % See p.105 of "TeX Unbound" for suggested values.
@@ -310,10 +313,8 @@
 	% N.B.: floatpagefraction MUST be less than topfraction !!
     \renewcommand{\dblfloatpagefraction}{0.8}	% require fuller float pages
 
-	\setlength\parskip{0pt}
-	\setlength{\parindent}{6pt}
 %\setlist{nosep,before=\vspace{-0.5\baselineskip},after=\vspace{-0.5\baselineski‌​p}}
-%\tightlists
+\tightlists
 
 % Set page headings
 \makeevenhead{headings}{\color{burntorange}\thepage}{}{\color{burntorange}\scriptsize\slshape\leftmark}

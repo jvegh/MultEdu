@@ -17,23 +17,25 @@
 %% These are the output specifications, declare them first
 %\def\LectureEncoding{latin1}			% By default, it is  UTF-8
 
-\def\LectureLanguage{magyar}
+%\def\LectureLanguage{magyar}
 %% Define the author, title and publisher
 %% Please use accents, no encoding and fonts defined
 \ifx\LectureLanguage\undefined
-	% printing in Hungarian
-	\def\LectureAuthor{V\'egh J\'anos}
-	\def\LectureTitle{Hogyan használjuk a MultEdu csomagot} 
-	\def\LectureSubtitle{(Hogyan készítsünk érdekes tananyagot)} %opcionális
-%	\def\LecturePublisher{Miskolci Egyetem \dots és Informatikai Kara}
-\else
 	% In English
 	\def\LectureAuthor{J\'anos V\'egh}
 	\def\LectureTitle{How to use package MultEdu}
-	\def\LectureSubtitle{(How to prepare interesting and attractive teaching material)} %Optional
+	\def\LectureSubtitle{(How to prepare interesting and attractive teaching material)}
+	 %Optional
 %	\def\LecturePublisher{Miskolc University Faculty of \dots and Informatics}
+	\def\LectureRevision{V0.02 (using \MERevision) \at 2016.07.15}
+\else
+	% printing in Hungarian
+	\def\LectureAuthor{V\'egh J\'anos}
+	\def\LectureTitle{Hogyan használjuk a MultEdu csomagot} 
+	\def\LectureSubtitle{(Hogyan készítsünk érdekes és vonzó tananyagot)} %opcionális
+%	\def\LecturePublisher{Miskolci Egyetem \dots és Informatikai Kara}
+	\def\LectureRevision{V0.02 (a \MERevision felhasználásával) \at 2016.07.15}
 \fi %% LectureLanguage
-\def\LectureRevision{V0.01 (using \MERevision) \at 2016.07.15}
 \def\LectureEmail{Janos.Vegh\at unideb.hu}
 	
 	

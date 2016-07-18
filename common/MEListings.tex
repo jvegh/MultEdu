@@ -158,13 +158,13 @@
 	\fi
 	%% Start printing the figure here:
 	\setlength{\FigHeight}{.8\textheight} 
-	\noindent\startsource\hskip-1em
+	\noindent\startsource 	\caption{#3} \hskip-1em
 %	\maxsizebox{#5\FigWidth}{#5\FigHeight}
 	{
 		\mbox{}\phantomsection
 		\noindent\begingroup\protected@edef\x{\endgroup\noexpand
 			\lstinputlisting[language={\ME@language}, \ME@options, label=#4, name=#4,
-			caption ={#3}
+%			caption ={#3}
 			]{#2}}
 		\x
 		\ME@decorations % Decorating comments
@@ -367,6 +367,7 @@
 	  	    		{
 	  	    		\begin{program*}[h!btp]	\caption{#4}
 	  	    		 }
+		\vglue-1.7\baselineskip
 		\fi\mbox{}\phantomsection
 		\begin{tabular}{p{.48\mywidth}p{.48\mywidth}}
 		\lstinputlisting[label=#5, name=#5,linewidth=\mywidth ] {#2}&
