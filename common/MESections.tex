@@ -151,13 +151,16 @@
 \newcommand{\MEchapter}[2][]{
 	\WEBpagebreak	% Start on new page for browsing
 	\phantomsection	% for hyperreferencing
-	\ifx\LecturePrintable\undefined\MEframelabel{#2}\fi
+%	\ifx\LecturePrintable\undefined\fi
 	\ifx\LecturePrintable\undefined % Making slides
-			\section[#1]{#2}
+		\MEDebugMessage{MESections: starting section}
+			\MEframelabel{#2}%\section[#1]{#2}
+			\ifthenelse{\isempty{#1}}{\section{#2}}{\section[#1]{#2}}		
 	\else %Printing book
-		\chapter[#1]{#2}
+		\MEDebugMessage{MESections: starting chapter}
+		\chapter[#1]{#2}\MEframelabel{#2}
 	\fi
-	\ifx\LecturePrintable\undefined\else\MEframelabel{#2}\fi
+%	\ifx\LecturePrintable\undefined\else\MEframelabel{#2}\fi
 }
 
 %%% Abandon extra typing for 'section' keyword
@@ -194,7 +197,8 @@
 \newcommand{\MEsubsubsection}[2][]{
 	\phantomsection % A hook for hyper references
 	\ifx\LecturePrintable\undefined % Making slides
-		%	\ifthenelse{\isempty{#1}}{}{\bfseries #2}
+			%\ifthenelse{\isempty{#1}}{}{
+			\par\noident\bfseries #2\par%}
 	\else %Printing book
 		\ifthenelse{\isempty{#1}}{\subsubsection{#2}}{\subsubsection[#1]{#2}}
 	\fi %Printable

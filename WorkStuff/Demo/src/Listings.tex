@@ -104,11 +104,13 @@ a fejezet elején használok egy
 \MEDframe{Displaying program listings}
 {
 
-\MESourceFile[language={[ISO]C++}]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way}{lst:hello.cpp}{}
-
 Program listings can be displayed using macro
 \par\noindent\lstinline|\\MESourceFile[keys] \{filename\} \{caption\} \{label\}\{scale\}|.
-\par\noindent The command used to display Listing~\ref{lst:hello.cpp} was
+Possible keys: \lstinline|wide,decorations|.
+
+\MESourceFile[language={[ISO]C++}]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way}{lst:hello.cpp}{}
+
+\par\noindent The command used to display Listing\ao{~\ref{lst:hello.cpp}} was
 \par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\}] \{lst/HelloWorld.cpp\} \{A "Hello World"- C++ program\} \{lst:hello.cpp\}\{\}|
 
 }
@@ -118,7 +120,7 @@ A
 \par\noindent\lstinline|\\MESourceFile[keys] \{filename\} \{caption\} \{label\}\{scale\}|
 \par\noindent makróval jeleníthetők meg programlisták.
 Lehetséges kulcs: \lstinline|wide,decorations|.
-A \ref{lst:hello.cpp} programlista megjelenítéshez használt programsor:
+A \ao{\ref{lst:hello.cpp}} programlista megjelenítéshez használt programsor:
 \par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\}] \{lst/HelloWorld.cpp\} \{A "Hello World"- C++ program\} \{lst:hello.cpp\}\{\}|
 
 \MESourceFile[language={[ISO]C++}]{lst/HelloWorld.cpp}{A "Hello World"- C++ program}{lst:hello.cpp}{}
@@ -137,21 +139,39 @@ Vigyázzunk rá, hogy a mondat minden változatban értelmes legyen.
 
 \MEDframe{Wide program listings}
 {
-
-\MESourceFile[language={[ISO]C++},wide]{lst/HelloWorld.cpp}{A "Hello World"- C++ program, wide}{lst:Whello.cpp}{}
-\index{MESourceFile@\bs MESourceFile}
-
 Many times one needs wider program listings.
 In the case of the two-column printing, 
 the listing shall fill the width of the two columns.
+In the case of one-column printing, the narrow list extend to 70\% of the text width,
+while the wide lists 
+
 The wide listings can be placed even hardly on the printed page
 (the first proper place, relative to the appearance of the macro
 is the top of the next page), and in addition, the orders of 
 normal and wide listings cannot be changed.
 Because of this, the place where the listing appears,
 might be relatively far from the place of referencing it.
+}
+{Széles programlista megjelenítése}
+{
+Sokszor van szükség szélesebb programlista megjelenítésére. Ennek hatására a két
+oszlopos nyomtatás teljes szélességében jelenik meg a lista.
+Egyoszlopos megjelenítés esetén a keskeny lista az oldalszélesség 70\%-ára terjed ki,
+a széles pedig a teljes oldal szélességet igénybe veszi.
+A széles programlistákat még nehezebb elhelyezni az oldalon (a megjelenítő utasítás helye
+utáni oldal tetejére kerülhet legelőször), ráadásul nem is szabad
+felcserélni a normál és széles programlisták sorrendjét.
+Emiatt a megjelenési hely eléggé messze is kerülhet
+a hivatkozás helyétől.
+}
 
-The command used to display Listing \ref{lst:Whello.cpp} :
+\MEDframe{Wide program listings}
+{
+
+\MESourceFile[language={[ISO]C++},wide]{lst/HelloWorld.cpp}{A "Hello World"- C++ program, wide}{lst:Whello.cpp}{}
+\index{MESourceFile@\bs MESourceFile}
+
+The command used to display Listing \ao{\ref{lst:Whello.cpp}} :
 \par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},wide] \{lst/HelloWorld.cpp\} \{A "Hello World"- C++ program, wide\} \{lst:Whello.cpp\}\{\}|
 }
 {Széles programlista megjelenítése}
@@ -159,16 +179,7 @@ The command used to display Listing \ref{lst:Whello.cpp} :
 
 \MESourceFile[language={[ISO]C++},wide]{lst/HelloWorld.cpp}{A "Hello World"- C++ program, wide}{lst:Whello.cpp}{}
 
-\index{MESourceFile@\bs MESourceFile}
-
-Sokszor van szükség szélesebb programlista megjelenítésére. Ennek hatására a két
-oszlopos nyomtatás teljes szélességében jelenik meg a lista.
-A széles programlistákat még nehezebb elhelyezni az oldalon (a megjelenítő utasítás helye
-utáni oldal tetejére kerülhet legelőször), ráadásul nem is szabad
-felcserélni a normál és széles programlisták sorrendjét.
-Emiatt a megjelenési hely eléggé messze is kerülhet
-a hivatkozás helyétől.
-A \ref{lst:Whello.cpp} programlista megjelenítéséhez használt programsor:
+A \ao{\ref{lst:Whello.cpp}} programlista megjelenítéséhez használt programsor:
 \par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},wide] \{lst/HelloWorld.cpp\} \{A "Hello World"- C++ program, wide\} \{lst:Whello.cpp\}\{\}|
 }
 
@@ -187,7 +198,10 @@ list of decorations
 \}
 ] \{source file\} \{caption\} \{label\}\{\}|
 \par\noindent where the list of decorations may contain any of the 
-decoration macros presented in the section.
+decoration macros presented in the section.\ao{\footnote{
+The compiler prepares in the first pass the program listing,
+the decorations follow in the next pass.}}
+Any option, used by package 'listings' applies.
 \index{MESourceFile!decorations@\bs MESourceFile decorations}
 }
 {Programlista díszítései}
@@ -206,6 +220,7 @@ list of decorations
 bármelyik fajta dekorációt tartalmazhatja.\ao{\footnote{
 A program az első menetben elhelyezi a programlistát és egy újabb fordítás során tudja 
 a díszítéseket is felrakni.}}
+A 'listings' csomagban használt bármely opció használható.
 \index{MESourceFile!díszítés@\bs MESourceFile díszítés}
 }
 
@@ -217,8 +232,21 @@ In a program listing, a range of source lines can be highlighted using macro
 \par\noindent\lstinline|\\MESourcelinesHighlight\{BallonName\} \{SourceName\} \{FirstLine\} \{LastLine\}|.
 \par\noindent Here  \lstinline|BallonName| is a new label, which denotes the 
 newly created source line region highlighting box, \lstinline|SourceName| 
-is the label of the source file. That is, to highlight a program body in listing
- \ref{lst:HLhello.cpp} the macro
+is the label of the source file. 
+}
+{Programsorok kijelölése}
+{
+Egy programlistán a
+\par\noindent\lstinline|\\MESourcelinesHighlight\{BallonName\} \{SourceName\} \{FirstLine\} \{LastLine\}|
+\par\noindent makró használatával jelölhetünk ki programsorokat. Itt \lstinline|BallonName|
+az az új címke, amit az így létrehozott sortartomány kap, \lstinline|SourceName| pedig a
+forrásfájl címkéje. 
+}
+
+\MEDframe{Highlighting lines}
+{
+To highlight a program body in listing
+ \ao{\ref{lst:HLhello.cpp}} the macro
 
 \par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},
 decorations=\{
@@ -237,11 +265,7 @@ decorations={
 }
 {Programsorok kijelölése}
 {
-Egy programlistán a
-\par\noindent\lstinline|\\MESourcelinesHighlight\{BallonName\} \{SourceName\} \{FirstLine\} \{LastLine\}|
-\par\noindent makró használatával jelölhetünk ki programsorokat. Itt \lstinline|BallonName|
-az az új címke, amit az így létrehozott sortartomány kap, \lstinline|SourceName| pedig a
-forrásfájl címkéje. Azaz a \ref{lst:HLhello.cpp} programlistán a programtörzs utasításainak
+A \ao{\ref{lst:HLhello.cpp}} programlistán a programtörzs utasításainak
 kijelöléséhez a
 
 
@@ -274,7 +298,22 @@ Here \lstinline|BallonName| is the first argument of  \lstinline|\\MESourcelines
 Possible keys, with defaults are:
 \par\noindent \lstinline|width[=3cm]| and \lstinline|color[=deeppeach]|.
 
-Listing \ref{lst:HLChello.cpp} is produced using macro
+}
+{Megjegyzés a kijelöléshez}
+{
+Az előbbi programlistán a kijelöléshez megjegyzést is fűzhetünk.
+Ennek formája 
+\par\noindent\lstinline|\\MEBalloonComment[keys]\{BallonName\} \{ShiftPosition\} \{Comment\} \{CommentShape\}|
+amivel az előzőleg felrajzolt ballonhoz fűzhetünk megjegyzést.
+Itt \lstinline|BallonName| az \lstinline|\\MEHighlightLines| első argumentuma,
+\lstinline|ShiftPosition| a megjegyzésdoboz eltolása, \lstinline|Comment| pedig maga 
+a megjegyzés.
+A lehetséges opciók: \lstinline|width[=3cm]| és \lstinline|color[=deeppeach]|.
+
+}
+\MEDframe{Commenting highlighted lines}
+{
+Listing \ao{\ref{lst:HLChello.cpp}} is produced using macro
 \par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},wide,
 decorations=\{
 \\MESourcelinesHighlight\{HelloBalloon\} \{lst:HLChello.cpp\} \{6\}\{8\}
@@ -292,16 +331,7 @@ decorations={
 }
 {Megjegyzés a kijelöléshez}
 {
-Az előbbi programlistán a kijelöléshez megjegyzést is fűzhetünk.
-Ennek formája 
-\par\noindent\lstinline|\\MEBalloonComment[keys]\{BallonName\} \{ShiftPosition\} \{Comment\} \{CommentShape\}|
-amivel az előzőleg felrajzolt ballonhoz fűzhetünk megjegyzést.
-Itt \lstinline|BallonName| az \lstinline|\\MEHighlightLines| első argumentuma,
-\lstinline|ShiftPosition| a megjegyzésdoboz eltolása, \lstinline|Comment| pedig maga 
-a megjegyzés.
-A lehetséges opciók: \lstinline|width[=3cm]| és \lstinline|color[=deeppeach]|.
-
-A \ref{lst:HLChello.cpp} programlista készítéséhez a
+A \ao{\ref{lst:HLChello.cpp}} programlista készítéséhez a
 
 \par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},
 decorations=\{
@@ -326,8 +356,8 @@ decorations={
 
 \MEDframe{Commenting source lines}
 {
-The individual source lines can also be commented, see Listing \ref{lst:Chello.cpp}.
-To produce it, the command
+The individual source lines can also be commented, see Listing\ao{ \ref{lst:Chello.cpp}}.
+To produce it, the command was:
 \par\noindent\lstinline|
 \\MESourceFile[language=\{[ISO]C++\},wide,
 decorations=\{
@@ -345,7 +375,7 @@ decorations={
 }
 {Megjegyzés a forrásprogramhoz}
 {
-Az egyes forráskód sorokhoz is fűzhetünk megjegyzéseket, lásd  \ref{lst:Chello.cpp} programlista.
+Az egyes forráskód sorokhoz is fűzhetünk megjegyzéseket, lásd\ao{  \ref{lst:Chello.cpp}} programlista.
 Ehhez a
 \par\noindent\lstinline|
 \\MESourceFile[language=\{[ISO]C++\},wide,
@@ -384,21 +414,6 @@ Notes:
 \item The positioning using geometrical positions, does not consider 'firstline'.
 \end{itemize}
 
-To produce Listing \ref{lst:LBhello.cpp}, the macro
-
-\par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},
-decorations=\{
-\\MESourcelineListBalls\{lst:LBhello.cpp\}\{3,8,5\}
-\}
-] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, with balls\} \{lst:LBhello.cpp\}\{\}|
-\par\noindent has been used
-
-\MESourceFile[language={[ISO]C++},
-decorations={
-\MESourcelineListBalls{lst:LBhello.cpp}{3,8,5}
-}
-]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way,  with balls}{lst:LBhello.cpp}{.3}
-
 The marked lines can then be referenced through the balls like '(\MEBall{Listing~\ref{lst:LBhello.cpp}}{2})
 is the return istruction'. It can be produced using 
 \par\noindent\lstinline|\\MEBall\{Listing~\\ref\{lst:LBhello.cpp\}\}\{2\}|
@@ -422,7 +437,34 @@ Megjegyzések:
 a 'firstline' paramétert.
 \end{itemize}
 
-A \ref{lst:LBhello.cpp} lista készítéséhez a
+
+Az így megjelölt sorokra később így hivatkozhatunk: "(\MEBall{Listing~\ref{lst:LBhello.cpp}}{2})
+a programtörzset lezáró visszatérési utasítás".
+Ehhez a 
+\par\noindent\lstinline|\\MEBall\{lst:LBhello.cpp\}\{2\}| makrót kell használnunk.
+
+}
+
+\MEDframe{Numbered balls to listing}
+{
+To produce Listing\ao{ \ref{lst:LBhello.cpp}}, the macro
+
+\par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},
+decorations=\{
+\\MESourcelineListBalls\{lst:LBhello.cpp\}\{3,8,5\}
+\}
+] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, with balls\} \{lst:LBhello.cpp\}\{\}|
+\par\noindent has been used
+
+\MESourceFile[language={[ISO]C++},
+decorations={
+\MESourcelineListBalls{lst:LBhello.cpp}{3,8,5}
+}
+]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way,  with balls}{lst:LBhello.cpp}{.3}
+}
+{Hivatkozási pontok elhelyezése a programlistán}
+{
+A \ao{\ref{lst:LBhello.cpp}} lista készítéséhez a
 \par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},
 decorations=\{
 \\MESourcelineListBalls{lst:LBhello.cpp}{3,8,5}
@@ -435,12 +477,6 @@ decorations={
 \MESourcelineListBalls{lst:LBhello.cpp}{3,8,5}
 }
 ]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, golyókkal}{lst:LBhello.cpp}{.3}
-
-Az így megjelölt sorokra később így hivatkozhatunk: "(\MEBall{Listing~\ref{lst:LBhello.cpp}}{2})
-a programtörzset lezáró visszatérési utasítás".
-Ehhez a 
-\par\noindent\lstinline|\\MEBall\{lst:LBhello.cpp\}\{2\}| makrót kell használnunk.
-
 }
 
 \index{MESourceListBalls@\bs MESourceListBalls}
@@ -452,31 +488,50 @@ Ehhez a
 Sometimes one might need to insert figures into the listing.
 The macro is
 \par\noindent\lstinline|\\MESourcelineFigure[keys] \{SourceLabel\} \{LineNo\} \{ShiftPosition\} \{GraphicsFile\}|.
-Possible key is \lstinline|width[=3cm]|
+\par\noindent Possible key is \lstinline|width[=3cm]|
 
-To produce Listing \ref{lst:forloops.v},
+}
+{Ábra elhelyezése a programlistán}
+{
+Néha ábrát is akarhatunk elhelyezni a programlistán.
+Az ezt a célt szolgáló makró
+\par\noindent\lstinline|\\MESourcelineFigure[keys] \{SourceLabel\} \{LineNo\} \{ShiftPosition\} \{GraphicsFile\}|.
+\par\noindent Lehetséges kulcs: \lstinline|width[=3cm]|
+}
+
+\MEDframe{Figure to listing}
+{
+To produce Listing\ao{ \ref{lst:forloops.v}},
  macro
 \par\noindent\lstinline|
-\\MESourceFile[language={Verilog},wide,
+\\MESourceFile[language=\{Verilog\},wide,
 decorations=\{
-\\MESourcelineFigure[width=5.2cm] \{lst:forloops.v\}\{8\} \{4.4,.0\} \{fig/forloops\}
+\\MESourcelineFigure[width=5.2cm] \{lst:forloops.v\}\{8\} \{3.0,-.3\} \{fig/forloops\}
 \}
 ] \{lst/forloops.v\} \{Implementing \\ctext\{for\} loop with repeating HW\} \{lst:forloops.v\}\{\}|
 \par\noindent was used.
 
 \MESourceFile[language={Verilog},wide,
 decorations={
-\MESourcelineFigure[width=5.2cm]{lst:forloops.v}{8}{4.4,.0}{fig/forloops}
+\MESourcelineFigure[width=5.2cm]{lst:forloops.v}{8}{3.0,-.3}{fig/forloops}
 }
 ]{lst/forloops.v}{Implementing \ctext{for} loop with repeating HW}{lst:forloops.v}{}
 }
 {Ábra elhelyezése a programlistán}
 {
+A \ao{\ref{lst:forloops.v}} előállításhoz használt makró:
+\par\noindent\lstinline|
+\\MESourceFile[language=\{Verilog\},wide,
+decorations=\{
+\\MESourcelineFigure[width=5.2cm] \{lst:forloops.v\}\{8\} \{3.0,-.3\} \{fig/forloops\}
+\}
+] \{lst/forloops.v\} \{Implementing \\ctext\{for\} loop with repeating HW\} \{lst:forloops.v\}\{\}|
+
 \MESourceFile[language={Verilog},wide,
 decorations={
-\MESourcelineFigure[width=5.2cm]{lst:forloops.v}{8}{4.4,.0}{fig/forloops}
+\MESourcelineFigure[width=5.2cm]{lst:forloops.v}{8}{3.0,-.3}{fig/forloops}
 }
-]{lst/forloops.v}{%\ctext{for} 
+]{lst/forloops.v}{\ctext{for} 
 ciklus megvalósítása HW ismétléssel}{lst:forloops.v}{}
 }
 \index{MESourcelineFigure@\bs MESourcelineFigure}
@@ -492,24 +547,29 @@ ciklus megvalósítása HW ismétléssel}{lst:forloops.v}{}
 Sometimes it is worth to compare source files, side by side.
 The macro for this is
 \par\noindent\lstinline|\\MESourceFileCompare[keys]\{source file1\} \{source file2\} \{caption\} \{label\}|
-\par\noindent The command to produce Listing \ref{lst:lower12.c} is
-\par\noindent\lstinline|\\MESourceFileCompare[language=\{[ANSI]C\}] \{lst/lower1.c\} \{lst/lower2.c\} \{Comparing two routines for converting string to lower case\} \{lst:lower12.c\}|
-
-\MESourceFileCompare[language={[ANSI]C}]{lst/lower1.c}{lst/lower2.c}{Comparing two routines for converting string to lower case}{lst:lower12.c}
-
-%
 }
 {Kapcsolódó egyéb makrók}
 {
 Néha érdemes forrás kód fájlokat egymás mellé helyezve összehasonlítani.
 Az erre szolgáló makró
 \par\noindent\lstinline|\\MESourceFileCompare[keys]\{source file1\} \{source file2\} \{caption\} \{label\}|
-\par\noindent A \ref{lst:lower12.c} programlista előállításához használt
+}
+
+\MEDframe{Comparing source files}
+{
+\par\noindent The command to produce Listing \ao{\ref{lst:lower12.c}} is
+\par\noindent\lstinline|\\MESourceFileCompare[language=\{[ANSI]C\}] \{lst/lower1.c\} \{lst/lower2.c\} \{Comparing two routines for converting string to lower case\} \{lst:lower12.c\}|
+
+\MESourceFileCompare[language={[ANSI]C}]{lst/lower1.c}{lst/lower2.c}{Comparing two routines for converting string to lower case}{lst:lower12.c}
+
+}
+{Kapcsolódó egyéb makrók}
+{
+\par\noindent A \ao{\ref{lst:lower12.c}} programlista előállításához használt
 utasítás
 \par\noindent\lstinline|\\MESourceFileCompare[language=\{[ANSI]C\}] \{lst/lower1.c\} \{lst/lower2.c\} \{Comparing two routines for converting string to lower case\} \{lst:lower12.c\}|
 
-\MESourceFileCompare[language={[ANSI]C}]{lst/lower1.c}{lst/lower2.c}{A két kisbetűssé alakí­tó rutin összehasonlí­tása}{lst:lower12.c}
-
+\MESourceFileCompare[language={[ANSI]C}]{lst/lower1.c}{lst/lower2.c}{A két kisbetűssé alakí­t rutin összehasonlí­tása}{lst:lower12.c}
 }
 \index{\MESourceFileCompare@\bs MESourceFileCompare}
 
@@ -519,13 +579,34 @@ utasítás
 It is also useful sometimes to show the source file with its output.
 The macro 
 \par\noindent\lstinline|\\MESourceFileWithResult\}[keys]\{source file\} \{result file\} \{caption\} \{label\}|
-\par\noindent allows to do that. For producing Listing \ref{lst:calculatorwithresult}
+\par\noindent allows to do that. 
+
+ For producing Listing \ao{\ref{lst:calculatorwithresult}}
 the command 
 \par\noindent\lstinline|\\MESourceFileWithResult[language=C++,wide,decorations=\{
 	\\MESourcelineListBalls\{lst:calculatorwithresult\} \{13,14,16,18,19\}
 \}] \{lst/expensive_calculator.cpp\}
 \{lst/calculatorresult.txt\} \{The calculator program with its result\} \{lst:calculatorwithresult\}|
 \par\noindent was used.
+}
+{Forrás fájl eredménnyel}
+{
+A \ao{\ref{lst:calculatorwithresult}} program lista
+a 
+\par\noindent\lstinline|\\MESourceFileWithResult[language=C++,wide,decorations=\{
+	\\MESourcelineListBalls\{lst:calculatorwithresult\} \{13,14,16,18,19\}
+\}] \{lst/expensive_calculator.cpp\}
+\{lst/calculatorresult.txt\} \{The calculator program with its result\} \{lst:calculatorwithresult\}|
+\par\noindent utasítás eredménye.
+
+Néha hasznos egy forrásfájlt a futtatás eredményével együtt megmutatni.
+A
+\par\noindent\lstinline|\\MESourceFileWithResult[keys]\{source file\} \{result file\} \{caption\} \{label\}|
+\par\noindent makró ezt teszi lehetővé.
+
+}
+\MEDframe{Source with output}
+{
 
 \MESourceFileWithResult[language=C++,wide=true,decorations={
 	\MESourcelineListBalls{lst:calculatorwithresult}{13,14,16,18,19}
@@ -536,10 +617,6 @@ the command
 }
 {Forrás fájl eredménnyel}
 {
-Néha hasznos egy forrásfájlt a futtatás eredményével együtt megmutatni.
-A
-\par\noindent\lstinline|\\MESourceFileWithResult[keys]\{source file\} \{result file\} \{caption\} \{label\}|
-\par\noindent makró ezt teszi lehetővé.
 
 \MESourceFileWithResult[language=C++,wide=true,decorations={
 	\MESourcelineListBalls{lst:calculatorwithresult}{13,14,16,18,19}

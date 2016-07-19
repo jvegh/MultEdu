@@ -1,0 +1,404 @@
+\newcommand\MEDebugMessage[1]{\ifx\EnableDebug\undefined \else  \par\message{====MultEdu====:#1}\fi}
+
+\usepackage[most]{tcolorbox}	% rounded color boxes
+\usepackage{wallpaper}
+\usepackage{url}
+\tcbuselibrary{breakable}
+
+%% Set up options for the session, global, user or none
+% % The user can have his own options in his own /src directory,
+% % otherwise default ones are used
+\IfFileExists{src/Options.tex}
+	{\input{src/Options.tex}
+	\MEDebugMessage{Using user's own options}
+	}	% % User options
+	{\IfFileExists{../../common/MEOptions.tex}
+		{\input{../../common/MEOptions.tex}
+	     \MEDebugMessage{Using system wide options}
+		}	% % Default options
+		{
+	      \MEDebugMessage{Using NO options}
+		} % % No options at all
+	} % Options
+
+%% Set up document-wide settings like title, subtitle, publisher, etc.
+% % The user should have his own definitions in his own /src directory,
+% % otherwise de default ones are used
+\IfFileExists{src/Heading.tex}
+	{\input{src/Heading.tex}}	% % User heading
+	{ %% No heading is to be used
+	      \MEDebugMessage{NO heading information found}
+	} % Options
+
+
+%\MEDebugMessage{ Logo handling started}
+%\ifx\DisableLogo\undefined
+%	\MEDebugMessage{ Logo handling enabled}
+%	%% Define logo images
+%	\IfFileExists{fig/LogoImageLeft.png}
+%		{\def\LogoImageLeft{fig/LogoImageLeft.png}} % User has own 1st logo
+%		{\IfFileExists{../../common/images/LogoImageLeft.png}% No, try to use default logo
+%			{\def\LogoImageLeft{../../common/images/LogoImageLeft.png}}
+%			{\MEDebugMessage{ LogoImageLeft not found}	}	% % No logo is available
+%		}
+%	\IfFileExists{fig/LogoImageRight.png}
+%		{\def\LogoImageRight{fig/LogoImageRight.png}} % User has own 1st logo
+%		{\IfFileExists{../../common/images/LogoImageRight.png}	% No, try to use default logo
+%			{\def\LogoImageRight{../../common/images/LogoImageRight.png}}
+%			{}	% % No logo is available
+%		}
+%	%% Define logo file, if any
+%	\IfFileExists{src/Logo1}
+%		{\input{src/Logo1}}	% User has own 1st logo
+%		{\IfFileExists{../../common/MELogo1}
+%			{\input{../../common/MELogo1}}
+%			{}	% % No logo is available
+%		}
+%	\IfFileExists{src/Logo2}
+%		{\input{src/Logo2}}	% User has own 2nd logo
+%		{\IfFileExists{../../common/MELogo2}
+%			{\input{../../common/MELogo2}}
+%			{}	% % No logo is available
+%		}
+%	\else			
+%	\MEDebugMessage{ Logo making disabled}
+%\fi % DisableLogo
+%\MEDebugMessage{ Logo handling finished}
+	
+%	\ifx\LogoImageLeft\undefined
+%\else
+%	% % Add university logo to the headlines
+%	\addtobeamertemplate{frametitle}{}{%
+%	\begin{tikzpicture}[remember picture,overlay]
+%	\node[anchor=north east,yshift=0cm,xshift=-2cm] at (current page.north east)
+%	{\color{HeadingColor}\insertframenumber/\inserttotalframenumber};
+%	\node[anchor=north east,yshift=2pt] at (current page.north east) {\includegraphics[width=2cm]{\LogoImageLeft}};
+%	\end{tikzpicture}}
+%\fi % of \LogoImageLeft
+
+%\setlist[itemize,1]{label={\fontfamily{cmr}\fontencoding{T1}\selectfont\textbullet}}	% Set font for item bullets
+		\setbeamercolor{section in head}{fg=red}
+	\setbeamertemplate{navigation symbols}{}
+	\setbeamertemplate{section in toc}[ball] %circle
+	\setbeamertemplate{subsection in toc}[triangle] %circle
+	\setbeamercolor{itemize item}{fg=red}
+	\setbeamertemplate{itemize item}[ball] %circle
+	 \setbeamertemplate{itemize subitem}[square]
+	 \setbeamertemplate{itemize subsubitem}[triangle]
+\setbeamertemplate{caption}{\insertcaption}% will not show up in article, only in presentation
+\setbeamertemplate{caption label separator}{}%
+\setbeamerfont{frametitle}{size=\tiny,series=\bfseries}
+\setbeamercolor{frametitle}{fg=white}
+
+\setbeamerfont{framesubtitle}{size=\normalfont\tiny}
+\setbeamercolor{framesubtitle}{fg=white}
+		\def\framelabel{\LectureTitle}
+
+\AtBeginSection[]
+{
+\ifx \suppresssectionTOC \undefined
+	\MEDframe[shrink]{Fejezet  tartalomjegyz\'ek}
+	{
+			\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide] %,hideallsubsubsections]
+	}
+	{Chapter outline}
+	{
+			\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide] %,hideallsubsubsections]
+	}
+\fi
+}
+
+\AtBeginSubsection[]
+{
+\ifx \suppresssectionTOC \undefined
+
+	\MEDframe[shrink]{Szakasz tartalomjegyz\'ek}
+	{
+		\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+	}
+	{Section outline}
+	{
+		\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+	}
+
+\fi
+}
+
+%\AtBeginSubsubsection[]
+%{
+%\ifx \suppresssectionTOC \undefined
+%
+%\MEDframe[shrink]{Alszakasz tartalomjegyz\'ek}
+%{
+%\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+%}
+%{Subsubsection outline}
+%{
+%\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+%}
+%
+%\fi
+%}
+
+\input{../../common/MEColors}		% Set up used colors
+\input{../../common/MELanguages}	% Set up selected language
+\input{../../common/MEPackages}	% Use the common packets
+\input{../../common/MEMacros}
+%\usepackage[plainpages=false,pdfpagelabels,colorlinks=true,linkcolor=ForestGreen,citecolor=ForestGreen]{hyperref}
+\usepackage{midfloat}
+	\IfFileExists{src/Glossary.tex}
+	{
+		\input{src/Glossary}
+	}
+	{} % Glossary
+
+%%	\input{src/Heading}
+	\def\TitlePageColor{ForestGreen}
+		\setbeamerfont{author}{size=\large}
+		\setbeamerfont{institute}{size=\normalsize\itshape}
+		\setbeamerfont{title}{size=\large\bfseries}
+	%	\setbeamerfont{subtitle}{size=\large\normalfont\slshape}
+		
+		\setbeamertemplate{title page}{%
+		\begin{tikzpicture}[remember picture,overlay]
+		\fill[\TitlePageColor]
+		  ([yshift=15pt]current page.west) rectangle (current page.south east);
+		\node[anchor=east] 
+		  at ([yshift=-30pt]current page.north east) (author)
+		  {\parbox[t]{.7\paperwidth}{\raggedleft%
+		    \usebeamerfont{author}\textcolor{\TitlePageColor}{%
+		    \textpdfrender{
+		    TextRenderingMode=FillStroke,
+		    FillColor=HeadingColor,
+		    LineWidth=.1ex,
+		    }{\LectureAuthor}}}};
+		\node[anchor=north east] 
+		  at ([yshift=-90pt]current page.north east) (institute)
+		  {\parbox[t]{.78\paperwidth}{\raggedleft%
+		    \usebeamerfont{institute}\textcolor{gray}{\LecturePublisher}}};
+		\node[anchor=south west] 
+		  at ([yshift=20pt]current page.west) (logo)
+		  {\parbox[t]{.19\paperwidth}{\raggedleft%
+		    \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}};
+		\node[anchor=east]
+		  at ([yshift=-10pt,xshift=-20pt]current page.east) (title)
+		  {\parbox[t]{\textwidth}{\raggedleft%
+		 \usebeamerfont{author}\textcolor{white}{%
+		    \textpdfrender{
+		    TextRenderingMode=FillStroke,
+		    FillColor=white,
+		    LineWidth=.1ex,
+		    }{\Large\LectureTitle}}}};
+		\node[anchor=east]
+		  at ([yshift=-65pt,xshift=-20pt]current page.east) (subtitle)
+		  {\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}\textcolor{black}{\insertsubtitle}}};
+		\node[anchor=west]
+		  at ([yshift=-120pt,xshift=00pt]current page.west) (subtitle)
+		  {\parbox[t]{.8\paperwidth}{\raggedright\usebeamerfont{subtitle}\textcolor{black}{\scriptsize \copyright \LectureAuthor\\\LectureRevision}}};
+		\end{tikzpicture}
+		} % End of title page
+		
+		\author{\LectureAuthor} 
+		\institute{\LecturePublisher
+		}
+		\title{\LectureTitle}
+		\subtitle{\LectureSubtitle}
+%%		\titlegraphic{\includegraphics[width=4cm]{../../common/images/um-logo}}
+
+			\MEDebugMessage{Preparing Beamer slides started}
+\newcommand{\frontmatter}{}
+\newcommand{\mainmatter}{}
+\newcommand{\backmatter}{}
+
+
+\def\TitlePageColor{ForestGreen}
+\setbeamerfont{author}{size=\large}
+\setbeamerfont{institute}{size=\normalsize\itshape}
+\setbeamerfont{title}{size=\huge\bfseries}
+\setbeamerfont{subtitle}{size=\large\normalfont\slshape}
+
+\setbeamertemplate{bibliography item}[online]
+\setbeamertemplate{title page}{% Jó template, logoval
+	\begin{tikzpicture}[remember picture,overlay]
+	\fill[\TitlePageColor]
+	([yshift=15pt]current page.west) rectangle (current page.south east);
+	\node[anchor=east] 
+	at ([yshift=-30pt]current page.north east) (author)
+	{\parbox[t]{.7\paperwidth}{\raggedleft%
+			\usebeamerfont{author}\textcolor{\TitlePageColor}{%
+				\textpdfrender{
+					TextRenderingMode=FillStroke,
+					FillColor=HeadingColor,
+					LineWidth=.1ex,
+				}{\LectureAuthor}}}};
+	\ifx\LecturePublisher\undefined
+	\else			
+		\node[anchor=north east] 
+		at ([yshift=-90pt]current page.north east) (institute)
+		{\parbox[t]{.78\paperwidth}{\raggedleft%
+				\usebeamerfont{institute}\textcolor{gray}{\LecturePublisher}}};
+	\fi		
+	\node[anchor=south west] 
+	at ([yshift=20pt]current page.west) (logo)
+	{\parbox[t]{.19\paperwidth}{\raggedleft%
+			\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}};
+	\node[anchor=east]
+	at ([yshift=-10pt,xshift=-20pt]current page.east) (title)
+	{\parbox[t]{\textwidth}{\raggedleft%
+			\usebeamerfont{author}\textcolor{white}{%
+				\textpdfrender{
+					TextRenderingMode=FillStroke,
+					FillColor=white,
+					LineWidth=.1ex,
+				}{\Large\LectureTitle}}}};
+	\node[anchor=east]
+	at ([yshift=-65pt,xshift=-20pt]current page.east) (subtitle)
+	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}\textcolor{black}{\insertsubtitle}}};
+	\node[anchor=west]
+	at ([yshift=-120pt,xshift=00pt]current page.west) (subtitle)
+	{\parbox[t]{.8\paperwidth}{\raggedright\usebeamerfont{subtitle}\textcolor{black}{\scriptsize \copyright \LectureAuthor\LectureRevision}}};
+	\end{tikzpicture}
+}
+
+\author[\LectureAuthor]{\LectureAuthor} 
+\ifx\LecturePublisher\undefined
+\institute[]{}
+\else
+\institute[\LecturePublisher]{\LecturePublisher	}
+\fi
+%		\title{\LectureTitle}
+%		\subtitle{\LectureSubtitle}
+\ifx\LogoImageLeft\undefined
+\else
+	\titlegraphic{\includegraphics[width=4cm]{\LogoImageLeft}}
+\fi
+% % End of \titlepage
+
+% http://tex.stackexchange.com/questions/68080/beamer-bibliography-icon
+\setbeamertemplate{bibliography item}{%
+	\ifboolexpr{ test {\ifentrytype{book}} or test {\ifentrytype{mvbook}}
+		or test {\ifentrytype{collection}} or test {\ifentrytype{mvcollection}}
+		or test {\ifentrytype{reference}} or test {\ifentrytype{mvreference}} }
+	{\setbeamertemplate{bibliography item}[book]}
+	{\ifentrytype{online}
+		{\setbeamertemplate{bibliography item}[online]}
+		{\setbeamertemplate{bibliography item}[article]}}%
+	\usebeamertemplate{bibliography item}}
+
+%\defbibenvironment{bibliography}
+%{\list{}
+%	{\settowidth{\labelwidth}{\usebeamertemplate{bibliography item}}%
+%		\setlength{\leftmargin}{\labelwidth}%
+%		\setlength{\labelsep}{\biblabelsep}%
+%		\addtolength{\leftmargin}{\labelsep}%
+%		\setlength{\itemsep}{\bibitemsep}%
+%		\setlength{\parsep}{\bibparsep}}}
+%{\endlist}
+%{\item}
+
+%			
+%%	% % % A macro for representing the front matter needed in the selected form
+%%	% % %
+%%	%% Usage MEfrontmatter
+%
+\newcommand\MEfrontmatter{
+	%% Check if the user wants to have his own front matter
+	\IfFileExists{src/FrontMatter.tex}
+	{%% Have his own frontmatter things; use it
+		\input{src/FrontMatter.tex}
+	}
+	{%% No, we need to use the built-in front matter
+		\pagenumbering{gobble}
+\begin{frame}[plain,noframenumbering] % the plain option removes the sidebar and header from the title page
+	\titlepage
+\end{frame}
+%	%	\maketitle
+		\frontmatter
+%%		\clearpage
+%%		\IfFileExists{src/Abstract}
+%%		{\input{src/Abstract}}
+%%		{\message{Abstract information not found}}
+%%		\vglue1\baselineskip
+%		\clearpage
+		\IfFileExists{src/Copyright}
+		{\input{src/Copyright}\clearpage}
+		{\IfFileExists{../../common/MECopyright}
+			{\input{../../common/MECopyright}\clearpage}
+			{}
+		}
+%%		\pagenumbering{roman}	
+%		\tableofcontents	
+	}
+}
+
+
+%	% % % A macro for representing the main matter needed in the selected form
+%	% % %
+%	%% Usage MEmainmatter
+\newcommand\MEmainmatter{
+	%% Check if the user wants to have his own main matter
+	\IfFileExists{src/MainMatter.tex}
+	{%% Have his own mainmatter things; use it
+		\input{src/MainMatter.tex}
+	}
+	{%% No, we need to use the built-in main matter
+		\mainmatter
+%		\pagenumbering{arabic}
+	}
+}
+
+%	% % % A macro for representing the back matter needed in the selected form
+%	% % %
+%	%% Usage MEbackmatter
+\newcommand\MEbackmatter{
+	%	%% Check if the user wants to have his own back matter
+%	\articleonly{
+%		%%% Printing a kind of PDF book
+%		% http://tex.stackexchange.com/questions/472/how-can-i-have-two-or-more-distinct-indexes
+%		% http://www.latex-community.org/forum/viewtopic.php?f=51&t=8096
+%		\IfFileExists{src/Glossary.tex}
+%		{
+%			\glossarystyle{altlisthypergroup}
+%			\ifx\DisableAcronim\undefined
+%			\clearpage
+%			\printglossary[type=acronym]
+%			\else 
+%			\MEDebugMessage{Printing acronims disabled}
+%			\fi
+%			\ifx\DisableGlossary\undefined
+%			\clearpage
+%			\printglossary
+%			\else 
+%			\MEDebugMessage{Printing glossary disabled}
+%			\fi
+%		}
+%		{\MEDebugMessage{No Glossary.tex file found}}	% % If no glossary file exists, make nothing
+%		\conditionalLoT    % Print list of tables, if any
+%		\conditionalLoF    % Print list of figures, if any
+%		\conditionalLoP
+%		%						
+%		%		
+		\ifx\DisableBibliography\undefined
+		\ifx\LectureBibliography\undefined
+		\MEDebugMessage{No bibliography file found}
+			\MEframelabel{\ifx\Lecturelanguage\undefined Felhasznált forrásmunkák \else Used sources\fi}
+			\chapter*{\ifx\Lecturelanguage\undefined Felhasznált forrásmunkák \else Used sources\fi}
+		\else
+		\begin{frame}[allowframebreaks] {\ifx\Lecturelanguage\undefined Felhasznált forrásmunkák\else Used sources\fi}{}
+		\printbibliography
+		\end{frame}
+		\fi			
+		\else
+		\MEDebugMessage{ Bibliography printing disabled}
+		\fi %\DisableBibliography
+%		\IfFileExists{src/BackMatter.tex}
+%		{%% Have his own backmatter things; use it
+%			\input{src/BackMatter.tex}
+%		}
+%		{%% No, we need to use the built-in main matter
+%			\backmatter
+%		}
+%	}% \articleonly
+}
+
+%\renewcommand{\gls}{}

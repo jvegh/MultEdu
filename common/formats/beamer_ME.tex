@@ -1,0 +1,49 @@
+% % 
+% % This is the preamble for printing a document in Beamer, University of Miskolc form
+% %
+\def\LectureFormat{Styled}		% A simple Memoir book or ME-style slides
+\def\MESlide{YES}
+%% % !! Must NOT define \LecturePrintable and \MayFloat
+\documentclass[12pt,
+		hidelinks,			% No boxes around links
+		 pdfnewwindow=true,
+		svgnames,
+		table, % Must be given here, passed to xcolor
+		pageanchor=true,		% Valid hyperlinks in index
+		breaklinks=true,		%  Allows link text to break across lines
+		navigationsymbols=false,
+%		hideothersections,	% 
+%				hideallsections,	% 		
+%   hideothersubsections,% hide all subsections but the subsections in the current 		backref
+%   hideothersubsubsections,% hide all subsections but the subsections in the current 		backref
+%ignorenonframetext
+		]{beamer}	
+		
+\input{../../common/formats/MESetupBeamerFormat}		
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}\usepackage[section]{placeins}			
+\pgfdeclareimage[height=.5\paperwidth]{mybackground}{fig/CoverIllustration.jpeg}
+\usetheme{Antibes}
+%		\usetheme{JuanLesPins}
+		\usecolortheme{dolphin}
+\setbeamertemplate{title page}{
+
+        \begin{picture}(0,0)
+
+            \put(-30,-163){%
+                \pgfuseimage{mybackground}
+            }
+
+            \put(0,-110.7){%
+                \begin{minipage}[b][45mm][t]{226mm}
+                    \usebeamerfont{title}{\inserttitle\par}
+                \end{minipage}
+            }
+
+            \end{picture}
+
+    }
+%\usepackage{enumitem}
+%\setitemize{label=\usebeamerfont*{itemize item}%
+%  \usebeamercolor[fg]{itemize item}
+%  \usebeamertemplate{itemize item}}
+%

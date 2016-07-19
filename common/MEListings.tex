@@ -132,19 +132,19 @@
 	% Define the environment: a 'Program' if it might float, a simple caption if not
 	\MESetStandardListingFormat
 	\ifx\MayFloat\undefined % A kind of slides
-		\def\startsource{
+		\def\startsource{ \begin{center}
 			              \setlength{\FigWidth}{#5\textwidth}
-		                  {\color{HeadingColor}}%\bfseries\scriptsize #3
-			              \par
+		                  {\color{HeadingColor}\bfseries\scriptsize #3}
+			              \par\vskip-\baselineskip
 		                }
-		\def\stopsource{}
+		\def\stopsource{\end{center}}
 	\else %% Some printable form, either A4 book,  WEB book or eBook
 		\ifKV@MEMacros@wide %% It is a wide floating version
-		   \def\startsource{
+		   \def\startsource{ \begin{center}
 			                \setlength{\FigWidth}{#5\textwidth} 
-			                \begin{program*}[!hbt] 
+			                \begin{program*}[!hbt] \caption{#3}
 			               }
-			\def\stopsource{\end{program*}}			
+			\def\stopsource{\end{program*}\end{center}}			
 		\else % It is the narrow (one-column} version)
 			\if@twocolumn
 			  \setlength{\FigWidth}{#5\columnwidth}
@@ -152,13 +152,13 @@
 			  \setlength{\FigWidth}{.7\textwidth}
 			  \setlength{\FigWidth}{#5\FigWidth}
 			 \fi
-			\def\startsource{\begin{program}[!hbt]}
-			\def\stopsource{\end{program}}
+			\def\startsource{\begin{center}\begin{program}[!hbt]}
+			\def\stopsource{\end{program}\end{center}}
 		\fi
 	\fi
 	%% Start printing the figure here:
 	\setlength{\FigHeight}{.8\textheight} 
-	\noindent\startsource 	\caption{#3} \hskip-1em
+	\noindent\startsource %	\caption{#3} \hskip-1em
 %	\maxsizebox{#5\FigWidth}{#5\FigHeight}
 	{
 		\mbox{}\phantomsection
@@ -361,14 +361,15 @@
 					 \setlength\mywidth{.46\textwidth}
 				\fi
 		% % Define the environment: a 'Program' if it might float, a simple caption if not
+		\begin{center}
 		\ifx\MayFloat\undefined
 			{\color{HeadingColor}\bfseries\scriptsize #4}
 		\else
 	  	    		{
 	  	    		\begin{program*}[h!btp]	\caption{#4}
 	  	    		 }
-		\vglue-1.7\baselineskip
 		\fi\mbox{}\phantomsection
+		\vskip-1\baselineskip
 		\begin{tabular}{p{.48\mywidth}p{.48\mywidth}}
 		\lstinputlisting[label=#5, name=#5,linewidth=\mywidth ] {#2}&
 		\lstinputlisting[label=#5, name=#5,linewidth=\mywidth ] {#3}\\
@@ -378,6 +379,7 @@
 		{	
 		\end{program*}}
 	\fi
+	\end{center}
   \endgroup%
 }
 

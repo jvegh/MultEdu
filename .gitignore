@@ -33,13 +33,17 @@ build/
 # TeX aux files
 *.acn
 *.aux
+*.bbl
+*.blg
 *.glo
 *.idx
 *.ist
 *.log
 *.lol
 *.mw
+*.nav
 *.run.xml
+*.snm
 *.synctex.gz
 *-blx.bib
 *.toc

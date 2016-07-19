@@ -60,7 +60,8 @@
 \ifx\DisableIndex\undefined
 	\usepackage{makeidx}
 	\ifx\LecturePrintable\undefined
-		\renewcommand{\index}{}\renewcommand{\indexit}[1]{#1}
+	\newcommand{\indexit}[1]{#1}
+%		\renewcommand{\index}{}\renewcommand{\indexit}[1]{#1}
 	\else
 		\usepackage[columns=2]{idxlayout} 
 		\makeindex
