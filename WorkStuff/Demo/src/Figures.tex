@@ -1,0 +1,43 @@
+%%%
+%%% This is the chapter about inserting figures with the MultEdu system
+
+\MEDchapter{Inserting figures}{}{Ábrák beszúrása}
+
+
+\MESetListingFormat[basicstyle=\ttfamily\color{black}\normalsize]{TeX}
+
+\MEDsection[]{Traditional figures}{}{Hagyományos ábrák}
+\MEDframe{Traditional figures}
+{
+Traditional figures can be displayed using macro
+\par\noindent\lstinline|\\MEfigure[keys]\{image file\} \{caption\} \{label\} \{copyright\} \{ScaleFactor\}|.
+Possible keys: \lstinline|wide|.
+
+
+\begin{columns}
+\column{.48\textwidth}
+			\MEfigure{fig/phone_anchestors}{When new and old phones meet}{fig:phonenanchestors}
+		{2011 http://pinterest.com}{.8}
+\column{.45\textwidth}
+
+On slides, the single-width figures are placed in 'columns'
+\end{columns}
+
+\par\noindent The command used to display Figure\ao{~\ref{fig:phonenanchestors}} was
+\par\noindent\lstinline|\\MEfigure\{fig/phone_anchestors\} \{When new and old phones meet\} \{fig:phonenachestors\}
+		\{2011 http://pinterest.com\}\{.8\}|
+
+}
+{Hagyományos ábrák}
+{
+\begin{columns}
+\column{.48\textwidth}
+			\MEfigure{fig/phone_anchestors}{Amikor régi és új telefonok találkoznak}{fig:phonenachestors}
+		{2011 http://pinterest.com}{.8}
+\column{.45\textwidth}
+\end{columns}
+\par\noindent Az \ao{~\ref{fig:phonenanchestors}} ábra előállításához a
+\par\noindent\lstinline|\\MEfigure\{fig/phone_anchestors\} \{Amikor régi és új telefonok találkoznak\} \{fig:phonenanchestors\}
+		\{2011 http://pinterest.com\}\{.8\}|
+}
+
