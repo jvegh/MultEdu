@@ -13,6 +13,7 @@
 		\setlength{\mywidth}{#6\textwidth}
 		\def\stopsource{}
 	\else
+	\mbox{}\phantomsection % For hyperlinking!			
 		\ifKV@MEMacros@wide
 			\def\startsource{\par\begin{figure*}[!hbt]	
 					}
@@ -28,7 +29,6 @@
 	\fi
 	
 	\par\startsource	  
-	\mbox{}\phantomsection % For hyperlinking!
 	{{\centering
 	
 			\vbox{
@@ -59,3 +59,60 @@
 }}
 	\stopsource%
 }
+
+
+%%%Usage MEtikzfigure[keys]{tikz source}{caption}{label}{copyright}{ScaleFactor}
+\newcommand\MEtikzfigure[6][]{
+	\setkeys{MEMacros}{wide=false,#1}% 
+	% % Define the environment: a 'figure' if it might float, a simple caption if not
+	\ifx\MayFloat\undefined
+		\def\startsource{ %\vskip.2\baselineskip
+	%	{\bfseries\scriptsize \color{HeadingColor}{#3}}\par%\vskip-\baselineskip
+		}
+		\setlength{\mywidth}{#6\textwidth}
+		\def\stopsource{}
+	\else
+		\ifKV@MEMacros@wide
+			\def\startsource{\par\begin{figure*}[!hbt]	
+					}
+			\def\stopsource{\end{figure*}}
+			\setlength{\mywidth}{#6\textwidth}
+		\else
+			\setlength{\mywidth}{#6\columnwidth}
+			\ifx\WEBBook\undefined\else\setlength{\mywidth}{.55\mywidth}\fi
+			\ifx\eBook\undefined\else\setlength{\mywidth}{.7\mywidth}\fi
+			\def\startsource{\par\begin{figure}[!hbtp]}
+			\def\stopsource{\end{figure}}
+		\fi
+	\fi
+	
+	\par\startsource	  
+	\mbox{}\phantomsection % For hyperlinking!
+	{{\centering
+			\vbox{
+				\ifx\WEBBook\undefined\else\vskip-.3\baselineskip\fi
+				\begin{minipage}{\mywidth}
+					\ifthenelse{\equal{#5}{}}{}{\vskip-.1\baselineskip{\tiny \copyright #5}	\hfill
+						}  %\copyright
+				\end{minipage}
+				\par\vskip\baselineskip
+				\noindent\makebox[\mywidth]{\color{SeparatorColor}\rule{\mywidth}{1pt}}\par\vskip.2\baselineskip
+						\maxsizebox{\mywidth}{.75\textheight}
+						{ #2 }
+					\par\vskip-.8\baselineskip\par
+				\noindent\makebox[\mywidth]{\color{SeparatorColor}\rule{\mywidth}{1pt}}\par		
+				\begin{minipage}{\mywidth} 			% % Add a caption
+					\ifx\MayFloat\undefined
+						{\scriptsize {\color{HeadingColor}#3}}
+					\else{\color{HeadingColor}\caption{{#3}}\label{#4}}
+					\fi 
+				\end{minipage}
+			}		
+	\ifx\LecturePrintable\undefined\else\par\vspace{-15pt}\fi				
+}}
+	\stopsource%
+}
+
+\makeatother
+
+

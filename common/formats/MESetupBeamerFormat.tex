@@ -76,7 +76,16 @@
 %	\end{tikzpicture}}
 %\fi % of \LogoImageLeft
 
-%\setlist[itemize,1]{label={\fontfamily{cmr}\fontencoding{T1}\selectfont\textbullet}}	% Set font for item bullets
+%% Restore 
+\usepackage{enumitem}
+\setitemize{label=\usebeamerfont*{itemize item}%
+  \usebeamercolor[fg]{itemize item}
+  \usebeamertemplate{itemize item}}
+%\setbeamertemplate{itemize items}[ball]
+\setlist[itemize,1]{label={\fontfamily{cmr}\fontencoding{T1}\selectfont\textbullet}}	% Set font for item bullets
+\setbeamerfont{page number in head/foot}{size=\small}
+\setbeamertemplate{footline}[frame number]
+%http://tex.stackexchange.com/questions/6291/how-to-insert-footline-style-page-number-into-headline
 		\setbeamercolor{section in head}{fg=red}
 	\setbeamertemplate{navigation symbols}{}
 	\setbeamertemplate{section in toc}[ball] %circle
@@ -97,13 +106,13 @@
 \AtBeginSection[]
 {
 \ifx \suppresssectionTOC \undefined
-	\MEDframe[shrink]{Fejezet  tartalomjegyz\'ek}
+	\MEDframe[shrink]	{Chapter outline}
+		{
+				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
+		}
+	{Fejezet  tartalomjegyz\'ek}
 	{
-			\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide] %,hideallsubsubsections]
-	}
-	{Chapter outline}
-	{
-			\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide] %,hideallsubsubsections]
+			\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
 	}
 \fi
 }
@@ -112,11 +121,11 @@
 {
 \ifx \suppresssectionTOC \undefined
 
-	\MEDframe[shrink]{Szakasz tartalomjegyz\'ek}
-	{
-		\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
-	}
-	{Section outline}
+	\MEDframe[shrink]	{Section outline}
+		{
+			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+		}
+	{Szakasz tartalomjegyz\'ek}
 	{
 		\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
 	}
@@ -314,12 +323,6 @@
 \end{frame}
 %	%	\maketitle
 		\frontmatter
-%%		\clearpage
-%%		\IfFileExists{src/Abstract}
-%%		{\input{src/Abstract}}
-%%		{\message{Abstract information not found}}
-%%		\vglue1\baselineskip
-%		\clearpage
 		\IfFileExists{src/Copyright}
 		{\input{src/Copyright}\clearpage}
 		{\IfFileExists{../../common/MECopyright}
@@ -400,5 +403,3 @@
 %		}
 %	}% \articleonly
 }
-
-%\renewcommand{\gls}{}

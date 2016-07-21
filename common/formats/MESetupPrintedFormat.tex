@@ -42,67 +42,29 @@
 \input{../../common/MEColors}		% Set up used colors
 \input{../../common/MELanguages}	% Set up selected language
 
-%\ifx\DisableLogo\undefined
-%%% Define logo images
-%\IfFileExists{fig/LogoImageLeft.png}
-%{\def\LogoImageLeft{fig/LogoImageLeft.png}} % User has own 1st logo
-%{\IfFileExists{../../common/images/LogoImageLeft.png}% No, try to use default logo
-%	{\def\LogoImageLeft{../../common/images/LogoImageLeft.png}}
-%	{}	% % No logo is available
-%}
-%\IfFileExists{fig/LogoImageRight.png}
-%{\def\LogoImageRight{fig/LogoImageRight.png}} % User has own 1st logo
-%{\IfFileExists{../../common/images/LogoImageRight.png}	% No, try to use default logo
-%	{\def\LogoImageRight{../../common/images/LogoImageRight.png}}
-%	{}	% % No logo is available
-%}
-%%% Define logo file, if any
-%\IfFileExists{src/Logo1}
-%{\input{src/Logo1}}	% User has own 1st logo
-%{\IfFileExists{../../common/MELogo1}}
-%{\input{../../common/MELogo1}}
-%{}	% % No logo is available
-%\IfFileExists{src/Logo2}
-%{\input{src/Logo2}}	% User has own 2nd logo
-%{\IfFileExists{../../common/MELogo2}}
-%{\input{../../common/MELogo2}}
-%{}	% % No logo is available
-%\else			
-%\MEDebugMessage{ Logo making disabled}
-%\fi % DisableLogo
-%
-%% % Declare author, title, publisher, etc
-%%\input{src/Heading}			% Define title, publisher, etc
-%%\usepackage{bookman}	% Font type
-%
 \input{../../common/MEPackages}	% Use the common packets
 \input{../../common/MEMacros}
+\usepackage{layouts}
+\tryintextsep{0pt plus2pt minus1pt}
+\tryfloatsep{0pt plus2pt minus1pt}
+
 \usepackage[plainpages=false,pdfpagelabels,colorlinks=true,linkcolor=ForestGreen,citecolor=ForestGreen]{hyperref}
 \usepackage{midfloat}
-	\IfFileExists{src/Glossary.tex}
-	{
-		\input{src/Glossary}
-	}
-	{} % Glossary
-%
-%
-%
-%\ifx\DisableGlossary\undefined
-%	\IfFileExists{src/Glossary.tex}
-%	{
-%		%%\LDebugMessage{Glossary initialized}
-%		\usepackage[toc,acronym]{glossaries}
-%			\ifx\LecturePrintable\undefined\else\makeglossaries\fi
-%			
-%			
-%%%%http://tex.stackexchange.com/questions/20034/glossaries-print-first-occurence-by-using-acronym-desc
-%%\AtBeginDocument{%
-%%	\defglsdisplayfirst[\acronymtype]{%
-%%		\glsentryshort{\glslabel} (\glsentrylong{\glslabel})#4%
-%%%		\glsentryshort{\glslabel} \footnote{\glsentrylong{\glslabel})#4}%
-%%	}%
-%%}
-%			
+\IfFileExists{src/Glossary.tex}
+{
+	\input{src/Glossary}
+}
+{} % Glossary
+
+			
+%%%http://tex.stackexchange.com/questions/20034/glossaries-print-first-occurence-by-using-acronym-desc
+%\AtBeginDocument{%
+%	\defglsdisplayfirst[\acronymtype]{%
+%		\glsentryshort{\glslabel} (\glsentrylong{\glslabel})#4%
+%%		\glsentryshort{\glslabel} \footnote{\glsentrylong{\glslabel})#4}%
+%	}%
+%}
+			
 %%%% http://archive.cs.uu.nl/mirror/CTAN/macros/latex/contrib/glossaries/samples/sample-custom-acronym.tex
 %%  % This is a sample file to illustrate how to define a custom
 %%  % acronym style. This example defines the acronyms so that on first use
@@ -205,17 +167,8 @@
 %% % Now set the new acronym style (to override the default style)
 %% \setacronymstyle{custom-fn}
 %%\setabbreviationstyle[acronym]
-%
-%			
-%		{\input{src/Glossary}}
-%	}
-%	{} % Glossary
 %\fi% \DisableGlossary
 %
-%%\ifx\DisableGlossary\undefined
-%%		\usepackage[toc,acronym]{glossaries}
-%%			\ifx\LecturePrintable\undefined\else\makeglossaries\fi
-%%\fi
 %%\usepackage{memhfixc} %Any re­cent ver­sion of hy­per­ref will au­to­mat­i­cally load this pack­age if it finds it­self run­ning un­der the mem­oir class.
 %
 %%\LDebugMessage{Preparing eBook-style book started}
@@ -363,21 +316,6 @@
 }%of footnotesize
 
 
-%\ifx\DisableLogo\undefined
-%    \pgfdeclaremask{UC}{../../common/images/under_construction-mask}
-%		\pgfdeclareimage[width=3.7cm]{um-logo}{../../common/images/um-logo}
-%		\pgfdeclareimage[mask=UC,width=3cm]{UC-logo}{../../common/images/under_construction}
-%\begin{center}
-%\begin{tabular}{ccc}
-%	& %Possible supporter 
-%	\pgfuseimage{um-logo}
-%	& %Publisher, if available
-% %   \pgfuseimage{UC-logo}
-%	\\ % %Under construction
-%\end{tabular}
-%\end{center}
-%\fi %\DisableLogo
-
 \begin{center}
 \begin{tabular}{ll}
 First edition:                        & July 2016 \\
@@ -511,3 +449,51 @@ First edition:                        & July 2016 \\
 	}% \articleonly
 }
 
+%\ifx\DisableLogo\undefined
+%    \pgfdeclaremask{UC}{../../common/images/under_construction-mask}
+%		\pgfdeclareimage[width=3.7cm]{um-logo}{../../common/images/um-logo}
+%		\pgfdeclareimage[mask=UC,width=3cm]{UC-logo}{../../common/images/under_construction}
+%\begin{center}
+%\begin{tabular}{ccc}
+%	& %Possible supporter 
+%	\pgfuseimage{um-logo}
+%	& %Publisher, if available
+% %   \pgfuseimage{UC-logo}
+%	\\ % %Under construction
+%\end{tabular}
+%\end{center}
+%\fi %\DisableLogo
+
+%\ifx\DisableLogo\undefined
+%%% Define logo images
+%\IfFileExists{fig/LogoImageLeft.png}
+%{\def\LogoImageLeft{fig/LogoImageLeft.png}} % User has own 1st logo
+%{\IfFileExists{../../common/images/LogoImageLeft.png}% No, try to use default logo
+%	{\def\LogoImageLeft{../../common/images/LogoImageLeft.png}}
+%	{}	% % No logo is available
+%}
+%\IfFileExists{fig/LogoImageRight.png}
+%{\def\LogoImageRight{fig/LogoImageRight.png}} % User has own 1st logo
+%{\IfFileExists{../../common/images/LogoImageRight.png}	% No, try to use default logo
+%	{\def\LogoImageRight{../../common/images/LogoImageRight.png}}
+%	{}	% % No logo is available
+%}
+%%% Define logo file, if any
+%\IfFileExists{src/Logo1}
+%{\input{src/Logo1}}	% User has own 1st logo
+%{\IfFileExists{../../common/MELogo1}}
+%{\input{../../common/MELogo1}}
+%{}	% % No logo is available
+%\IfFileExists{src/Logo2}
+%{\input{src/Logo2}}	% User has own 2nd logo
+%{\IfFileExists{../../common/MELogo2}}
+%{\input{../../common/MELogo2}}
+%{}	% % No logo is available
+%\else			
+%\MEDebugMessage{ Logo making disabled}
+%\fi % DisableLogo
+%
+%% % Declare author, title, publisher, etc
+%%\input{src/Heading}			% Define title, publisher, etc
+%%\usepackage{bookman}	% Font type
+%
