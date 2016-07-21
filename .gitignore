@@ -32,14 +32,21 @@ build/
 
 # TeX aux files
 *.acn
+*.acr
+*.alg
 *.aux
 *.bbl
 *.blg
 *.glo
+*.glg
+*.gls
 *.idx
 *.ist
+*.ilg
+*.ind
 *.log
 *.lol
+*.lof
 *.mw
 *.nav
 *.run.xml

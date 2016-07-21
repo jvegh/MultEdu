@@ -7,33 +7,11 @@
 % \input{../../common/formats/memoir_eBook} % An eBook format for students (mainly mobile devices)
 %  \input{../../common/formats/memoir_WEB}	% A WEB browsable, landscape, big letter version
 % \input{../../common/formats/memoir_A4Fancy}	% A fancy memoir book
-%\input{../../common/formats/memoir_A4Fancy}	% A fancy memoir book
 \input{../../common/formats/beamer_ME}	% A beamer slides format
 \usepackage{layouts}
 
-%\makeatletter
-%\renewcommand{\subsubsection}{\@startsection%
-%{subsubsection}%       name
-%{3}%                   level
-%{0mm}%                 indent
-%{-\baselineskip}%      beforeskip
-%{0.5\baselineskip}%    afterskip
-%{}
-%}%     style
-%\makeatother
-%
-%\makeatletter
-%\renewcommand{\subsection}{\@startsection%
-%{subsection}%       name
-%{2}%                   level
-%{0mm}%                 indent
-%{-.7\baselineskip}%      beforeskip
-%{0.6\baselineskip}%    afterskip
-%{}
-%}%     style
-%\makeatother
-
-
+\tryintextsep{0pt plus2pt minus1pt}
+\tryfloatsep{0pt plus2pt minus1pt}
 %% This is the beginning of the user document
 \begin{document}
 %\nocite{*}
@@ -41,7 +19,7 @@
 	\MEmainmatter
 %	\input{src/General}		%% General information
 %	\input{src/Organizing}	%% How to organize a document
-%	\input{src/Sectioning}	%% How to section a document
+	\input{src/Sectioning}	%% How to section a document
 	\input{src/Listings}	%% How to insert program listings
 	\input{src/Figures}		%% How to insert figures
 	\MEbackmatter
