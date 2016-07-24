@@ -39,18 +39,34 @@
 %% No header nor footer on the cover
 \thispagestyle{empty}
 
-
 %% Cover illustration
 \ifx\LectureCoverIllustration\undefined
   \IfFileExists{fig/CoverIllustration.jpeg}
   {
+	\MEDebugMessage{memoir_eBook: Using user's cover illustration}
     \ThisLLCornerWallPaper{1}{fig/CoverIllustration}
   }
   {
-    \ThisLLCornerWallPaper{1}{../../common/fig/CoverIllustration}
+  \IfFileExists{../../common/fig/CoverIllustration.jpeg}
+    {
+    \MEDebugMessage{memoir_eBook: Using default cover illustration, if any}
+    \ThisLLCornerWallPaper{1}{../../common/fig/CoverIllustration.jpeg}
+    }
+    {
+      \MEDebugMessage{memoir_eBook: Using NO cover illustration}
+    }
   }
 \else
-  \ThisLLCornerWallPaper{1}{\LectureCoverIllustration}
+{
+  \IfFileExists{\LectureCoverIllustration}
+  {
+    \ThisLLCornerWallPaper{1}{\LectureCoverIllustration}
+    \MEDebugMessage{memoir_eBook: Cover illustration '\LectureCoverIllustration' used}
+}
+  {
+    \MEDebugMessage{memoir_eBook: Cover illustration '\LectureCoverIllustration' not found}
+  }
+}
 \fi % of CoverIllustration
 
 %% Bar across the top
@@ -71,6 +87,7 @@ at (current page.north){\tiny\LectureSubtitle};
 			  \par\raisebox{1.0cm}{ \hspace*{.1cm}\normalsize\color{HeadingColor}\LecturePublisher \hspace*{.1cm}}%
 	    	\fi
 		}
+		\fi
 	\end{center}
 	\vskip -1cm
 
@@ -80,8 +97,8 @@ at (current page.north){\tiny\LectureSubtitle};
 \normalfont\bfseries\large{\bfseries\Large\color{HeadingColor}\LectureAuthor}\\
 %
          {\bfseries\Large\color{HighlightColor}\LectureTitle}\\
-%     \ifx\LectureSubtitle\undefined\else  { \normalsize\color{HeadingColor} \LectureSubtitle}\fi
-%
+     \ifx\LectureSubtitle\undefined\else  { \normalsize\color{HeadingColor} \LectureSubtitle}\fi
+
 \end{center}
 }
 \end{tcolorbox}
@@ -92,6 +109,7 @@ at (current page.north){\tiny\LectureSubtitle};
 minimum width=\paperwidth,minimum height=2em,anchor=south]%
 at (current page.south){\hfill \tiny Copyright 
 \copyright\ 2011-\the\year\ (\tiny\LectureEmail)};
+%\\bottom
 }
 
 
