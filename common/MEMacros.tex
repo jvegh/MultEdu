@@ -6,11 +6,13 @@
 
 %% A simple dual language text handler
 \newcommand{\MEDtext}[2]{ 
-{\ifx\LectureLanguage\undefined#1\else#2\fi}}
+{\ifx\UseSecondLanguage\undefined#1\else#2\fi}}
 
 %%% This output goes only to the handout, but not to slides
 \newcommand\articleonly[1]{\ifx\LecturePrintable\undefined\else{{\rmfamily #1}}\fi}
 \newcommand\ao[1]{\articleonly{#1}}
+% put the argument both in text and the 
+\newcommand{\indexit}[1]{\index{#1}{\sffamily\color{NavyBlue}#1}}
 
 
 	% A macro to use ifstrequal 			
@@ -78,6 +80,53 @@
 \newcommand{\ctext}[1]{{\ttfamily\bfseries
 		 #1}}
 
+
+%http://tex.stackexchange.com/questions/167708/tcolorbox-spanning-two-columns-in-paracol-environment
+\ifx\LecturePrintable\undefined
+	\NewTColorBox{NoteBox}{ s O{!htbp} }{%
+	colframe=HeadingColor,colback=HeadingColor!10!white,% any tcolorbox options here
+}
+\else
+\NewTColorBox{NoteBox}{ s O{!htbp} }{%
+	floatplacement={#2},
+	IfBooleanTF={#1}{float*,width=\textwidth}{float},
+	colframe=HeadingColor,colback=ivory,% any tcolorbox options here
+}
+\fi
+
+
+%% Make a notice entry
+%% Usage: \MEnote[kv]{title}{explanation}
+\makeatletter
+\newcommand\MEnote[3][]{
+	\setkeys{MEMacros}{wide=false,title={},#1}% 
+	\ifKV@MEMacros@wide
+	
+		\begin{NoteBox}*[!htbp]
+					\maxsizebox{\textwidth}{.5\textheight}
+					{
+						\begin{minipage}{\textwidth}
+							\ttext{\large #2}\par
+							#3
+						\end{minipage}
+					}
+		\end{NoteBox}
+	\else
+		\begin{NoteBox}[!htbp]
+			\maxsizebox{\columnwidth}{.5\textheight}
+			{
+				\begin{minipage}{\columnwidth}
+					\ttext{\large #2}\par
+					#3
+				\end{minipage}
+			}
+		\end{NoteBox}
+	\fi
+}
+\makeatother
+
 \input{../../common/MESections}
 \input{../../common/MEListings}
 \input{../../common/MEFigures}
+\input{../../common/METables}
+	\MEDebugMessage{MEMacros: finished to load}

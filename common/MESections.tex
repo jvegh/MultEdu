@@ -8,6 +8,7 @@
 %% % Possible keys: shrink
 %% %                         plain
 %%% Actually, this is two implementations: one for the printed formats and one for the slides
+	\MEDebugMessage{MESections: started to load}
 \makeatletter
 \ifx\LecturePrintable\undefined	% Making slides
 \newcommand{\MEframe}[3][]
@@ -282,3 +283,5 @@
 	\fi% \myfile
 	\fi%\DisableChapterIllustration
 }%\MEchapterillustration
+
+	\MEDebugMessage{MESections: finished to load}

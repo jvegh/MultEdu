@@ -1,0 +1,59 @@
+
+	\MEDebugMessage{METables: started to load}
+
+\makeatletter  % This is the good version
+%%%Usage MEtable[keys]{source tabular}{caption}{label}{copyright}{ScaleFactor}
+%% Possible keys are wide, 
+%% Keys: wide 	: if two-column size
+%% ========= KEY DEFAULTS =========
+\newcommand\MEtable[6][]{%
+	\setkeys{MEMacros}{wide=false,#1}% 
+	% % Define the environment: a 'table' if it might float, a simple caption if not
+	\ifx\MayFloat\undefined
+		\def\startsource{%\vskip.2\baselineskip
+			{\color{HeadingColor}\bfseries\scriptsize #3}\par\vskip-1.8\baselineskip}
+		\setlength{\mywidth}{#6\textwidth}
+		\def\stopsource{}
+	\else
+		\ifKV@MEMacros@wide
+			\def\startsource{\begin{table*}[!hbtp]	}
+			\def\stopsource{\end{table*}}
+			\setlength{\mywidth}{#6\textwidth}
+		\else
+			\setlength{\mywidth}{#6\columnwidth}
+			\ifx\WEBBook\undefined\else\setlength{\mywidth}{.5\mywidth}\fi
+			\ifx\eBook\undefined\else\setlength{\mywidth}{.7\mywidth}\fi
+			\def\startsource{\begin{table}[!hbtp]}
+			\def\stopsource{\end{table}}
+		\fi
+	\fi
+	\startsource	  
+	\mbox{}\phantomsection % For hyperlinking!
+		\begin{center}
+			\vbox{
+%				\ifx\WEBBook\undefined\else\vskip-1.3\baselineskip\fi
+				\begin{minipage}{\mywidth} 			% % Add a caption
+					\ifx\MayFloat\undefined
+					\else{\color{HeadingColor}\caption{#3}\label{#4}}
+					\fi 
+				\end{minipage}
+%				\vglue-0.2\baselineskip\par
+				\begin{minipage}{\mywidth}
+					\ifthenelse{\equal{#5}{}}{}{\vskip-.1\baselineskip{\tiny \copyright #5}	\hfill
+						}  %\copyright
+				\end{minipage}
+				\par %\vskip-\baselineskip
+				\noindent\makebox[\mywidth]{\color{SeparatorColor}\rule{\mywidth}{1pt}}\par
+						\maxsizebox{\mywidth}{.75\textheight}{ %\hskip-.4em
+						#2}
+				\par\noindent\makebox[\mywidth]{\color{SeparatorColor}\rule{\mywidth}{1pt}}\par
+%				\par\vskip-.7\baselineskip
+			}
+		\end{center}
+%	\ifx\LecturePrintable\undefined\else\par\vskip-.8\baselineskip\fi
+	\stopsource%
+}
+
+\makeatother
+
+	\MEDebugMessage{METables: finished to load}
