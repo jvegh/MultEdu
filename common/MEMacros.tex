@@ -125,6 +125,36 @@
 }
 \makeatother
 
+
+%% Make a notice entry
+%% Usage: \MEquote[kv]{saying}{author}
+\makeatletter
+\newcommand\MEquote[3][]{
+	\setkeys{MEMacros}{wide=false,#1}% 
+	\ifKV@MEMacros@wide
+	
+		\begin{NoteBox}*[!htbp]
+					\maxsizebox{\textwidth}{.5\textheight}
+					{
+					\ttext{ #2}\par
+					\hfill #3
+					}
+		\end{NoteBox}
+	\else
+		\begin{NoteBox}[!htbp]
+			\maxsizebox{\columnwidth}{.5\textheight}
+			{
+				\begin{minipage}{\columnwidth}
+					\ttext{ #2}\par
+					\hfill #3
+				\end{minipage}
+			}
+		\end{NoteBox}
+	\fi
+}
+\makeatother
+
+
 \input{../../common/MESections}
 \input{../../common/MEListings}
 \input{../../common/MEFigures}
