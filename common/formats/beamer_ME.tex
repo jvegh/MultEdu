@@ -21,27 +21,44 @@
 		
 \input{../../common/formats/MESetupBeamerFormat}		
 \PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}\usepackage[section]{placeins}			
-\pgfdeclareimage[height=.8\paperheight,width=\paperwidth]{mybackground}{fig/CoverIllustration.jpeg}
-\usetheme{Antibes}
+\pgfdeclareimage[height=\paperheight,width=\paperwidth]{mybackground}{fig/CoverIllustration.jpeg}
+%\usetheme{Antibes}
+%\usetheme{Montpellier}
 %		\usetheme{JuanLesPins}
-		\usecolortheme{dolphin}
-\setbeamertemplate{title page}{
-
-        \begin{picture}(0,0)
-
-            \put(-30,-163){%
-                \pgfuseimage{mybackground}
-            }
-
-            \put(0,-30.7){%
-                \begin{minipage}[b][45mm][t]{226mm}
-                    \usebeamerfont{title}{\inserttitle\par}
-                \end{minipage}
-            }
-
-            \end{picture}
-
-    }
+%		\usetheme{Szeged}
+\usetheme[
+%%% options passed to the outer theme
+%    hidetitle,           % hide the (short) title in the sidebar
+%    hideauthor,          % hide the (short) author in the sidebar
+%    hideinstitute,       % hide the (short) institute in the bottom of the sidebar
+%    shownavsym,          % show the navigation symbols
+%    width=2.5cm,           % width of the sidebar (default is 2 cm)
+   hideothersubsections,% hide all subsections but the subsections in the current section
+%   hideothersubsubsections,% hide all subsubsections but the subsections in the current section
+%    hideallsubsections,  % hide all subsections
+%	aspectratio = 169,
+%    left                % right of left position of sidebar (default is right)
+  ]	{Goettingen}
+%		\usecolortheme{dolphin}
+\usecolortheme{spruce}
+%\usecolortheme{beaver}
+%\setbeamertemplate{title page}{
+%
+%        \begin{picture}(0,0)
+%
+%            \put(-30,-163){%
+%                \pgfuseimage{mybackground}
+%            }
+%
+%            \put(0,-30.7){%
+%                \begin{minipage}[b][45mm][t]{226mm}
+%                    \usebeamerfont{title}{\inserttitle\par}
+%                \end{minipage}
+%            }
+%
+%            \end{picture}
+%
+%    }
 %\usepackage{enumitem}
 %\setitemize{label=\usebeamerfont*{itemize item}%
 %  \usebeamercolor[fg]{itemize item}

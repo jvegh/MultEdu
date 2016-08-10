@@ -97,7 +97,7 @@
 \setbeamertemplate{caption}{\insertcaption}% will not show up in article, only in presentation
 \setbeamertemplate{caption label separator}{}%
 \setbeamerfont{frametitle}{size=\tiny,series=\bfseries}
-\setbeamercolor{frametitle}{fg=white}
+%\setbeamercolor{frametitle}{fg=white}
 
 \setbeamerfont{framesubtitle}{size=\normalfont\tiny}
 \setbeamercolor{framesubtitle}{fg=white}
@@ -106,14 +106,14 @@
 \AtBeginSection[]
 {
 \ifx \suppresssectionTOC \undefined
-	\MEDframe[shrink]	{Chapter outline}
+	\MEDframe[shrink]		{Fejezet  tartalomjegyz\'ek}
 		{
 				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
 		}
-	{Fejezet  tartalomjegyz\'ek}
-	{
-			\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
-	}
+	{Chapter outline}
+		{
+				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
+		}
 \fi
 }
 
@@ -121,14 +121,14 @@
 {
 \ifx \suppresssectionTOC \undefined
 
-	\MEDframe[shrink]	{Section outline}
+	\MEDframe[shrink] 	{Szakasz tartalomjegyz\'ek}
 		{
 			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
 		}
-	{Szakasz tartalomjegyz\'ek}
-	{
-		\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
-	}
+		{Section outline}
+		{
+			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+		}
 
 \fi
 }
@@ -161,14 +161,48 @@
 	}
 	{} % Glossary
 
-%%	\input{src/Heading}
+% % Configure pgfplot diagram appearance
+\pgfplotscreateplotcyclelist{my color list}{%
+solid, color=webblue, every mark/.append style={solid, fill=webblue}, mark=*\\%
+densely dashdotted, color=webgreen, every mark/.append style={solid, fill=webred},mark=diamond*\\%
+densely dotted, color=webbrown, every mark/.append style={solid, fill=webgreen}, mark=triangle*\\%
+loosely dashed, color=webred, every mark/.append style={solid, fill=webbrown},mark=*\\%
+dotted, color=webblue, every mark/.append style={solid, fill=webyellow}, mark=square*\\%
+densely dotted, color=webgreen, every mark/.append style={solid, fill=gray}, mark=otimes*\\%
+dashed, color=webbrown, every mark/.append style={solid, fill=gray},mark=diamond*\\%
+densely dashed, every mark/.append style={solid, fill=gray},mark=square*\\%
+dashdotted, every mark/.append style={solid, fill=gray},mark=otimes*\\%
+dasdotdotted, every mark/.append style={solid},mark=star\\%
+}
+
+\pgfplotscreateplotcyclelist{my black white}{%
+solid, every mark/.append style={solid, fill=gray}, mark=*\\%
+densely dashdotted,every mark/.append style={solid, fill=gray},mark=diamond*\\%
+densely dotted, every mark/.append style={solid, fill=gray}, mark=triangle*\\%
+loosely dashed, every mark/.append style={solid, fill=gray},mark=*\\%
+dotted, every mark/.append style={solid, fill=gray}, mark=square*\\%
+densely dotted, every mark/.append style={solid, fill=gray}, mark=otimes*\\%
+dashed, every mark/.append style={solid, fill=gray},mark=diamond*\\%
+densely dashed, every mark/.append style={solid, fill=gray},mark=square*\\%
+dashdotted, every mark/.append style={solid, fill=gray},mark=otimes*\\%
+dasdotdotted, every mark/.append style={solid},mark=star\\%
+}
+
 	\def\TitlePageColor{ForestGreen}
 		\setbeamerfont{author}{size=\large}
 		\setbeamerfont{institute}{size=\normalsize\itshape}
 		\setbeamerfont{title}{size=\large\bfseries}
 	%	\setbeamerfont{subtitle}{size=\large\normalfont\slshape}
 		
-		\setbeamertemplate{title page}{%
+\IfFileExists{fig/CoverIllustration.jpeg}
+{ %Make a graphic on the title page
+	\setbeamertemplate{title page}{%
+	aa
+	}
+	}
+	{ % Make a text-only title page
+	\setbeamertemplate{title page}{%
+	  file not found
 		\begin{tikzpicture}[remember picture,overlay]
 		\fill[\TitlePageColor]
 		  ([yshift=15pt]current page.west) rectangle (current page.south east);
@@ -205,15 +239,42 @@
 		  at ([yshift=-120pt,xshift=00pt]current page.west) (subtitle)
 		  {\parbox[t]{.8\paperwidth}{\raggedright\usebeamerfont{subtitle}\textcolor{black}{\scriptsize \copyright \LectureAuthor\\\LectureRevision}}};
 		\end{tikzpicture}
-		} % End of title page
+	} % End of title page
+	}
 		
 		\author{\LectureAuthor} 
 		\institute{\LecturePublisher
 		}
 		\title{\LectureTitle}
 		\subtitle{\LectureSubtitle}
-%%		\titlegraphic{\includegraphics[width=4cm]{../../common/images/um-logo}}
 
+\ifx\DisableLogos\undefined
+  %% We can use logos, either custom logos or default ones
+	\IfFileExists{fig/PictureLogo.png}
+	{
+		\titlegraphic{\includegraphics[width=4cm]{fig/PictureLogo.png}}
+		\pgfdeclareimage[height=1.3cm]{MElogo}{fig/PictureLogo.png}
+	}
+	{ % No user logo, use the default one
+		\titlegraphic{\includegraphics[width=4cm]{../../common/images/LatexTalk.png}}
+		\pgfdeclareimage[height=1.3cm]{MElogo}{../../common/images/LatexTalk.png}
+	}
+	\logo{\pgfuseimage{MElogo}}
+	\IfFileExists{fig/TextLogo.jpg}
+	{
+		\titlegraphic{\includegraphics[width=4cm]{fig/TextLogo}}
+        \pgfdeclareimage[height=.5cm]{textlogo}{fig/TextLogo}
+	}
+	{ % No user logo, use the default one
+		\titlegraphic{\includegraphics[width=4cm]{../../common/images/LatexText.png}}
+        \pgfdeclareimage[height=0.5cm]{textlogo}{../../common/images/LatexText.png}
+	}
+\else
+\fi
+%http://tex.stackexchange.com/questions/18410/how-can-i-add-more-than-one-logo-to-my-beamer-presentation
+\setbeamertemplate{footline}{\raisebox{-2ex}{\pgfuseimage{textlogo}}
+  \usebeamerfont{date in head/foot}\insertshortdate{}\hfill
+  \insertframenumber{}/\inserttotalframenumber\raisebox{-2ex}{\insertlogo}}
 			\MEDebugMessage{Preparing Beamer slides started}
 \newcommand{\frontmatter}{}
 \newcommand{\mainmatter}{}
@@ -227,7 +288,8 @@
 \setbeamerfont{subtitle}{size=\large\normalfont\slshape}
 
 \setbeamertemplate{bibliography item}[online]
-\setbeamertemplate{title page}{% Jó template, logoval
+\setbeamertemplate{title page}{%
+ 
 	\begin{tikzpicture}[remember picture,overlay]
 	\fill[\TitlePageColor]
 	([yshift=15pt]current page.west) rectangle (current page.south east);
@@ -321,7 +383,7 @@
 \begin{frame}[plain,noframenumbering] % the plain option removes the sidebar and header from the title page
 	\titlepage
 \end{frame}
-%	%	\maketitle
+%	\maketitle
 		\frontmatter
 		\IfFileExists{src/Copyright}
 		{\input{src/Copyright}\clearpage}
