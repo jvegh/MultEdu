@@ -40,7 +40,16 @@
 %    left                % right of left position of sidebar (default is right)
   ]	{Goettingen}
 %		\usecolortheme{dolphin}
-\usecolortheme{spruce}
+%\usecolortheme{spruce}
+\usecolortheme{beaver}
+
+%http://tex.stackexchange.com/questions/324228/how-can-i-decrease-beamers-sidebar-section-distance
+\makeatletter
+\setbeamertemplate{section in sidebar}{\vbox{%
+    \beamer@sidebarformat{0pt}{section in sidebar}{\insertsectionhead}}}
+\setbeamertemplate{section in sidebar shaded}{\vbox{%
+    \beamer@sidebarformat{0pt}{section in sidebar shaded}{\insertsectionhead}}}
+\makeatother
 %\usecolortheme{beaver}
 %\setbeamertemplate{title page}{
 %

@@ -30,52 +30,7 @@
 	      \MEDebugMessage{NO heading information found}
 	} % Options
 
-
-%\MEDebugMessage{ Logo handling started}
-%\ifx\DisableLogo\undefined
-%	\MEDebugMessage{ Logo handling enabled}
-%	%% Define logo images
-%	\IfFileExists{fig/LogoImageLeft.png}
-%		{\def\LogoImageLeft{fig/LogoImageLeft.png}} % User has own 1st logo
-%		{\IfFileExists{../../common/images/LogoImageLeft.png}% No, try to use default logo
-%			{\def\LogoImageLeft{../../common/images/LogoImageLeft.png}}
-%			{\MEDebugMessage{ LogoImageLeft not found}	}	% % No logo is available
-%		}
-%	\IfFileExists{fig/LogoImageRight.png}
-%		{\def\LogoImageRight{fig/LogoImageRight.png}} % User has own 1st logo
-%		{\IfFileExists{../../common/images/LogoImageRight.png}	% No, try to use default logo
-%			{\def\LogoImageRight{../../common/images/LogoImageRight.png}}
-%			{}	% % No logo is available
-%		}
-%	%% Define logo file, if any
-%	\IfFileExists{src/Logo1}
-%		{\input{src/Logo1}}	% User has own 1st logo
-%		{\IfFileExists{../../common/MELogo1}
-%			{\input{../../common/MELogo1}}
-%			{}	% % No logo is available
-%		}
-%	\IfFileExists{src/Logo2}
-%		{\input{src/Logo2}}	% User has own 2nd logo
-%		{\IfFileExists{../../common/MELogo2}
-%			{\input{../../common/MELogo2}}
-%			{}	% % No logo is available
-%		}
-%	\else			
-%	\MEDebugMessage{ Logo making disabled}
-%\fi % DisableLogo
-%\MEDebugMessage{ Logo handling finished}
 	
-%	\ifx\LogoImageLeft\undefined
-%\else
-%	% % Add university logo to the headlines
-%	\addtobeamertemplate{frametitle}{}{%
-%	\begin{tikzpicture}[remember picture,overlay]
-%	\node[anchor=north east,yshift=0cm,xshift=-2cm] at (current page.north east)
-%	{\color{HeadingColor}\insertframenumber/\inserttotalframenumber};
-%	\node[anchor=north east,yshift=2pt] at (current page.north east) {\includegraphics[width=2cm]{\LogoImageLeft}};
-%	\end{tikzpicture}}
-%\fi % of \LogoImageLeft
-
 %% Restore 
 \usepackage{enumitem}
 \setitemize{label=\usebeamerfont*{itemize item}%
@@ -133,22 +88,6 @@
 \fi
 }
 
-%\AtBeginSubsubsection[]
-%{
-%\ifx \suppresssectionTOC \undefined
-%
-%\MEDframe[shrink]{Alszakasz tartalomjegyz\'ek}
-%{
-%\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
-%}
-%{Subsubsection outline}
-%{
-%\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
-%}
-%
-%\fi
-%}
-
 \input{../../common/MEColors}		% Set up used colors
 \input{../../common/MELanguages}	% Set up selected language
 \input{../../common/MEPackages}	% Use the common packets
@@ -161,33 +100,6 @@
 	}
 	{} % Glossary
 
-% % Configure pgfplot diagram appearance
-\pgfplotscreateplotcyclelist{my color list}{%
-solid, color=webblue, every mark/.append style={solid, fill=webblue}, mark=*\\%
-densely dashdotted, color=webgreen, every mark/.append style={solid, fill=webred},mark=diamond*\\%
-densely dotted, color=webbrown, every mark/.append style={solid, fill=webgreen}, mark=triangle*\\%
-loosely dashed, color=webred, every mark/.append style={solid, fill=webbrown},mark=*\\%
-dotted, color=webblue, every mark/.append style={solid, fill=webyellow}, mark=square*\\%
-densely dotted, color=webgreen, every mark/.append style={solid, fill=gray}, mark=otimes*\\%
-dashed, color=webbrown, every mark/.append style={solid, fill=gray},mark=diamond*\\%
-densely dashed, every mark/.append style={solid, fill=gray},mark=square*\\%
-dashdotted, every mark/.append style={solid, fill=gray},mark=otimes*\\%
-dasdotdotted, every mark/.append style={solid},mark=star\\%
-}
-
-\pgfplotscreateplotcyclelist{my black white}{%
-solid, every mark/.append style={solid, fill=gray}, mark=*\\%
-densely dashdotted,every mark/.append style={solid, fill=gray},mark=diamond*\\%
-densely dotted, every mark/.append style={solid, fill=gray}, mark=triangle*\\%
-loosely dashed, every mark/.append style={solid, fill=gray},mark=*\\%
-dotted, every mark/.append style={solid, fill=gray}, mark=square*\\%
-densely dotted, every mark/.append style={solid, fill=gray}, mark=otimes*\\%
-dashed, every mark/.append style={solid, fill=gray},mark=diamond*\\%
-densely dashed, every mark/.append style={solid, fill=gray},mark=square*\\%
-dashdotted, every mark/.append style={solid, fill=gray},mark=otimes*\\%
-dasdotdotted, every mark/.append style={solid},mark=star\\%
-}
-
 	\def\TitlePageColor{ForestGreen}
 		\setbeamerfont{author}{size=\large}
 		\setbeamerfont{institute}{size=\normalsize\itshape}
@@ -197,50 +109,58 @@ dasdotdotted, every mark/.append style={solid},mark=star\\%
 \IfFileExists{fig/CoverIllustration.jpeg}
 { %Make a graphic on the title page
 	\setbeamertemplate{title page}{%
-	aa
+{ % % We are making the title page "by hand"
+% \usebackgroundtemplate{\includegraphics[width=1.0\paperwidth]{fig/CoverIllustration.jpeg}}
+%  \begin{frame}[plain]
+%  \end{frame}
+}
 	}
-	}
-	{ % Make a text-only title page
-	\setbeamertemplate{title page}{%
-	  file not found
-		\begin{tikzpicture}[remember picture,overlay]
-		\fill[\TitlePageColor]
-		  ([yshift=15pt]current page.west) rectangle (current page.south east);
-		\node[anchor=east] 
-		  at ([yshift=-30pt]current page.north east) (author)
-		  {\parbox[t]{.7\paperwidth}{\raggedleft%
-		    \usebeamerfont{author}\textcolor{\TitlePageColor}{%
-		    \textpdfrender{
-		    TextRenderingMode=FillStroke,
-		    FillColor=HeadingColor,
-		    LineWidth=.1ex,
-		    }{\LectureAuthor}}}};
+}
+{ % Make a text-only title page
+    \setbeamertemplate{title page}{%
+ 
+	\begin{tikzpicture}[remember picture,overlay]
+	\fill[\TitlePageColor]
+	([yshift=15pt]current page.west) rectangle (current page.south east);
+	\node[anchor=east] 
+	at ([yshift=-30pt]current page.north east) (author)
+	{\parbox[t]{.7\paperwidth}{\raggedleft%
+			\usebeamerfont{author}\textcolor{\TitlePageColor}{%
+				\textpdfrender{
+					TextRenderingMode=FillStroke,
+					FillColor=HeadingColor,
+					LineWidth=.1ex,
+				}{\LectureAuthor}}}};
+	\ifx\LecturePublisher\undefined
+	\else			
 		\node[anchor=north east] 
-		  at ([yshift=-90pt]current page.north east) (institute)
-		  {\parbox[t]{.78\paperwidth}{\raggedleft%
-		    \usebeamerfont{institute}\textcolor{gray}{\LecturePublisher}}};
-		\node[anchor=south west] 
-		  at ([yshift=20pt]current page.west) (logo)
-		  {\parbox[t]{.19\paperwidth}{\raggedleft%
-		    \usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}};
-		\node[anchor=east]
-		  at ([yshift=-10pt,xshift=-20pt]current page.east) (title)
-		  {\parbox[t]{\textwidth}{\raggedleft%
-		 \usebeamerfont{author}\textcolor{white}{%
-		    \textpdfrender{
-		    TextRenderingMode=FillStroke,
-		    FillColor=white,
-		    LineWidth=.1ex,
-		    }{\Large\LectureTitle}}}};
-		\node[anchor=east]
-		  at ([yshift=-65pt,xshift=-20pt]current page.east) (subtitle)
-		  {\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}\textcolor{black}{\insertsubtitle}}};
-		\node[anchor=west]
-		  at ([yshift=-120pt,xshift=00pt]current page.west) (subtitle)
-		  {\parbox[t]{.8\paperwidth}{\raggedright\usebeamerfont{subtitle}\textcolor{black}{\scriptsize \copyright \LectureAuthor\\\LectureRevision}}};
-		\end{tikzpicture}
-	} % End of title page
-	}
+		at ([yshift=-90pt]current page.north east) (institute)
+		{\parbox[t]{.78\paperwidth}{\raggedleft%
+				\usebeamerfont{institute}\textcolor{gray}{\LecturePublisher}}};
+	\fi		
+	\node[anchor=south west] 
+	at ([yshift=20pt]current page.west) (logo)
+	{\parbox[t]{.19\paperwidth}{\raggedleft%
+			\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}};
+	\node[anchor=east]
+	at ([yshift=-10pt,xshift=-20pt]current page.east) (title)
+	{\parbox[t]{\textwidth}{\raggedleft%
+			\usebeamerfont{author}\textcolor{white}{%
+				\textpdfrender{
+					TextRenderingMode=FillStroke,
+					FillColor=white,
+					LineWidth=.1ex,
+				}{\Large\LectureTitle}}}};
+	\node[anchor=east]
+	at ([yshift=-65pt,xshift=-20pt]current page.east) (subtitle)
+	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}\textcolor{black}{\insertsubtitle}}};
+	\node[anchor=west]
+	at ([yshift=-120pt,xshift=00pt]current page.west) (subtitle)
+	{\parbox[t]{.8\paperwidth}{\raggedright\usebeamerfont{subtitle}\textcolor{black}{\scriptsize \copyright \LectureAuthor\ \\\LectureRevision\ (using\ \MERevision)}}};
+	
+	\end{tikzpicture}
+}
+}
 		
 		\author{\LectureAuthor} 
 		\institute{\LecturePublisher
@@ -288,48 +208,6 @@ dasdotdotted, every mark/.append style={solid},mark=star\\%
 \setbeamerfont{subtitle}{size=\large\normalfont\slshape}
 
 \setbeamertemplate{bibliography item}[online]
-\setbeamertemplate{title page}{%
- 
-	\begin{tikzpicture}[remember picture,overlay]
-	\fill[\TitlePageColor]
-	([yshift=15pt]current page.west) rectangle (current page.south east);
-	\node[anchor=east] 
-	at ([yshift=-30pt]current page.north east) (author)
-	{\parbox[t]{.7\paperwidth}{\raggedleft%
-			\usebeamerfont{author}\textcolor{\TitlePageColor}{%
-				\textpdfrender{
-					TextRenderingMode=FillStroke,
-					FillColor=HeadingColor,
-					LineWidth=.1ex,
-				}{\LectureAuthor}}}};
-	\ifx\LecturePublisher\undefined
-	\else			
-		\node[anchor=north east] 
-		at ([yshift=-90pt]current page.north east) (institute)
-		{\parbox[t]{.78\paperwidth}{\raggedleft%
-				\usebeamerfont{institute}\textcolor{gray}{\LecturePublisher}}};
-	\fi		
-	\node[anchor=south west] 
-	at ([yshift=20pt]current page.west) (logo)
-	{\parbox[t]{.19\paperwidth}{\raggedleft%
-			\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}};
-	\node[anchor=east]
-	at ([yshift=-10pt,xshift=-20pt]current page.east) (title)
-	{\parbox[t]{\textwidth}{\raggedleft%
-			\usebeamerfont{author}\textcolor{white}{%
-				\textpdfrender{
-					TextRenderingMode=FillStroke,
-					FillColor=white,
-					LineWidth=.1ex,
-				}{\Large\LectureTitle}}}};
-	\node[anchor=east]
-	at ([yshift=-65pt,xshift=-20pt]current page.east) (subtitle)
-	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}\textcolor{black}{\insertsubtitle}}};
-	\node[anchor=west]
-	at ([yshift=-120pt,xshift=00pt]current page.west) (subtitle)
-	{\parbox[t]{.8\paperwidth}{\raggedright\usebeamerfont{subtitle}\textcolor{black}{\scriptsize \copyright \LectureAuthor\LectureRevision}}};
-	\end{tikzpicture}
-}
 
 \author[\LectureAuthor]{\LectureAuthor} 
 \ifx\LecturePublisher\undefined
@@ -372,6 +250,24 @@ dasdotdotted, every mark/.append style={solid},mark=star\\%
 %%	% % %
 %%	%% Usage MEfrontmatter
 %
+\newtcolorbox{mybox}[1][]{
+    width=.9\textwidth,
+    arc=3mm,
+%    auto outer arc,
+    boxsep=0cm,
+    toprule=1pt,
+    leftrule=1pt,
+    bottomrule=1pt,
+    rightrule=1pt,
+    colframe=\TitlePageColor,
+    fontupper=\raggedleft\fontsize{16pt}{14pt}\itshape,
+    breakable,
+    nobeforeafter,
+    enhanced jigsaw,
+    opacityframe=0.3,
+    opacityback=0.7
+}
+
 \newcommand\MEfrontmatter{
 	%% Check if the user wants to have his own front matter
 	\IfFileExists{src/FrontMatter.tex}
@@ -380,10 +276,48 @@ dasdotdotted, every mark/.append style={solid},mark=star\\%
 	}
 	{%% No, we need to use the built-in front matter
 		\pagenumbering{gobble}
-\begin{frame}[plain,noframenumbering] % the plain option removes the sidebar and header from the title page
-	\titlepage
-\end{frame}
-%	\maketitle
+{
+ \usebackgroundtemplate{\includegraphics[width=\paperwidth,keepaspectratio]{fig/CoverIllustration.jpeg}}
+  \begin{frame}[plain]
+	\begin{tikzpicture}[remember picture,overlay]
+	\node[anchor=east]
+	at ([yshift=-45pt,xshift=-5pt]current page.north east) (subtitle)
+	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
+	       { \bfseries\textcolor{\TitlePageColor}
+	       \LectureTitle\\\small\bfseries\textcolor{\TitlePageColor}\LectureSubtitle}
+%	       Some text here just to fill the line and see if the line breaks smoothly and goes to the next. If not, I am in deep trouble ;-)
+	    \end{mybox}
+	}}};
+	\node[anchor=east]
+	at ([yshift=45pt,xshift=-5pt]current page.south east) (subtitle)
+	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
+	       {  \bfseries\textcolor{\TitlePageColor}
+	       \LectureAuthor\\\small\bfseries\textcolor{\TitlePageColor}\LecturePublisher}
+%	       Some text here just to fill the line and see if the line breaks smoothly and goes to the next. If not, I am in deep trouble ;-)
+	    \end{mybox}
+	}}};
+	\ifx\DisableLogos\undefined
+	  %% We can use logos, either custom logos or default ones
+		\IfFileExists{fig/TextLogo.jpg}
+		{
+        	\node[anchor=west]
+	        at ([yshift=.75cm,xshift=-.18cm]current page.south west) (logo)
+			{\includegraphics[width=2cm]{../../common/images/LatexTalk.png}\includegraphics[width=2cm]{fig/TextLogo.jpg} \raisebox{.5ex}
+			{\tiny{\ \LectureRevision\ (using\ \MERevision}) \ \copyright \LectureAuthor}};
+		}
+		{ % No user logo, use the default one
+			\node[anchor=west]
+			at ( [yshift=1cm]
+			current page.south west) (logo)
+			{\includegraphics[width=2cm]{../../common/images/LatexTalk.png}\raisebox{.5ex}
+						{\tiny{\ \LectureRevision\ (using\ \MERevision}) \ \copyright \LectureAuthor}};
+		}
+		
+	\fi
+	\end{tikzpicture}
+  
+  \end{frame}
+}
 		\frontmatter
 		\IfFileExists{src/Copyright}
 		{\input{src/Copyright}\clearpage}
@@ -408,7 +342,6 @@ dasdotdotted, every mark/.append style={solid},mark=star\\%
 	}
 	{%% No, we need to use the built-in main matter
 		\mainmatter
-%		\pagenumbering{arabic}
 	}
 }
 
@@ -465,3 +398,4 @@ dasdotdotted, every mark/.append style={solid},mark=star\\%
 %		}
 %	}% \articleonly
 }
+
