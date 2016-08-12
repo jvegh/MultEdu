@@ -159,7 +159,7 @@
 }
 		
 		\author{\LectureAuthor} 
-		\institute{\LecturePublisher}
+\ifx\LecturePublisher\undefined\else	\institute{\LecturePublisher}   \fi
 		\title{\LectureTitle}
 		\subtitle{\LectureSubtitle}
 
@@ -275,7 +275,8 @@
 	at ([yshift=45pt,xshift=-5pt]current page.south east) (subtitle)
 	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
 	       {  \bfseries\textcolor{\TitlePageColor}
-	       \LectureAuthor\\\small\bfseries\textcolor{\TitlePageColor}\LecturePublisher}
+	       \LectureAuthor\\
+               \ifx\LecturePublisher\undefined\else\small\bfseries\textcolor{\TitlePageColor}\LecturePublisher\fi}
 	    \end{mybox}
 	}}};
 	\ifx\DisableLogos\undefined
