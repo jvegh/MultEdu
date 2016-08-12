@@ -19,7 +19,6 @@
 %	\usepackage{longtable}			% Break tables at page boundaries
 \usepackage{calc}
 \usepackage{answers}
-	
 \usepackage{savesym} 	% http://comments.gmane.org/gmane.emacs.orgmode/72621
 \savesymbol{iint}
 \savesymbol{iiint}
@@ -54,10 +53,35 @@
 	automata}
 \fi
 	\usepackage{pgfplots}
+% % Configure pgfplot diagram appearance
+\pgfplotscreateplotcyclelist{my color list}{%
+solid, color=webblue, every mark/.append style={solid, fill=webblue}, mark=*\\%
+densely dashdotted, color=webgreen, every mark/.append style={solid, fill=webred},mark=diamond*\\%
+densely dotted, color=webbrown, every mark/.append style={solid, fill=webgreen}, mark=triangle*\\%
+loosely dashed, color=webred, every mark/.append style={solid, fill=webbrown},mark=*\\%
+dotted, color=webblue, every mark/.append style={solid, fill=webyellow}, mark=square*\\%
+densely dotted, color=webgreen, every mark/.append style={solid, fill=gray}, mark=otimes*\\%
+dashed, color=webbrown, every mark/.append style={solid, fill=gray},mark=diamond*\\%
+densely dashed, every mark/.append style={solid, fill=gray},mark=square*\\%
+dashdotted, every mark/.append style={solid, fill=gray},mark=otimes*\\%
+dasdotdotted, every mark/.append style={solid},mark=star\\%
+}
+
+\pgfplotscreateplotcyclelist{my black white}{%
+solid, every mark/.append style={solid, fill=gray}, mark=*\\%
+densely dashdotted,every mark/.append style={solid, fill=gray},mark=diamond*\\%
+densely dotted, every mark/.append style={solid, fill=gray}, mark=triangle*\\%
+loosely dashed, every mark/.append style={solid, fill=gray},mark=*\\%
+dotted, every mark/.append style={solid, fill=gray}, mark=square*\\%
+densely dotted, every mark/.append style={solid, fill=gray}, mark=otimes*\\%
+dashed, every mark/.append style={solid, fill=gray},mark=diamond*\\%
+densely dashed, every mark/.append style={solid, fill=gray},mark=square*\\%
+dashdotted, every mark/.append style={solid, fill=gray},mark=otimes*\\%
+dasdotdotted, every mark/.append style={solid},mark=star\\%
+}
+
 	\usepackage{pdfrender}
 	 \usepackage[backend=bibtex]{biblatex}   	% for beamer bibliography
-%	\input{../../common/MEMacros}	% % Must be after 'geometry'
-%	\input{../../common/MEListings}
 \ifx\DisableIndex\undefined
 	\usepackage{makeidx}
 	\ifx\LecturePrintable\undefined
