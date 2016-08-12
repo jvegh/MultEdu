@@ -41,14 +41,13 @@
 \settocdepth{subsection}
 \input{../../common/MEColors}		% Set up used colors
 \input{../../common/MELanguages}	% Set up selected language
-
 \input{../../common/MEPackages}	% Use the common packets
 \input{../../common/MEMacros}
 \usepackage{layouts}
-\tryintextsep{0pt plus2pt minus1pt}
-\tryfloatsep{0pt plus2pt minus1pt}
+\tryintextsep{6pt plus2pt minus1pt}
+\tryfloatsep{6pt plus2pt minus1pt}
 
-\usepackage[plainpages=false,pdfpagelabels,colorlinks=true,linkcolor=ForestGreen,citecolor=ForestGreen]{hyperref}
+\usepackage[plainpages=false,pdfpagelabels,colorlinks=true,linkcolor=webgreen,citecolor=ForestGreen]{hyperref}
 \usepackage{midfloat}
 \IfFileExists{src/Glossary.tex}
 {
@@ -56,6 +55,33 @@
 }
 {} % Glossary
 
+	% % Configure pgfplot diagram appearance
+	\pgfplotscreateplotcyclelist{my color list}{%
+	solid, color=webblue, every mark/.append style={solid, fill=webblue}, mark=*\\%
+	densely dashdotted, color=webgreen, every mark/.append style={solid, fill=webred},mark=diamond*\\%
+	densely dotted, color=webbrown, every mark/.append style={solid, fill=webgreen}, mark=triangle*\\%
+	loosely dashed, color=webred, every mark/.append style={solid, fill=webbrown},mark=*\\%
+	dotted, color=webblue, every mark/.append style={solid, fill=webyellow}, mark=square*\\%
+	densely dotted, color=webgreen, every mark/.append style={solid, fill=gray}, mark=otimes*\\%
+	dashed, color=webbrown, every mark/.append style={solid, fill=gray},mark=diamond*\\%
+	densely dashed, every mark/.append style={solid, fill=gray},mark=square*\\%
+	dashdotted, every mark/.append style={solid, fill=gray},mark=otimes*\\%
+	dasdotdotted, every mark/.append style={solid},mark=star\\%
+	}
+	
+	\pgfplotscreateplotcyclelist{my black white}{%
+	solid, every mark/.append style={solid, fill=gray}, mark=*\\%
+	densely dashdotted,every mark/.append style={solid, fill=gray},mark=diamond*\\%
+	densely dotted, every mark/.append style={solid, fill=gray}, mark=triangle*\\%
+	loosely dashed, every mark/.append style={solid, fill=gray},mark=*\\%
+	dotted, every mark/.append style={solid, fill=gray}, mark=square*\\%
+	densely dotted, every mark/.append style={solid, fill=gray}, mark=otimes*\\%
+	dashed, every mark/.append style={solid, fill=gray},mark=diamond*\\%
+	densely dashed, every mark/.append style={solid, fill=gray},mark=square*\\%
+	dashdotted, every mark/.append style={solid, fill=gray},mark=otimes*\\%
+	dasdotdotted, every mark/.append style={solid},mark=star\\%
+	}
+	
 			
 %%%http://tex.stackexchange.com/questions/20034/glossaries-print-first-occurence-by-using-acronym-desc
 %\AtBeginDocument{%
@@ -241,7 +267,7 @@
 	\setsecheadstyle{\color{HeadingColor}\bfseries\memRTLraggedright}
 	\setsubsecheadstyle{\color{HeadingColor}\bfseries\small\memRTLraggedright}
 
-	\setlength{\parskip}{4pt plus 2pt minus 3pt}
+	\setlength{\parskip}{6pt plus 2pt minus 3pt}
 	\setlength{\parindent}{0pt}
 	\setlength{\textfloatsep}{6.0pt plus 1.0pt minus 2.0pt}
 	\setlength{\floatsep}{6.0pt plus 1.0pt minus 2.0pt}
@@ -277,6 +303,7 @@
 %%%	% % % A macro for representing the front matter needed in the selected form
 %
 \newcommand\MEfrontmatterRoot{
+	\MEDebugMessage{MESetupPrintedFormat: frontmatter started to load}
 	%% Check if the user wants to have his own front matter
 	\IfFileExists{src/FrontMatter.tex}
 	{%% Have his own frontmatter things; use it
@@ -284,6 +311,8 @@
 		\MEDebugMessage{MESetupPrintedFormat: Using user's FrontMatter}
 	}
 	{%% No, we need to use the built-in front matter
+	\IfFileExists{src/Heading.tex}
+	{
 		\pagenumbering{gobble}
 		\maketitle
 		\frontmatter
@@ -341,6 +370,11 @@ First edition:                        & July 2016 \\
 	\tableofcontents	
 \fi
 }
+{
+\MEDebugMessage{MESetupPrintedFormat: Title page not generated}
+}
+}
+	\MEDebugMessage{MESetupPrintedFormat: frontmatter finished to load}
 }%FrontMatterRoot
 
 
@@ -349,12 +383,10 @@ First edition:                        & July 2016 \\
 %	%% Usage MEbackmatter
 \newcommand\MEbackmatter{
 	%	%% Check if the user wants to have his own back matter
-	\ao{
-		%%% Printing a kind of PDF book
+	\MEDebugMessage{MESetupPrintedFormat: backmatter started to load}
 		% http://tex.stackexchange.com/questions/472/how-can-i-have-two-or-more-distinct-indexes
 		% http://www.latex-community.org/forum/viewtopic.php?f=51&t=8096
-		\ifx\DisableIndex\undefined
-		
+		\ifx\DisableIndex\undefined		
 			\clearpage\printindex
 		\else 
 			\MEDebugMessage{Index printing disabled}
@@ -445,7 +477,7 @@ First edition:                        & July 2016 \\
 \end{center}
 
 \fi		
-	}% \articleonly
+	\MEDebugMessage{MESetupPrintedFormat: backmatter finished to load}
 }
 
 %\ifx\DisableLogo\undefined
