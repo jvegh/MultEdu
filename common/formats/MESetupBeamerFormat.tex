@@ -109,11 +109,7 @@
 \IfFileExists{fig/CoverIllustration.jpeg}
 { %Make a graphic on the title page
 	\setbeamertemplate{title page}{%
-{ % % We are making the title page "by hand"
-% \usebackgroundtemplate{\includegraphics[width=1.0\paperwidth]{fig/CoverIllustration.jpeg}}
-%  \begin{frame}[plain]
-%  \end{frame}
-}
+ % % We are making the title page "by hand"
 	}
 }
 { % Make a text-only title page
@@ -160,11 +156,9 @@
 	
 	\end{tikzpicture}
 }
-}
 		
 		\author{\LectureAuthor} 
-		\institute{\LecturePublisher
-		}
+		\institute{\LecturePublisher}
 		\title{\LectureTitle}
 		\subtitle{\LectureSubtitle}
 
@@ -234,21 +228,10 @@
 		{\setbeamertemplate{bibliography item}[article]}}%
 	\usebeamertemplate{bibliography item}}
 
-%\defbibenvironment{bibliography}
-%{\list{}
-%	{\settowidth{\labelwidth}{\usebeamertemplate{bibliography item}}%
-%		\setlength{\leftmargin}{\labelwidth}%
-%		\setlength{\labelsep}{\biblabelsep}%
-%		\addtolength{\leftmargin}{\labelsep}%
-%		\setlength{\itemsep}{\bibitemsep}%
-%		\setlength{\parsep}{\bibparsep}}}
-%{\endlist}
-%{\item}
-
 %			
-%%	% % % A macro for representing the front matter needed in the selected form
-%%	% % %
-%%	%% Usage MEfrontmatter
+%% A macro for representing the front matter needed in the selected form
+%%
+%% Usage MEfrontmatter
 %
 \newtcolorbox{mybox}[1][]{
     width=.9\textwidth,
@@ -285,7 +268,6 @@
 	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
 	       { \bfseries\textcolor{\TitlePageColor}
 	       \LectureTitle\\\small\bfseries\textcolor{\TitlePageColor}\LectureSubtitle}
-%	       Some text here just to fill the line and see if the line breaks smoothly and goes to the next. If not, I am in deep trouble ;-)
 	    \end{mybox}
 	}}};
 	\node[anchor=east]
@@ -293,7 +275,6 @@
 	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
 	       {  \bfseries\textcolor{\TitlePageColor}
 	       \LectureAuthor\\\small\bfseries\textcolor{\TitlePageColor}\LecturePublisher}
-%	       Some text here just to fill the line and see if the line breaks smoothly and goes to the next. If not, I am in deep trouble ;-)
 	    \end{mybox}
 	}}};
 	\ifx\DisableLogos\undefined
@@ -325,15 +306,13 @@
 			{\input{../../common/MECopyright}\clearpage}
 			{}
 		}
-%%		\pagenumbering{roman}	
-%		\tableofcontents	
 	}
 }
 
 
-%	% % % A macro for representing the main matter needed in the selected form
-%	% % %
-%	%% Usage MEmainmatter
+%% A macro for representing the main matter needed in the selected form
+%%
+%% Usage MEmainmatter
 \newcommand\MEmainmatter{
 	%% Check if the user wants to have his own main matter
 	\IfFileExists{src/MainMatter.tex}
@@ -345,57 +324,63 @@
 	}
 }
 
-%	% % % A macro for representing the back matter needed in the selected form
-%	% % %
-%	%% Usage MEbackmatter
+%% A macro for representing the back matter 
+%%
+%% Usage MEbackmatter
 \newcommand\MEbackmatter{
 	%	%% Check if the user wants to have his own back matter
-%	\articleonly{
-%		%%% Printing a kind of PDF book
-%		% http://tex.stackexchange.com/questions/472/how-can-i-have-two-or-more-distinct-indexes
-%		% http://www.latex-community.org/forum/viewtopic.php?f=51&t=8096
-%		\IfFileExists{src/Glossary.tex}
-%		{
-%			\glossarystyle{altlisthypergroup}
-%			\ifx\DisableAcronim\undefined
-%			\clearpage
-%			\printglossary[type=acronym]
-%			\else 
-%			\MEDebugMessage{Printing acronims disabled}
-%			\fi
-%			\ifx\DisableGlossary\undefined
-%			\clearpage
-%			\printglossary
-%			\else 
-%			\MEDebugMessage{Printing glossary disabled}
-%			\fi
-%		}
-%		{\MEDebugMessage{No Glossary.tex file found}}	% % If no glossary file exists, make nothing
-%		\conditionalLoT    % Print list of tables, if any
-%		\conditionalLoF    % Print list of figures, if any
-%		\conditionalLoP
-%		%						
-%		%		
-		\ifx\DisableBibliography\undefined
-		\ifx\LectureBibliography\undefined
-		\MEDebugMessage{No bibliography file found}
-			\MEframelabel{\ifx\Lecturelanguage\undefined Felhasznált forrásmunkák \else Used sources\fi}
-			\chapter*{\ifx\Lecturelanguage\undefined Felhasznált forrásmunkák \else Used sources\fi}
-		\else
-		\begin{frame}[allowframebreaks] {\ifx\Lecturelanguage\undefined Felhasznált forrásmunkák\else Used sources\fi}{}
+	\ifx\DisableIndex\undefined		
+       \begin{frame}[allowframebreaks]{Tárgymutató}
+		\printindex
+	   \end{frame}
+	\else 
+			\MEDebugMessage{Index printing disabled}
+	\fi
+	%% Now print glossary and acronyms
+		\IfFileExists{src/Glossary.tex}
+		{
+			\glossarystyle{altlisthypergroup}
+			\ifx\DisableAcronyms\undefined
+		       \begin{frame}[allowframebreaks]{Acronyms}
+					\printglossary[type=acronym]
+			   \end{frame}
+			\else 
+				\MEDebugMessage{Printing acronyms disabled}
+			\fi
+			\ifx\DisableGlossary\undefined
+		       \begin{frame}[allowframebreaks]{Glossary}
+					\printglossary
+			   \end{frame}
+			  
+			\else 
+			  \MEDebugMessage{Printing glossary disabled}
+			\fi
+		}
+		{\MEDebugMessage{No Glossary.tex file found}
+		}	% % If no glossary file exists, make nothing
+
+	\ifx\DisableBibliography\undefined
+ %% Printing bibliography is allowed
+	\ifx\LectureBibliography\undefined
+		\MEDebugMessage{No bibliography file defined}
+	\else
+	   %% The file is defined, open the frame
+      \ifthenelse{\equal{\LectureLanguage}{magyar}}
+      {
+      \begin{frame}[allowframebreaks]{Felhasznált források}
 		\printbibliography
-		\end{frame}
-		\fi			
-		\else
-		\MEDebugMessage{ Bibliography printing disabled}
-		\fi %\DisableBibliography
-%		\IfFileExists{src/BackMatter.tex}
-%		{%% Have his own backmatter things; use it
-%			\input{src/BackMatter.tex}
-%		}
-%		{%% No, we need to use the built-in main matter
-%			\backmatter
-%		}
-%	}% \articleonly
+	  \end{frame}
+      }
+	  {
+	  }	
+      \ifthenelse{\equal{\LectureLanguage}{english}}
+      {
+      \begin{frame}[allowframebreaks]{Used sources}
+		\printbibliography
+	  \end{frame}
+      }
+	  {
+	  }	
+	\fi		
 }
 

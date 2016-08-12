@@ -20,11 +20,10 @@
 			{\def\myshrink{yes}}{}
 		\expandafter\ifstrequal\expandafter{\ME@plain}{true}
 			{\def\myplain{yes}}{}
-			
 			\ifx\LecturePrintable\undefined	% Making slides
 						\begin{frame}[shrink] {\framelabel}{}
 	%					Just normal\par
-						#3\par\phantom{-}
+						#3 %\par\phantom{-}
 						\end{frame}
 %				\ifx\myshrink\undefined
 %					\ifx\myplain\undefined

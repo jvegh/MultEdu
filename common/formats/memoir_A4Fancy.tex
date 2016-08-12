@@ -33,6 +33,7 @@ pdfpagemode=UseNone,pdfstartview=Fit
 \checkandfixthelayout[fixed]
 
 \input{../../common/formats/MESetupPrintedFormat}
+\usepackage{dblfloatfix} % Allow to place two-column wide figs to bottom
 
 
 %%%%%%%%%%%%%%
@@ -48,29 +49,32 @@ pdfpagemode=UseNone,pdfstartview=Fit
 \ifx\LectureCoverIllustration\undefined
   \IfFileExists{fig/CoverIllustration.jpeg}
   {
-    \ThisLLCornerWallPaper{1}{fig/CoverIllustration}
+    \ThisLLCornerWallPaper{1}{fig/CoverIllustration.jpeg}
   }
   {
-    \ThisLLCornerWallPaper{1}{../../common/fig/CoverIllustration}
+    \ThisLLCornerWallPaper{1}{../../common/images/CoverIllustration.jpeg}
   }
 \else
   \ThisLLCornerWallPaper{1}{\LectureCoverIllustration}
 \fi % of CoverIllustration
 \onecolumn  	
 
+\ifx\LectureSubtitle\undefined
+\else
 %% Bar across the top
 \tikz[remember picture,overlay]%
 \node[fill=HeadingColor,text=white,font=\LARGE\bfseries,text=cream,%
 minimum width=\paperwidth,minimum height=5em,anchor=north]%
 at (current page.north){\LectureSubtitle};
+\fi
 
-%% Bar across the bottom
-\tikz[remember picture,overlay]%
-\node[fill=HeadingColor,text=white,font=\LARGE\bfseries,text=cream,%
-minimum width=\paperwidth,minimum height=5em,anchor=south]%
-at (current page.south){\hfill%\Copyright 
-\copyright\ 2010-\the\year\ (\LectureEmail)};
-
+%%% Bar across the bottom
+%\tikz[remember picture,overlay]%
+%\node[fill=HeadingColor,text=white,font=\LARGE\bfseries,text=cream,%
+%minimum width=\paperwidth,minimum height=5em,anchor=south]%
+%at (current page.south){\hfill%\Copyright 
+%\copyright\ 2010-\the\year\ (\LectureEmail)};
+%
 
 \vspace*{-3\baselineskip}
   

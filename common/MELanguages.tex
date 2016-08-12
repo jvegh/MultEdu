@@ -6,22 +6,31 @@
 %\usepackage[latin2]{inputenc}
 \usepackage{t1enc}
 \usepackage{ifthen}
-
+\ifx\LectureLanguage\undefined
+    \def\LectureLanguage{english}	%% 
+\fi
 % % The default is the English text
 % % \LectureLanguage can change to another language
 % % \UseSecondLanguage allows to use two languages simultanously
 %
-  	\hyphenpenalty=2000 %Preset these params, overwrite at selected language, if needed
-  	\tolerance=20000
-	\def\MEAbstract{Abstract}
-\ifx\LectureLanguage\undefined
-% % Using English only
-  \MEDebugMessage{MELanguages: Configured to use English only}
-\else
+%  	\hyphenpenalty=2000 %Preset these params, overwrite at selected language, if needed
+%  	\tolerance=20000
+%	\def\MEAbstract{Abstract}
+%% % Using English only
+%  \MEDebugMessage{MELanguages: Configured to use English only}
+%  \ifx\UseAlsoHungarian\undefined
+%    \usepackage[english]{babel}
+%  \else
+%    \usepackage[magyar,english]{babel}
+%    \selectlanguage{english}
+%  \fi
+%\else
+  %% http://tex.stackexchange.com/questions/195491/ifthenelse-equal-string-comparison-fails
   % % Some other language must be used
   %% Check if using Hungarian
-  \ifthenelse{\equal{\LectureLanguage}{magyar}}
-  { % % implement Hungarian documenting
+\ifthenelse{\equal{\LectureLanguage}{magyar}}
+  {%% implement Hungarian documenting
+    \MEDebugMessage{MELanguages: Hungarian language selected}
     \ifx\UseSecondLanguage\undefined
 	  \usepackage[english,magyar]{babel}
     \else
@@ -29,39 +38,47 @@
     \fi
 	\selectlanguage{magyar}
 	\frenchspacing
- % 	\hyphenpenalty=2000
- % 	\tolerance=20000
-	\let\Aref\relax	%% Needed for workaround \Aref bug
+  	\hyphenpenalty=2000
+  	\tolerance=20000
+%	\let\Aref\relax	%% Needed for workaround \Aref bug
 	\def\MEAbstract{Kivonat}
   	\MEDebugMessage{MELanguages: Hungarian language selected}
-  % % http://tex.stackexchange.com/questions/195491/ifthenelse-equal-string-comparison-fails
   }% true
-  { % % NOT 'magyar', look further
-    \MEDebugMessage{MELanguages: NOT Hungarian}% false
-    \ifthenelse{\equal{\LectureLanguage}{english}}
-    {
-      \MEDebugMessage{MELanguages: English language selected}
-	  \def\MEAbstract{Abstract}  
-	  \usepackage[english]{babel}
+  {}	%% Just empty, to avoid embedding
+  %% NOT 'magyar', look further
+\ifthenelse{\equal{\LectureLanguage}{english}}
+  {
+    \MEDebugMessage{MELanguages: English language selected}
+    \def\MEAbstract{Abstract}  
+	\ifx\UseAlsoHungarian\undefined
+	    \usepackage[english]{babel}
+    \else
+	    \usepackage[magyar,english]{babel}
+	\fi
       % % Just an example how to implement further languages
-     }% true
-     {  \MEDebugMessage{MELanguages: NOT English}
+  }% true
+  {}	%% Just empty, to avoid embedding
        %% Just an example how to implement further languages
-        \ifthenelse{\equal{\LectureLanguage}{german}}
-        {
-          \MEDebugMessage{MELanguages: German language selected} 
-	      \usepackage[german]{babel}
-        }% true
-        {  \MEDebugMessage{MELanguages: Unknown language, English used}  
-%  	       \hyphenpenalty=2000
-%  	       \tolerance=20000
-	       \usepackage[english]{babel}
-	       \def\MEAbstract{Abstract}
-        }% false
-  
-     }% false
-  }
-\fi %\LectureLanguage
+\ifthenelse{\equal{\LectureLanguage}{german}}
+  {
+    \MEDebugMessage{MELanguages: German language selected} 
+	\usepackage[german]{babel}
+  }% true
+  {}	%% Just empty, to avoid embedding
+%        {  \MEDebugMessage{MELanguages: Unknown language, English used}  
+%%  	       \hyphenpenalty=2000
+%%  	       \tolerance=20000
+%		   \ifx\UseAlsoHungarian\undefined
+%	         \usepackage[english]{babel}
+%	       \else
+%	         \usepackage[magyar,english]{babel}
+%	       \fi
+%	       \def\MEAbstract{Abstract}
+%        }% false
+%  
+%     }% false
+%  }
+%\fi %\LectureLanguage
 
 \providecommand*{\at}{\symbol{64}}	% To avoid the special handling for the @ symbol 
 \providecommand*{\bs}{\symbol{92}}	%% back slash
