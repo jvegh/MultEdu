@@ -20,22 +20,29 @@
 %\def\LectureLanguage{magyar}
 %% Define the author, title and publisher
 %% Please use accents, no encoding and fonts defined
-\ifx\LectureLanguage\undefined
+  \ifthenelse{\equal{\LectureLanguage}{english}}
+  { % % implement Hungarian documenting
 	% In English
 	\def\LectureAuthor{J\'anos V\'egh}
 	\def\LectureTitle{How to use package MultEdu}
 	\def\LectureSubtitle{(How to prepare interesting and attractive teaching material)}
 	 %Optional
 %	\def\LecturePublisher{Miskolc University Faculty of \dots and Informatics}
-	\def\LectureRevision{V0.02 (using \MERevision) \at 2016.07.15}
-\else
+	\def\LectureRevision{V0.03 (using \MERevision) \at 2016.08.17}
+  }% true
+  {% NOT english
+  }
+  \ifthenelse{\equal{\LectureLanguage}{magyar}}
+  { % % implement Hungarian documenting
 	% printing in Hungarian
 	\def\LectureAuthor{V\'egh J\'anos}
-	\def\LectureTitle{Hogyan használjuk a MultEdu csomagot} 
-	\def\LectureSubtitle{(Hogyan készítsünk érdekes és vonzó tananyagot)} %opcionális
+	\def\LectureTitle{Hogyan haszn\'aljuk a MultEdu csomagot} 
+	\def\LectureSubtitle{(Hogyan k\'esz\'\i{}ts\"unk \'erdekes \'es vonz\'o tananyagot)} %opcionális
 %	\def\LecturePublisher{Miskolci Egyetem \dots és Informatikai Kara}
-	\def\LectureRevision{V0.02 (a \MERevision felhasználásával) \at 2016.07.15}
-\fi %% LectureLanguage
+	\def\LectureRevision{V0.03 (a \MERevision felhaszn\'al\'as\'aval) \at 2016.08.17}
+  }% true
+  {% NOT magyar
+  }
 \def\LectureEmail{Janos.Vegh\at unideb.hu}
 	
 	
