@@ -1,28 +1,4 @@
 %% This is main file for Demo of  the MultEdu system
-%% It is ONLY available in  printed hardcopy form (both in PDF)
-%% Due to difficulties and differences between environments,
-%% all auxiliary and output files are put in the root.
-%% However, sources are stored outside, in the /src subdirectory
-%% Printed formats, based on memoir;
-% \input{../../common/formats/memoir_eBook} % An eBook format for students (mainly mobile devices)
-%  \input{../../common/formats/memoir_WEB}	% A WEB browsable, landscape, big letter version
-% \input{../../common/formats/memoir_A4Fancy}	% A fancy memoir book
-\input{../../common/formats/beamer_ME}	% A beamer slides format
-\usepackage{layouts}
-
-\tryintextsep{0pt plus2pt minus1pt}
-\tryfloatsep{0pt plus2pt minus1pt}
-%% This is the beginning of the user document
-\begin{document}
-%\nocite{*}
-	\MEfrontmatter
-	\MEmainmatter
-%	\input{src/General}		%% General information
-%	\input{src/Organizing}	%% How to organize a document
-	\input{src/Sectioning}	%% How to section a document
-	\input{src/Listings}	%% How to insert program listings
-	\input{src/Figures}		%% How to insert figures
-	\MEbackmatter
-\end{document}
-
+    \input{src/Defines}	%% Define title, language, format, etc.
+    \input{Main.tex}    %% The real main file
 
