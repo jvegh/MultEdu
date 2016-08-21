@@ -116,5 +116,53 @@
 
 \makeatother
 
+%http://tex.stackexchange.com/questions/99070/check-for-a-valid-file-before-using-includegraphics
+% Usage: IfGraphicFileExists{FileName WITHOUT extension}{TRUE bracnh} {FALSE branch} 
+% File must have extension which 'graphix' can handle
+\makeatletter
+\newif\ifgraphicexist
+
+\catcode`\*=11
+\newcommand\IfGraphicFileExists[1]{%
+%\newcommand\IfGraphicFileExists[1]{%
+ \begingroup
+ \global\graphicexisttrue
+   \let\input@path\Ginput@path
+  \filename@parse{#1}%
+  \ifx\filename@ext\relax
+    \@for\Gin@temp:=\Gin@extensions\do{%
+      \ifx\Gin@ext\relax
+        \Gin@getbase\Gin@temp
+      \fi}%
+  \else
+    \Gin@getbase{\Gin@sepdefault\filename@ext}%
+    \ifx\Gin@ext\relax
+       \global\graphicexistfalse
+       \def\Gin@base{\filename@area\filename@base}%
+       \edef\Gin@ext{\Gin@sepdefault\filename@ext}%
+    \fi
+  \fi
+  \ifx\Gin@ext\relax
+         \global\graphicexistfalse
+    \else 
+       \@ifundefined{Gin@rule@\Gin@ext}%
+         {\global\graphicexistfalse}%
+         {}%
+    \fi  
+  \ifx\Gin@ext\relax 
+   \gdef\imageextension{unknown}%
+  \else
+   \xdef\imageextension{\Gin@ext}%
+  \fi 
+ \endgroup 
+ \ifgraphicexist
+  \expandafter \@firstoftwo
+ \else
+  \expandafter \@secondoftwo
+ \fi 
+ } 
+\catcode`\*=12
+\makeatother 
+
 	\MEDebugMessage{MEFigures: finished to load}
 
