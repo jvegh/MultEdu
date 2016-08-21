@@ -1,26 +1,16 @@
 cmake_minimum_required(VERSION 2.8.4)
 
-PROJECT(Demo NONE)
+cmake_policy(SET CMP0048 NEW)
+PROJECT(Demo VERSION 0.02.1 LANGUAGES NONE)
 
-set(MainFile "Demo.tex")
-set(InputFiles
- ${MainFile} Main.tex src/Heading.tex   
- )
- 
-## !! Do not edit below this line until you know what you are doing!!
-include(../../common/UseLATEX.cmake)
-# file(GLOB_RECURSE InputFiles ${MainFile} Main.tex src ) # It is WRONG
-# This CMakeLists is called from ./build/build
-# Make a private copy of MultEdu/build/common
-#
-set(commonMultEdu "${CMAKE_BINARY_DIR}/../../../../common")
-set(MyCommon "${CMAKE_BINARY_DIR}/../../")
-#message("Copy "  ${commonMultEdu} " to " ${MyCommon})
-file(GLOB_RECURSE MyFiles "${commonMultEdu}/*.*")
-file(MAKE_DIRECTORY "${MyCommon}")
-#file(COPY "${MyFiles}" DESTINATION "${MyCommon}/")
-file(COPY ${commonMultEdu} DESTINATION "${MyCommon}/")
-# Include UseLATEX macros
+set(MainFile "Demo.tex")	# Is used to define output file name
+set(InputFiles ${MainFile} Main.tex
+   src/Heading.tex src/Abstract.tex src/Copyright.tex src/Glossary.tex
+   src/Figures.tex src/Listings.tex src/Sectioning.tex
+)
+## Copy extra directories, if you need
+ file(COPY "${CMAKE_SOURCE_DIR}/dat" DESTINATION "${CMAKE_BINARY_DIR}")
+ file(COPY "${CMAKE_SOURCE_DIR}/lst" DESTINATION "${CMAKE_BINARY_DIR}")
 
 # Select language setting
 #
@@ -44,30 +34,28 @@ if(NOT NEED_BOTH_LANGUAGES)
   option (USE_SECOND_LANGUAGE "If to use the 2nd or 1st language" OFF) 
 endif(NOT NEED_BOTH_LANGUAGES)
 #
-
-# Choose which formats you need
-option (NEED_BEAMER "Make the Beamer version of the lecture"  ON)
-  # Select sub-option
-option (NEED_BOOK "If to use book format PDF" ON)
-  # Select book sub-format
-  option(NEED_EBOOK "If you need eBook format PDF" ON)
-  option(NEED_WEBBOOK "If you need webBook format PDF" ON)
-  option(NEED_FancyA4BOOK "If you need fancy A4 size Book format PDF" ON)
-
-cmake_policy(SET CMP0053 NEW)
-set(LectureLanguage "magyar")
-
+ 
+## !! Do not edit below this line until you know what you are doing!!
+include(../../common/UseLATEX.cmake)
+# This CMakeLists is called from ./build/build
+# Make a private copy of MultEdu/build/common
 #
-# Assemble list of formats to prepare
-#
-set(MyFormatList "")
-if(NEED_EBOOK)
-  set(MyFormatList ${MyFormatList} memoir_eBook)
-endif(NEED_EBOOK)
-if(NEED_WEBBOOK)
-  set(MyFormatList ${MyFormatList} memoir_WEB)
-endif(NEED_WEBBOOK)
+set(commonMultEdu "${CMAKE_BINARY_DIR}/../../../../common")
+set(MyCommon "${CMAKE_BINARY_DIR}/../../")
+file(GLOB_RECURSE MyFiles "${commonMultEdu}/*.*")
+file(MAKE_DIRECTORY "${MyCommon}")
+file(COPY ${commonMultEdu} DESTINATION "${MyCommon}/")
 
+# This CMakeLists is called from ./build/build
+
+#?? set(MyLanguageList ${MyLanguageList} magyar)
+#?? set(MyLanguageList ${MyLanguageList} english)
+#  set(MyFormatList ${MyFormatList} eBook)
+#  set(MyFormatList ${MyFormatList} WEB)
+#  set(MyFormatList ${MyFormatList} A4Fancy)
+  set(MyFormatList ${MyFormatList} beamertry)
+  
+  
 #
 # Assemble list of languages to prepare
 #
@@ -82,40 +70,36 @@ else(USE_2ND_LANGUAGE)
   set(MyLanguageList ${MyLanguageList} ${FirstLanguage})
 endif(USE_2ND_LANGUAGE)
 endif(NEED_BOTH_LANGUAGES)
-
-
+  
+  
 ### The beginning of the output generating loop
 foreach(MyLanguage ${MyLanguageList})
 foreach(MyFormat ${MyFormatList})
   message("Preparing " "format '${MyFormat}'" " in language " "'${MyLanguage}'")
-## Prepare a new config file
-#
+  ## Prepare a new config file
+  #
   set(ConfigFile "${CMAKE_SOURCE_DIR}/src/Defines.tex.in" )
   file(WRITE "${ConfigFile}" "%% This file is prepared by CMake, will be overwritten\n")
 ## Handle the language
   file(APPEND  "${ConfigFile}"  "\\def\\LectureLanguage{" "${MyLanguage}" "}\n")
-## Choose if 2nd or 1st language
-  if(USE_2ND_LANGUAGE)  
-    file(APPEND  "${ConfigFile}"  "\\def\\\UseSecondLanguage{yes}\n")
-  endif(USE_2ND_LANGUAGE) 
-## Handle debug option
-  if(DEBUG_MODE)
-    file(APPEND  "${ConfigFile}"  "\\def\\EnableDebug{yes} % USE IT ONLY WHEN DEBUGGING!!!\n")
-  endif(DEBUG_MODE)
-
+#  file(APPEND  "${ConfigFile}"  "\\documentclass{memoir}\n")
+  file(APPEND  "${ConfigFile}"  "\\def\\Version{" "${PROJECT_VERSION}" "}\n")
+  file(APPEND  "${ConfigFile}"  "\\def\\EnableDebug{" "yes" "} % USE IT ONLY WHEN DEBUGGING!!!\n")
   file(APPEND  "${ConfigFile}"  "\\input{../../common/formats/${MyFormat}}\n")
 ## Now configure Defines.tex
-  configure_file("${ConfigFile}" "${CMAKE_BINARY_DIR}/src/Defines.tex")
+  set(PrefixFile "${CMAKE_BINARY_DIR}/src/Defines.tex")
+  configure_file("${ConfigFile}" ${PrefixFile})
+  
+## At this point we have a configuration in "${CMAKE_BINARY_DIR}/src/Defines.tex"
+## Now prepend it to the original Main.tex and  prepare new source files 
+  set(MyFileName "${MyLanguage}_${MyFormat}_${PROJECT_VERSION}_${MainFile}")
+  file(READ    ${PrefixFile}   newfile)
+  file(WRITE   ${MyFileName} "${newfile}" )
+  file(APPEND  ${MyFileName} "\\input{Main.tex}\n"  )
 
-  set(MyFileName "${MyLanguage}_${MyFormat}_${MainFile}")
-  file(READ  "${CMAKE_BINARY_DIR}/src/Defines.tex" newfile)
-  file(WRITE  "${MyFileName}" "${newfile}" )
-  file(APPEND  "${MyFileName}" "\\input{Main.tex}\n"  )
-
-
-  ADD_LATEX_DOCUMENT( "${MyFileName}"   #TARGET_NAME
-	INPUTS     ${InputFiles} 
-    IMAGE_DIRS fig lst dat
+  ADD_LATEX_DOCUMENT( ${MyFileName}   #TARGET_NAME
+  INPUTS     "${InputFiles}" 
+    IMAGE_DIRS fig 
     CONFIGURE src/Defines.tex
     BIBFILES src/Bibliography.bib
     USE_GLOSSARY
