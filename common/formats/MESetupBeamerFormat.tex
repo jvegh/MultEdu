@@ -36,7 +36,7 @@
 \setitemize{label=\usebeamerfont*{itemize item}%
   \usebeamercolor[fg]{itemize item}
   \usebeamertemplate{itemize item}}
-%\setbeamertemplate{itemize items}[ball]
+\setbeamertemplate{itemize items}[diamond]
 \setlist[itemize,1]{label={\fontfamily{cmr}\fontencoding{T1}\selectfont\textbullet}}	% Set font for item bullets
 \setbeamerfont{page number in head/foot}{size=\small}
 \setbeamertemplate{footline}[frame number]
@@ -46,7 +46,7 @@
 	\setbeamertemplate{section in toc}[ball] %circle
 	\setbeamertemplate{subsection in toc}[triangle] %circle
 	\setbeamercolor{itemize item}{fg=red}
-	\setbeamertemplate{itemize item}[ball] %circle
+	\setbeamertemplate{itemize item}[diamond] %circle
 	 \setbeamertemplate{itemize subitem}[square]
 	 \setbeamertemplate{itemize subsubitem}[triangle]
 \setbeamertemplate{caption}{\insertcaption}% will not show up in article, only in presentation
@@ -58,6 +58,7 @@
 \setbeamercolor{framesubtitle}{fg=white}
 		\def\framelabel{\LectureTitle}
 
+\ifx\DisableTOC\undefined
 \AtBeginSection[]
 {
 \ifx \suppresssectionTOC \undefined
@@ -87,6 +88,7 @@
 
 \fi
 }
+\fi %\DisableTOC
 
 \input{../../common/MEColors}		% Set up used colors
 \input{../../common/MELanguages}	% Set up selected language
@@ -152,7 +154,7 @@
 	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}\textcolor{black}{\insertsubtitle}}};
 	\node[anchor=west]
 	at ([yshift=-120pt,xshift=00pt]current page.west) (subtitle)
-	{\parbox[t]{.8\paperwidth}{\raggedright\usebeamerfont{subtitle}\textcolor{black}{\scriptsize \copyright \LectureAuthor\ \\\LectureRevision\ (using\ \MERevision)}}};
+	{\parbox[t]{.8\paperwidth}{\raggedright\usebeamerfont{subtitle}\textcolor{black}{\scriptsize \copyright \LectureAuthor\ \\\LectureRevision\ (using\ \MERevision)\ \LectureEmail}}};
 	
 	\end{tikzpicture}
 	}%title page
@@ -293,7 +295,7 @@
 			at ( [yshift=1cm]
 			current page.south west) (logo)
 			{\includegraphics[width=2cm]{../../common/images/LatexTalk.png}\raisebox{.5ex}
-						{\tiny{\ \LectureRevision\ (using\ \MERevision}) \ \copyright \LectureAuthor}};
+						{\tiny{\ \LectureRevision\ (using\ \MERevision}) \ \copyright \LectureAuthor\ (\LectureEmail)}};
 		}
 		
 	\fi
@@ -331,35 +333,35 @@
 %% Usage MEbackmatter
 \newcommand\MEbackmatter{
 	%	%% Check if the user wants to have his own back matter
-	\ifx\DisableIndex\undefined		
-       \begin{frame}[allowframebreaks]{Tárgymutató}
-		\printindex
-	   \end{frame}
-	\else 
-			\MEDebugMessage{Index printing disabled}
-	\fi
-	%% Now print glossary and acronyms
-		\IfFileExists{src/Glossary.tex}
-		{
-			\glossarystyle{altlisthypergroup}
-			\ifx\DisableAcronyms\undefined
-		       \begin{frame}[allowframebreaks]{Acronyms}
-					\printglossary[type=acronym]
-			   \end{frame}
-			\else 
-				\MEDebugMessage{Printing acronyms disabled}
-			\fi
-			\ifx\DisableGlossary\undefined
-		       \begin{frame}[allowframebreaks]{Glossary}
-					\printglossary
-			   \end{frame}
-			  
-			\else 
-			  \MEDebugMessage{Printing glossary disabled}
-			\fi
-		}
-		{\MEDebugMessage{No Glossary.tex file found}
-		}	% % If no glossary file exists, make nothing
+%	\ifx\DisableIndex\undefined		
+%       \begin{frame}[allowframebreaks]{Tárgymutató}
+%		\printindex
+%	   \end{frame}
+%	\else 
+%			\MEDebugMessage{Index printing disabled}
+%	\fi
+%	%% Now print glossary and acronyms
+%		\IfFileExists{src/Glossary.tex}
+%		{
+%			\glossarystyle{altlisthypergroup}
+%			\ifx\DisableAcronyms\undefined
+%		       \begin{frame}[allowframebreaks]{Acronyms}
+%					\printglossary[type=acronym]
+%			   \end{frame}
+%			\else 
+%				\MEDebugMessage{Printing acronyms disabled}
+%			\fi
+%			\ifx\DisableGlossary\undefined
+%		       \begin{frame}[allowframebreaks]{Glossary}
+%					\printglossary
+%			   \end{frame}
+%			  
+%			\else 
+%			  \MEDebugMessage{Printing glossary disabled}
+%			\fi
+%		}
+%		{\MEDebugMessage{No Glossary.tex file found}
+%		}	% % If no glossary file exists, make nothing
 
 	\ifx\DisableBibliography\undefined
  %% Printing bibliography is allowed
@@ -369,7 +371,7 @@
 	   %% The file is defined, open the frame
       \ifthenelse{\equal{\LectureLanguage}{magyar}}
       {
-      \begin{frame}[allowframebreaks]{Felhasznált források}
+      \begin{frame}[allowframebreaks]{Hivatkozások}
 		\printbibliography
 	  \end{frame}
       }
@@ -377,7 +379,7 @@
 	  }	
       \ifthenelse{\equal{\LectureLanguage}{english}}
       {
-      \begin{frame}[allowframebreaks]{Used sources}
+      \begin{frame}[allowframebreaks]{Cited references}
 		\printbibliography
 	  \end{frame}
       }
