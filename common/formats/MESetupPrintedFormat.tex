@@ -14,19 +14,19 @@
 %% Set up options for the session, global, user or none
 % % The user can have his own options in his own /src directory,
 % % otherwise default ones are used
-\IfFileExists{src/Options.tex}
-	{\input{src/Options.tex}
-	\MEDebugMessage{Using user's own options}
-	}	% % User options
-	{\IfFileExists{../../common/MEOptions.tex}
-		{\input{../../common/MEOptions.tex}
-	     \MEDebugMessage{Using system wide options}
-		}	% % Default options
-		{
-	      \MEDebugMessage{Using NO options}
-		} % % No options at all
-	} % Options
-
+%\IfFileExists{src/Options.tex}
+%	{\input{src/Options.tex}
+%	\MEDebugMessage{Using user's own options}
+%	}	% % User options
+%	{\IfFileExists{../../common/MEOptions.tex}
+%		{\input{../../common/MEOptions.tex}
+%	     \MEDebugMessage{Using system wide options}
+%		}	% % Default options
+%		{
+%	      \MEDebugMessage{Using NO options}
+%		} % % No options at all
+%	} % Options
+%
 %% Set up document-wide settings like title, subtitle, publisher, etc.
 % % The user should have his own definitions in his own /src directory,
 % % otherwise de default ones are used
@@ -299,11 +299,12 @@
 \makeevenhead{headings}{\color{burntorange}\thepage}{}{\color{burntorange}\scriptsize\slshape\leftmark}
 \makeoddhead{headings}{\color{burntorange}\scriptsize\slshape\rightmark}{}{\color{burntorange}\thepage}
 
+	\MEDebugMessage{MESetupPrintedFormat: frontmatter started to load}
 %%			
 %%%	% % % A macro for representing the front matter needed in the selected form
 %
 \newcommand\MEfrontmatterRoot{
-	\MEDebugMessage{MESetupPrintedFormat: frontmatter started to load}
+	\MEDebugMessage{MESetupPrintedFormat: frontmatter started to execute}
 	%% Check if the user wants to have his own front matter
 	\IfFileExists{src/FrontMatter.tex}
 	{%% Have his own frontmatter things; use it
@@ -346,7 +347,7 @@
 
 \begin{center}
 \begin{tabular}{ll}
-First edition:                        & July 2016 \\
+First edition:                        & August 2016 \\
 \end{tabular}
 \end{center}
 \vfill
@@ -359,8 +360,8 @@ First edition:                        & July 2016 \\
 
 
 \begin{center}
-\LectureRevision\\
-10 09 08 07 06 05 04 03 02 01\hspace{2em}19 18 17 16 15 14 13
+{\small \LectureRevision\\
+10 09 08 07 06 05 04 03 02 01\hspace{2em}19 18 17 16 15 14 13}
 \end{center}
 
 \clearpage
@@ -374,16 +375,18 @@ First edition:                        & July 2016 \\
 \MEDebugMessage{MESetupPrintedFormat: Title page not generated}
 }
 }
-	\MEDebugMessage{MESetupPrintedFormat: frontmatter finished to load}
+	\MEDebugMessage{MESetupPrintedFormat: frontmatter finished to execute}
 }%FrontMatterRoot
 
+	\MEDebugMessage{MESetupPrintedFormat: frontmatter finished to load}
 
+	\MEDebugMessage{MESetupPrintedFormat: backmatter started to load}
 %	% % % A macro for representing the back matter needed in the selected form
 %	% % %
 %	%% Usage MEbackmatter
 \newcommand\MEbackmatter{
 	%	%% Check if the user wants to have his own back matter
-	\MEDebugMessage{MESetupPrintedFormat: backmatter started to load}
+	\MEDebugMessage{MESetupPrintedFormat: backmatter started to execute}
 		% http://tex.stackexchange.com/questions/472/how-can-i-have-two-or-more-distinct-indexes
 		% http://www.latex-community.org/forum/viewtopic.php?f=51&t=8096
 		\ifx\DisableIndex\undefined		
@@ -477,8 +480,10 @@ First edition:                        & July 2016 \\
 \end{center}
 
 \fi		
-	\MEDebugMessage{MESetupPrintedFormat: backmatter finished to load}
+	\MEDebugMessage{MESetupPrintedFormat: backmatter finished to execute}
 }
+
+	\MEDebugMessage{MESetupPrintedFormat: backmatter finished to load}
 
 %\ifx\DisableLogo\undefined
 %    \pgfdeclaremask{UC}{../../common/images/under_construction-mask}
