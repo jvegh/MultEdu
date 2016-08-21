@@ -1,25 +1,31 @@
-\ifx\LectureLanguage\undefined
-\includegraphics{../../common/images/CC88x31} 
-This Work is licensed under a Creative Commons Attribution 4.0 International License.
+\includegraphics{../../common/images/CC88x31}
+\ifthenelse{\equal{\LectureLanguage}{english}}
+  {%% implement English copyright
+\par\noindent This Work is licensed under a\\
+Creative Commons Attribution 4.0 International License.\\
+\url{"http://creativecommons.org/licenses/by/4.0/}
 
-  \textcopyright{} Copyright \copyright\ 2011-\the\year\ \LectureAuthor\ (\LectureEmail) \\
-  All rights reserved
-
-
-  Printed in the World, using recycled electrons
-
-\else
-%\LectureLanguage\\
-%\detokenize{\LectureLanguage}\\
-%{\detokenize{magyar}}\\
-%  \ifthenelse{\equal{\LectureLanguage}{\detokenize{magyar}}}
+  \copyright Copyright\ 2011-\the\year\ \LectureAuthor\\
+   (\LectureEmail) \\
+   All rights reserved
+   
+Printed in the World, using recycled electrons
+  }
+  {
+  }
+\ifthenelse{\equal{\LectureLanguage}{magyar}}
   { % % implement Hungarian copyright
-\includegraphics{../../common/images/CC88x31}  Ez a Mű a \url{"http://creativecommons.org/licenses/by/4.0/} Creative Commons Nevezd meg! 4.0 Nemzetközi Licenc feltételeinek megfelelően felhasználható.
+ \par\noindent Ez a Mű a\\
+ \url{"http://creativecommons.org/licenses/by/4.0/}\\
+ Creative Commons Nevezd meg! 4.0 Nemzetközi Licenc\\
+ feltételeinek megfelelően felhasználható.
   
-  \textcopyright{} Szerzői jogok \copyright\ 2011-\the\year\ \LectureAuthor\ (\LectureEmail) \\
+  \copyright Szerzői jogok \ 2011-\the\year\ \LectureAuthor\\
+  (\LectureEmail) \\
   Minden jog fenntartva
-
- Kizárólag újra hasznosított elektronokkal nyomtatható
+  
+Kizárólag újra hasznosított elektronokkal nyomtatva
 
   }
-\fi
+  {
+  }
