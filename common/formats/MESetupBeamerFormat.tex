@@ -123,7 +123,7 @@
 %\fi
 %http://tex.stackexchange.com/questions/18410/how-can-i-add-more-than-one-logo-to-my-beamer-presentation
 \setbeamertemplate{footline}{\raisebox{-2ex}{\pgfuseimage{textlogo}}
-  \usebeamerfont{date in head/foot}\quad\LecturePublisher\hfill
+  \usebeamerfont{date in head/foot}\quad\ifx\LecturePublisher\undefined\else\small\bfseries\textcolor{\TitlePageColor}\LecturePublisher\fi\hfill
   \insertframenumber{}/\inserttotalframenumber\quad\raisebox{-2ex}{\insertlogo}}
 			\MEDebugMessage{Preparing Beamer slides started}
 \newcommand{\frontmatter}{}
@@ -147,10 +147,10 @@
 \fi
 %		\title{\LectureTitle}
 %		\subtitle{\LectureSubtitle}
-\ifx\LogoImageLeft\undefined
-\else
-	\titlegraphic{\includegraphics[width=4cm]{\LogoImageLeft}}
-\fi
+%\ifx\LogoImageLeft\undefined
+%\else
+%	\titlegraphic{\includegraphics[width=4cm]{\LogoImageLeft}}
+%\fi
 % % End of \titlepage
 
 % http://tex.stackexchange.com/questions/68080/beamer-bibliography-icon
@@ -196,8 +196,8 @@
 {\def\TitleTextLogo{\includegraphics[height=1cm]{fig/TextLogo}}
     \pgfdeclareimage[height=.5cm]{textlogo}{fig/TextLogo}
    }
-{\def\TitleTextLogo{\includegraphics[height=1cm]{../../common/images/fig/LatexText}}
-    \pgfdeclareimage[height=.5cm]{textlogo}{../../common/images/fig/LatexText}
+{\def\TitleTextLogo{\includegraphics[height=1cm]{../../common/images/LatexText}}
+    \pgfdeclareimage[height=.5cm]{textlogo}{../../common/images/LatexText}
     }
 
 
@@ -241,14 +241,14 @@
         	\node[anchor=west]
 	        at ([yshift=.75cm,xshift=-.18cm]current page.south west) (logo)
 			{\TitlePictureLogo\TitleTextLogo \raisebox{.5ex}
-			{\tiny{\ \LectureRevision\ (using\ \MERevision}) \ \copyright \LectureAuthor}};
+			{\tiny{\ \LectureRevision}) \ \copyright \LectureAuthor}};
 		}
 		{ % No user logo, use the default one
 			\node[anchor=west]
 			at ( [yshift=1cm]
 			current page.south west) (logo)
 			{\TitlePictureLogo\raisebox{.5ex}
-						{\tiny{\ \LectureRevision\ (using\ \MERevision}) \ \copyright \LectureAuthor\ (\LectureEmail)}};
+						{\tiny{\ \LectureRevision}) \ \copyright \LectureAuthor\ (\LectureEmail)}};
 		}
 		
 	\fi
@@ -296,8 +296,7 @@
 	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}\textcolor{black}{\insertsubtitle}}};
 	\node[anchor=west]
 	at ([yshift=-120pt,xshift=00pt]current page.west) (subtitle)
-	{\parbox[t]{.8\paperwidth}{\raggedright\usebeamerfont{subtitle}\textcolor{black}{\scriptsize \copyright \LectureAuthor\ \\\LectureRevision\ (using\ \MERevision)\ \LectureEmail}}};
-	
+	{\parbox[t]{.8\paperwidth}{\raggedright\usebeamerfont{subtitle}\textcolor{black}{\scriptsize \copyright \LectureAuthor\ \\\LectureRevision\ \LectureEmail}}};
 	\end{tikzpicture}
   \end{frame}
 }
@@ -380,71 +379,3 @@
 	\fi		
 }
 
-%% Set up options for the session, global, user or none
-% % The user can have his own options in his own /src directory,
-% % otherwise default ones are used
-%\IfFileExists{src/Options.tex}
-%	{\input{src/Options.tex}
-%	\MEDebugMessage{Using user's own options}
-%	}	% % User options
-%	{\IfFileExists{../../common/MEOptions.tex}
-%		{\input{../../common/MEOptions.tex}
-%	     \MEDebugMessage{Using system wide options}
-%		}	% % Default options
-%		{
-%	      \MEDebugMessage{Using NO options}
-%		} % % No options at all
-%	} % Options
-
-
-%\IfFileExists{fig/CoverIllustration.jpeg}
-%{ %Make a graphic on the title page
-%	\setbeamertemplate{title page}{%
-% % % We are making the title page "by hand"
-%	}
-%}
-%{ % Make a text-only title page
-%    \setbeamertemplate{title page}{%
-% 
-%	\begin{tikzpicture}[remember picture,overlay]
-%	\fill[\TitlePageColor]
-%	([yshift=15pt]current page.west) rectangle (current page.south east);
-%	\node[anchor=east] 
-%	at ([yshift=-30pt]current page.north east) (author)
-%	{\parbox[t]{.7\paperwidth}{\raggedleft%
-%			\usebeamerfont{author}\textcolor{\TitlePageColor}{%
-%				\textpdfrender{
-%					TextRenderingMode=FillStroke,
-%					FillColor=HeadingColor,
-%					LineWidth=.1ex,
-%				}{\LectureAuthor}}}};
-%	\ifx\LecturePublisher\undefined
-%	\else			
-%		\node[anchor=north east] 
-%		at ([yshift=-90pt]current page.north east) (institute)
-%		{\parbox[t]{.78\paperwidth}{\raggedleft%
-%				\usebeamerfont{institute}\textcolor{gray}{\LecturePublisher}}};
-%	\fi		
-%	\node[anchor=south west] 
-%	at ([yshift=20pt]current page.west) (logo)
-%	{\parbox[t]{.19\paperwidth}{\raggedleft%
-%			\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}};
-%	\node[anchor=east]
-%	at ([yshift=-10pt,xshift=-20pt]current page.east) (title)
-%	{\parbox[t]{\textwidth}{\raggedleft%
-%			\usebeamerfont{author}\textcolor{white}{%
-%				\textpdfrender{
-%					TextRenderingMode=FillStroke,
-%					FillColor=white,
-%					LineWidth=.1ex,
-%				}{\Large\LectureTitle}}}};
-%	\node[anchor=east]
-%	at ([yshift=-65pt,xshift=-20pt]current page.east) (subtitle)
-%	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}\textcolor{black}{\insertsubtitle}}};
-%	\node[anchor=west]
-%	at ([yshift=-120pt,xshift=00pt]current page.west) (subtitle)
-%	{\parbox[t]{.8\paperwidth}{\raggedright\usebeamerfont{subtitle}\textcolor{black}{\scriptsize \copyright \LectureAuthor\ \\\LectureRevision\ (using\ \MERevision)\ \LectureEmail}}};
-%	
-%	\end{tikzpicture}
-%	}
-%}

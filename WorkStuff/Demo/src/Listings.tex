@@ -1,7 +1,7 @@
 %%%
 %%% This is the chapter about sectioning documents for the MultEdu system
 
-\MEDchapter{Preparing program listings}{}{Program listák készítése}
+\MEDchapter[Listings]{Preparing program listings}{Program listák}{Program listák készítése}
 
 
 \MESetListingFormat[basicstyle=\ttfamily\color{black}\normalsize]{TeX}
@@ -29,7 +29,7 @@ az készített oldal sokkal esztétikusabb.
 }
 \index{package!listings}
 
-\MEDsection{Setting appearance}{}{A megjelenítés beállítása}
+\MEDsection[Appearance]{Setting appearance}{Megjelenítés}{A megjelenítés beállítása}
 
 \MEDframe{Setting appearance}
 {
@@ -60,7 +60,7 @@ de nem állít be programnyelvet.
 \index{MESetListingFormat@\bs MESetListingFormat}
 
 
-\MEDsection{Displaying inline fragments}{}{Sorközi töredék megjelenítése}
+\MEDsection[Code fragments]{Displaying inline fragments}{Töredék kód}{Sorközi töredék megjelenítése}
 
 \MEDframe{Displaying inline fragments}
 {
@@ -99,7 +99,7 @@ a fejezet elején használok egy
 \noindent parancsot. (különben túl kicsi lesz a megjelenített program kód karaktereinek mérete)
 }
 
-\MEDsection{Displaying program listings}{}{Teljes programlista megjelenítése}
+\MEDsection[Full code]{Displaying program listings}{Teljes program}{Teljes programlista megjelenítése}
 
 \MEDframe{Displaying program listings}
 {
@@ -183,7 +183,7 @@ A \ao{\ref{lst:Whello.cpp}} programlista megjelenítéséhez használt programso
 \par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},wide] \{lst/HelloWorld.cpp\} \{A "Hello World"- C++ program, wide\} \{lst:Whello.cpp\}\{\}|
 }
 
-\MEDsection{Decorations on listings}{}{Programlista díszítései}
+\MEDsection[Decorations]{Decorations on listings}{Díszítések}{Programlista díszítései}
 
 \MEDframe{Decorations on listings}
 {
@@ -224,12 +224,12 @@ A 'listings' csomagban használt bármely opció használható.
 \index{MESourceFile!díszítés@\bs MESourceFile díszítés}
 }
 
-\MEDsubsection{Highlighting lines}{}{Programsorok kijelölése}
+\MEDsubsection[Highlighting]{Highlighting lines}{Kijelölés}{Programsorok kijelölése}
 
 \MEDframe{Highlighting lines}
 {
 In a program listing, a range of source lines can be highlighted using macro 
-\par\noindent\lstinline|\\MESourcelinesHighlight\{BallonName\} \{SourceName\} \{FirstLine\} \{LastLine\}|.
+\par\noindent\lstinline|\\\MESourcelinesHighlight\{BallonName\} \{SourceName\} \{FirstLine\} \{LastLine\}|.
 \par\noindent Here  \lstinline|BallonName| is a new label, which denotes the 
 newly created source line region highlighting box, \lstinline|SourceName| 
 is the label of the source file. 
@@ -279,14 +279,14 @@ decorations=\{
 
 \MESourceFile[language={[ISO]C++},
 decorations={
-\MEHighlightLines{HelloBalloon}{lst:HLhello.cpp}{6}{8}
+\MESourcelinesHighlight{HelloBalloon}{lst:HLhello.cpp}{6}{8}
 }
 ]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, kijelölt}{lst:HLhello.cpp}{}
 \index{MESourceFile!sorkijelölés@\bs MESourceFile sorkijelölés}
 }
 \index{MESourcelinesHighlight@\bs MESourcelinesHighlight}
 
-\MEDsubsection{Commenting highlighted lines}{}{Megjegyzés kijelölt programsorokhoz}
+\MEDsubsection[Commenting]{Commenting highlighted lines}{Megjegyzések}{Megjegyzés kijelölt programsorokhoz}
 
 \MEDframe{Commenting highlighted lines}
 {
@@ -311,6 +311,7 @@ a megjegyzés.
 A lehetséges opciók: \lstinline|width[=3cm]| és \lstinline|color[=deeppeach]|.
 
 }
+
 \MEDframe{Commenting highlighted lines}
 {
 Listing \ao{\ref{lst:HLChello.cpp}} is produced using macro
@@ -326,33 +327,34 @@ decorations={
 \MESourcelinesHighlight{HelloCBalloon}{lst:HLChello.cpp}{6}{8}
 \MESourceBalloonComment{HelloCBalloon}{0cm,0cm}{This is the body}{CommentShape}
 }
-]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, commenting highlighted}{lst:HLChello.cpp}{.3}
+]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, megjegyzés a kijelöléshez}{lst:HLChello.cpp}
 \index{MESourceFile!highlighting@\bs MESourceFile highlighting}
 }
 {Megjegyzés a kijelöléshez}
 {
 A \ao{\ref{lst:HLChello.cpp}} programlista készítéséhez a
 
-\par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},
+\par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},wide,
 decorations=\{
-\\MESourcefileHighlight\{HelloBalloonC\} \{lst:HLChello.cpp\} \{6\}\{8\}
-\\MEBalloonComment\{HelloBalloonC\} \{0cm,0cm\} \{This is the body\} \{CommentShape\}
-\}
-] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, megjegyzés a kijelöléshez\} \{lst:HLChello.cpp\}\{\}|
+\\MESourcelinesHighlight\{HelloBalloon\} \{lst:HLChello.cpp\} \{6\}\{8\}
+\\MESourceBalloonComment\{HelloCBalloon\} \{0cm,0cm\} \{This is the body\} \{CommentShape\}
+\} 
+] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, commenting highlighted\} \{lst:HLhello.cpp\}\{\}|
+
 
 parancsot kell kiadni.
 
 \MESourceFile[language={[ISO]C++},
-decorations={
-\MESourcelineHighlight{HelloBalloonC}{lst:HLChello.cpp}{6}{8}
-\MEBalloonComment{HelloBalloonC}{0cm,0cm}{This is the body}{CommentShape}
-}
-]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, megjegyzés a kijelöléshez}{lst:HLChello.cpp}{.3}
+%decorations={
+%\MESourcelinesHighlight{HelloBalloonC}{lst:HLChello.cpp}{6}{8}
+%\MESourceBalloonComment{HelloBalloonC}{0cm,0cm}{This is the body}{CommentShape}
+%}
+]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, megjegyzés a kijelöléshez}{lst:HLChello.cpp}
 \index{MESourceFile!tartomány kijelölés@\bs MESourceFile tartomány kijelölés}
 }
 \index{MESourcelinesHighlight@\bs MESourcelinesHighlight}
 
-\MEDsubsection{Commenting source lines}{}{Megjegyzés forráskód programsorhoz}
+\MEDsubsection[Commenting]{Commenting source lines}{Megjegyzés}{Megjegyzés forráskód programsorhoz}
 
 \MEDframe{Commenting source lines}
 {
@@ -377,13 +379,6 @@ decorations={
 {
 Az egyes forráskód sorokhoz is fűzhetünk megjegyzéseket, lásd\ao{  \ref{lst:Chello.cpp}} programlista.
 Ehhez a
-\par\noindent\lstinline|
-\\MESourceFile[language=\{[ISO]C++\},wide,
-decorations=\{
-\\MESourcelineComment\{lst:Chello.cpp\}\{6\}\{0cm,0cm\}\{This is a comment\}\{CommentShape\}
-\}
-]\{lst/HelloWorld.cpp\}\{"Hello World" -- a C++ way, megjegyzés a forráskód soráho\}\{lst:Chello.cpp\}\{\}
-|\par\noindent parancsot kellett kiadnunk.
 
 \MESourceFile[language={[ISO]C++},wide,
 decorations={
@@ -394,7 +389,7 @@ decorations={
 }
 \index{MESourcelineComment@\bs MESourcelineComment}
 
-\MEDsubsection{Numbered balls to listing}{}{Hivatkozási pontok elhelyezése a programlistán}
+\MEDsubsection[Balls]{Numbered balls to listing}{Golyók}{Hivatkozási pontok elhelyezése a programlistán}
 
 \MEDframe{Numbered balls to listing}
 {
@@ -467,21 +462,21 @@ decorations={
 A \ao{\ref{lst:LBhello.cpp}} lista készítéséhez a
 \par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},
 decorations=\{
-\\MESourcelineListBalls{lst:LBhello.cpp}{3,8,5}
+\\MESourcelineListBalls\{lst:LBhello.cpp\}\{3,8,5\}
 \}
-] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, golyókkal\} \{lst:LBhello.cpp\}\{\}|
-parancsot kell kiadni.
+] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, golyokkal\} \{lst:LBhello.cpp\}\{\}|
+\par\noindent parancsot kell kiadni.
 
 \MESourceFile[language={[ISO]C++},
 decorations={
 \MESourcelineListBalls{lst:LBhello.cpp}{3,8,5}
 }
-]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, golyókkal}{lst:LBhello.cpp}{.3}
+]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, golyókkal}{lst:LBhello.cpp}
 }
 
 \index{MESourceListBalls@\bs MESourceListBalls}
 
-\MEDsubsection{Figure to listing}{}{Ábra elhelyezése a programlistán}
+\MEDsubsection[Figures]{Figure to listing}{Ábrák}{Ábra elhelyezése a programlistán}
 
 \MEDframe{Figure to listing}
 {
@@ -537,7 +532,7 @@ ciklus megvalósítása HW ismétléssel}{lst:forloops.v}{}
 \index{MESourcelineFigure@\bs MESourcelineFigure}
 
 
-\MEDsection{Other related macros}{}{Kapcsolódó egyéb makrók}
+\MEDsection[Other]{Other related macros}{Egyéb}{Kapcsolódó egyéb makrók}
 
 \MEDsubsection{Comparing source files}{}{Forrás fájlok összehasonlítása}
 
@@ -573,6 +568,7 @@ utasítás
 }
 \index{\MESourceFileCompare@\bs MESourceFileCompare}
 
+\MEDsubsection[Output]{Source with output}{Eredménnyel}{Forrás eredménnyel}
 
 \MEDframe{Source with output}
 {
@@ -603,8 +599,8 @@ Néha hasznos egy forrásfájlt a futtatás eredményével együtt megmutatni.
 A
 \par\noindent\lstinline|\\MESourceFileWithResult[keys]\{source file\} \{result file\} \{caption\} \{label\}|
 \par\noindent makró ezt teszi lehetővé.
-
 }
+
 \MEDframe{Source with output}
 {
 
@@ -612,7 +608,6 @@ A
 	\MESourcelineListBalls{lst:calculatorwithresult}{13,14,16,18,19}
 }]{lst/expensive_calculator.cpp}
 {lst/calculatorresult.txt}{The calculator program with its result}{lst:calculatorwithresult}
-
 
 }
 {Forrás fájl eredménnyel}
@@ -625,7 +620,7 @@ A
 }
 \index{\MESourceFileWithResult@\bs MESourceFileWithResult}
 
-\MEDsection{Extra program languages}{}{További program nyelvek}
+\MEDsection[Program languages]{Extra program languages}{Program nyelvek}{További program nyelvek}
 
 \MEDframe{Extra program languages}
 { For my own goals, in addition to the programming languages

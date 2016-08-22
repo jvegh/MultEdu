@@ -1,0 +1,298 @@
+%%%
+%%% This is the chapter about sectioning documents for the MultEdu system
+
+\MEDchapter[General]{General information}{Általános}{Általános információ}
+
+
+\MESetListingFormat{TeX}
+\lstset{ basicstyle=\ttfamily\color{black}\normalsize}
+\MEDsection[Installing]{Installing MultEdu}{Beüzemelés}{A MultEdu beüzemelése}
+
+%\MEDframe{Document units}
+%{
+%}
+%{Document units}
+%{
+%}
+
+\MEDsection[Structure]{Structure of MultEdu}{Szerkezet}{A MultEdu könyvtár szerkezete}
+
+\MEDframe{Directory structure}
+{
+The MultEdu system is assumed to be used with the directury structure below.
+It comes with two main subdirectories: \lstinline|./common| comprises all files of
+the MultEdu system, and  \lstinline|./Workstuff| models the users subdirectory structure.
+\par\vskip-\parskip\noindent\lstinline*.*
+\par\vskip-\parskip\noindent\lstinline*|-- common*
+\par\vskip-\parskip\noindent\lstinline*|-- WorkStuff*
+
+
+You may add your stuff like
+\par\vskip-\parskip\noindent\lstinline*.*
+\par\vskip-\parskip\noindent\lstinline*|-- Exams*
+\par\vskip-\parskip\noindent\lstinline*|-- Labs*
+\par\vskip-\parskip\noindent\lstinline*|-- Lectures*
+\par\vskip-\parskip\noindent\lstinline*|-- Papers*
+}
+{Könyvtár szerkezet}
+{
+A MultEdu rendszert az alábbi könyvtár szerkezetben célszerű használni.
+Két fő könyvtára: a \lstinline|./common|, amely tartalmazza a MultEdu összes fájlját,
+ és a \lstinline|./Workstuff|, amely a felhasználói könyvtár szerkezetet modellezi.
+\par\vskip-\parskip\noindent\lstinline*.*
+\par\vskip-\parskip\noindent\lstinline*|-- common*
+\par\vskip-\parskip\noindent\lstinline*|-- WorkStuff*
+*
+
+A felhasználó projekt csoportokat például ilyen szerkezetben érdemes hozzáadni:
+\par\vskip-\parskip\noindent\lstinline*.*
+\par\vskip-\parskip\noindent\lstinline*|-- Exams*
+\par\vskip-\parskip\noindent\lstinline*|-- Labs*
+\par\vskip-\parskip\noindent\lstinline*|-- Lectures*
+\par\vskip-\parskip\noindent\lstinline*|-- Papers*
+}
+
+\MEDsubsection[\lstinline*common*]{Subdirectory \lstinline*common*}{\lstinline*common*}{A \lstinline*common* alkönyvtár}
+
+\MEDframe{Directory structure of subdirectory \lstinline*common*}
+{
+Subdirectory \lstinline|./common| comprises some special subsubdirectories
+and general purpose macro files. \ao{MultEdu attempts to be as user-friendly as possible: it uses default settings, files, images, etc., to allow a quick start for a new development.}
+\par\vskip-\parskip\noindent\lstinline*.*
+\par\vskip-\parskip\noindent\lstinline*|-- common*
+\par\vskip-\parskip\noindent\lstinline*|    |-- defaults*
+\par\vskip-\parskip\noindent\lstinline*|    |-- formats*
+\par\vskip-\parskip\noindent\lstinline*|    |-- images*
+
+Subsubdirectory \lstinline|./common| contains some default text, like copyright.
+\ao{In general, if the user does not provide its own elements, MultEdu uses the defaults instead
+(provided that using and presenting it is not disabled, see later.)}
+
+Subsubdirectory \lstinline|./formats| contains the possible format specification macros,
+here you can add your owns.
+
+Subsubdirectory \lstinline|./images| contains some images, partly the ones which are used 
+as defaults.
+}
+{A \lstinline*common* alkönyvtár szerkezete}
+{
+A \lstinline|./common| különleges célú al-alkönyvtárakat, valamint általános célú makró fájlokat tartalmaz.  \ao{A Multedu megpróbál a lehető legbarátságosabb lenni:
+alapértelmezett beállításokat, fájlokat, képeket, stb használ, hogy gyorsan el 
+lehessen kezdeni egy új fejlesztést.}
+\par\vskip-\parskip\noindent\lstinline*.*
+\par\vskip-\parskip\noindent\lstinline*|-- common*
+\par\vskip-\parskip\noindent\lstinline*|    |-- defaults*
+\par\vskip-\parskip\noindent\lstinline*|    |-- formats*
+\par\vskip-\parskip\noindent\lstinline*|    |-- images*
+
+A \lstinline|./common| al-alkönyvtár olyan alapértelmezett szöveget tárol, mint 
+a szerzői jogok.
+\ao{Alapértelmezetten, ha a felhasználó nem adja meg saját dokumentum elemeit,
+a MultEdu automatikusan az alpértelmezetteket használja helyettük
+(feltéve, hogy azok használata nincs megtiltva, lásd később).
+}
+
+A \lstinline|./formats| al-alkönyvtár tartalmazza a formátumokat meghatározó makrókat;
+itt adhatja hozzá a felhasználó esetleges saját makróit.
+
+Az \lstinline|./images|  al-alkönyvtár képeket tartalmaz, amelyek egy része
+alapértelmezett képként használatos.
+}
+
+\MEDsubsection[\lstinline*Workstuff*]{Subdirectory \lstinline*Workstuff*}{\lstinline*Workstuff*}{A \lstinline*Workstuff* alkönyvtár}
+\MEDframe{Files in subdirectory \lstinline|Workstuff|}
+{
+Subdirectory \lstinline|./Workstuff| contains the files of the present demo,
+and serves as an example of using the system. It contains a sample project \lstinline|./Workstuff/Demo|, which has three main files.
+\par\vskip-\parskip\noindent\lstinline*|-- WorkStuff*
+\par\vskip-\parskip\noindent\lstinline*|    |-- Demo*
+\par\vskip-\parskip\noindent\lstinline*|        |-- CMakeLists.txt*
+\par\vskip-\parskip\noindent\lstinline*|        |-- Demo.tex*
+\par\vskip-\parskip\noindent\lstinline*|        |-- Main.tex*
+
+The real main source file is \lstinline|Main.tex|, and \lstinline|Demo.tex| is a lightweight envelope to it. It is also possible to use CMake package UseLATEX for compiling
+your text to different formats and languages in batch mode.
+}
+{A \lstinline|Workstuff| alkönyvtár fájljai}
+{
+A \lstinline|./Workstuff|  al-alkönyvtár tartalmazza  (a példa programként is szolgáló)
+felhasználói leírás fájljait. Egy olyan \lstinline|./Workstuff/Demo| projektet tartalmaz, amelyik (a saját főkönyvtárában)
+három fájlból áll. 
+\par\vskip-\parskip\noindent\lstinline*|-- WorkStuff*
+\par\vskip-\parskip\noindent\lstinline*|    |-- Demo*
+\par\vskip-\parskip\noindent\lstinline*|    .    |-- CMakeLists.txt*
+\par\vskip-\parskip\noindent\lstinline*|    .   |-- Demo.tex*
+\par\vskip-\parskip\noindent\lstinline*|    .    |-- Main.tex*
+
+A valódi főprogram  \lstinline|Main.tex|, és ehhez készült egy \lstinline|Demo.tex| nagyon egyszerű boríték. A CMake rendszeren keresztül a UseLATEX csomag is használható arra,
+hogy egy szerkesztés után, a kötegelt feldolgozási módot használva, egyetlen lépésben elő lehessen állítani a forrásnyelvi fájlból a különböző nyelvű és formátumú dokumentumokat; erre való a  \lstinline|CMakeLists.txt| fájl.
+}
+
+\MEDframe{Subsubdirectories in \lstinline|./Workstuff|}
+{
+\ao{Subdirectory \lstinline|./Workstuff| has some subsubdirectories, for different goals.}
+\par\vskip-\parskip\noindent\lstinline*|-- WorkStuff*
+\par\vskip-\parskip\noindent\lstinline*|    |-- Demo*
+\par\vskip-\parskip\noindent\lstinline*|    .    |-- build*
+\par\vskip-\parskip\noindent\lstinline*|    .    .    .   |-- build*
+\par\vskip-\parskip\noindent\lstinline*|    .    |-- dat*
+\par\vskip-\parskip\noindent\lstinline*|    .    |-- fig*
+\par\vskip-\parskip\noindent\lstinline*|    .    |-- lst*
+\par\vskip-\parskip\noindent\lstinline*|    .    |-- src*
+
+The file  \lstinline|Main.tex| inputs files in the sub-subdirectories.
+
+Subsubdirectories \par\vskip-\parskip\noindent\lstinline*|-- build* and \par\vskip-\parskip\noindent\lstinline*|   .  .  |-- build*
+\par\vskip-\parskip\noindent are only needed
+if using CMake\ao{; they contain temporary files created during processing.
+The system also makes its own copy of the subdirectory \lstinline|common| in 
+subdirectory \lstinline|Demo|. Those files can be deleted any time: when compiling,
+CMake will regenerate them}.
+
+Subsubdirectory 
+\par\vskip-\parskip\noindent\lstinline*|   .   |-- src*  is the place for the user's source files, 
+\par\vskip-\parskip\noindent\lstinline*|   .   |-- fig* for the images. 
+\par\vskip-\parskip\noindent\lstinline*|   .   |-- lst* for the program source files,
+\par\vskip-\parskip\noindent\lstinline*|   .   |-- dat* for the other data \ao{(like tabulated data for pgfplot or TikZ figures source code)}. 
+ 
+\ao{You may use (and handle!) further subsubdirectories}
+}
+{A \lstinline|./Workstuff| al-alkönyvtárai}
+{
+\ao{A \lstinline|./Workstuff| al-alkönyvtárai különböző célokat szolgálnak.}
+\par\vskip-\parskip\noindent\lstinline*|-- WorkStuff*
+\par\vskip-\parskip\noindent\lstinline*|    |-- Demo*
+\par\vskip-\parskip\noindent\lstinline*|    .    |-- build*
+\par\vskip-\parskip\noindent\lstinline*|    .    .    .   |-- build*
+\par\vskip-\parskip\noindent\lstinline*|    .    |-- dat*
+\par\vskip-\parskip\noindent\lstinline*|    .    |-- fig*
+\par\vskip-\parskip\noindent\lstinline*|    .    |-- lst*
+\par\vskip-\parskip\noindent\lstinline*|    .    |-- src*
+
+A fő  \lstinline|Main.tex| menet közben magába olvassa az alkönyvtárakban levő egyéb fájlokat.
+A \par\vskip-\parskip\noindent\lstinline*|-- build* és \par\vskip-\parskip\noindent\lstinline*|   .  .  |-- build*
+\par\vskip-\parskip\noindent alkönyvtárak csak akkor kellenek
+ha a CMake rendszert használjuk\ao{; ezek a feldolgozás során szükséges 
+átmeneti fájlokat tartalmazzák. A rendszer készít a \lstinline|Demo| alkönyvtárba 
+egy saját másolatot a  \lstinline|common| alkönyvtárról.
+Ezek a fájlok bármikor törölhetők: amikor fordít, a CMaker újra generálja azokat. 
+}.
+
+ 
+\par\vskip-\parskip\noindent\lstinline*|   .   |-- src*  tartalmazza a felhasználó forráskód fájljait, 
+\par\vskip-\parskip\noindent\lstinline*|   .   |-- fig* a képeit, 
+\par\vskip-\parskip\noindent\lstinline*|   .   |-- lst* a programlisták forrás kódját,
+\par\vskip-\parskip\noindent\lstinline*|   .   |-- dat* a többi adatot \ao{(például
+táblázatok, adatok a pgfplot vagy kód a TikZ ábrák számára)}. 
+ 
+\ao{További alkönyvtárak is készíthetők, de azokat a felhasználónak kell kezelni.}
+}
+
+%\makeatletter
+%\DeclareRobustCommand{\stdLaTeX}{L\kern-.36em
+%  {%
+%    \sbox\z@ T%
+%    \vbox to\ht0{\hbox{$\m@th$%
+%        \csname S@\f@size\endcsname
+%        \fontsize\sf@size\z@
+%        \math@fontsfalse\selectfont
+%        A}%
+%      \vss}%
+%  }%
+%  \kern-.15em
+%  \TeX}
+%%
+%\DeclareRobustCommand{\faqLaTeX}{L%
+%  {%
+%    \setbox0\hbox{T}%
+%    \setbox\@tempboxa\hbox{$\m@th$%
+%      \csname S@\f@size\endcsname
+%      \fontsize\sf@size\z@
+%      \math@fontsfalse\selectfont
+%      A}%
+%    \@tempdima\ht0
+%    \advance\@tempdima-\ht\@tempboxa
+%    \@tempdima\strip@pt\fontdimen1\font\@tempdima
+%    \advance\@tempdima-.36em
+%    \kern\@tempdima
+%    \vbox to\ht0{\box\@tempboxa
+%      \vss}%
+%  }%
+%  \kern-.15em
+%  \TeX}
+%\makeatother  
+%
+%\stdLaTeX
+%,\faqLaTeX
+
+%\begin{verbatim}
+%.
+%├── common
+%│   ├── defaults
+%│   │   └── Copyright.tex
+%│   ├── formats
+%│   │   ├── beamer_ME.tex
+%│   │   ├── beamertry.tex
+%│   │   ├── eBook.tex
+%│   │   ├── memoir_A4Fancy.tex
+%│   │   ├── memoir_A4Simple.tex
+%│   │   ├── memoir_eBook.tex
+%│   │   ├── memoir_WEB.tex
+%│   │   ├── MESetupBeamerFormat.tex
+%│   │   ├── MESetupPrintedFormat.tex
+%│   │   └── WEB.tex
+%│   ├── images
+%│   │   ├── CC88x31.png
+%│   │   ├── CoverIllustration.jpeg
+%│   │   ├── LatexTalk.png
+%│   │   ├── LatexText.png
+%│   │   ├── under_construction.jpg
+%│   │   └── under_construction-mask.jpg
+%│   ├── MEColors.tex
+%│   ├── MEFigures.tex
+%│   ├── MELanguages.tex
+%│   ├── MEListings.tex
+%│   ├── MEMacros.tex
+%│   ├── MEPackages.tex
+%│   ├── MESections.tex
+%│   ├── METables.tex
+%│   └── UseLATEX.cmake
+%├── LICENSE
+%├── README.md
+%└── WorkStuff
+%    └── Demo
+%        ├── build
+%        │   └── build
+%        ├── CMakeListsMid.txt
+%        ├── CMakeListsNew.txt
+%        ├── CMakeLists_ShouldBeGood.txt
+%        ├── CMakeLists.txt
+%        ├── dat
+%        ├── Demo.tex
+%        ├── fig
+%        │   ├── CoverIllustration.jpeg
+%        │   ├── forloops.png
+%        │   └── phone_anchestors.jpg
+%        ├── lst
+%        │   ├── calculatorresult.txt
+%        │   ├── expensive_calculator.cpp
+%        │   ├── forloops.v
+%        │   ├── HelloWorld.cpp
+%        │   ├── lower1.c
+%        │   └── lower2.c
+%        ├── Main.tex
+%        └── src
+%            ├── Abstract.tex
+%            ├── Bibliography.bib
+%            ├── Copyright.tex
+%            ├── Defines.tex
+%            ├── Defines.tex.in
+%            ├── Figures.tex
+%            ├── General.tex
+%            ├── Glossary.tex
+%            ├── Heading.tex
+%            ├── Listings.tex
+%            ├── Options.tex
+%            ├── Organizing.tex
+%            └── Sectioning.tex
+%\end{verbatim}
