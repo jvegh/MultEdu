@@ -5,22 +5,6 @@
 \usepackage{url}
 \tcbuselibrary{breakable}
 
-%% Set up options for the session, global, user or none
-% % The user can have his own options in his own /src directory,
-% % otherwise default ones are used
-\IfFileExists{src/Options.tex}
-	{\input{src/Options.tex}
-	\MEDebugMessage{Using user's own options}
-	}	% % User options
-	{\IfFileExists{../../common/MEOptions.tex}
-		{\input{../../common/MEOptions.tex}
-	     \MEDebugMessage{Using system wide options}
-		}	% % Default options
-		{
-	      \MEDebugMessage{Using NO options}
-		} % % No options at all
-	} % Options
-
 %% Set up document-wide settings like title, subtitle, publisher, etc.
 % % The user should have his own definitions in his own /src directory,
 % % otherwise de default ones are used
@@ -108,90 +92,39 @@
 		\setbeamerfont{title}{size=\large\bfseries}
 	%	\setbeamerfont{subtitle}{size=\large\normalfont\slshape}
 		
-\IfFileExists{fig/CoverIllustration.jpeg}
-{ %Make a graphic on the title page
-	\setbeamertemplate{title page}{%
- % % We are making the title page "by hand"
-	}
-}
-{ % Make a text-only title page
-    \setbeamertemplate{title page}{%
- 
-	\begin{tikzpicture}[remember picture,overlay]
-	\fill[\TitlePageColor]
-	([yshift=15pt]current page.west) rectangle (current page.south east);
-	\node[anchor=east] 
-	at ([yshift=-30pt]current page.north east) (author)
-	{\parbox[t]{.7\paperwidth}{\raggedleft%
-			\usebeamerfont{author}\textcolor{\TitlePageColor}{%
-				\textpdfrender{
-					TextRenderingMode=FillStroke,
-					FillColor=HeadingColor,
-					LineWidth=.1ex,
-				}{\LectureAuthor}}}};
-	\ifx\LecturePublisher\undefined
-	\else			
-		\node[anchor=north east] 
-		at ([yshift=-90pt]current page.north east) (institute)
-		{\parbox[t]{.78\paperwidth}{\raggedleft%
-				\usebeamerfont{institute}\textcolor{gray}{\LecturePublisher}}};
-	\fi		
-	\node[anchor=south west] 
-	at ([yshift=20pt]current page.west) (logo)
-	{\parbox[t]{.19\paperwidth}{\raggedleft%
-			\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}};
-	\node[anchor=east]
-	at ([yshift=-10pt,xshift=-20pt]current page.east) (title)
-	{\parbox[t]{\textwidth}{\raggedleft%
-			\usebeamerfont{author}\textcolor{white}{%
-				\textpdfrender{
-					TextRenderingMode=FillStroke,
-					FillColor=white,
-					LineWidth=.1ex,
-				}{\Large\LectureTitle}}}};
-	\node[anchor=east]
-	at ([yshift=-65pt,xshift=-20pt]current page.east) (subtitle)
-	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}\textcolor{black}{\insertsubtitle}}};
-	\node[anchor=west]
-	at ([yshift=-120pt,xshift=00pt]current page.west) (subtitle)
-	{\parbox[t]{.8\paperwidth}{\raggedright\usebeamerfont{subtitle}\textcolor{black}{\scriptsize \copyright \LectureAuthor\ \\\LectureRevision\ (using\ \MERevision)\ \LectureEmail}}};
-	
-	\end{tikzpicture}
-	}%title page
-}
 		
 		\author{\LectureAuthor} 
 \ifx\LecturePublisher\undefined\else	\institute{\LecturePublisher}   \fi
 		\title{\LectureTitle}
 		\subtitle{\LectureSubtitle}
 
-\ifx\DisableLogos\undefined
-  %% We can use logos, either custom logos or default ones
-	\IfFileExists{fig/PictureLogo.png}
-	{
-		\titlegraphic{\includegraphics[width=4cm]{fig/PictureLogo.png}}
-		\pgfdeclareimage[height=1.3cm]{MElogo}{fig/PictureLogo.png}
-	}
-	{ % No user logo, use the default one
-		\titlegraphic{\includegraphics[width=4cm]{../../common/images/LatexTalk.png}}
-		\pgfdeclareimage[height=1.3cm]{MElogo}{../../common/images/LatexTalk.png}
-	}
-	\logo{\pgfuseimage{MElogo}}
-	\IfFileExists{fig/TextLogo.jpg}
-	{
-		\titlegraphic{\includegraphics[width=4cm]{fig/TextLogo}}
-        \pgfdeclareimage[height=.5cm]{textlogo}{fig/TextLogo}
-	}
-	{ % No user logo, use the default one
-		\titlegraphic{\includegraphics[width=4cm]{../../common/images/LatexText.png}}
-        \pgfdeclareimage[height=0.5cm]{textlogo}{../../common/images/LatexText.png}
-	}
-\else
-\fi
+%\ifx\DisableLogos\undefined
+%  %% We can use logos, either custom logos or default ones
+%	\IfFileExists{fig/PictureLogo.png}
+%	{
+%		\titlegraphic{\includegraphics[width=4cm]{fig/PictureLogo.png}}
+%		\pgfdeclareimage[height=1.3cm]{MElogo}{fig/PictureLogo.png}
+%	}
+%	{ % No user logo, use the default one
+%		\titlegraphic{\includegraphics[width=4cm]{../../common/images/LatexTalk.png}}
+%		\pgfdeclareimage[height=1.3cm]{MElogo}{../../common/images/LatexTalk.png}
+%	}
+%	\logo{\pgfuseimage{MElogo}}
+%	\IfFileExists{fig/TextLogo.jpg}
+%	{
+%		\titlegraphic{\includegraphics[width=4cm]{fig/TextLogo}}
+%        \pgfdeclareimage[height=.5cm]{textlogo}{fig/TextLogo}
+%	}
+%	{ % No user logo, use the default one
+%		\titlegraphic{\includegraphics[width=4cm]{../../common/images/LatexText.png}}
+%        \pgfdeclareimage[height=0.5cm]{textlogo}{../../common/images/LatexText.png}
+%	}
+%\else
+%\fi
 %http://tex.stackexchange.com/questions/18410/how-can-i-add-more-than-one-logo-to-my-beamer-presentation
 \setbeamertemplate{footline}{\raisebox{-2ex}{\pgfuseimage{textlogo}}
-  \usebeamerfont{date in head/foot}\insertshortdate{}\hfill
-  \insertframenumber{}/\inserttotalframenumber\raisebox{-2ex}{\insertlogo}}
+  \usebeamerfont{date in head/foot}\quad\LecturePublisher\hfill
+  \insertframenumber{}/\inserttotalframenumber\quad\raisebox{-2ex}{\insertlogo}}
 			\MEDebugMessage{Preparing Beamer slides started}
 \newcommand{\frontmatter}{}
 \newcommand{\mainmatter}{}
@@ -231,11 +164,6 @@
 		{\setbeamertemplate{bibliography item}[article]}}%
 	\usebeamertemplate{bibliography item}}
 
-%			
-%% A macro for representing the front matter needed in the selected form
-%%
-%% Usage MEfrontmatter
-%
 \newtcolorbox{mybox}[1][]{
     width=.9\textwidth,
     arc=3mm,
@@ -254,6 +182,30 @@
     opacityback=0.7
 }
 
+\IfGraphicFileExists{fig/PictureLogo}
+{ \def\TitlePictureLogo{\includegraphics[width=2cm]{fig/PictureLogo}}
+  \titlegraphic{\includegraphics[width=4cm]{fig/PictureLogo}}
+  \pgfdeclareimage[height=1.3cm]{MElogo}{fig/PictureLogo}
+}
+{ \def\TitlePictureLogo{\includegraphics[width=2cm]{../../common/images/LatexTalk}}
+  \titlegraphic{\includegraphics[width=4cm]{../../common/images/LatexTalk}}
+  \pgfdeclareimage[height=1.3cm]{MElogo}{../../common/images/LatexTalk}
+}
+\logo{\pgfuseimage{MElogo}}
+\IfGraphicFileExists{fig/TextLogo}
+{\def\TitleTextLogo{\includegraphics[height=1cm]{fig/TextLogo}}
+    \pgfdeclareimage[height=.5cm]{textlogo}{fig/TextLogo}
+   }
+{\def\TitleTextLogo{\includegraphics[height=1cm]{../../common/images/fig/LatexText}}
+    \pgfdeclareimage[height=.5cm]{textlogo}{../../common/images/fig/LatexText}
+    }
+
+
+%			
+%% A macro for representing the front matter needed in the selected form
+%%
+%% Usage MEfrontmatter
+%
 \newcommand\MEfrontmatter{
 	%% Check if the user wants to have his own front matter
 	\IfFileExists{src/FrontMatter.tex}
@@ -262,7 +214,8 @@
 	}
 	{%% No, we need to use the built-in front matter
 		\pagenumbering{gobble}
-{
+  \IfGraphicFileExists{fig/CoverIllustration}
+  {{
  \usebackgroundtemplate{\includegraphics[width=\paperwidth,keepaspectratio]{fig/CoverIllustration.jpeg}}
   \begin{frame}[plain]
 	\begin{tikzpicture}[remember picture,overlay]
@@ -287,14 +240,14 @@
 		{
         	\node[anchor=west]
 	        at ([yshift=.75cm,xshift=-.18cm]current page.south west) (logo)
-			{\includegraphics[width=2cm]{../../common/images/LatexTalk.png}\includegraphics[width=2cm]{fig/TextLogo.jpg} \raisebox{.5ex}
+			{\TitlePictureLogo\TitleTextLogo \raisebox{.5ex}
 			{\tiny{\ \LectureRevision\ (using\ \MERevision}) \ \copyright \LectureAuthor}};
 		}
 		{ % No user logo, use the default one
 			\node[anchor=west]
 			at ( [yshift=1cm]
 			current page.south west) (logo)
-			{\includegraphics[width=2cm]{../../common/images/LatexTalk.png}\raisebox{.5ex}
+			{\TitlePictureLogo\raisebox{.5ex}
 						{\tiny{\ \LectureRevision\ (using\ \MERevision}) \ \copyright \LectureAuthor\ (\LectureEmail)}};
 		}
 		
@@ -302,14 +255,53 @@
 	\end{tikzpicture}
   
   \end{frame}
+}}
+{ % Make a title page without background graphics
+  \begin{frame}[plain]
+ 
+	\begin{tikzpicture}[remember picture,overlay]
+	\fill[\TitlePageColor]
+	([yshift=15pt]current page.west) rectangle (current page.south east);
+	\node[anchor=east] 
+	at ([yshift=-30pt]current page.north east) (author)
+	{\parbox[t]{.7\paperwidth}{\raggedleft%
+			\usebeamerfont{author}\textcolor{\TitlePageColor}{%
+				\textpdfrender{
+					TextRenderingMode=FillStroke,
+					FillColor=HeadingColor,
+					LineWidth=.1ex,
+				}{\LectureAuthor}}}};
+	\ifx\LecturePublisher\undefined
+	\else			
+		\node[anchor=north east] 
+		at ([yshift=-85pt]current page.north east) (institute)
+		{\parbox[t]{.78\paperwidth}{\raggedleft%
+				\usebeamerfont{institute}\textcolor{gray}{\LecturePublisher}\quad\TitleTextLogo}};
+	\fi		
+	\node[anchor=north west] 
+	at ([yshift=5pt,xshift=-5pt]current page.north west) (logo)
+	{\parbox[t]{.19\paperwidth}{\raggedleft%
+			\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}};
+	\node[anchor=east]
+	at ([yshift=-15pt,xshift=-20pt]current page.east) (title)
+	{\parbox[t]{\textwidth}{\raggedleft%
+			\usebeamerfont{author}\textcolor{white}{%
+				\textpdfrender{
+					TextRenderingMode=FillStroke,
+					FillColor=white,
+					LineWidth=.1ex,
+				}{\Large\LectureTitle}}}};
+	\node[anchor=east]
+	at ([yshift=-65pt,xshift=-20pt]current page.east) (subtitle)
+	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}\textcolor{black}{\insertsubtitle}}};
+	\node[anchor=west]
+	at ([yshift=-120pt,xshift=00pt]current page.west) (subtitle)
+	{\parbox[t]{.8\paperwidth}{\raggedright\usebeamerfont{subtitle}\textcolor{black}{\scriptsize \copyright \LectureAuthor\ \\\LectureRevision\ (using\ \MERevision)\ \LectureEmail}}};
+	
+	\end{tikzpicture}
+  \end{frame}
 }
 		\frontmatter
-		\IfFileExists{src/Copyright}
-		{\input{src/Copyright}\clearpage}
-		{\IfFileExists{../../common/MECopyright}
-			{\input{../../common/MECopyright}\clearpage}
-			{}
-		}
 	}
 }
 
@@ -387,4 +379,5 @@
 	  }	
 	\fi		
 }
+
 
