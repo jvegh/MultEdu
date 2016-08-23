@@ -46,11 +46,12 @@
 \AtBeginSection[]
 {
 \ifx \suppresssectionTOC \undefined
-	\MEDframe[shrink]		{Fejezet  tartalomjegyz\'ek}
+	\MEDframe[shrink]		
+	{Chapter outline}
 		{
 				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
 		}
-	{Chapter outline}
+	{Fejezet  tartalomjegyz\'ek}
 		{
 				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
 		}
@@ -61,11 +62,12 @@
 {
 \ifx \suppresssectionTOC \undefined
 
-	\MEDframe[shrink] 	{Szakasz tartalomjegyz\'ek}
+	\MEDframe[shrink]
+		{Section outline}
 		{
 			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
 		}
-		{Section outline}
+	 	{Szakasz tartalomjegyz\'ek}
 		{
 			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
 		}
@@ -216,7 +218,8 @@
 		\pagenumbering{gobble}
   \IfGraphicFileExists{fig/CoverIllustration}
   {{
- \usebackgroundtemplate{\includegraphics[width=\paperwidth,keepaspectratio]{fig/CoverIllustration.jpeg}}
+ \usebackgroundtemplate{\includegraphics[width=\paperwidth,%height=\paperheight,
+ keepaspectratio]{fig/CoverIllustration.jpeg}}
   \begin{frame}[plain]
 	\begin{tikzpicture}[remember picture,overlay]
 	\node[anchor=east]
