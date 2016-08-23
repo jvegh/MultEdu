@@ -18,14 +18,12 @@
 %   hideothersubsubsections,% hide all subsections but the subsections in the current 		backref
 %ignorenonframetext
 		]{beamer}	
+\ifx\DisableWideScreen\undefined		
+\usepackage[orientation=landscape,size=custom,width=16,height=9,scale=0.5,debug]{beamerposter} 
+\fi% of \DisableWideScreen
 		
 \input{../../common/formats/MESetupBeamerFormat}		
 \PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}\usepackage[section]{placeins}			
-%\pgfdeclareimage[height=\paperheight,width=\paperwidth]{mybackground}{fig/CoverIllustration.jpeg}
-%\usetheme{Antibes}
-%\usetheme{Montpellier}
-%		\usetheme{JuanLesPins}
-%		\usetheme{Szeged}
 \usetheme[
 %%% options passed to the outer theme
 %    hidetitle,           % hide the (short) title in the sidebar
@@ -36,7 +34,7 @@
    hideothersubsections,% hide all subsections but the subsections in the current section
 %   hideothersubsubsections,% hide all subsubsections but the subsections in the current section
 %    hideallsubsections,  % hide all subsections
-%	aspectratio = 169,
+	aspectratio = 169,
 %    left                % right of left position of sidebar (default is right)
   ]	{Goettingen}
 %		\usecolortheme{dolphin}
