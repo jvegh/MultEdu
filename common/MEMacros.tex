@@ -156,6 +156,26 @@
 \makeatother
 
 
+\newtcolorbox{mybox}[1][]{
+%	\setkeys{MEMacros}{width=.9\textwidth,#1}%  
+    ,arc=3mm,
+width=.9\textwidth,%    auto outer arc,
+    boxsep=0cm,
+    toprule=1pt,
+    leftrule=1pt,
+    bottomrule=1pt,
+    rightrule=1pt,
+    colframe=\TitlePageColor,
+    fontupper=\raggedleft\fontsize{16pt}{14pt}\itshape,
+    breakable,
+    nobeforeafter,
+    enhanced jigsaw,
+    opacityframe=0.3,
+    opacityback=0.7
+}
+
+
+
 \input{../../common/MESections}
 \input{../../common/MEListings}
 \input{../../common/MEFigures}
