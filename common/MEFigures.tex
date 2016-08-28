@@ -33,12 +33,13 @@
 	{{\centering
 	
 			\vbox{
-				\ifx\WEBBook\undefined\else\vskip-.3\baselineskip\fi
+				\ifx\WEBBook\undefined\vskip .3\baselineskip\else\vskip .3\baselineskip\fi
 				\begin{minipage}{\mywidth}
-					\ifthenelse{\equal{#5}{}}{}{\vskip-.1\baselineskip{\tiny \copyright #5}	\hfill
+					\ifthenelse{\equal{#5}{}}{}{%\vskip-.1\baselineskip
+					{\tiny \copyright #5}	\hfill
 						}  %\copyright
 				\end{minipage}
-				\vskip-\baselineskip
+				\vskip-.8\baselineskip
 				\noindent\makebox[\mywidth]{\color{SeparatorColor}\rule{\mywidth}{1pt}}\par\vskip.2\baselineskip
 						\maxsizebox{\mywidth}{.75\textheight}
 						{ 
@@ -60,6 +61,110 @@
 }}
 	\stopsource%
 }
+
+%%%Usage MEfigurewithtext[keys]{image file}{caption}{label}{copyright}{ScaleFactor}{text}
+\newcommand\MEfigurewithtext[7][]{
+	% % Define the environment: a 'figure' if it might float, a simple caption if not
+	\ifx\MayFloat\undefined
+		\def\startsource{}
+		\setlength{\mywidth}{#6\textwidth}
+		\def\stopsource{}
+		\def\CombinedMode{yes}
+	\else
+	\mbox{}\phantomsection % For hyperlinking!			
+			\setlength{\mywidth}{#6\columnwidth}
+			\ifx\WEBBook\undefined\else\setlength{\mywidth}{.55\mywidth}\fi
+			\ifx\eBook\undefined\else\setlength{\mywidth}{.7\mywidth}\fi
+			\def\startsource{\par\begin{figure}[!hbtp]}
+			\def\stopsource{\end{figure}}
+	\fi
+ 
+ \ifx\CombinedMode\undefined 
+   %% This is the conventional mode: the figure, plus the text  	
+	\par\startsource	  
+	{{\centering
+	
+			\vbox{
+%				\ifx\WEBBook\undefined\else\vskip-.3\baselineskip\fi
+				\begin{minipage}{\mywidth}
+					\ifthenelse{\equal{#5}{}}{}{%\vskip-.1\baselineskip
+					{\tiny \copyright #5}	\hfill
+						}  %\copyright
+				\end{minipage}
+				\vskip-.8\baselineskip
+				\noindent\makebox[\mywidth]{\color{SeparatorColor}\rule{\mywidth}{1pt}}\par\vskip.2\baselineskip
+						\maxsizebox{\mywidth}{.75\textheight}
+						{ 
+													
+						\includegraphics[width=\mywidth,keepaspectratio]{#2}
+						}
+					\par\vskip-.8\baselineskip\par
+				\noindent\makebox[\mywidth]{\color{SeparatorColor}\rule{\mywidth}{1pt}}\par
+			
+				\begin{minipage}{\mywidth} 			% % Add a caption
+					\ifx\MayFloat\undefined
+						{\bfseries\scriptsize {\color{HeadingColor}#3}}
+					\else{\color{HeadingColor}\caption{{#3}}\label{#4}}
+					\fi 
+				\end{minipage}
+			}
+}}
+#7
+	\stopsource%
+\else
+  \begin{tabular}{cc}
+  %This is a combined mode make a tabular environment, left column figure, right column text
+    \begin{minipage}[b]{.55\textwidth}
+    \setlength{\mywidth}{\textwidth}
+	\par\startsource	  
+	{{\centering
+	
+			\vbox{
+%				\ifx\WEBBook\undefined\else\vskip-.3\baselineskip\fi
+				\begin{minipage}{\mywidth}
+					\ifthenelse{\equal{#5}{}}{}{\vskip .1\baselineskip
+					{\tiny \copyright #5}	\hfill
+						}  %\copyright
+				\end{minipage}
+				\vskip-.8\baselineskip
+				\noindent\makebox[\mywidth]{\color{SeparatorColor}\rule{\mywidth}{1pt}}\par\vskip.2\baselineskip
+						\maxsizebox{\mywidth}{.75\textheight}
+						{ 
+													
+						\includegraphics[width=\mywidth,keepaspectratio]{#2}
+						}
+					\par\vskip-.8\baselineskip\par
+				\noindent\makebox[\mywidth]{\color{SeparatorColor}\rule{\mywidth}{1pt}}\par
+			
+				\begin{minipage}{\mywidth} 			% % Add a caption
+					\ifx\MayFloat\undefined
+						{\bfseries\scriptsize {\color{HeadingColor}#3}}
+					\else{\color{HeadingColor}\caption{{#3}}\label{#4}}
+					\fi 
+				\end{minipage}
+			}
+}}
+	\stopsource%
+				\end{minipage}
+%  						\maxsizebox{.55\textwidth}{.75\textheight}
+%  						{ 
+%  													
+%  						\includegraphics[width=\mywidth,keepaspectratio]{#2}
+%  						}
+%    \begin{minipage}[b]{.55\textwidth}
+%        {#7}
+%    \end{minipage}%
+  &
+    \begin{minipage}[b]{.4\textwidth}
+        {#7}
+    \end{minipage}%
+  \\
+  \end{tabular}
+  
+\fi	%CombinedMode	
+%	\ifx\LecturePrintable\undefined\else\par\vspace{-15pt}\fi				
+}%
+
 
 
 %%%Usage MEtikzfigure[keys]{tikz source}{caption}{label}{copyright}{ScaleFactor}
@@ -113,6 +218,8 @@
 }}
 	\stopsource%
 }
+
+
 
 \makeatother
 
