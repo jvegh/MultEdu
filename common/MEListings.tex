@@ -125,56 +125,6 @@
 }%MESetListingFormat
 
 \newlength{\FigWidth}\newlength{\FigHeight}
-%\makeatletter
-%%% Insert a source file in the text, with optional decorations
-%%%%Usage \MESourceFile[keys]{source file}{caption}{label}{ScaleFactor}
-%\newcommand\MESourceFile[5][]{
-%	\setkeys{MEMacros}{wide=false,language={[ANSI]C},options={}, decorations={},#1}% 
-%	% Define the environment: a 'Program' if it might float, a simple caption if not
-%	\MESetStandardListingFormat
-%	\ifx\MayFloat\undefined % A kind of slides
-%		\def\startsource{ \begin{center}
-%			              \setlength{\FigWidth}{#5\textwidth}
-%		                  {\color{HeadingColor}\bfseries\scriptsize #3}
-%			              \par\vskip-\baselineskip
-%		                }
-%		\def\stopsource{\end{center}}
-%	\else %% Some printable form, either A4 book,  WEB book or eBook
-%		\ifKV@MEMacros@wide %% It is a wide floating version
-%		   \def\startsource{ \begin{center}
-%			                \setlength{\FigWidth}{#5\textwidth} 
-%			                \begin{program*}[!hbt] 
-%			               }
-%			\def\stopsource{\end{program*}\end{center}}			
-%		\else % It is the narrow (one-column) version
-%			\if@twocolumn
-%			  \setlength{\FigWidth}{#5\columnwidth}
-%			\else
-%			  \setlength{\FigWidth}{.7\textwidth}
-%			  \setlength{\FigWidth}{#5\FigWidth}
-%			 \fi
-%			\def\startsource{\begin{center}\begin{program}[!hbt]}
-%			\def\stopsource{\end{program}\end{center}}
-%		\fi
-%	\fi
-%	%% Start printing the figure here:
-%	\setlength{\FigHeight}{.8\textheight} 
-%	\noindent\startsource %{\caption{#3}} \hskip-1em
-%%	\maxsizebox{#5\FigWidth}{#5\FigHeight}
-%	{
-%		\mbox{}\phantomsection
-%		\noindent\begingroup\protected@edef\x{\endgroup\noexpand
-%			\lstinputlisting[language={\ME@language}, \ME@options, label=#4, name=#4,
-%			\ifx\LecturePrintable\undefined\else	caption ={#3}\fi
-%			]{#2}}
-%		\x
-%		\ME@decorations % Decorating comments
-%	}					
-%	\stopsource
-%}
-%\makeatother
-%\newlength{\FigWidth}
-%\usepackage{layouts}
 \makeatletter
 %% Insert a source file in the text, with optional decorations
 %%%Usage \MESourceFile[keys]{source file}{caption}{label}
