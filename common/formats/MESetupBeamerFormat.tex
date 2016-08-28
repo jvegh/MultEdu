@@ -88,7 +88,6 @@
 	}
 	{} % Glossary
 
-	\def\TitlePageColor{ForestGreen}
 		\setbeamerfont{author}{size=\large}
 		\setbeamerfont{institute}{size=\normalsize\itshape}
 		\setbeamerfont{title}{size=\large\bfseries}
@@ -166,24 +165,6 @@
 		{\setbeamertemplate{bibliography item}[article]}}%
 	\usebeamertemplate{bibliography item}}
 
-\newtcolorbox{mybox}[1][]{
-    width=.9\textwidth,
-    arc=3mm,
-%    auto outer arc,
-    boxsep=0cm,
-    toprule=1pt,
-    leftrule=1pt,
-    bottomrule=1pt,
-    rightrule=1pt,
-    colframe=\TitlePageColor,
-    fontupper=\raggedleft\fontsize{16pt}{14pt}\itshape,
-    breakable,
-    nobeforeafter,
-    enhanced jigsaw,
-    opacityframe=0.3,
-    opacityback=0.7
-}
-
 \IfGraphicFileExists{fig/PictureLogo}
 { \def\TitlePictureLogo{\includegraphics[width=2cm]{fig/PictureLogo}}
   \titlegraphic{\includegraphics[width=4cm]{fig/PictureLogo}}
@@ -239,19 +220,18 @@
 	}}};
 	\ifx\DisableLogos\undefined
 	  %% We can use logos, either custom logos or default ones
-		\IfFileExists{fig/TextLogo.jpg}
+		\IfGraphicFileExists{fig/TextLogo}
 		{
         	\node[anchor=west]
-	        at ([yshift=.75cm,xshift=-.18cm]current page.south west) (logo)
+	        at ([yshift=.95cm,xshift=-.18cm]current page.south west) (logo)
 			{\TitlePictureLogo\TitleTextLogo \raisebox{.5ex}
-			{\tiny{\ \LectureRevision}) \ \copyright \LectureAuthor}};
+			{\tiny{\ \LectureRevision} \ \copyright \LectureAuthor}};
 		}
 		{ % No user logo, use the default one
-			\node[anchor=west]
-			at ( [yshift=1cm]
-			current page.south west) (logo)
-			{\TitlePictureLogo\raisebox{.5ex}
-						{\tiny{\ \LectureRevision}) \ \copyright \LectureAuthor\ (\LectureEmail)}};
+			\node[anchor=east] 
+			at ( [yshift=.8cm,xshift=10pt]	current page.south east) (logo)
+			{\TitlePictureLogo{\raisebox{-.5ex}\TitleTextLogo}
+						{\begin{mybox}[]{\tiny{\ \LectureRevision}) \ \copyright \LectureAuthor\ (\LectureEmail)}\end{mybox}}};
 		}
 		
 	\fi
