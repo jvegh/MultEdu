@@ -26,6 +26,11 @@
 	\def\lstsize{\tiny}
 \fi
 
+\newcommand\MEcommandline[1]{
+\lstset{language=bash,identifierstyle=\normalsize\bfseries\color{NavyBlue}}
+\par\noindent\lstinline!#1!
+\par\noindent%
+}
 %% Set parameters for the appearance of the listings
 
 \newcommand{\MESetStandardListingFormat}
