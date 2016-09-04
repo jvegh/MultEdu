@@ -27,9 +27,9 @@
 \fi
 
 \newcommand\MEcommandline[1]{
-\lstset{language=bash,identifierstyle=\normalsize\bfseries\color{NavyBlue}}
-\par\noindent\lstinline!#1!
-\par\noindent%
+\par\vskip-\parskip\noindent\lstset{language=bash,identifierstyle=\normalsize\bfseries\color{NavyBlue}}
+\lstinline!#1!
+\par\vskip-2\parskip\noindent%
 }
 %% Set parameters for the appearance of the listings
 
@@ -140,10 +140,7 @@
 	\ifx\MayFloat\undefined % A kind of slides
 		\def\startsource{
 			\setlength{\FigWidth}{\textwidth}
-	%	\vskip.2\baselineskip
-		{\color{HeadingColor}%\bfseries\scriptsize #3
-			}
-			\par%\vskip\baselineskip
+			\par
 		}
 		\def\stopsource{}
 	\else %% Either A4 book,  WEB book or eBook
@@ -164,8 +161,7 @@
 		\fi
 	\fi
 	%% Start printing the figure here:
-	\noindent\startsource\hskip-1em
-	\vspace{-10pt}
+	\noindent\startsource 
 %	\maxsizebox{\FigWidth}{.5\textheight}
 	{
 		\mbox{}\phantomsection
@@ -177,10 +173,9 @@
 		\x
 		\ME@decorations % Decorating comments
 	}					
-%	\vspace{-5pt}					
 	\stopsource
 }
-\makeatletter  % This is the good version
+\makeatother
 
 %\newlength{\mywidth} % Used in defining listing width
 % http://mirror.unl.edu/ctan/graphics/pgf/contrib/tikzmark/tikzmark.pdf
