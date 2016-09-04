@@ -16,6 +16,8 @@
 			pdfpagemode=UseNone,pdfstartview=Fit
 ]{memoir}
 %	\usepackage{etex}	% Modify register allocation - must be first
+%http://tex.stackexchange.com/questions/244380/redefining-a-babel-macro-in-memoir/244383
+\let\Aref\relax	%% Needed for workaround \Aref bug, only in Hungarian
 
 % % Set up the page size	
 % Lets make the text nice and big
@@ -32,26 +34,6 @@
 \input{../../common/formats/MESetupPrintedFormat}
 %%http://tex.stackexchange.com/questions/3033/forcing-linebreaks-in-url
 \PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}\usepackage[section]{placeins}	%  for eBook, restrict floats to sections
-
-
-
-\IfGraphicFileExists{fig/PictureLogo}
-{ \def\TitlePictureLogo{\includegraphics[width=2cm]{fig/PictureLogo}}
-  \titlegraphic{\includegraphics[width=2cm]{fig/PictureLogo}}
-  \pgfdeclareimage[height=.65cm]{MElogo}{fig/PictureLogo}
-}
-{ \def\TitlePictureLogo{\includegraphics[width=2cm]{../../common/images/LatexTalk}}
-  \titlegraphic{\includegraphics[width=2cm]{../../common/images/LatexTalk}}
-  \pgfdeclareimage[height=.65cm]{MElogo}{../../common/images/LatexTalk}
-}
-\logo{\pgfuseimage{MElogo}}
-\IfGraphicFileExists{fig/TextLogo}
-{\def\TitleTextLogo{\includegraphics[height=.5cm]{fig/TextLogo}}
-    \pgfdeclareimage[height=.25cm]{textlogo}{fig/TextLogo}
-   }
-{\def\TitleTextLogo{\includegraphics[height=.5cm]{../../common/images/LatexText}}
-    \pgfdeclareimage[height=.25cm]{textlogo}{../../common/images/LatexText}
-    }
 
 
 \renewcommand{\maketitle}
@@ -89,103 +71,46 @@
 }
 \fi % of CoverIllustration
 
-
-\ifx\LectureSubtitle\undefined
-\else
 %% Bar across the top
 \tikz[remember picture,overlay]%
-	\node[anchor=east]
-	at ([yshift=-50pt,xshift=-32pt]current page.north east) (subtitle)
-	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
-	       {\bfseries\itshape\color{SeparatorColor}\fontsize{16pt}{20pt}\selectfont
-	       %	\LectureTitle\par}
-	       \LectureTitle\\\bfseries\color{\TitlePageColor}\fontsize{14pt}{16pt}\selectfont\LectureSubtitle}
-	    \end{mybox}
-	}}};
+\node[fill=HeadingColor,text=white,font=\LARGE\bfseries,text=cream,%
+minimum width=\paperwidth,minimum height=2em,anchor=north]%
+at (current page.north){\tiny\LectureSubtitle};
 
-\fi
-
-\tikz[remember picture,overlay]%
-	\node[anchor=east]
-	at ([yshift=70pt,xshift=-31pt]current page.south east) (subtitle)
-	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
-	       {  \bfseries\fontsize{16pt}{20pt}\selectfont
-	       {\color{SeparatorColor}\LectureAuthor}\\
-               \ifx\LecturePublisher\undefined\else\fontsize{14pt}{16pt}\selectfont\color{\TitlePageColor}\LecturePublisher\fi}
-	    \end{mybox}
-	}}};
-
-	\ifx\DisableLogos\undefined
-	  %% We can use logos, either custom logos or default ones
-		\IfGraphicFileExists{fig/TextLogo}
+	\begin{center}\normalfont\bfseries\color{HeadingColor}
+		\hspace*{.08cm}%
+		\ifx\DisableLogo\undefined
 		{
-\tikz[remember picture,overlay]%
-        	\node[anchor=south west]
-	        at ([yshift=.0cm,xshift=-53pt]current page.south west) (logo)
-			{
-			{\bfseries\fontsize{4pt}{6pt}\selectfont{\ \LectureRevision}) \ \copyright \LectureAuthor}};
-\tikz[remember picture,overlay]%
-        	\node[anchor=south west]
-	        at ([yshift=-3pt,xshift=35pt]current page.south west) (logo)
-			{\TitlePictureLogo\TitleTextLogo \raisebox{.5ex}
-			{\bfseries\fontsize{4pt}{6pt}\selectfont{\ \LectureRevision}) \ \\\copyright \LectureAuthor}};
+			\ifx\LogoImageLeft\undefined \else \includegraphics[width=3cm]{\LogoImageLeft}\fi
+			\hfill
+			\ifx\LogoImageRight\undefined \else \includegraphics[width=2.5cm]{\LogoImageRight}\fi
+            \ifx\LecturePublisher\undefined
+            \else		 
+			  \par\raisebox{1.0cm}{ \hspace*{.1cm}\normalsize\color{HeadingColor}\LecturePublisher \hspace*{.1cm}}%
+	    	\fi
 		}
-		{ % No user logo, use the default one
-\tikz[remember picture,overlay]%
-			\node[anchor=south west] 
-			at ( [yshift=-3pt,xshift=35pt]	
-			current page.south west) (logo)
-			{ %\TitlePictureLogo{\raisebox{-.5ex}\TitleTextLogo}
-						{\begin{mybox}[]{\fontsize{4pt}{6pt}\selectfont{\ \LectureRevision}) \ \\\copyright \LectureAuthor\ (\LectureEmail)\quad\ }\end{mybox}}};
-\tikz[remember picture,overlay]%
-			\node[anchor=south west] 
-			at ( [yshift=-2pt,xshift=0pt]	current page.south west) (logo)
-			{\TitlePictureLogo{\raisebox{-.5ex}\TitleTextLogo}
-						};
-		}
-		
-	\fi
+		\fi
+	\end{center}
+	\vskip -1cm
 
-%%% Bar across the top
-%\tikz[remember picture,overlay]%
-%\node[fill=HeadingColor,text=white,font=\LARGE\bfseries,text=cream,%
-%minimum width=\paperwidth,minimum height=2em,anchor=north]%
-%at (current page.north){\tiny\LectureSubtitle};
-
-%	\begin{center}\normalfont\bfseries\color{HeadingColor}
-%		\hspace*{.08cm}%
-%		\ifx\DisableLogo\undefined
-%		{
-%			\ifx\LogoImageLeft\undefined \else \includegraphics[width=3cm]{\LogoImageLeft}\fi
-%			\hfill
-%			\ifx\LogoImageRight\undefined \else \includegraphics[width=2.5cm]{\LogoImageRight}\fi
-%            \ifx\LecturePublisher\undefined
-%            \else		 
-%			  \par\raisebox{1.0cm}{ \hspace*{.1cm}\normalsize\color{HeadingColor}\LecturePublisher \hspace*{.1cm}}%
-%	    	\fi
-%		}
-%		\fi
-%	\end{center}
-%	\vskip -1cm
-
-%\begin{tcolorbox}[]
-%{
-%\begin{center}
-%\normalfont\bfseries\large{\bfseries\Large\color{HeadingColor}\LectureAuthor}\\
-%%
-%         {\bfseries\Large\color{HighlightColor}\LectureTitle}\\
-%     \ifx\LectureSubtitle\undefined\else  { \normalsize\color{HeadingColor} \LectureSubtitle}\fi
+\begin{tcolorbox}[]
+{
+\begin{center}
+\normalfont\bfseries\large{\bfseries\Large\color{HeadingColor}\LectureAuthor}\\
 %
-%\end{center}
-%}
-%\end{tcolorbox}
+         {\bfseries\Large\color{HighlightColor}\LectureTitle}\\
+     \ifx\LectureSubtitle\undefined\else  { \normalsize\color{HeadingColor} \LectureSubtitle}\fi
 
-%%% Bar across the bottom
-%\tikz[remember picture,overlay]%
-%\node[fill=HeadingColor,text=white,font=\LARGE\bfseries,text=cream,%
-%minimum width=\paperwidth,minimum height=2em,anchor=south]%
-%at (current page.south){\hfill \tiny Copyright 
-%\copyright\ 2011-\the\year\ (\tiny\LectureEmail)};
+\end{center}
+}
+\end{tcolorbox}
+
+%% Bar across the bottom
+\tikz[remember picture,overlay]%
+\node[fill=HeadingColor,text=white,font=\LARGE\bfseries,text=cream,%
+minimum width=\paperwidth,minimum height=2em,anchor=south]%
+at (current page.south){\hfill \tiny Copyright 
+\copyright\ 2011-\the\year\ (\tiny\LectureEmail)};
 %\\bottom
 }
 
