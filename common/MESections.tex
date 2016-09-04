@@ -197,7 +197,7 @@
 	\phantomsection % A hook for hyper references
 	\ifx\LecturePrintable\undefined % Making slides
 			%\ifthenelse{\isempty{#1}}{}{
-			\par\noident\bfseries #2\par%}
+			\par\noindent\bfseries #2\par%}
 	\else %Printing book
 		\ifthenelse{\isempty{#1}}{\subsubsection{#2}}{\subsubsection[#1]{#2}}
 	\fi %Printable
@@ -250,18 +250,17 @@
 	\ifx\DisableChapterIllustration\undefined
 		\ifthenelse{\isempty{#1}}
 		{	
-			\IfFileExists{fig/DefaultIllustration.png}
-				{\def\myfile{fig/DefaultIllustration.png}}
+			\IfGraphicFileExists{fig/DefaultIllustration}
+				{\def\myfile{fig/DefaultIllustration}}
 				{}	
 		}			
 		{	% The argument is not empty
-		\IfFileExists{#1}
+		\IfGraphicFileExists{#1}
 			{\def\myfile{#1}}	% Explicit file present, use that file
-			{%\DebugMessage{File '#1' not found}
+			{\DebugMessage{File '#1' not found}
 				}
 		}
-		
-		
+				
 	\ifx\myfile\undefined
 			% No file was found, exit
 	\else
