@@ -243,7 +243,7 @@
 	\fi
 }
 
-
+\def\Chapterillustration{}% Define it as empty
 %% Give the new illustration of chapter in memoir/fancy mode
 \newcommand\MEchapterillustration[1]
 {
@@ -251,33 +251,47 @@
 		\ifthenelse{\isempty{#1}}
 		{	
 			\IfGraphicFileExists{fig/DefaultIllustration}
-				{\def\myfile{fig/DefaultIllustration}}
+				{\def\Chapterillustration{fig/DefaultIllustration}}
 				{}	
 		}			
 		{	% The argument is not empty
 		\IfGraphicFileExists{#1}
-			{\def\myfile{#1}}	% Explicit file present, use that file
+			{\def\Chapterillustration{#1}}	% Explicit file present, use that file
 			{\DebugMessage{File '#1' not found}
 				}
 		}
 				
-	\ifx\myfile\undefined
-			% No file was found, exit
-	\else
+		\ifthenelse{\isempty{\Chapterillustration}}
+		{% No file was found, exit	
+		}
+		{ % File found
 		\ifx\LecturePrintable\undefined
-			\def\framelabel{}
-			\MEframe[plain]{}
-				{
-					\includegraphics[width=\textwidth]{\myfile}
-				}
-		\else % We are printing a book
+		%% We are making slides, will be done in \AtBeginSection
+		\else
 			\ifx\FancyBook\undefined
-				\par\noindent\includegraphics[width=\paperwidth]{\myfile}
+				\par\noindent\includegraphics[width=\paperwidth]{\ChapterIllustration}
 			\else
-				\renewcommand\chapterillustration{\myfile}
+				\renewcommand\chapterillustration{\Chapterillustration}
 			\fi
 		\fi
-	\fi% \myfile
+		}
+%	\ifx\MEchapterillustration\undefined
+%			% No file was found, exit
+%	\else
+%		\ifx\LecturePrintable\undefined
+%%			\def\framelabel{}
+%%			\MEframe[plain]{}
+%%				{
+%%					\includegraphics[width=\textwidth]{\myfile}
+%%				}
+%		\else % We are printing a book
+%			\ifx\FancyBook\undefined
+%				\par\noindent\includegraphics[width=\paperwidth]{\ChapterIllustration}
+%			\else
+%				\renewcommand\chapterillustration{\Chapterillustration}
+%			\fi
+%		\fi
+%	\fi% \myfile
 	\fi%\DisableChapterIllustration
 }%\MEchapterillustration
 
