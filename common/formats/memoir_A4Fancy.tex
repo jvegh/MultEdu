@@ -16,7 +16,10 @@ tight, breaklinks=true,
 %			linkcolor=webgreen,filecolor=webbrown,citecolor=webgreen, urlcolor=webbrown,
 pdfpagemode=UseNone,pdfstartview=Fit
 ]{memoir}
-	
+
+%http://tex.stackexchange.com/questions/244380/redefining-a-babel-macro-in-memoir/244383
+\let\Aref\relax	%% Needed for workaround \Aref bug, only in Hungarian
+  
 % % Set up the page size	
 \setstocksize{303mm}{216mm}
 \settrimmedsize{\stockheight}{\stockwidth}{*}
@@ -57,14 +60,19 @@ pdfpagemode=UseNone,pdfstartview=Fit
     \ThisLLCornerWallPaper{1}{../../common/images/CoverIllustration}
   }
 \else
-  \ThisLLCornerWallPaper{1}{\LectureCoverIllustration}
+%  \ThisLLCornerWallPaper{1}{
+  \LectureCoverIllustration
+  %}
 \fi % of CoverIllustration
 \ifx\LectureSubtitle\undefined
 \else
 %% Bar across the top
 \tikz[remember picture,overlay]%
-	\node[anchor=east]
-	at ([yshift=-90pt,xshift=-20pt]current page.north east) (subtitle)
+%\node[fill=HeadingColor,text=white,font=\LARGE\bfseries,text=cream,%
+%minimum width=\paperwidth,minimum height=5em,anchor=north]%
+%at (current page.north){\LectureSubtitle};
+	\node[anchor=north east]
+	at ([yshift=-60pt,xshift=-10pt]current page.north east) (subtitle)
 	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
 	       {\bfseries\itshape\color{SeparatorColor}\fontsize{30pt}{40pt}\selectfont
 	       %	\LectureTitle\par}
@@ -96,7 +104,7 @@ pdfpagemode=UseNone,pdfstartview=Fit
 %
 \tikz[remember picture,overlay]%
 	\node[anchor=east]
-	at ([yshift=120pt,xshift=-20pt]current page.south east) (subtitle)
+	at ([yshift=85pt,xshift=-10pt]current page.south east) (subtitle)
 	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
 	       {  \bfseries\fontsize{30pt}{40pt}\selectfont
 	       {\color{SeparatorColor}\LectureAuthor}\\
@@ -117,7 +125,7 @@ pdfpagemode=UseNone,pdfstartview=Fit
 		{ % No user logo, use the default one
 \tikz[remember picture,overlay]%
 			\node[anchor=east] 
-			at ( [yshift=45pt,xshift=0pt]	current page.south east) (logo)
+			at ( [yshift=1.5cm,xshift=20pt]	current page.south east) (logo)
 			{\TitlePictureLogo{\raisebox{-.5ex}\TitleTextLogo}
 						{\begin{mybox}[]{\fontsize{9pt}{12pt}\selectfont{\ \LectureRevision}) \ \copyright \LectureAuthor\ (\LectureEmail)\quad\ }\end{mybox}}};
 		}
