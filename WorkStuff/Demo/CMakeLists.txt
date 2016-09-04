@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.4)
 
 cmake_policy(SET CMP0048 NEW)
-PROJECT(Demo VERSION 0.02.1 LANGUAGES NONE)
+PROJECT(Demo VERSION 0.02.02 LANGUAGES NONE)
 
 set(MainFile "Demo.tex")	# Is used to define output file name
 set(InputFiles ${MainFile} Main.tex
@@ -53,7 +53,7 @@ file(COPY ${commonMultEdu} DESTINATION "${MyCommon}/")
 #  set(MyFormatList ${MyFormatList} eBook)
 #  set(MyFormatList ${MyFormatList} WEB)
 #  set(MyFormatList ${MyFormatList} A4Fancy)
-  set(MyFormatList ${MyFormatList} beamertry)
+  set(MyFormatList ${MyFormatList} beamer_ME)
   
   
 #
@@ -85,7 +85,8 @@ foreach(MyFormat ${MyFormatList})
 #  file(APPEND  "${ConfigFile}"  "\\documentclass{memoir}\n")
   file(APPEND  "${ConfigFile}"  "\\def\\Version{" "${PROJECT_VERSION}" "}\n")
   file(APPEND  "${ConfigFile}"  "\\def\\EnableDebug{" "yes" "} % USE IT ONLY WHEN DEBUGGING!!!\n")
-  file(APPEND  "${ConfigFile}"  "\\input{../../common/formats/${MyFormat}}\n")
+#  file(APPEND  "${ConfigFile}"  "\\input{../../common/formats/${MyFormat}}\n")
+  file(APPEND  "${ConfigFile}"  "\\documentclass{beamer}\n")
 ## Now configure Defines.tex
   set(PrefixFile "${CMAKE_BINARY_DIR}/src/Defines.tex")
   configure_file("${ConfigFile}" ${PrefixFile})
