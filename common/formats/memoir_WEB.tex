@@ -14,6 +14,8 @@ tight, breaklinks=true,extrafontsizes,
 			linkcolor=webgreen,filecolor=webbrown,citecolor=webgreen, urlcolor=webbrown,
 pdfpagemode=UseNone,pdfstartview=Fit
 ]{memoir}
+%http://tex.stackexchange.com/questions/244380/redefining-a-babel-macro-in-memoir/244383
+\let\Aref\relax	%% Needed for workaround \Aref bug, only in Hungarian
 
 % % Set up the page size	
 % Lets make the text nice and big
