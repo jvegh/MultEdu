@@ -41,16 +41,17 @@
 
 %% Cover illustration
 \ifx\LectureCoverIllustration\undefined
-  \IfFileExists{fig/CoverIllustration.jpeg}
+  \IfGraphicFileExists{fig/CoverIllustration}
   {
 	\MEDebugMessage{memoir_eBook: Using user's cover illustration}
-    \ThisLLCornerWallPaper{1}{fig/CoverIllustration}
+%    \ThisLLCornerWallPaper{1.33}{fig/CoverIllustration}
+	\CenterWallPaper{1.33}{fig/CoverIllustration}
   }
   {
-  \IfFileExists{../../common/fig/CoverIllustration.jpeg}
+  \IfFileExists{../../common/fig/CoverIllustration}
     {
     \MEDebugMessage{memoir_eBook: Using default cover illustration, if any}
-    \ThisLLCornerWallPaper{1}{../../common/fig/CoverIllustration.jpeg}
+    \ThisLLCornerWallPaper{1}{../../common/fig/CoverIllustration}
     }
     {
       \MEDebugMessage{memoir_eBook: Using NO cover illustration}
@@ -60,6 +61,7 @@
 {
   \IfFileExists{\LectureCoverIllustration}
   {
+%	\CenterWallPaper{1.33}{fig/CoverIllustration}
     \ThisLLCornerWallPaper{1}{\LectureCoverIllustration}
     \MEDebugMessage{memoir_eBook: Cover illustration '\LectureCoverIllustration' used}
 }
