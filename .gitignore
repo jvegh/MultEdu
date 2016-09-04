@@ -54,5 +54,10 @@ build/
 *.synctex.gz
 *-blx.bib
 *.toc
+*.vrb
+
+# TeX generated files
+english_*
+magyar_*
 
 
