@@ -45,7 +45,8 @@
 \ifx\DisableTOC\undefined
 \AtBeginSection[]
 {
-\ifx \suppresssectionTOC \undefined
+\ifthenelse{\isempty{\MEchapterillustration}}
+{ % There is no background
 	\MEDframe[shrink]		
 	{Chapter outline}
 		{
@@ -55,7 +56,25 @@
 		{
 				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
 		}
-\fi
+}
+{
+{
+\usebackgroundtemplate{%
+\tikz\node[opacity=0.3] {\includegraphics[height=\paperheight,width=\paperwidth]{fig/illustration_tour}};}
+
+	\MEDframe[shrink]		
+	{Chapter outline}
+		{
+				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
+		}
+	{Fejezet  tartalomjegyz\'ek}
+		{
+				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
+		}
+}
+}
+
+%\fi
 }
 
 \AtBeginSubsection[]
