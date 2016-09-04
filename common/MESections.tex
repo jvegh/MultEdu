@@ -196,8 +196,7 @@
 \newcommand{\MEsubsubsection}[2][]{
 	\phantomsection % A hook for hyper references
 	\ifx\LecturePrintable\undefined % Making slides
-			%\ifthenelse{\isempty{#1}}{}{
-			\par\noindent\bfseries #2\par%}
+%			\par\noindent{\bfseries #2}\par%
 	\else %Printing book
 		\ifthenelse{\isempty{#1}}{\subsubsection{#2}}{\subsubsection[#1]{#2}}
 	\fi %Printable
