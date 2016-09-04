@@ -3,6 +3,7 @@
 \usepackage[most]{tcolorbox}	% rounded color boxes
 \usepackage{wallpaper}
 \usepackage{url}
+%\usepackage{tikz}
 \tcbuselibrary{breakable}
 
 %% Set up document-wide settings like title, subtitle, publisher, etc.
@@ -42,10 +43,35 @@
 \setbeamercolor{framesubtitle}{fg=white}
 		\def\framelabel{\LectureTitle}
 
+
 \ifx\DisableTOC\undefined
 \AtBeginSection[]
 {
-\ifthenelse{\isempty{\MEchapterillustration}}
+  \IfGraphicFileExists{fig/CoverIllustration}
+{{
+%\par File is \Coverillustration\par
+\usebackgroundtemplate{%
+\tikz\node[opacity=0.2] {\includegraphics[height=\paperheight,width=\paperwidth]{fig/CoverIllustration}};}
+
+  \ifthenelse{\equal{\LectureLanguage}{magyar}}
+	{
+	\MEframe[shrink]		
+{Fejezet  tartalomjegyz\'ek}
+		{
+				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
+		}
+	}
+	{}
+  \ifthenelse{\equal{\LectureLanguage}{english}}
+	{
+	\MEframe[shrink]		
+{Chapter outline}
+		{
+				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
+		}
+	}
+	{}
+}}
 { % There is no background
 	\MEDframe[shrink]		
 	{Chapter outline}
@@ -57,30 +83,14 @@
 				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
 		}
 }
-{
-{
-\usebackgroundtemplate{%
-\tikz\node[opacity=0.3] {\includegraphics[height=\paperheight,width=\paperwidth]{fig/illustration_tour}};}
-
-	\MEDframe[shrink]		
-	{Chapter outline}
-		{
-				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
-		}
-	{Fejezet  tartalomjegyz\'ek}
-		{
-				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
-		}
-}
-}
-
-%\fi
 }
 
 \AtBeginSubsection[]
 {
 \ifx \suppresssectionTOC \undefined
 
+\ifthenelse{\isempty{\Chapterillustration}}
+{ % There is no background
 	\MEDframe[shrink]
 		{Section outline}
 		{
@@ -90,11 +100,34 @@
 		{
 			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
 		}
-
+}
+{
+{
+\usebackgroundtemplate{%
+\tikz\node[opacity=0.3] {\includegraphics[height=\paperheight,width=\paperwidth]{\Chapterillustration}};}
+  \ifthenelse{\equal{\LectureLanguage}{magyar}}
+	{
+	\MEframe[shrink]		
+{Szakasz tartalomjegyz\'ek}
+		{
+			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+		}
+	}
+	{}
+  \ifthenelse{\equal{\LectureLanguage}{english}}
+	{
+	\MEframe[shrink]		
+{Section outline}
+		{
+			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+		}
+	}
+	{}
+}
+}
 \fi
 }
 \fi %\DisableTOC
-
 \input{../../common/MEColors}		% Set up used colors
 \input{../../common/MELanguages}	% Set up selected language
 \input{../../common/MEPackages}	% Use the common packets
@@ -201,8 +234,6 @@
 {\def\TitleTextLogo{\includegraphics[height=1cm]{../../common/images/LatexText}}
     \pgfdeclareimage[height=.5cm]{textlogo}{../../common/images/LatexText}
     }
-
-
 %			
 %% A macro for representing the front matter needed in the selected form
 %%
