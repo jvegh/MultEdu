@@ -1,10 +1,11 @@
 %%% Now select the language
 
 \MEDebugMessage{MELanguages: started to load}
+%% This must be after language selection
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 %\usepackage[latin2]{inputenc}
-\usepackage{t1enc}
+%\usepackage{t1enc}
 \usepackage{ifthen}
 \ifx\LectureLanguage\undefined
     \def\LectureLanguage{english}	%% 
@@ -32,15 +33,14 @@
   {%% implement Hungarian documenting
     \MEDebugMessage{MELanguages: Hungarian language selected}
     \ifx\UseSecondLanguage\undefined
-	  \usepackage[english,magyar]{babel}
+	  \usepackage[english,hungarian]{babel}
     \else
-	  \usepackage[magyar]{babel}
+	  \usepackage[hungarian]{babel}
     \fi
-	\selectlanguage{magyar}
+	\selectlanguage{hungarian}
 	\frenchspacing
   	\hyphenpenalty=2000
   	\tolerance=20000
-%	\let\Aref\relax	%% Needed for workaround \Aref bug
 	\def\MEAbstract{Kivonat}
   	\MEDebugMessage{MELanguages: Hungarian language selected}
   }% true
