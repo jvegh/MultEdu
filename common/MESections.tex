@@ -14,16 +14,29 @@
 \newcommand{\MEframe}[3][]
 {
 	\MEframelabel{#2}
-	\setkeys{MEMacros}{shrink=true, plain=false, #1}% 
+	\setkeys{MEMacros}{shrink=false, plain=false, #1}% 
 %	\begingroup
-		\expandafter\ifstrequal\expandafter{\ME@shrink}{true}
-			{\def\myshrink{yes}}{}
-		\expandafter\ifstrequal\expandafter{\ME@plain}{true}
-			{\def\myplain{yes}}{}
+	\expandafter\ifstrequal\expandafter{\ME@shrink}{true}
+		{% We are schrinking
+			\expandafter\ifstrequal\expandafter{\ME@plain}{true}
+				{\def\startframe{\begin{frame}[shrink,plain] {\framelabel}{}}}
+				{\def\startframe{\begin{frame}[shrink] {\framelabel}{}}}
+		%\def\myshrink{yes}
+		}
+		{% We are not schrinking
+			\expandafter\ifstrequal\expandafter{\ME@plain}{true}
+			{\def\startframe{\begin{frame}[plain] {\framelabel}{}}}
+			{\def\startframe{\begin{frame} {\framelabel}{}}}
+		}
+%		\expandafter\ifstrequal\expandafter{\ME@plain}{true}
+%			{\def\myplain{yes}}{}
+			
+			
+			\def\startframe{\begin{frame}[shrink] {\framelabel}{}}
 			\ifx\LecturePrintable\undefined	% Making slides
-						\begin{frame}[shrink] {\framelabel}{}
+						\startframe
 	%					Just normal\par
-						#3 %\par\phantom{-}
+						#3 \par\phantom{-}\vskip-5\parskip
 						\end{frame}
 %				\ifx\myshrink\undefined
 %					\ifx\myplain\undefined
@@ -242,55 +255,31 @@
 	\fi
 }
 
+
 \def\Chapterillustration{}% Define it as empty
 %% Give the new illustration of chapter in memoir/fancy mode
 \newcommand\MEchapterillustration[1]
 {
 	\ifx\DisableChapterIllustration\undefined
-		\ifthenelse{\isempty{#1}}
+		\ifthenelse{\equal{#1}{}}
 		{	
 			\IfGraphicFileExists{fig/DefaultIllustration}
-				{\def\Chapterillustration{fig/DefaultIllustration}}
-				{}	
+				{
+				\def\Chapterillustration{fig/DefaultIllustration}}
+				{\IfGraphicFileExists{fig/CoverIllustration}
+				{
+				\def\Chapterillustration{fig/CoverIllustration}}
+				{}
+				}	
 		}			
 		{	% The argument is not empty
 		\IfGraphicFileExists{#1}
-			{\def\Chapterillustration{#1}}	% Explicit file present, use that file
+			{\renewcommand\chapterillustration{#1}
+		%	\def\Chapterillustration{#1}
+			}	% Explicit file present, use that file
 			{\DebugMessage{File '#1' not found}
 				}
 		}
-				
-		\ifthenelse{\isempty{\Chapterillustration}}
-		{% No file was found, exit	
-		}
-		{ % File found
-		\ifx\LecturePrintable\undefined
-		%% We are making slides, will be done in \AtBeginSection
-		\else
-			\ifx\FancyBook\undefined
-				\par\noindent\includegraphics[width=\paperwidth]{\ChapterIllustration}
-			\else
-				\renewcommand\chapterillustration{\Chapterillustration}
-			\fi
-		\fi
-		}
-%	\ifx\MEchapterillustration\undefined
-%			% No file was found, exit
-%	\else
-%		\ifx\LecturePrintable\undefined
-%%			\def\framelabel{}
-%%			\MEframe[plain]{}
-%%				{
-%%					\includegraphics[width=\textwidth]{\myfile}
-%%				}
-%		\else % We are printing a book
-%			\ifx\FancyBook\undefined
-%				\par\noindent\includegraphics[width=\paperwidth]{\ChapterIllustration}
-%			\else
-%				\renewcommand\chapterillustration{\Chapterillustration}
-%			\fi
-%		\fi
-%	\fi% \myfile
 	\fi%\DisableChapterIllustration
 }%\MEchapterillustration
 
