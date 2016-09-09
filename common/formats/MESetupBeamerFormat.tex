@@ -87,20 +87,34 @@
 
 \AtBeginSubsection[]
 {
-\ifx \suppresssectionTOC \undefined
+\ifx\suppresssectionTOC\undefined
 
-\ifthenelse{\isempty{\Chapterillustration}}
+\ifthenelse{\equal{\Chapterillustration}{}}
+%\ifthenelse{\isempty{\Chapterillustration}}
 { % There is no background
-	\MEDframe[shrink]
+    \ifthenelse{\equal{\LectureLanguage}{magyar}}
+    {
+      \MEframe[shrink]
+	 	{Szakasz tartalomjegyz\'ek}
+		{
+		Illustration = "\Chapterillustration" \par
+			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+		}
+	}
+	{
+	}
+% % Now check English		
+    \ifthenelse{\equal{\LectureLanguage}{english}}
+    {
+      \MEframe[shrink]
 		{Section outline}
 		{
 			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
 		}
-	 	{Szakasz tartalomjegyz\'ek}
-		{
-			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
-		}
-}
+	}
+	{
+	}
+} %
 {
 {
 \usebackgroundtemplate{%
@@ -125,9 +139,8 @@
 	{}
 }
 }
-\fi
-}
 \fi %\DisableTOC
+}
 \input{../../common/MEColors}		% Set up used colors
 \input{../../common/MELanguages}	% Set up selected language
 \input{../../common/MEPackages}	% Use the common packets
