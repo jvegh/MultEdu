@@ -63,16 +63,17 @@
 }
 
 %%%Usage MEfigurewithtext[keys]{image file}{caption}{label}{copyright}{ScaleFactor}{text}
-\newcommand\MEfigurewithtext[7][]{
+\newcommand\MEfigurewithtext
+[ 7][]{
 	% % Define the environment: a 'figure' if it might float, a simple caption if not
 	\ifx\MayFloat\undefined
 		\def\startsource{}
-		\setlength{\mywidth}{#6\textwidth}
+		\setlength{\mywidth}{\columnwidth}
 		\def\stopsource{}
 		\def\CombinedMode{yes}
 	\else
 	\mbox{}\phantomsection % For hyperlinking!			
-			\setlength{\mywidth}{#6\columnwidth}
+			\setlength{\mywidth}{\columnwidth}
 			\ifx\WEBBook\undefined\else\setlength{\mywidth}{.55\mywidth}\fi
 			\ifx\eBook\undefined\else\setlength{\mywidth}{.7\mywidth}\fi
 			\def\startsource{\par\begin{figure}[!hbtp]}
@@ -109,12 +110,12 @@
 				\end{minipage}
 			}
 }}
-#7
 	\stopsource%
+	\ifx\LecturePrintable\undefined #7\fi
 \else
   \begin{tabular}{cc}
   %This is a combined mode make a tabular environment, left column figure, right column text
-    \begin{minipage}[b]{.55\textwidth}
+    \begin{minipage}[b]{#6\textwidth}
     \setlength{\mywidth}{\textwidth}
 	\par\startsource	  
 	{{\centering
@@ -146,18 +147,12 @@
 }}
 	\stopsource%
 				\end{minipage}
-%  						\maxsizebox{.55\textwidth}{.75\textheight}
-%  						{ 
-%  													
-%  						\includegraphics[width=\mywidth,keepaspectratio]{#2}
-%  						}
-%    \begin{minipage}[b]{.55\textwidth}
-%        {#7}
-%    \end{minipage}%
   &
-    \begin{minipage}[b]{.4\textwidth}
-        {#7}
+  \ifx\LecturePrintable\undefined
+    \begin{minipage}[b]{\textwidth-#6\textwidth}
+ %       {#7}
     \end{minipage}%
+    \fi
   \\
   \end{tabular}
   
