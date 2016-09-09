@@ -27,6 +27,7 @@
 			\def\stopsource{\end{table}}
 		\fi
 	\fi
+	\par\vskip-\parskip
 	\startsource	  
 	\mbox{}\phantomsection % For hyperlinking!
 		\begin{center}
@@ -37,7 +38,7 @@
 					\else{\color{HeadingColor}\caption{#3}\label{#4}}
 					\fi 
 				\end{minipage}
-%				\vglue-0.2\baselineskip\par
+%				
 				\begin{minipage}{\mywidth}
 					\ifthenelse{\equal{#5}{}}{}{\vskip-.1\baselineskip{\tiny \copyright #5}	\hfill
 						}  %\copyright
