@@ -16,7 +16,7 @@
 	\else
 	\mbox{}\phantomsection % For hyperlinking!			
 		\ifKV@MEMacros@wide
-			\def\startsource{\par\begin{figure*}[!hbt]	
+			\def\startsource{\par\begin{figure*}[h!bt]	
 					}
 			\def\stopsource{\end{figure*}}
 			\setlength{\mywidth}{#6\textwidth}
@@ -24,7 +24,7 @@
 			\setlength{\mywidth}{#6\columnwidth}
 			\ifx\WEBBook\undefined\else\setlength{\mywidth}{.55\mywidth}\fi
 			\ifx\eBook\undefined\else\setlength{\mywidth}{.7\mywidth}\fi
-			\def\startsource{\par\begin{figure}[!hbtp]}
+			\def\startsource{\par\begin{figure}[h!btp]}
 			\def\stopsource{\end{figure}}
 		\fi
 	\fi

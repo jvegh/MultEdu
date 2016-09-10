@@ -132,13 +132,14 @@
 \makeatletter
 \newcommand\MEquote[3][]{
 	\setkeys{MEMacros}{wide=false,#1}% 
-	\ifKV@MEMacros@wide
-	
+	\ifKV@MEMacros@wide	
 		\begin{NoteBox}*[!htbp]
 					\maxsizebox{\textwidth}{.5\textheight}
 					{
+				\begin{minipage}{\textwidth}
 					\ttext{ #2}\par
 					\hfill #3
+				\end{minipage}
 					}
 		\end{NoteBox}
 	\else
