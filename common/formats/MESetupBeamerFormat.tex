@@ -3,7 +3,6 @@
 \usepackage[most]{tcolorbox}	% rounded color boxes
 \usepackage{wallpaper}
 \usepackage{url}
-%\usepackage{tikz}
 \tcbuselibrary{breakable}
 
 %% Set up document-wide settings like title, subtitle, publisher, etc.
@@ -97,7 +96,6 @@
       \MEframe[shrink]
 	 	{Szakasz tartalomjegyz\'ek}
 		{
-		Illustration = "\Chapterillustration" \par
 			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
 		}
 	}
@@ -145,7 +143,7 @@
 \input{../../common/MELanguages}	% Set up selected language
 \input{../../common/MEPackages}	% Use the common packets
 \input{../../common/MEMacros}
-%\usepackage[plainpages=false,pdfpagelabels,colorlinks=true,linkcolor=ForestGreen,citecolor=ForestGreen]{hyperref}
+%%\usepackage[plainpages=false,pdfpagelabels,colorlinks=true,linkcolor=ForestGreen,citecolor=ForestGreen]{hyperref}
 \usepackage{midfloat}
 	\IfFileExists{src/Glossary.tex}
 	{
@@ -188,15 +186,17 @@
 %\else
 %\fi
 %http://tex.stackexchange.com/questions/18410/how-can-i-add-more-than-one-logo-to-my-beamer-presentation
-\setbeamertemplate{footline}{\raisebox{-2ex}{\pgfuseimage{textlogo}}
-  \usebeamerfont{date in head/foot}\quad\ifx\LecturePublisher\undefined\else\small\bfseries\textcolor{\TitlePageColor}\LecturePublisher\fi\hfill
-  \insertframenumber{}/\inserttotalframenumber\quad\raisebox{-2ex}{\insertlogo}}
 			\MEDebugMessage{Preparing Beamer slides started}
 \newcommand{\frontmatter}{}
 \newcommand{\mainmatter}{}
 \newcommand{\backmatter}{}
 
-
+%\newenvironment{theindex}
+% {\let\item\par
+%  %definitions for subitem etc
+%  }{}
+%\newcommand\indexspace{}
+%
 \def\TitlePageColor{ForestGreen}
 \setbeamerfont{author}{size=\large}
 \setbeamerfont{institute}{size=\normalsize\itshape}
@@ -247,11 +247,17 @@
 {\def\TitleTextLogo{\includegraphics[height=1cm]{../../common/images/LatexText}}
     \pgfdeclareimage[height=.5cm]{textlogo}{../../common/images/LatexText}
     }
-%			
-%% A macro for representing the front matter needed in the selected form
-%%
-%% Usage MEfrontmatter
+\setbeamertemplate{footline}{
+\raisebox{-2ex}{\pgfuseimage{textlogo}
+}
+  \usebeamerfont{date in head/foot}\quad\ifx\LecturePublisher\undefined\else\small\bfseries\textcolor{\TitlePageColor}\LecturePublisher\fi\hfill
+  \insertframenumber{}/\inserttotalframenumber\quad\raisebox{-2ex}{\insertlogo}
+  }
+			
+% A macro for representing the front matter needed in the selected form
 %
+% Usage MEfrontmatter
+
 \newcommand\MEfrontmatter{
 	%% Check if the user wants to have his own front matter
 	\IfFileExists{src/FrontMatter.tex}
