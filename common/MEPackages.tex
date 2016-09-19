@@ -23,8 +23,6 @@
 \savesymbol{iint}
 \savesymbol{iiint}
 
-%	\usepackage{amsthm}
-%	\usepackage{mathtools}	% special math environments
 
 \ifx\MayFloat\undefined	% Packet for non-printable forms
 \else	% Packets for printable forms
@@ -35,7 +33,7 @@
 	\newfloat{exercise}{thp}{lep}[chapter]
 	\floatname{exercise}{\ifx\LectureLanguage\undefined List of exercises\else A gyakorlatok listája \fi}
 	\newfloat{solution}{thp}{lsp}[chapter]
-	\floatname{solution}{\ifx\LectureLanguage A megoldások listája\else\undefined List of solutions\fi}
+	\floatname{solution}{\ifx\LectureLanguage\undefined A megoldások listája\else List of solutions\fi}
 \fi
 
 \ifx\DisableTikz\undefined
@@ -83,14 +81,18 @@ dasdotdotted, every mark/.append style={solid},mark=star\\%
 }
 
 	\usepackage{pdfrender}
-	 \usepackage[backend=bibtex]{biblatex}   	% for beamer bibliography
 \ifx\DisableIndex\undefined
-	\usepackage{makeidx}
 	\ifx\LecturePrintable\undefined
+		\renewcommand{\index}{}
+%		\renewcommand{\indexspace}{}
 	\else
+		\usepackage{makeidx}
 		\usepackage[columns=2]{idxlayout} 
 		\makeindex
 	\fi
+\else
+		\renewcommand{\index}{}
+%%		\renewcommand\indexspace{}
 \fi
 
 \usepackage[toc,acronym]{glossaries}
@@ -99,7 +101,7 @@ dasdotdotted, every mark/.append style={solid},mark=star\\%
 
 \ifx\LectureBibliography\undefined
 \else
-	\usepackage[backend=bibtex]{biblatex} % defined in MEPackages
+	\usepackage[backend=bibtex]{biblatex} 
 	\bibliography{\LectureBibliography}
 \fi
 \MEDebugMessage{MEPackages successfully loaded}
