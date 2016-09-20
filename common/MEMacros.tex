@@ -2,12 +2,14 @@
 % % The macros for the MultEdu system
 % %
 	\MEDebugMessage{MEMacros: started to load}
-        \def\MEVersion{0.4.1}
+        \def\MEVersion{0.4.2}
 	\def\MERevision{MultEdu V\MEVersion}
 
 %% A simple dual language text handler
 \newcommand{\MEDtext}[2]{ 
-{\ifx\UseSecondLanguage\undefined#1\else#2\fi}}
+\ifthenelse{\equal{\LectureLanguage}{\FirstLanguage}}{#1}{}
+\ifthenelse{\equal{\LectureLanguage}{\SecondLanguage}}{#2}{}
+}
 
 %%% This output goes only to the handout, but not to slides
 \newcommand\articleonly[1]{\ifx\LecturePrintable\undefined\else{{\rmfamily #1}}\fi}
