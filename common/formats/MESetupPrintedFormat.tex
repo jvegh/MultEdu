@@ -12,22 +12,7 @@
 \usepackage{url}
 \tcbuselibrary{breakable}
 
-%% Set up options for the session, global, user or none
-% % The user can have his own options in his own /src directory,
-% % otherwise default ones are used
-%\IfFileExists{src/Options.tex}
-%	{\input{src/Options.tex}
-%	\MEDebugMessage{Using user's own options}
-%	}	% % User options
-%	{\IfFileExists{../../common/MEOptions.tex}
-%		{\input{../../common/MEOptions.tex}
-%	     \MEDebugMessage{Using system wide options}
-%		}	% % Default options
-%		{
-%	      \MEDebugMessage{Using NO options}
-%		} % % No options at all
-%	} % Options
-%
+
 %% Set up document-wide settings like title, subtitle, publisher, etc.
 % % The user should have his own definitions in his own /src directory,
 % % otherwise de default ones are used
@@ -35,7 +20,7 @@
 	{\input{src/Heading.tex}}	% % User heading
 	{ %% No heading is to be used
 	      \MEDebugMessage{NO heading information found}
-	} % Options
+	}
 
 
 \setsecnumdepth{subsection}
