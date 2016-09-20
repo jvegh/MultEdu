@@ -1,0 +1,116 @@
+
+%%% This is the chapter about sectioning documents for the MultEdu system
+
+\MEDchapter[Compiling]{Compiling document}{Fordítás}{A dokumentum fordítása}
+
+
+\MESetListingFormat{TeX}
+\lstset{ basicstyle=\ttfamily\color{black}\normalsize}
+
+\MEDsection[Manual]{Manual mode compiling}{Kézi}{Kézi fordítás}
+
+\MEDframe{Settings}
+{
+The MultEdu system works perfectly with its default settings, but it cannot read your mind.
+The settings can be changed using definitions of form \lstinline|\\def\{\\xxx\}|.
+The place where the settings can be changed, depends on the compilation mode.
+The next two sections shows the utilization of the compilation mode,
+while the third one describes the setting in details.
+}
+{Beállítások}
+{
+A MultEdu rendszer tökéletesen működik alapértelmezett beállításokkal is,
+de nem gondolatolvasó. A beállításokat \lstinline|\\def\{\\xxx\}| formájú definíciókkal
+lehet megváltoztatni. A beállítások helye üzemmódtól függ. A következő két szakasz 
+az üzemmódok használatát mutatja be, a harmadik pedig a beállításokat ismerteti részletesen.
+}
+
+\MEDframe{The file Main.tex}
+{
+File \ctext{Main.tex} is the common part of the dual compilation system. 
+This contains the real source code. Any setting in this file (or in the included files)
+overwrites the settings, in both the manual and the batch mode, so it is better
+not to use any settings here. The best policy is to collect all the settings
+in a separate file, which is then included in the main file.
+}
+{A Main.tex fájl}
+{
+A \ctext{Main.tex} fájl a közös és a két fordítási módban egyformán használt rész:
+ez tartalmazza a tényleges forráskódot. Az ebben a fájlban (vagy az ide beolvasott fájlokban)
+szereplő bármely beállítás változtatás megváltoztatja a rendszer beállításait,
+azaz itt nem tanácsos bármiféle beállítást használni. Érdemes az összes beállítást 
+egyetlen fájlba gyűjteni, amit aztán a a fő fájl magába olvas.
+}
+
+
+\MEDframe{Manual mode}
+{
+Developing course materials is best to do using an editor, integrated into an IDE.
+You need to read the real main file (corresponding to \lstinline|Demo.tex|) into the
+editor and mark it as your main document. 
+In the file \lstinline|Main.tex| you should insert references to the chapters of your course material.
+Those chapter files should be placed in subdirectory \lstinline|src|, following the structure of 
+the demonstrational material.
+}
+{Kézi üzemmód}
+{
+A tananyag fejlesztést általában valamilyen szerkesztőbe integrált fejlesztő rendszerrel
+érdemes végezni. A szerkesztőbe be kell olvasni a fő fájlt (a \lstinline|Demo.tex| megfelelőjét)
+és azt gyökér dokumentumként megjelölni.
+A \lstinline|Main.tex| fájlban érdemes hozzáadni a hivatkozásokat a tananyag fejezeteire, ami anyagokat
+természetesen a \lstinline|src| alkönyvtárban célszerű elhelyezni, követve a demonstrációs anyag elrendezését.
+}
+
+\MEDframe{The file for settings}
+{
+The settings file should be placed in subdirectory \lstinline|src|, its reasonable name can be
+\lstinline|Defines.tex|. The task of the wrapper file \lstinline|Demo.tex| is only to input
+the setting file and the main file.
+
+The batch compilation generates a file \lstinline|Defines.tex|, which goes into subdirectory
+\lstinline|build/build/src|. (You may use it to 'cheat', what settings and how should be utilized.)
+The batch compilation also generates a template file \lstinline|Defines.tex.in| in subdirectory \lstinline|src|.
+The content of this file corresponds to the lass pass of the batch compilation.
+}
+{A beállítások tárolására szolgáló fájl}
+{
+A beállítások tárolására szolgáló fájlt is a \lstinline|src| alkönyvtárban érdemes elhelyezni,
+célszerűen \lstinline|Defines.tex| néven. A burkolóként szolgáló \lstinline|Demo.tex| feladata, hogy
+ezt és a fő fájlt beolvassa.
+
+A kötegelt mód a konfigurálás során készít egy \lstinline|Defines.tex| fájlt, de az a \lstinline|build/build/src|
+alkönyvtárba kerül. (Onnét lehet puskázni, hogy mit és hogyan érdemes beállítani; miután egyszer már futott
+a kötegelt fordítás.) A kötegelt fordítás egy "minta" fájlt is készít \lstinline|Defines.tex.in| néven a
+\lstinline|src| alkönyvtárba. Ennek a két fájlnak a tartalma a kötegelt fordítás utolsó menetének fele meg.
+}
+
+\MEDsection[Batch]{Batch mode compiling}{Kötegelt}{Kötegelt fordítás}
+
+\MEDframe{Batch mode compiling}
+{
+a
+}
+{Kötegelt fordítás üzemmód}
+{
+a
+}
+
+\MEDsection[Settings]{Changing default settings}{Beállítások}{Az alapbeállítások megváltoztatása}
+
+\MEDframe{Changing default settings}
+{
+}
+{Az alapbeállítások megváltoztatása}
+{
+}
+%\section{Document frame}
+%
+%\subsection{Frontmatter}
+%
+%\subsection{Mainmatter}
+%
+%\subsection{Backmatter}
+%
+%\section{Document sectioning}
+%
+%chapter, section, 
