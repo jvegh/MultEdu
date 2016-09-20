@@ -1,12 +1,12 @@
 cmake_minimum_required(VERSION 2.8.4)
 
 cmake_policy(SET CMP0048 NEW)
-PROJECT(Demo VERSION 0.02.02 LANGUAGES NONE)
+PROJECT(Demo VERSION 0.02.03 LANGUAGES NONE)
 
 set(MainFile "Demo.tex")	# Is used to define output file name
 set(InputFiles ${MainFile} Main.tex
    src/Heading.tex src/Abstract.tex src/Copyright.tex src/Glossary.tex
-   src/Figures.tex src/General.tex src/Listings.tex src/Organizing.tex src/Sectioning.tex
+   src/Compiling.tex  src/Figures.tex src/General.tex src/Listings.tex src/Organizing.tex src/Sectioning.tex
 )
 ### CMake will copy all source files to its own area
 ### These standard subdirectories are copied by default
@@ -19,11 +19,11 @@ set(InputFiles ${MainFile} Main.tex
 ### If you use dual language source, provide here which source follows first and which is the second
 ### It might change from project to project!
 #
-set(FirstLanguage "magyar") # language must be set!
+set(FirstLanguage "english") # language must be set!
 #
 # Select second language setting
 #
-set(SecondLanguage "english") # Usual setting language
+set(SecondLanguage "magyar") # Usual setting language
 #
 # Choose if you need both languages
 #
@@ -31,9 +31,7 @@ option (NEED_BOTH_LANGUAGES "Make both language versions of the course" ON)
 #
 # Choose if to use the second or 1st language, if only one language
 #
-if(NOT NEED_BOTH_LANGUAGES)
   option (USE_SECOND_LANGUAGE "If to use the 2nd or 1st language" OFF) 
-endif(NOT NEED_BOTH_LANGUAGES)
 #
 
 ### General-purpose settings
@@ -61,10 +59,21 @@ file(COPY ${commonMultEdu} DESTINATION "${MyCommon}/")
 
 # This CMakeLists is called from ./build/build
 
-set(MyLanguageList ${MyLanguageList} magyar)
-set(MyLanguageList ${MyLanguageList} english)
-set(MyFormatList ${MyFormatList} eBook)
-set(MyFormatList ${MyFormatList} WEB)
+### Assemble which language(s) to use
+#
+if(NEED_BOTH_LANGUAGES)
+  set(MyLanguageList  ${FirstLanguage} ${SecondLanguage})
+  SET(USE_SECOND_LANGUAGE OFF CACHE BOOL "If to use the 2nd or 1st language" FORCE)
+else(NEED_BOTH_LANGUAGES)
+  if(USE_SECOND_LANGUAGE)
+    set(MyLanguageList ${SecondLanguage})
+  else(USE_SECOND_LANGUAGE)
+    set(MyLanguageList ${FirstLanguage})
+  endif(USE_SECOND_LANGUAGE)
+endif(NEED_BOTH_LANGUAGES)
+
+#set(MyFormatList ${MyFormatList} eBook)
+#set(MyFormatList ${MyFormatList} WEB)
 set(MyFormatList ${MyFormatList} A4Fancy)
 set(MyFormatList ${MyFormatList} beamer_ME)
   
@@ -76,18 +85,22 @@ foreach(MyFormat ${MyFormatList})
   #
   set(ConfigFile "${CMAKE_SOURCE_DIR}/src/Defines.tex.in" )
   file(WRITE "${ConfigFile}" "%% This file is prepared by CMake, will be overwritten\n")
-## Handle the language
-  file(APPEND  "${ConfigFile}"  "\\def\\LectureLanguage{" "${MyLanguage}" "}\n")
+## Handle the language(s)
+  file(APPEND  "${ConfigFile}"  "\\def\\FirstLanguage{"  "${FirstLanguage}"  "} % In dual language macros\n")
+  file(APPEND  "${ConfigFile}"  "\\def\\SecondLanguage{" "${SecondLanguage}" "} % In dual language macros\n")
+  file(APPEND  "${ConfigFile}"  "\\def\\LectureLanguage{" "${MyLanguage}" "} % What you want to print\n")
+  if(USE_SECOND_LANGUAGE)
+    file(APPEND  "${ConfigFile}"  "\\def\\UseSecondLanguage{YES}   % Now make output in '" "${MyLanguage}"   "'\n")
+  endif(USE_SECOND_LANGUAGE)
   file(APPEND  "${ConfigFile}"  "\\def\\Version{" "${PROJECT_VERSION}" "}\n")
-  file(APPEND  "${ConfigFile}"  "\\def\\EnableDebug{" "yes" "} % USE IT ONLY WHEN DEBUGGING!!!\n")
+  file(APPEND  "${ConfigFile}"  "\\def\\EnableDebug{YES} % USE IT ONLY WHEN DEVELOPING FEATURES!!!\n")
   file(APPEND  "${ConfigFile}"  "\\input{../../common/formats/${MyFormat}}\n")
 
-### Now the configuration file is ready, make configuration
-## Now configure Defines.tex
+  ### Now the configuration file is ready, make configuration
   set(PrefixFile "${CMAKE_BINARY_DIR}/src/Defines.tex")
   configure_file("${ConfigFile}" ${PrefixFile})
 ###
-## Now prepend it to the original Main.tex and  prepare new source files 
+## Now prepend it to the original Main.tex and prepare new source files 
   set(MyFileName "${MyLanguage}_${MyFormat}_${PROJECT_VERSION}_${MainFile}")
   file(READ    ${PrefixFile}   newfile)
   file(WRITE   ${MyFileName} "${newfile}" )
@@ -109,12 +122,18 @@ endif( ${MyFormat} MATCHES  "beamer")
     CONFIGURE src/Defines.tex	  # Prepare a config file for manual compile
 #    BIBFILES src/Bibliography.bib # Use bibliography file
     USE_GLOSSARY                  # Use glossary           
-    ${MyIndex}                     # Use index
+    ${MyIndex}                     # Use index, if not a beamer format
    )
-
-# Just use the second language if multiple languages  
-  option (USE_SECOND_LANGUAGE "If to use the 2nd or 1st language" ON) 
 endforeach(MyFormat)
+
+# Be sure to use the second language if multiple languages  
+  if(NOT USE_SECOND_LANGUAGE)
+#    message("Use 2nd language WAS OFF")
+    SET(USE_SECOND_LANGUAGE ON CACHE BOOL "If to use the 2nd or 1st language" FORCE)
+#    message("Use 2nd language is switched on")
+  else(NOT USE_SECOND_LANGUAGE) 
+#     message("Use 2nd language is now on")
+  endif(NOT USE_SECOND_LANGUAGE)
 endforeach(MyLanguage)
 
 
