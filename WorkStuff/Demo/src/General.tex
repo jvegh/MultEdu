@@ -46,7 +46,7 @@ Az informatikában évről évre változik a technológia, a statisztikák, a te
 
 Manapság a tananyagot a hallgatóság változatos formákban igényli: előadáson nagy méretű, jól áttekinthető,
 kivetíthető anyagot kell használni, amely képekkel gazdagon illusztrált és az előadó számára is jó sorvezetőként szolgál.
-A vizsgára készüléshez pedig arra a magyarázatra is szükség van, amit az előadó a kivetített anyaghoz magyarázatként hozzáfűz.
+A vizsgára készüléshez pedig arra a magyarázatra is szükség van, amit az előadó a kivetített anyaghoz élő szóban hozzáfűz.
 \ao{Azaz, olyan magyarázó szöveggel ellátott anyagra is szükség van, amelyet kinyomtatva, asztali gép vagy mobil eszköz
 képernyőjén lehet elolvasni. Esetleg ugyanazt a változatot idegen nyelven is közzétenni, külföldi hallgatók számára.
 Bár sokszor lehet elérhető könyvekre és megvásárolható jegyzetekre hagyatkozni, a kicsit is speciálisabb anyagok
@@ -68,22 +68,61 @@ nem mindig egyeznek meg a dokumentációval, különösen a kezdeti fázisban.
 {
 The macro package can be used at (at least) three different levels.
 Even the lowest level assumes some familiarity  with \LaTeX.
-At the very basic level, you might 
+At the very basic level, you might just take the package,
+replace and modify files in the distribution.
+At the advanced level (this assumes reading the User's manual \smiley)
+the user learns the facilities provided in the package,
+and prepares his/her courses actively using those facilities.
+Power users might add their own macros (preferably uploaded to the distribution), i.e. take part in the development.
 }
 {Bevezetés}
 {
 A makró csomag (legalább) három különböző felhasználói szinten 
 alkalmazható. Már a legalacsonyabb szinten is szükségesek a \LaTeX-re
 vonatkozó elemi ismeretek.
+Az alap szinten a felhasználó egyszerűen csak helyettesíti és módosítja a rendszert bemutató dokumentumokat.
+Haladó szinten (ehhez már el kell olvasni a felhasználói leírást is \smiley) megtanulja a csomagban található makrók által biztosított lehetőségeket, és azokat aktívan használva fejleszti dokumentumait.
+Tapasztalt felhasználóként saját makrókat is készíthet (jó, ha azokat
+a letölthető anyaghoz hozzáadja), azaz aktívan részt vesz a fejlesztésben.
 }
 
-\MEDsection[Installing]{Installing MultEdu}{Beüzemelés}{A MultEdu beüzemelése}
+\MEDsection[Installing]{Installing and utilizing MultEdu}{Beüzemelés}{A MultEdu beüzemelése és használata}
 
-\MEDframe{What this can be used for}
+\MEDframe{Installing MultEdu}
 {
+Multedu, as any package based on \LaTeX, assumes that the user has
+experiences with using \LaTeX. I.e. some \LaTeX{} distribution must already be installed on the system of the user. If you want to use the
+batch processing facility, the CMake system must also be installed.
+
+For the simplicity of utilization and starting up, 
+the best way is to create a main directory for your family of projects and a subdirectory for your first project, 
+as described below. The quickest way is to copy \lstinline|./Workstuff| (after deleting and renaming some files)
+and to prepare your own "Hello World" program.
+Making minor changes to that source you may experience
+some features of the package. Then, it is worth at least to skim the user's manual, to see what features you need. After that, you may start your own development.
+At the beginning text only, later you can learn the advanced
+possibilities.
+\ao{Do not forget: LaTeX is hard, it needs accurate coding,
+and so is MultEdu too.
+Frequent saving and using versioning can help a lot.}
 }
-{Mire használható}
+{A MultEdu beüzemelése}
 {
+A MultEdu (mint minden \LaTeX{} alapú rendszer) feltételezi, hogy 
+a felhasználó már rendelkezik tapasztalatokkal a \LaTeX{}  használatában.
+Azaz, a felhasználó rendszerén már működnie kell valamilyen \LaTeX{}
+rendszernek.
+
+Az egyszerű használat és a gyors elindulás érdekében célszerű a 
+lentebb megadott módon saját projekt csoportjainak egy főkönyvtárat és
+azon belül az egyes projekteknek alkönyvtárakat létrehozni.
+A leggyorsabb magát a \lstinline|./Workstuff| könyvtárat (a megfelelő átnevezésekkel és törlésekkel) lemásolni, és csekély 
+módosításokkal elkészíteni saját 'Helló Világ' programját.
+Ezután érdemes legalább átlapozni a
+felhasználói kézikönyvet, ami után már elkezdheti saját fejlesztését.
+Eleinte csak szöveget, aztán sorjában megtanulni a használni kívánt tulajdonságok programozását.
+\ao{Ne feledje: a LaTeX nehéz nyelv, pontos kódolást igényel,
+és ezért ilyen a MultEdu is. A gyakori mentések és a verziókövető rendszerek használata nagy segítséget jelentenek.}
 }
 
 \MEDsection[Structure]{Structure of MultEdu}{Szerkezet}{A MultEdu könyvtár szerkezete}
@@ -166,11 +205,11 @@ a MultEdu automatikusan az alapértelmezetteket használja helyettük
 (feltéve, hogy azok használata nincs megtiltva, lásd később).
 }
 
-A \lstinline|./formats| al-alkönyvtár tartalmazza a formátumokat meghatározó makrókat;
-itt adhatja hozzá a felhasználó esetleges saját formátum leíró makróit.
+A \lstinline|./formats| al-alkönyvtár tartalmazza a formátumokat meghatározó makrókat\ao{;
+itt adhatja hozzá a felhasználó esetleges saját formátum leíró makróit.}
 
-Az \lstinline|./images|  al-alkönyvtár képeket tartalmaz, amelyek egy része
-alapértelmezett képként használatos.
+Az \lstinline|./images|  al-alkönyvtár képeket tartalmaz\ao{, amelyek egy része
+alapértelmezett képként használatos.}
 }
 
 \MEDsubsection[\lstinline*Workstuff*]{Subdirectory \lstinline*Workstuff*}{\lstinline*Workstuff*}{A \lstinline*Workstuff* alkönyvtár}
@@ -246,7 +285,7 @@ A fő  \lstinline|Main.tex| menet közben magába olvassa az alkönyvtárakban l
 \par\vskip-\parskip\noindent\lstinline*|   .   |-- dat* a többi adatot \ao{(például
 táblázatok, adatok a pgfplot vagy kód a TikZ ábrák számára)}. 
  
-\ao{További alkönyvtárak is készíthetők, de azokat a felhasználónak kell kezelni, és módosítani a CMakeLists.txt fájlt is.}
+\ao{További alkönyvtárak is készíthetők, de azokat a felhasználónak kell kezelni, és módosítania kell a CMakeLists.txt fájlt is.}
 }
 
 \MEDframe{Subsubdirectories and files for CMake}
@@ -276,43 +315,121 @@ egy saját másolatot a  \lstinline|common| alkönyvtárról.
 Ezek a fájlok bármikor törölhetők: amikor fordít, a CMaker újra generálja azokat}. 
 }
 
-\MEDsection[Usage]{How to use MultEdu}{Használat}{A MultEdu könyvtár használata}
-
-\MEDframe{How to use MultEdu}
-{
-For the simplicity of utilization and starting up, 
-the best way is to create a main directory for your family of themes and a subdirectory for your first theme, 
-as described above. The quickest way is to copy \lstinline|./Workstuff| (after deleting and renaming some files)
-and to prepare your own "Hello World" program.
-At the beginning text only, later you can learns the advance 
-possibilities.
-\ao{Do not forget: LaTeX is hard, it needs accurate coding,
-and so is MultEdu too.
-Frequent saving and using versioning can help a lot.}
-}
-{A MultEdu könyvtár használata}
-{
-Az egyszerű használat és a gyors elindulás érdekében célszerű a 
-fentebb megadott módon saját témáinak egy főkönyvtárat és
-azon belül az egyes témáknak alkönyvtárakat létrehozni.
-A leggyorsabb magát a \lstinline|./Workstuff| könyvtárat (a megfelelő átnevezésekkel és törlésekkel) lemásolni, és csekély 
-módosításokkal elkészíteni saját 'Helló Világ' programját.
-Eleinte csak szöveget, aztán sorjában megtanulni a használni kívánt tulajdonságok programozását.
-\ao{Ne feledje: a LaTeX nehéz nyelv, pontos kódolást igényel,
-és ezért ilyen a MultEdu is. A gyakori mentések és a verziókövető rednszerek használata nagy segítséget jelentenek.}
-}
-
 
 \MEDsection[Defaults]{Default files for package MultEdu}{Alapértelmezett}{A MultEdu csomag alapértelmezett fájljai}
 
-\MEDframe{Default files for package MultEdu}
+\MEDsubsection[Heading]{\ctext{Heading}}{Alapértelmezett}[Heading]{\ctext{Heading}}{Alapértelmezett}
+
+\MEDframe{File \ctexf{Heading}}
 {
-a
+Some kind of heading usually belongs to the document.
+%\begin{lstlisting}
+%\ifthenelse{\equal{\LectureLanguage}{english}}
+%  { % In English
+%	\def\LectureAuthor{J\'anos V\'egh}
+%	\def\LectureTitle{How to use package MultEdu}
+%	\def\LectureSubtitle{(How to prepare interesting and attractive teaching material)}
+%	 %Optional
+%%	\def\LecturePublisher{Miskolc University Faculty of \dots and Informatics}
+%	\def\LectureRevision{V\Version\ (using \MERevision) \at 2016.08.19}
+%  }% true
+%  {% NOT english
+%  }
+%\end{lstlisting}
 }
-{A MultEdu csomag alapértelmezett fájljai}
+{A \ctext{Heading} file}
 {
-a
+A dokumentumokhoz tartozik néhány fejzet leíró definíció.
+Mintaként a felhasználói leírás \ctext{src/Heading.tex} fájlja szolgál.
+%  \ifthenelse{\equal{\LectureLanguage}{magyar}}
+%  {	% in Hungarian
+%	\def\LectureAuthor{V\'egh J\'anos}
+%	\def\LectureTitle{Hogyan haszn\'aljuk\\ a MultEdu csomagot} 
+%	\def\LectureSubtitle{(Hogyan k\'esz\'\i{}ts\"unk \'erdekes\\ \'es vonz\'o tananyagot)} %opcionális
+%%	\def\LecturePublisher{Miskolci Egyetem \dots és Informatikai Kara}
+%	\def\LectureRevision{V\Version\ (a \MERevision\ felhaszn\'al\'as\'aval) \at 2016.08.19}
+%  }% true
+%  {% NOT magyar
+%  }
+
 }
+
+
+\MEDframe{File \ctexf{Heading}}
+{
+Some kind of heading usually belongs to the document.
+
+Line \lstinline|\\def\\LectureAuthor\{J\\'anos V\\'egh\}| defines the author,
+lines \lstinline|\\def\\LectureTitle\{How to use package MultEdu\}|
+and \lstinline|\\def\\LectureSubtitle\{(How to prepare interesting and attractive teaching material)\}| the main title and its subtitle.
+Also a university name or conference name can be defined in \lstinline|\\def\\LecturePublisher\{University or conference\}| line.
+It is good practice to define \lstinline|\\def\\LectureRevision\{V\\Version\\ (using \\MERevision) \\at 2016.08.19\}|, too.
+
+}
+{A \ctext{Heading} file}
+{
+\ao{A fejzetet olyan fázisban olvassa a program, amikor még nem használhatók
+a magyar ékezetes betűk, ezért azokat a szokásos \LaTeX{} kódolással kell írni.}
+A fejzet tartalma:
+
+A \lstinline|\\def\\LectureAuthor\{V\\'egh J\\'anos\}| sor adja meg a szerzőt,
+a \lstinline|\\def\\LectureTitle\{Hogyan haszn\\'aljuk\\\\ a MultEdu csomagot\}|
+a címét, a \lstinline|\\def\\LectureSubtitle\{(Hogyan k\\'esz\\'\\i\{\}ts\\"unk \\'erdekes\\\\ \\'es vonz\\'o tananyagot)\}| pedig a dokumentum címét és alcímét.
+Megadhatunk egy \lstinline|\\def\\LecturePublisher\{Egyetem neve vagy konferencia neve\}| meghatározást is.
+Javasolt egy \lstinline|\\def\\LectureRevision\{V\\Version\\ (a \\MERevision\\ felhaszn\\'al\\'as\\'aval) \\at 2016.09.19\}| formájú sor használata is
+
+}
+
+\MEDframe{File \ctexf{Heading}}
+{ When using dual-language source files, 
+
+To prepare dual-language documents, the definitions should be put in frame 
+like 
+\noindent\lstinline|\\ifthenelse\{\\equal\{\\LectureLanguage\}\{english\}\}|\par
+\noindent\vskip-\parskip\lstinline|  \{\% in English|\par
+\noindent\vskip-\parskip\lstinline|  \}\% true|\par
+\noindent\vskip-\parskip\lstinline|  \{\% NOT english|\par
+\noindent\vskip-\parskip\lstinline|  \}|\par
+}
+{A \ctext{Heading} file}
+{ Kétnyelvű dokumentumok készítéséhez a fentieket
+\noindent\lstinline|\\ifthenelse\{\\equal\{\\LectureLanguage\}\{magyar\}\}|\par
+\noindent\vskip-\parskip\lstinline|  \{\% in Hungarian|\par
+\noindent\vskip-\parskip\lstinline|  \}\% true|\par
+\noindent\vskip-\parskip\lstinline|  \{\% NOT magyar|\par
+\noindent\vskip-\parskip\lstinline|  \}|\par
+blokkban kell elhelyezni.
+}
+
+\MEDframe{File \ctexf{Heading}}
+{
+Also here we can give e-mail address
+
+\lstinline|\\def\\LectureEmail\{Janos.Vegh\\at unideb.hu\}|
+
+Furthermore, one can provide  \ctext{BibTeX},
+even conditionally, depending on the language or the presence of some files
+
+\noindent\vskip-\parskip\lstinline|\\IfFileExists\{src/Bibliographyhu\}|\par
+\noindent\vskip-\parskip\lstinline|\{\\def\\LectureBibliography\{src/Bibliography,src/Bibliographyhu\}\}|\par
+\noindent\vskip-\parskip\lstinline|\{\\def\\LectureBibliography\{src/Bibliography\}\}|\par
+ 
+}
+{A \ctext{Heading} file}
+{
+Megadhatunk számítógépes címet is
+
+\lstinline|\\def\\LectureEmail\{Janos.Vegh\\at unideb.hu\}|
+
+Ugyancsak itt célszerű megadni a dokumentumban használt \ctext{BibTeX} fájlokat, akár a nyelv, vagy a fájl tényleges fellelhetősége alapján:
+
+\noindent\vskip-\parskip\lstinline|\\IfFileExists\{src/Bibliographyhu\}|\par
+\noindent\vskip-\parskip\lstinline|\{\\def\\LectureBibliography\{src/Bibliography, src/Bibliographyhu\}\}|\par
+\noindent\vskip-\parskip\lstinline|\{\\def\\LectureBibliography\{src/Bibliography\}\}|\par
+ 
+}
+
+
 
 \MEDsection[Options]{Options for using package MultEdu}{Beállítások}{A MultEdu csomag beállítási lehetőségei}
 
