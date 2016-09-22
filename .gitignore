@@ -58,7 +58,7 @@ build/
 *.vrb
 
 # TeX generated files
-english_*
-magyar_*
+./english_*
+./magyar_*
 
 
