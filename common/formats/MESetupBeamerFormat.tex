@@ -44,106 +44,95 @@
 
 
 \ifx\DisableTOC\undefined
-\AtBeginSection[]
-{
-  \IfGraphicFileExists{fig/CoverIllustration}
-{{
-%\par File is \Coverillustration\par
-\usebackgroundtemplate{%
-\tikz\node[opacity=0.2] {\includegraphics[height=\paperheight,width=\paperwidth]{fig/CoverIllustration}};}
-
-  \ifthenelse{\equal{\LectureLanguage}{magyar}}
+	\AtBeginSection[]
 	{
-	\MEframe[shrink]		
-{Fejezet  tartalomjegyz\'ek}
+		\IfGraphicFileExists{fig/CoverIllustration}
+		{{%\par File is \Coverillustration\par
+		\usebackgroundtemplate{%
+		\tikz\node[opacity=0.2] {\includegraphics[height=\paperheight,width=\paperwidth]{fig/CoverIllustration}};}
+
+		\ifthenelse{\equal{\LectureLanguage}{magyar}}
+		{
+		\MEframe[shrink]{Fejezet  tartalomjegyz\'ek}
+		{
+				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
+		}
+		}
+		{}
+	    \ifthenelse{\equal{\LectureLanguage}{english}}
+		{
+		\MEframe[shrink]		{Chapter outline}
+		{
+				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
+		}
+		}
+		{}
+	}}
+	{ % There is no background
+		\MEDframe[shrink]{Chapter outline}
+		{
+				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
+		}
+		{Fejezet  tartalomjegyz\'ek}
 		{
 				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
 		}
 	}
-	{}
-  \ifthenelse{\equal{\LectureLanguage}{english}}
-	{
-	\MEframe[shrink]		
-{Chapter outline}
-		{
-				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
-		}
 	}
-	{}
-}}
-{ % There is no background
-	\MEDframe[shrink]		
-	{Chapter outline}
-		{
-				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
-		}
-	{Fejezet  tartalomjegyz\'ek}
-		{
-				\tableofcontents[currentsection,sectionstyle=show/shaded,subsectionstyle=show/shaded/hide,hideallsubsections]
-		}
-}
-}
 
-\AtBeginSubsection[]
-{
-\ifx\suppresssectionTOC\undefined
+	\ifx\DisableSectionTOC\undefined
+	\AtBeginSubsection[]
+	{
 
-\ifthenelse{\equal{\Chapterillustration}{}}
-%\ifthenelse{\isempty{\Chapterillustration}}
-{ % There is no background
-    \ifthenelse{\equal{\LectureLanguage}{magyar}}
-    {
-      \MEframe[shrink]
-	 	{Szakasz tartalomjegyz\'ek}
-		{
+	\ifthenelse{\equal{\Chapterillustration}{}}
+	{ % There is no background
+	    \ifthenelse{\equal{\LectureLanguage}{magyar}}
+	    {
+		    \MEframe[shrink]	{Szakasz tartalomjegyz\'ek}
+			{
 			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+			}
 		}
-	}
-	{
-	}
+		{
+		}
 % % Now check English		
-    \ifthenelse{\equal{\LectureLanguage}{english}}
-    {
-      \MEframe[shrink]
-		{Section outline}
+	    \ifthenelse{\equal{\LectureLanguage}{english}}
+	    {
+		    \MEframe[shrink]{Section outline}
+			{
+			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+			}
+		}
+		{
+		}
+	} %
+	{{
+		\usebackgroundtemplate{%
+		\tikz\node[opacity=0.3] {\includegraphics[height=\paperheight,width=\paperwidth]{\Chapterillustration}};}
+		\ifthenelse{\equal{\LectureLanguage}{magyar}}
+		{
+			\MEframe[shrink]{Szakasz tartalomjegyz\'ek}
+			{
+				\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
+			}
+		}
+		{}
+	  \ifthenelse{\equal{\LectureLanguage}{english}}
+		{
+		\MEframe[shrink]{Section outline}
 		{
 			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
 		}
-	}
-	{
-	}
-} %
-{
-{
-\usebackgroundtemplate{%
-\tikz\node[opacity=0.3] {\includegraphics[height=\paperheight,width=\paperwidth]{\Chapterillustration}};}
-  \ifthenelse{\equal{\LectureLanguage}{magyar}}
-	{
-	\MEframe[shrink]		
-{Szakasz tartalomjegyz\'ek}
-		{
-			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
 		}
+		{}
+	}}
 	}
-	{}
-  \ifthenelse{\equal{\LectureLanguage}{english}}
-	{
-	\MEframe[shrink]		
-{Section outline}
-		{
-			\tableofcontents[currentsubsection,sectionstyle=show/hide,subsectionstyle=show/shaded/hide,subsubsectionstyle=show/shaded/hide]
-		}
-	}
-	{}
-}
-}
-\fi %\DisableTOC
-}
+	\fi %\DisableSectionTOC
+	\fi %\DisableTOC
 \input{../../common/MEColors}		% Set up used colors
 \input{../../common/MELanguages}	% Set up selected language
 \input{../../common/MEPackages}	% Use the common packets
 \input{../../common/MEMacros}
-%%\usepackage[plainpages=false,pdfpagelabels,colorlinks=true,linkcolor=ForestGreen,citecolor=ForestGreen]{hyperref}
 \usepackage{midfloat}
 	\IfFileExists{src/Glossary.tex}
 	{
@@ -191,12 +180,6 @@
 \newcommand{\mainmatter}{}
 \newcommand{\backmatter}{}
 
-%\newenvironment{theindex}
-% {\let\item\par
-%  %definitions for subitem etc
-%  }{}
-%\newcommand\indexspace{}
-%
 \def\TitlePageColor{ForestGreen}
 \setbeamerfont{author}{size=\large}
 \setbeamerfont{institute}{size=\normalsize\itshape}
@@ -211,12 +194,6 @@
 \else
 \institute[\LecturePublisher]{\LecturePublisher	}
 \fi
-%		\title{\LectureTitle}
-%		\subtitle{\LectureSubtitle}
-%\ifx\LogoImageLeft\undefined
-%\else
-%	\titlegraphic{\includegraphics[width=4cm]{\LogoImageLeft}}
-%\fi
 % % End of \titlepage
 
 % http://tex.stackexchange.com/questions/68080/beamer-bibliography-icon
@@ -249,8 +226,10 @@
     }
 \setbeamertemplate{footline}{
 \raisebox{-2ex}{\pgfuseimage{textlogo}
+
 }
   \usebeamerfont{date in head/foot}\quad\ifx\LecturePublisher\undefined\else\small\bfseries\textcolor{\TitlePageColor}\LecturePublisher\fi\hfill
+  \ifx\EnableTimer\undefined \else\cronominutes\pdfcolon\cronoseconds\quad\fi
   \insertframenumber{}/\inserttotalframenumber\quad\raisebox{-2ex}{\insertlogo}
   }
 			
@@ -282,9 +261,9 @@
 	\node[anchor=east]
 	at ([yshift=45pt,xshift=-5pt]current page.south east) (subtitle)
 	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
-	       {  \bfseries\textcolor{\TitlePageColor}
-	       \LectureAuthor\\
-               \ifx\LecturePublisher\undefined\else\small\bfseries\textcolor{\TitlePageColor}\LecturePublisher\fi}
+	       {  \bfseries\textcolor{\TitlePageColor}\LectureAuthor\\
+               \ifx\LecturePublisher\undefined\else\small\bfseries\textcolor{\TitlePageColor}\LecturePublisher\fi
+           }
 	    \end{mybox}
 	}}};
 	\ifx\DisableLogos\undefined
@@ -303,7 +282,7 @@
 						{\begin{mybox}[]{\tiny{\ \LectureRevision}) \ \copyright \LectureAuthor\ (\LectureEmail)}\end{mybox}}};
 		}
 		
-	\fi
+	\fi %DisableLogos
 	\end{tikzpicture}
   
   \end{frame}
@@ -376,13 +355,6 @@
 %% Usage MEbackmatter
 \newcommand\MEbackmatter{
 	%	%% Check if the user wants to have his own back matter
-%	\ifx\DisableIndex\undefined		
-%       \begin{frame}[allowframebreaks]{Tárgymutató}
-%		\printindex
-%	   \end{frame}
-%	\else 
-%			\MEDebugMessage{Index printing disabled}
-%	\fi
 %	%% Now print glossary and acronyms
 %		\IfFileExists{src/Glossary.tex}
 %		{
@@ -406,8 +378,9 @@
 %		{\MEDebugMessage{No Glossary.tex file found}
 %		}	% % If no glossary file exists, make nothing
 
-	\ifx\DisableBibliography\undefined
+\ifx\DisableBibliography\undefined
  %% Printing bibliography is allowed
+ 
 	\ifx\LectureBibliography\undefined
 		\MEDebugMessage{No bibliography file defined}
 	\else
@@ -418,7 +391,7 @@
 		\printbibliography
 	  \end{frame}
       }
-	  {
+	  { % NOT magyar
 	  }	
       \ifthenelse{\equal{\LectureLanguage}{english}}
       {
@@ -426,8 +399,9 @@
 		\printbibliography
 	  \end{frame}
       }
-	  {
+	  { % NOT english
 	  }	
-	\fi		
+	\fi %\LectureBibliography
+\fi	%\DisableBibliography\undefined
 }
 
