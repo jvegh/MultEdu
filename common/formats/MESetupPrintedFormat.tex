@@ -329,9 +329,22 @@
 
 
 \begin{center}
+  \ifthenelse{\equal{\LectureLanguage}{english}}
+  { % In English
 \begin{tabular}{ll}
 First edition:                        & August 2016 \\
 \end{tabular}
+  }% true
+  {% NOT english
+  }
+  \ifthenelse{\equal{\LectureLanguage}{magyar}}
+  { % In English
+\begin{tabular}{ll}
+Első kiadás:                        & 2016 Szeptember \\
+\end{tabular}
+  }% true
+  {% NOT magyar
+  }
 \end{center}
 \vfill
 \ifx\LectureLogo\undefined
