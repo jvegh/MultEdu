@@ -22,7 +22,19 @@
 \usepackage{savesym} 	% http://comments.gmane.org/gmane.emacs.orgmode/72621
 \savesymbol{iint}
 \savesymbol{iiint}
-
+\ifx\EnableTimer\undefined
+\else
+	\ifx\LectureTime\undefined\def\LectureTime{15}\fi
+	\usepackage[timeinterval=1, % 1 sec refresh
+		timeduration=\LectureTime, %Total time, mins
+		resetatpages=2, % Start the timer at page 2
+		timewarningfirst=85,timewarningsecond=95, % Warnings when approaching the end (%)
+		colorwarningfirst=white!60!yellow,
+		fillcolorwarningsecond=white!10!yellow]{ %../../common/
+		tdclock}
+\fi
+%	\usepackage{amsthm}
+%	\usepackage{mathtools}	% special math environments
 
 \ifx\MayFloat\undefined	% Packet for non-printable forms
 \else	% Packets for printable forms
@@ -81,18 +93,14 @@ dasdotdotted, every mark/.append style={solid},mark=star\\%
 }
 
 	\usepackage{pdfrender}
+	 \usepackage[backend=bibtex]{biblatex}   	% for beamer bibliography
 \ifx\DisableIndex\undefined
+	\usepackage{makeidx}
 	\ifx\LecturePrintable\undefined
-		\renewcommand{\index}{}
-%		\renewcommand{\indexspace}{}
 	\else
-		\usepackage{makeidx}
 		\usepackage[columns=2]{idxlayout} 
 		\makeindex
 	\fi
-\else
-		\renewcommand{\index}{}
-%%		\renewcommand\indexspace{}
 \fi
 
 \usepackage[toc,acronym]{glossaries}
@@ -101,7 +109,7 @@ dasdotdotted, every mark/.append style={solid},mark=star\\%
 
 \ifx\LectureBibliography\undefined
 \else
-	\usepackage[backend=bibtex]{biblatex} 
+	\usepackage[backend=bibtex]{biblatex} % defined in MEPackages
 	\bibliography{\LectureBibliography}
 \fi
 \MEDebugMessage{MEPackages successfully loaded}
