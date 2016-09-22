@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.4)
 
 cmake_policy(SET CMP0048 NEW)
-PROJECT(Demo VERSION 0.02.03 LANGUAGES NONE)
+PROJECT(Demo VERSION 0.05.01 LANGUAGES NONE)
 
 set(MainFile "Demo.tex")	# Is used to define output file name
 set(InputFiles ${MainFile} Main.tex
@@ -40,6 +40,11 @@ option (NEED_BOTH_LANGUAGES "Make both language versions of the course" ON)
 option (DEBUG_MODE "Include debug support for lecture making"  ON)
 #
 
+### Beamer-related settings
+# 
+  option ( DISABLE_WIDE_SCREEN "Use 4:3 screen rather than 16:9" OFF)
+  option ( DISABLE_TOC "Disable table of contents, in Beamer only" OFF)
+  option ( DISABLE_SECTION_TOC "Disable sections in table of contents, in Beamer only" OFF)
  
 ###!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ### 
@@ -72,15 +77,14 @@ else(NEED_BOTH_LANGUAGES)
   endif(USE_SECOND_LANGUAGE)
 endif(NEED_BOTH_LANGUAGES)
 
-#set(MyFormatList ${MyFormatList} eBook)
-#set(MyFormatList ${MyFormatList} WEB)
+set(MyFormatList ${MyFormatList} eBook)
+set(MyFormatList ${MyFormatList} WEB)
 set(MyFormatList ${MyFormatList} A4Fancy)
 set(MyFormatList ${MyFormatList} beamer_ME)
   
 ### The beginning of the output generating loop
 foreach(MyLanguage ${MyLanguageList})
 foreach(MyFormat ${MyFormatList})
-  message("Preparing " "format '${MyFormat}'" " in language " "'${MyLanguage}'")
   ### Prepare a new config file
   #
   set(ConfigFile "${CMAKE_SOURCE_DIR}/src/Defines.tex.in" )
@@ -94,6 +98,27 @@ foreach(MyFormat ${MyFormatList})
   endif(USE_SECOND_LANGUAGE)
   file(APPEND  "${ConfigFile}"  "\\def\\Version{" "${PROJECT_VERSION}" "}\n")
   file(APPEND  "${ConfigFile}"  "\\def\\EnableDebug{YES} % USE IT ONLY WHEN DEVELOPING FEATURES!!!\n")
+  
+if( ${MyFormat} MATCHES  "beamer")
+  ## Make beamer-only settings
+  if(DISABLE_WIDE_SCREEN)
+    file(APPEND  "${ConfigFile}"  "\\def\\DisableWideScreen{YES} % I need 4:3 ratio\n")
+  endif(DISABLE_WIDE_SCREEN)
+  if(DISABLE_TOC)
+    file(APPEND  "${ConfigFile}"  "\\def\\DisableTOC{YES} % I need no Table of Contents at all \n")
+  else(DISABLE_TOC)
+    if(DISABLE_SECTION_TOC)
+    file(APPEND  "${ConfigFile}"  "\\def\\DisableSectionTOC{YES} % you need chapters but sections in Table of Contents\n")
+    endif(DISABLE_SECTION_TOC)  
+  endif(DISABLE_TOC)
+else( ${MyFormat} MATCHES  "beamer") 
+  ## Make printed-only settings     
+  set(MyIndex "USE_INDEX")
+endif( ${MyFormat} MATCHES  "beamer")
+  
+    option ( DISABLE_TOC "Disable table of contents, in Beamer only" OFF)
+    option ( DISABLE_SECTION_TOC "Disable sections in table of contents, in Beamer only" OFF)
+  
   file(APPEND  "${ConfigFile}"  "\\input{../../common/formats/${MyFormat}}\n")
 
   ### Now the configuration file is ready, make configuration
@@ -102,6 +127,7 @@ foreach(MyFormat ${MyFormatList})
 ###
 ## Now prepend it to the original Main.tex and prepare new source files 
   set(MyFileName "${MyLanguage}_${MyFormat}_${PROJECT_VERSION}_${MainFile}")
+  message("Preparing file " '${MyFileName}')
   file(READ    ${PrefixFile}   newfile)
   file(WRITE   ${MyFileName} "${newfile}" )
   file(APPEND  ${MyFileName} "\\input{Main.tex}\n"  )
