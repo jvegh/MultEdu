@@ -1,5 +1,9 @@
 \newcommand\MEDebugMessage[1]{\ifx\EnableDebug\undefined \else  \par\message{====MultEdu====:#1}\fi}
 
+\ifx\DisableWideScreen\undefined		
+\usepackage[orientation=landscape,size=custom,width=16,height=9,scale=0.5,debug]{beamerposter} 
+\fi% of \DisableWideScreen
+
 \usepackage[most]{tcolorbox}	% rounded color boxes
 \usepackage{wallpaper}
 \usepackage{url}

@@ -20,9 +20,6 @@
 		]{beamer}	
 %http://tex.stackexchange.com/questions/244380/redefining-a-babel-macro-in-memoir/244383
 \let\Aref\relax	%% Needed for workaround \Aref bug, only in Hungarian
-\ifx\DisableWideScreen\undefined		
-\usepackage[orientation=landscape,size=custom,width=16,height=9,scale=0.5,debug]{beamerposter} 
-\fi% of \DisableWideScreen
 		
 \input{../../common/formats/MESetupBeamerFormat}
 \PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}\usepackage[section]{placeins}			
