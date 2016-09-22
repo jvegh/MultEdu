@@ -87,7 +87,7 @@ Usage:\par
 
 In a similar way, there exists \lstinline|\\MEsubsection[short title]\{long title\}|
 and \lstinline|\\MEsubsubsection[short title]\{long title\}|; the latter one is
-transformed for slides to \lstinline|\\paragraph|
+transformed for slides to \lstinline|\\paragraph|.
 }
 {Fejezet}
 {
@@ -113,10 +113,9 @@ Obviously it is advantageous, if they are located in the same source file, side 
 so they can be developed in the same action.
 The \lstinline|\\UseSecondLanguage| macro supports this method.
 
-The macros introduced above have a version with prefix 'MED' rather than 'ME only,
+The macros introduced above have a version with prefix 'MED' rather than 'ME' only,
 which takes double argument sets (arguments for both languages). Depending on whether \lstinline|\\UseSecondLanguage| is defined,
-the first or the second argument set is used. In this way, just the 'src/Heading.tex'
-source file shall be edited, and the other language output will be prepared.
+the first or the second argument set is used.
 }
 {Kétnyelvű forráskódok}
 {
@@ -126,8 +125,7 @@ Nyilván előnyös, ha a két anyag ugyanabban a forrásnyelvi fájlban, egymás
 
 Erre szolgál a \lstinline|\\UseSecondLanguage|. A fent bevezetett makróknak van egy 'D' (Dual) taggal
 kibővített változata, amelyikben mind az elsődleges, mind a másodlagos nyelven 
-megadjuk a szükséges tartalmakat. A 'Heading.tex' file megváltoztatásával készíthetünk 
-más nyelvű dokumentumot.
+megadjuk a szükséges tartalmakat.
 }
 \index{UseSecondLanguage@\bs UseSecondLanguage}
 \MEDsubsection{Switching between languages}{}{Átváltás a nyelvek között}
@@ -140,7 +138,6 @@ Usage:
 \noindent\lstinline|\\UseSecondLanguage\{YES\}|
 
 \noindent where the argument \lstinline|\{\}| is not relevant, only if this macro is defined or not.
-Traditionally, it is defined in 'src/Heading.tex'.
 
 The two kinds of macros can be mixed, but only the 'D' macros 
 are sensitive to changing the language.
@@ -153,7 +150,6 @@ Használata:
 \noindent\lstinline|\\UseSecondLanguage\{YES\}|
 
 \noindent ahol az \lstinline|\{\}| nem számít, csak az, hogy definiálva van-e ez a makro.
-Hagyományosan az 'src/Heading.tex' fájlban definiáljuk.
 
 A kétféle makrókészlet keverhető, de csak a 'D' makrók reagálnak 
 a nyelv változtatásra.

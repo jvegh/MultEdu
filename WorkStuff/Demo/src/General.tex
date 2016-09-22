@@ -19,7 +19,7 @@ In informatics, the technology, the statistics, the products, the tools, etc. ch
 and this alone is a good reason to renew the teaching material for a new semester.}
 
 The todays education needs the course material in various forms: in the lecture room for the projected 
-picture well organized text with many pictures are needed, which also serve as a good guide fro the lecture, too.
+picture well organized text with many pictures are needed, which also serve as a good guide for the lecturer, too.
 To prepare for the exams, the explanation provided by the lecturer when projecting the slides is also needed.
 \ao{That means, the course material should be available in printable and browsable form, as well as for mobile devices.
 A frequent case is that the same material shall be provided in foreign language(s), for foreign students.
@@ -32,7 +32,7 @@ In this way also others can use the package, when they follow the rules. The pac
 in some fields, at some point I needed to make a bargain between the different needs, not perfect
 in some points, and of course in much more aspects I did not have the time to develop features.}
 
-The present document is a demo and test at the same time. A dokumentum attempts to describe the many features,
+The present document is a demo and test at the same time. It attempts to describe the many features,
 and also tests if the features really work. Because of the many features, and their interference,
 this job needs a lot of work and time, so the documentation does not always match the actual features,
 especially in this initial phase.
@@ -62,6 +62,8 @@ A jelen dokumentum egyúttal bemutató és tulajdonság tesztelő is. A dokument
 kell és lehet használni, egyúttal azt is megvizsgálva, hogy tényleg működik-e az elvárt módon. A sokféle tulajdonság
 és különösen azok kölcsönhatása miatt sok munkát és időt igényel a fejlesztés, ezért a tényleges tulajdonságok
 nem mindig egyeznek meg a dokumentációval, különösen a kezdeti fázisban. 
+
+
 }
 
 \MEDframe{Introduction}
@@ -103,7 +105,7 @@ some features of the package. Then, it is worth at least to skim the user's manu
 At the beginning text only, later you can learn the advanced
 possibilities.
 \ao{Do not forget: LaTeX is hard, it needs accurate coding,
-and so is MultEdu too.
+and so is MultEdu, too.
 Frequent saving and using versioning can help a lot.}
 }
 {A MultEdu beüzemelése}
@@ -129,7 +131,7 @@ Eleinte csak szöveget, aztán sorjában megtanulni a használni kívánt tulajd
 
 \MEDframe{Directory structure}
 {
-The MultEdu system is assumed to be used with the directury structure below.
+The MultEdu system is assumed to be used with the directory structure below.
 It comes with two main subdirectories: \lstinline|./common| comprises all files of
 the MultEdu system, and  \lstinline|./Workstuff| models the users subdirectory structure.
 \par\vskip-\parskip\noindent\lstinline*.*
@@ -182,7 +184,7 @@ Subsubdirectory \lstinline|./defaults| contains some default text, like copyrigh
 (provided that using and presenting it is not disabled, see later.)}
 
 Subsubdirectory \lstinline|./formats| contains the possible format specification macros,
-here you can add your ownformat macros.
+here you can add your own format macros.
 
 Subsubdirectory \lstinline|./images| contains some images, partly the ones which are used 
 as defaults.
@@ -216,12 +218,12 @@ alapértelmezett képként használatos.}
 \MEDframe{Files in subdirectory \lstinline|Workstuff|}
 {
 Subdirectory \lstinline|./Workstuff| contains the files of the present demo,
-and serves as an example of using the system. It contains a sample project \lstinline|./Workstuff/Demo|, which has three main files.
+and serves as an example of using the system (a kind of User's Guide). It contains a sample project \lstinline|./Workstuff/Demo|, which has three main files.
 \par\vskip-\parskip\noindent\lstinline*|-- WorkStuff*
 \par\vskip-\parskip\noindent\lstinline*|    |-- Demo*
-\par\vskip-\parskip\noindent\lstinline*|        |-- CMakeLists.txt*
-\par\vskip-\parskip\noindent\lstinline*|        |-- Demo.tex*
-\par\vskip-\parskip\noindent\lstinline*|        |-- Main.tex*
+\par\vskip-\parskip\noindent\lstinline*|    .    |-- CMakeLists.txt*
+\par\vskip-\parskip\noindent\lstinline*|    .    |-- Demo.tex*
+\par\vskip-\parskip\noindent\lstinline*|    .    |-- Main.tex*
 
 The real main source file is \lstinline|Main.tex|, and \lstinline|Demo.tex| is a lightweight envelope to it. 
 (if you want to use UseLATEX, you need to use the file with name \lstinline|Main.tex|, the envelop must be concerted with the CMakeLists.txt file)
@@ -234,7 +236,7 @@ három fájlból áll.
 \par\vskip-\parskip\noindent\lstinline*|-- WorkStuff*
 \par\vskip-\parskip\noindent\lstinline*|    |-- Demo*
 \par\vskip-\parskip\noindent\lstinline*|    .    |-- CMakeLists.txt*
-\par\vskip-\parskip\noindent\lstinline*|    .   |-- Demo.tex*
+\par\vskip-\parskip\noindent\lstinline*|    .    |-- Demo.tex*
 \par\vskip-\parskip\noindent\lstinline*|    .    |-- Main.tex*
 
 A valódi főprogram  \lstinline|Main.tex|, és ehhez készült egy \lstinline|Demo.tex| nagyon egyszerű boríték. 
@@ -262,7 +264,7 @@ Subsubdirectory
 \par\vskip-\parskip\noindent\lstinline*|   .   |-- lst* for the program source files,
 \par\vskip-\parskip\noindent\lstinline*|   .   |-- dat* for the other data \ao{(like tabulated data for pgfplot or TikZ figures source code)}. 
  
-\ao{You may use (and handle!, especially in CMakeLists.txt) further subsubdirectories}
+\ao{You may use (and handle!, especially in CMakeLists.txt) further subsubdirectories.}
 }
 {A \lstinline|./Workstuff| al-alkönyvtárai}
 {
@@ -299,7 +301,7 @@ Subsubdirectories \par\vskip-\parskip\noindent\lstinline*|-- build* and \par\vsk
 \par\vskip-\parskip\noindent are only needed
 if using CMake\ao{; they contain temporary files created during processing.
 The system also makes its own copy of the subdirectory \lstinline|common| in 
-subdirectory \lstinline|Demo|. Those files can be deleted any time: when compiling,
+your project directory (corresponding to subdirectory \lstinline|Demo|). Those files can be deleted any time: when compiling,
 CMake will regenerate them}.
 }
 {A CMake al-alkönyvtárai és fájljai}
@@ -310,7 +312,7 @@ hogy egy szerkesztés után, a kötegelt feldolgozási módot használva, egyetl
 A \par\vskip-\parskip\noindent\lstinline*|-- build* és \par\vskip-\parskip\noindent\lstinline*|   .  .  |-- build*
 \par\vskip-\parskip\noindent alkönyvtárak csak akkor kellenek
 ha a CMake rendszert használjuk\ao{; ezek a feldolgozás során szükséges 
-átmeneti fájlokat tartalmazzák. A rendszer készít a \lstinline|Demo| alkönyvtárba 
+átmeneti fájlokat tartalmazzák. A rendszer készít a projekt könyvtárába (ami a \lstinline|Demo| alkönyvtárnak felel meg 
 egy saját másolatot a  \lstinline|common| alkönyvtárról.
 Ezek a fájlok bármikor törölhetők: amikor fordít, a CMaker újra generálja azokat}. 
 }
@@ -318,11 +320,12 @@ Ezek a fájlok bármikor törölhetők: amikor fordít, a CMaker újra generálj
 
 \MEDsection[Defaults]{Default files for package MultEdu}{Alapértelmezett}{A MultEdu csomag alapértelmezett fájljai}
 
-\MEDsubsection[Heading]{\ctext{Heading}}{Alapértelmezett}[Heading]{\ctext{Heading}}{Alapértelmezett}
+\MEDsubsection[Heading]{\ctext{Heading}}{Alapértelmezett}{Alapértelmezett}
 
-\MEDframe{File \ctexf{Heading}}
+\MEDframe{File \ctext{Heading}}
 {
 Some kind of heading usually belongs to the document.
+As an example see file \ctext{src/Heading.tex} of this user's guide.
 %\begin{lstlisting}
 %\ifthenelse{\equal{\LectureLanguage}{english}}
 %  { % In English
@@ -355,10 +358,8 @@ Mintaként a felhasználói leírás \ctext{src/Heading.tex} fájlja szolgál.
 }
 
 
-\MEDframe{File \ctexf{Heading}}
+\MEDframe{File \ctext{Heading}}
 {
-Some kind of heading usually belongs to the document.
-
 Line \lstinline|\\def\\LectureAuthor\{J\\'anos V\\'egh\}| defines the author,
 lines \lstinline|\\def\\LectureTitle\{How to use package MultEdu\}|
 and \lstinline|\\def\\LectureSubtitle\{(How to prepare interesting and attractive teaching material)\}| the main title and its subtitle.
@@ -380,9 +381,9 @@ Javasolt egy \lstinline|\\def\\LectureRevision\{V\\Version\\ (a \\MERevision\\ f
 
 }
 
-\MEDframe{File \ctexf{Heading}}
-{ When using dual-language source files, 
-
+\MEDframe{File \ctext{Heading}}
+{ When using dual-language source files, one has to prepare the source
+in a form which allows to select source lines depending on the language.
 To prepare dual-language documents, the definitions should be put in frame 
 like 
 \noindent\lstinline|\\ifthenelse\{\\equal\{\\LectureLanguage\}\{english\}\}|\par
@@ -401,9 +402,9 @@ like
 blokkban kell elhelyezni.
 }
 
-\MEDframe{File \ctexf{Heading}}
+\MEDframe{File \ctext{Heading}}
 {
-Also here we can give e-mail address
+Also here you can give e-mail address
 
 \lstinline|\\def\\LectureEmail\{Janos.Vegh\\at unideb.hu\}|
 
@@ -411,7 +412,8 @@ Furthermore, one can provide  \ctext{BibTeX},
 even conditionally, depending on the language or the presence of some files
 
 \noindent\vskip-\parskip\lstinline|\\IfFileExists\{src/Bibliographyhu\}|\par
-\noindent\vskip-\parskip\lstinline|\{\\def\\LectureBibliography\{src/Bibliography,src/Bibliographyhu\}\}|\par
+\noindent\vskip-\parskip\lstinline|\{\\def\\LectureBibliography\{src/Bibliography
+,src/Bibliographyhu\}\}|\par
 \noindent\vskip-\parskip\lstinline|\{\\def\\LectureBibliography\{src/Bibliography\}\}|\par
  
 }
@@ -442,6 +444,43 @@ a
 a
 }
 
+\MEDsubsection[Beamer]{Options for Beamer-based formats}{Beamer}{Beamer alapú formátum beállítások}
+
+\MEDframe{Screen width}
+{
+Multedu allows to utilize two popular screen width.
+The default is the spreading format with aspect ratio 16:9.
+To set ratio 4:3, use
+\noindent\vskip-\parskip\lstinline|\{\\def\\DisableWideScreen\{YES\}\}|\par
+}
+{Képernyő szélesség}
+{
+A Multedu lehetővé teszi kétféle elterjedt formátum használatát.
+Egyre gyakoribb 16:9  arányú képformátum így az az alap beállítás.
+A 4:3 arányú képformátumot a 
+\noindent\vskip-\parskip\lstinline|\{\\def\\DisableWideScreen\{YES\}\}|\par
+definiálásával lehet beállítani.
+}
+
+\MEDframe{Table of contents}
+{
+Sometimes (mainly in the case of short presentations) the table of contents is not necessary at all.
+It can be disabled through defining 
+\noindent\vskip-\parskip\lstinline|\{\\def\\DisableTOC\{YES\}\}|\par
+It might also happen, that chapter-level TOC is still needed, but the section level not.
+This can be reached through defining
+\noindent\vskip-\parskip\lstinline|\{\\def\\DisableSectionTOC\{YES\}\}|\par
+}
+{Tartalomjegyzék}
+{
+Néha (főként rövid bemutatók esetén) egyáltalán nincs szükség tartalomjegyzékre.
+Ezt a 
+\noindent\vskip-\parskip\lstinline|\{\\def\\DisableTOC\{YES\}\}|\par
+definiálásával lehet elérni. Az is előfordul, hogy a fejezet-szintű
+tartalomjegyzék még szükséges, de a szakasz szintű már nem. Ezt a
+\noindent\vskip-\parskip\lstinline|\{\\def\\DisableSectionTOC\{YES\}\}|\par
+definiálásával lehet elérni.
+}
 
 \MEDsection[Tips]{Tips for using package MultEdu}{Ötletek}{Ötletek a MultEdu csomag használatához}
 

@@ -14,8 +14,8 @@
 The MultEdu system works perfectly with its default settings, but it cannot read your mind.
 The settings can be changed using definitions of form \lstinline|\\def\{\\xxx\}|.
 The place where the settings can be changed, depends on the compilation mode.
-The next two sections shows the utilization of the compilation mode,
-while the third one describes the setting in details.
+The next two sections shows the utilization of the compilation modes,
+while the third one describes the settings in details.
 }
 {Beállítások}
 {
@@ -31,7 +31,7 @@ File \ctext{Main.tex} is the common part of the dual compilation system.
 This contains the real source code. Any setting in this file (as well as in the included files)
 overwrites the settings, in both the manual and the batch mode, so it is better
 not to use any settings here. The best policy is to collect all the settings
-in a separate file, which is then included in the main file.
+in a separate file, which is then included in the envelope file.
 }
 {A Main.tex fájl}
 {
@@ -46,7 +46,7 @@ egyetlen fájlba gyűjteni, amit aztán a fő fájl magába olvas.
 \MEDframe{Manual mode}
 {
 Developing course materials is best to do using an editor, integrated into an IDE.
-You need to read the real main file (corresponding to \lstinline|Demo.tex|) into the
+You need to read the envelope file (corresponding to \lstinline|Demo.tex|) into the
 editor and mark it as your main document. 
 In the file \lstinline|Main.tex| you should insert references to the chapters of your course material.
 Those chapter files should be placed in subdirectory \lstinline|src|, following the structure of 
@@ -55,7 +55,7 @@ the demonstrational material.
 {Kézi üzemmód}
 {
 A tananyag fejlesztést általában valamilyen szerkesztőbe integrált fejlesztő rendszerrel
-érdemes végezni. A szerkesztőbe be kell olvasni a fő fájlt (a \lstinline|Demo.tex| megfelelőjét)
+érdemes végezni. A szerkesztőbe be kell olvasni a boríték fájlt (a \lstinline|Demo.tex| megfelelőjét)
 és azt gyökér dokumentumként megjelölni.
 A \lstinline|Main.tex| fájlban érdemes hozzáadni a hivatkozásokat a tananyag fejezeteire, ami anyagokat
 természetesen a \lstinline|src| alkönyvtárban célszerű elhelyezni, követve a demonstrációs anyag elrendezését.
@@ -70,7 +70,7 @@ the setting file and the main file.
 The batch compilation generates a file \lstinline|Defines.tex|, which goes into subdirectory
 \lstinline|build/build/src|. (You may use it to 'cheat', what settings and how should be utilized.)
 The batch compilation also generates a template file \lstinline|Defines.tex.in| in subdirectory \lstinline|src|.
-The content of this file corresponds to the lass pass of the batch compilation.
+The content of this file corresponds to the last pass of the batch compilation.
 }
 {A beállítások tárolására szolgáló fájl}
 {
@@ -92,10 +92,10 @@ Batch processing serves (mainly) the goal to generate the output
 from the common source in the different formats and languages.
 
 From technical reasons, MultEdu prepares a private copy from
-the MultEdu files, in the subdirectory \lstinline|common|  of the group.
+the MultEdu files, in the subdirectory \lstinline|common|  of the project.
 You may safely experiment with this copy or also delete it; the next
 batch compile will recreate it. (I.e. one should save the valuable developments; possibly in subdirectory \lstinline|../../common|
-if you want to use also by the other project groups.)
+if you want to use it also by the other project groups.)
 }
 {Kötegelt fordítás üzemmód}
 {
@@ -103,7 +103,7 @@ A kötegelt fordítás (főként) arra szolgál, hogy a közös forráskódból 
 előállítani a különféle formátumokban és nyelveken anyagainkat.
 
 Technikai okokból a tényleges fordítás előtt a rendszer saját másolatot
-készít a MultEdu szükséges fájljairól a témacsoporton belül egy \lstinline|common| alkönyvtárba.
+készít a MultEdu szükséges fájljairól a projekt \lstinline|common| alkönyvtárába.
 Ezzel a saját kópiával lehet kísérletezni, vagy akár törölni;
 a következő kötegelt fordítás majd helyreállítja. (azaz a következő fordítás előtt az értékes fejlesztést el kell menteni, akár a \lstinline|../../common| alkönyvtárba, ha azt másutt is használni akarjuk.)
 }
@@ -128,11 +128,11 @@ developer maintains version of MultEdu.
 Version number of MultEdu is located in file  \lstinline|../../common/MEMacros.tex|; better not to change it.
 The own course material version number is held in file \lstinline|CMakeFiles.txt|, and that setting will be refreshed 
 in the generated source files (through file \lstinline|Defines.tex|) when batch compiling.
-
 The version number of the course material appears also in the name
 of the generated file, so it is worth to use it in a consequent way.
+
 Usage:
-\lstinline|\\def\\Version\{major.minor.patch\}|
+\par\noindent\lstinline|\\def\\Version\{major.minor.patch\}|
 }
 {A verziók kezelése}
 {
@@ -153,9 +153,8 @@ tehát érdemes következetesen használni azt. Használata:
 \MEDframe{Languages}
 {
 MultEdu can handle single- and dual-language documents.
-Different spelling, section name, captions belon to the different languages. In the settings file the language must be specified,
+Different spelling, section name, captions belong to the different languages. In the settings file the language must be specified,
 like using setting \lstinline|\\LectureLanguage\{english\}| (this is the default).
-
 The name of the selected language appears also in the name of the result file.
 }
 {Nyelvek}
@@ -170,7 +169,7 @@ A kiválasztott nyelv neve az eredmény file nevében is megjelenik.
 \MEDframe{Dual-language documents}
 {
 
-In the dual-language documents, a first and second language exists,
+In the dual-language documents, a first and second language co-exist,
 meaning in which order the texts in the different languages appear in the document. This allows to develop course material in both languages simultanously, one below the other. Selecting the proper language
 one can generate output in either language.
 If \lstinline|\\UseSecondLanguage\{\}| is defined, then the text appearing in the second position will be processed, using the 
@@ -180,7 +179,7 @@ When using batch compilation, the options  \lstinline|FirstLanguage| and
 \lstinline|SecondLanguage| must be provided (that defines the language
  found in the dual-language macros in the first and second position, respectively). If option \lstinline|NEED_BOTH_LANGUAGES| is on,
  the output file will be produced in both languages.
- If it is switched offf, option \lstinline|USE_SECOND_LANGUAGE| decides
+ If it is switched off, option \lstinline|USE_SECOND_LANGUAGE| decides
  which language to use.
 }
 {Két-nyelvű dokumentumok}
