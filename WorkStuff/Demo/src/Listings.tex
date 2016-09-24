@@ -250,7 +250,7 @@ To highlight a program body in listing
 
 \par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},
 decorations=\{
-\\MESourcelinesHighlight\{HelloBalloon\} \{lst:HLhello.cpp\} \{6\}\{8\}
+\\MESourcelinesHighlight \{HelloBalloon\} \{lst:HLhello.cpp\} \{6\}\{8\}
 \}
 ] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, kijelölt\} \{lst:HLhello.cpp\}\{\}|
 
@@ -271,7 +271,7 @@ kijelöléséhez a
 
 \par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},
 decorations=\{
-\\MESourcelinesHighligh\{HelloBalloon\} \{lst:HLhello.cpp\} \{6\}\{8\}
+\\MESourcelinesHighligh \{HelloBalloon\} \{lst:HLhello.cpp\} \{6\}\{8\}
 \}
 ] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, kijelölt\} \{lst:HLhello.cpp\}\{\}|
 
@@ -317,7 +317,7 @@ A lehetséges opciók: \lstinline|width[=3cm]| és \lstinline|color[=deeppeach]|
 Listing \ao{\ref{lst:HLChello.cpp}} is produced using macro
 \par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},wide,
 decorations=\{
-\\MESourcelinesHighlight\{HelloBalloon\} \{lst:HLChello.cpp\} \{6\}\{8\}
+\\MESourcelinesHighlight \{HelloBalloon\} \{lst:HLChello.cpp\} \{6\}\{8\}
 \\MESourceBalloonComment\{HelloCBalloon\} \{0cm,0cm\} \{This is the body\} \{CommentShape\}
 \} 
 ] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, commenting highlighted\} \{lst:HLhello.cpp\}\{\}|
@@ -336,8 +336,8 @@ A \ao{\ref{lst:HLChello.cpp}} programlista készítéséhez a
 
 \par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\},wide,
 decorations=\{
-\\MESourcelinesHighlight\{HelloBalloon\} \{lst:HLChello.cpp\} \{6\}\{8\}
-\\MESourceBalloonComment\{HelloCBalloon\} \{0cm,0cm\} \{This is the body\} \{CommentShape\}
+\\MESourcelinesHighlight \{HelloBalloon\} \{lst:HLChello.cpp\} \{6\}\{8\}
+\\MESourceBalloonComment \{HelloCBalloon\} \{0cm,0cm\} \{This is the body\} \{CommentShape\}
 \} 
 ] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, commenting highlighted\} \{lst:HLhello.cpp\}\{\}|
 
@@ -345,10 +345,10 @@ decorations=\{
 parancsot kell kiadni.
 
 \MESourceFile[language={[ISO]C++},
-%decorations={
-%\MESourcelinesHighlight{HelloBalloonC}{lst:HLChello.cpp}{6}{8}
-%\MESourceBalloonComment{HelloBalloonC}{0cm,0cm}{This is the body}{CommentShape}
-%}
+decorations={
+\MESourcelinesHighlight{HelloBalloonC}{lst:HLChello.cpp}{6}{8}
+\MESourceBalloonComment{HelloBalloonC}{0cm,0cm}{This is the body}{CommentShape}
+}
 ]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, megjegyzés a kijelöléshez}{lst:HLChello.cpp}
 \index{MESourceFile!tartomány kijelölés@\bs MESourceFile tartomány kijelölés}
 }
@@ -410,7 +410,7 @@ Notes:
 \end{itemize}
 
 The marked lines can then be referenced through the balls like '(\MEBall{Listing~\ref{lst:LBhello.cpp}}{2})
-is the return istruction'. It can be produced using 
+is the return instruction'. It can be produced using 
 \par\noindent\lstinline|\\MEBall\{Listing~\\ref\{lst:LBhello.cpp\}\}\{2\}|
 }
 {Hivatkozási pontok elhelyezése a programlistán}
@@ -514,19 +514,19 @@ decorations={
 }
 {Ábra elhelyezése a programlistán}
 {
-A \ao{\ref{lst:forloops.v}} előállításhoz használt makró:
-\par\noindent\lstinline|
-\\MESourceFile[language=\{Verilog\},wide,
-decorations=\{
-\\MESourcelineFigure[width=5.2cm] \{lst:forloops.v\}\{8\} \{3.0,-.3\} \{fig/forloops\}
-\}
-] \{lst/forloops.v\} \{Implementing \\ctext\{for\} loop with repeating HW\} \{lst:forloops.v\}\{\}|
+A \ao{\ref{lst:forloops.v}} programlista előállításához használt makró:
+%\par\noindent\lstinline|
+%\\MESourceFile[language=\{Verilog\},wide,
+%decorations=\{
+%\\MESourcelineFigure[width=5.2cm] \{lst:forloops.v\}\{8\} \{3.0,-.3\} \{fig/forloops\}
+%\}
+%] \{lst/forloops.v\} \{Implementing \\lstinline|for| loop with repeating HW\} \{lst:forloops.v\}\{\}|
 
 \MESourceFile[language={Verilog},wide,
 decorations={
 \MESourcelineFigure[width=5.2cm]{lst:forloops.v}{8}{3.0,-.3}{fig/forloops}
 }
-]{lst/forloops.v}{\ctext{for} 
+]{lst/forloops.v}{'for'
 ciklus megvalósítása HW ismétléssel}{lst:forloops.v}{}
 }
 \index{MESourcelineFigure@\bs MESourcelineFigure}
@@ -564,7 +564,7 @@ Az erre szolgáló makró
 utasítás
 \par\noindent\lstinline|\\MESourceFileCompare[language=\{[ANSI]C\}] \{lst/lower1.c\} \{lst/lower2.c\} \{Comparing two routines for converting string to lower case\} \{lst:lower12.c\}|
 
-\MESourceFileCompare[language={[ANSI]C}]{lst/lower1.c}{lst/lower2.c}{A két kisbetűssé alakí­t rutin összehasonlí­tása}{lst:lower12.c}
+\MESourceFileCompare[language={[ANSI]C}]{lst/lower1.c}{lst/lower2.c}{A két kisbetűssé alakító rutin összehasonlí­tása}{lst:lower12.c}
 }
 \index{\MESourceFileCompare@\bs MESourceFileCompare}
 
@@ -574,13 +574,13 @@ utasítás
 {
 It is also useful sometimes to show the source file with its output.
 The macro 
-\par\noindent\lstinline|\\MESourceFileWithResult\}[keys]\{source file\} \{result file\} \{caption\} \{label\}|
+\par\noindent\lstinline|\\MESourceFileWithResult\} [keys]\{source file\} \{result file\} \{caption\} \{label\}|
 \par\noindent allows to do that. 
 
  For producing Listing \ao{\ref{lst:calculatorwithresult}}
 the command 
-\par\noindent\lstinline|\\MESourceFileWithResult[language=C++,wide,decorations=\{
-	\\MESourcelineListBalls\{lst:calculatorwithresult\} \{13,14,16,18,19\}
+\par\noindent\lstinline|\\MESourceFileWithResult [language=C++,wide,decorations=\{
+	\\MESourcelineListBalls \{lst:calculatorwithresult\} \{13,14,16,18,19\}
 \}] \{lst/expensive_calculator.cpp\}
 \{lst/calculatorresult.txt\} \{The calculator program with its result\} \{lst:calculatorwithresult\}|
 \par\noindent was used.
