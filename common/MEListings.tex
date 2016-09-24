@@ -167,11 +167,10 @@
 %	\maxsizebox{\FigWidth}{.5\textheight}
 	{
 		\mbox{}\phantomsection
-%		\ifx\MayFloat\undefined\else\caption{#3}\fi %\vglue-.7\baselineskip
-        \ifx\MayFloat\undefined\else\caption{#3}\fi
+        \ifx\MayFloat\undefined{\bfseries\scriptsize\textcolor{HeadingColor}#3}\fi
 		\noindent\begingroup\protected@edef\x{\endgroup\noexpand
 			\lstinputlisting[language={\ME@language}, \ME@options, label=#4, name=#4,
-		%	caption ={#3}
+			caption ={#3}
 			]{#2}}
 		\x
 		\ME@decorations % Decorating comments
@@ -373,13 +372,17 @@
 			{\color{HeadingColor}\bfseries\scriptsize #4}
 		\else
 	  	    		{
-	  	    		\begin{program*}[h!btp]	\caption{#4}\par\vskip-\baselineskip
+	  	    		\begin{program*}[h!btp]	%\caption{#4}\par\vskip-\baselineskip
 	  	    		 }
 		\fi\mbox{}\phantomsection
 		\vskip-1\baselineskip
 		\begin{tabular}{p{.48\mywidth}p{.48\mywidth}}
+		 \ifx\MayFloat\undefined
 		\lstinputlisting[label=#5, name=#5, linewidth=\mywidth ] {#2}&
-		\lstinputlisting[label=#5, name=#5,linewidth=\mywidth ] {#3}\\
+		\lstinputlisting[label=#5, name=#5, linewidth=\mywidth ] {#3}\\		 \else
+		\lstinputlisting[label=#5, name=#5, caption=#4, linewidth=\mywidth ] {#2}&
+		\lstinputlisting[label=#5, name=#5, caption=#4, linewidth=\mywidth ] {#3}\\\fi
+		\fi
 		\end{tabular}
 	\ifx\MayFloat\undefined	% nothing needed
 	\else
@@ -410,7 +413,7 @@
 	\color{HeadingColor}\bfseries\scriptsize #4}
 	\else
 	{
-		\begin{program*}[h!btp]	\caption{#4}\par\ifx\WEBBook\undefined\vskip-\baselineskip\else\fi
+		\begin{program*}[h!btp]	%\caption{#4}\par\ifx\WEBBook\undefined\vskip-\baselineskip\else\fi
 		}
 		\vglue-1.7\baselineskip
 		\fi\mbox{}\phantomsection
@@ -418,21 +421,25 @@
 		\begin{tabular}{p{.48\mywidth}p{.48\mywidth}}
 		%		\ifx\MayFloat\undefined\else\caption{#3}\fi %\vglue-.7\baselineskip
 		\noindent\begingroup\protected@edef\x{\endgroup\noexpand
-			\lstinputlisting[language={\ME@language}, \ME@options, label=#5, name=#5, linewidth=\mywidth,
+			\lstinputlisting[language={\ME@language}, \ME@options, label=#5, name=#5, \ifx\MayFloat\undefined\else caption=#4,\fi 
+			linewidth=\mywidth,
 			]{#2}}
 		\x
 		\ME@decorations % Decorating comments
 			&
-			\lstset{language={bash},backgroundcolor=\color{gray!20}}				
-			\lstinputlisting[ linewidth=\mywidth,
+			\lstset{language={bash},backgroundcolor=\color{gray!20}}			\ifx\MayFloat\undefined
+	\lstinputlisting[ linewidth=\mywidth,
 				 ]
-				 {#3}\\
+				 {#3}\\			\else 	
+			\lstinputlisting[ linewidth=\mywidth, caption=#4, 
+				 ]
+				 {#3}\\\fi
 		\end{tabular}
 		\par\vskip-.6\baselineskip
 		\ifx\MayFloat\undefined	% nothing needed
 		\else
 		{	
-			\caption{#4}\label{#5}
+%			\caption{#4}\label{#5}
 		\end{program*}}
 		\fi
 		\endgroup%
