@@ -18,11 +18,11 @@
   {%% implement Hungarian documenting
     \MEDebugMessage{MELanguages: Hungarian language selected}
     \ifx\UseSecondLanguage\undefined
-	  \usepackage[english,hungarian]{babel}
+	  \usepackage[english,magyar]{babel}
     \else
-	  \usepackage[hungarian]{babel}
+	  \usepackage[magyar]{babel}
     \fi
-	\selectlanguage{hungarian}
+	\selectlanguage{magyar}
 	\frenchspacing
   	\hyphenpenalty=2000
   	\tolerance=20000
@@ -38,8 +38,10 @@
 	\ifx\UseAlsoHungarian\undefined
 	    \usepackage[english]{babel}
     \else
-	    \usepackage[hungarian,english]{babel}
+	    \usepackage[magyar,english]{babel}
 	\fi
+  	\hyphenpenalty=2000
+  	\tolerance=20000
       % % Just an example how to implement further languages
   }% true
   {}	%% Just empty, to avoid embedding
