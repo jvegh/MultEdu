@@ -1,12 +1,13 @@
 cmake_minimum_required(VERSION 2.8.4)
 
 cmake_policy(SET CMP0048 NEW)
-PROJECT(Demo VERSION 0.05.01 LANGUAGES NONE)
+PROJECT(Demo VERSION 0.05.02 LANGUAGES NONE)
 
 set(MainFile "Demo.tex")	# Is used to define output file name
-set(InputFiles ${MainFile} Main.tex
-   src/Heading.tex src/Abstract.tex src/Copyright.tex src/Glossary.tex
-   src/Compiling.tex  src/Figures.tex src/General.tex src/Listings.tex src/Organizing.tex src/Sectioning.tex
+file(GLOB_RECURSE InputFiles RELATIVE "${CMAKE_SOURCE_DIR}" src/*.tex)
+set(InputFiles ${MainFile} Main.tex ${InputFiles}
+#   src/Heading.tex src/Abstract.tex src/Copyright.tex src/Glossary.tex
+#   src/Compiling.tex  src/Figures.tex src/General.tex src/Listings.tex src/Organizing.tex src/Sectioning.tex
 )
 ### CMake will copy all source files to its own area
 ### These standard subdirectories are copied by default
@@ -50,6 +51,7 @@ option (DEBUG_MODE "Include debug support for lecture making"  ON)
 ### 
 ### !! Do not edit below this line until you know what you are doing!!
 ###
+###!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # This is the UseLatex macros
 include(../../common/UseLATEX.cmake)
 #
@@ -77,10 +79,10 @@ else(NEED_BOTH_LANGUAGES)
   endif(USE_SECOND_LANGUAGE)
 endif(NEED_BOTH_LANGUAGES)
 
+set(MyFormatList ${MyFormatList} beamer_ME)
 set(MyFormatList ${MyFormatList} eBook)
 set(MyFormatList ${MyFormatList} WEB)
 set(MyFormatList ${MyFormatList} A4Fancy)
-set(MyFormatList ${MyFormatList} beamer_ME)
   
 ### The beginning of the output generating loop
 foreach(MyLanguage ${MyLanguageList})
