@@ -9,68 +9,51 @@
 %% %                         plain
 %%% Actually, this is two implementations: one for the printed formats and one for the slides
 	\MEDebugMessage{MESections: started to load}
+%%%% The base input is formatted as 'beamer' frames
+%%%% Frame specific definitions
+%%%%
+%% Define frame subtitle 
+\ifx\LecturePrintable\undefined
+%% Implementation for the slides
+\newcommand{\MEframelabel}[1]{
+	\def\framelabel{#1}
+}
+\else
+%% Implementation for the printed versions
+\newcommand{\MEframelabel}[1]{
+	\def\framelabel{#1}
+	\ifx\undefined\eBook\else \markright{#1}\fi
+	\ifx\FancyBook\undefined\else\markright{#1}\fi
+}
+\fi %\LecturePrintable\undefined
+
 \makeatletter
-\ifx\LecturePrintable\undefined	% Making slides
 \newcommand{\MEframe}[3][]
 {
 	\MEframelabel{#2}
-	\setkeys{MEMacros}{shrink=false, plain=false, #1}% 
-%	\begingroup
-	\expandafter\ifstrequal\expandafter{\ME@shrink}{true}
-		{% We are schrinking
-			\expandafter\ifstrequal\expandafter{\ME@plain}{true}
-				{\def\startframe{\begin{frame}[shrink,plain] {\framelabel}{}}}
-				{\def\startframe{\begin{frame}[shrink] {\framelabel}{}}}
-		%\def\myshrink{yes}
-		}
-		{% We are not schrinking
-			\expandafter\ifstrequal\expandafter{\ME@plain}{true}
-			{\def\startframe{\begin{frame}[plain] {\framelabel}{}}}
-			{\def\startframe{\begin{frame} {\framelabel}{}}}
-		}
-%		\expandafter\ifstrequal\expandafter{\ME@plain}{true}
-%			{\def\myplain{yes}}{}
-			
-			
-			\def\startframe{\begin{frame}[shrink] {\framelabel}{}}
-			\ifx\LecturePrintable\undefined	% Making slides
-						\startframe
-	%					Just normal\par
-						#3 \par\phantom{-}\vskip-5\parskip
-						\end{frame}
-%				\ifx\myshrink\undefined
-%					\ifx\myplain\undefined
-%						%\begin{frame} {#2}{\framelabel}
-%						\begin{frame} {MyTitle}{MySubtitle}
-%	%					Just normal\par
-%						#3\par\phantom{-}
-%						\end{frame}
-%					\else	%  plain
-%						\begin{frame}[plain]
-%	%					plain 
-%						#3\par\phantom{-}
-%						\end{frame}
-%					\fi
-%				\else % Anyhow, shrink defined
-%					\ifx\myplain\undefined
-%						\begin{frame}[shrink]  {#2}{\framelabel}
-%	%					shrink\par
-%						#3\par\phantom{-}
-%						\end{frame}
-%					\else	% shrink AND plain
-%						\begin{frame}[shrink,plain] 
-%	%					plain shrink
-%						#3\par\phantom{-}
-%						\end{frame}
-%					\fi %  shrink and plain
-%				\fi %shrink
-			\else	% Making book
-			\begin{frame}%
-						#3
-			\end{frame}%
-			\fi
-%	\endgroup%
-	
+	\setkeys{MEMacros}{shrink=true, plain=false, #1}% 
+%   \def\startframe{\begin{frame} {#2}{}}
+	\ifKV@MEMacros@plain
+	  %% The user want a plain frame, no further options considered
+	  \def\startframe{\begin{frame}[plain] {\framelabel}{}}
+		%message("Just plain")
+	\else %@plain
+	  %% Not plain, consider if to shrink
+	  \ifKV@MEMacros@shrink
+			  \def\startframe{\begin{frame}[shrink] {\framelabel}{}}
+		%  message("just shrink")
+	  \else %@shrink
+			\def\startframe{\begin{frame} {\framelabel}{}}
+		%message("just nothing")
+	  \fi %@shrink	  
+	\fi %@plain		
+\startframe
+#3
+\end{frame}
+%\par\phantom{-}\vskip-5\parskip
+} % \MEframe
+\makeatother
+
 	
 	%	\begingroup%
 	%	\ifx\LecturePrintable\undefined
@@ -101,15 +84,25 @@
 	%#3
 	%\ifx\LecturePrintable\undefined\phantom{-}\fi
 	%\end{frame}
-} % \MEframe
-\else % Making some printed version
-	\newcommand{\MEframe}[3][]
-	{
-		\begin{frame}%{}{}
-			#3
-		\end{frame}
-	}
-\fi % \LecturePrintable
+
+%	\expandafter\ifstrequal\expandafter{\ME@shrink}{true}
+%		{% We are schrinking
+%			\expandafter\ifstrequal\expandafter{\ME@plain}{true}
+%				{\def\startframe{\begin{frame}[shrink,plain] {\framelabel}{}}}
+%				{\def\startframe{\begin{frame}[shrink] {\framelabel}{}}}
+%		%\def\myshrink{yes}
+%		}
+%		{% We are not schrinking
+%			\expandafter\ifstrequal\expandafter{\ME@plain}{true}
+%			{\def\startframe{\begin{frame}[plain] {\framelabel}{}}}
+%			{\def\startframe{\begin{frame} {\framelabel}{}}}
+%		}
+%%		\expandafter\ifstrequal\expandafter{\ME@plain}{true}
+%%			{\def\myplain{yes}}{}
+%	
+		
+%			\def\startframe{\begin{frame}[shrink] {\framelabel}{}}
+%			\ifx\LecturePrintable\undefined	% Making slides
 
 %% A dual-language frame for avoiding unnecessary typing
 %% Usage: \MEDframe[keys and values]
@@ -118,6 +111,40 @@
 % % Possible keys: shrink
 % %                         plain
 
+%				\ifx\myshrink\undefined
+%					\ifx\myplain\undefined
+%						%\begin{frame} {#2}{\framelabel}
+%						\begin{frame} {MyTitle}{MySubtitle}
+%	%					Just normal\par
+%						#3\par\phantom{-}
+%						\end{frame}
+%					\else	%  plain
+%						\begin{frame}[plain]
+%	%					plain 
+%						#3\par\phantom{-}
+%						\end{frame}
+%					\fi
+%				\else % Anyhow, shrink defined
+%					\ifx\myplain\undefined
+%						\begin{frame}[shrink]  {#2}{\framelabel}
+%	%					shrink\par
+%						#3\par\phantom{-}
+%						\end{frame}
+%					\else	% shrink AND plain
+%						\begin{frame}[shrink,plain] 
+%	%					plain shrink
+%						#3\par\phantom{-}
+%						\end{frame}
+%					\fi %  shrink and plain
+%				\fi %shrink
+
+%			\else	% Making book
+%			\begin{frame}%
+%						#3
+%			\end{frame}%
+%			\fi
+%%	\endgroup%
+
 \newcommand{\MEDframe}[5][]{
 	\ifx\UseSecondLanguage\undefined
 	    \MEframe[{#1}]{#2}{#3}%
@@ -125,24 +152,6 @@
 		\MEframe[{#1}]{#4}{#5}%
 	\fi
 }
-
-%%%% The base input is formatted as 'beamer' frames
-%%%% Frame specific definitions
-%%%%
-%% Define frame subtitle 
-\ifx\LecturePrintable\undefined
-%% Implementation for the slides
-\newcommand{\MEframelabel}[1]{
-	\def\framelabel{#1}
-}
-\else
-%% Implementation for the printed versions
-\newcommand{\MEframelabel}[1]{
-	\def\framelabel{#1}
-	\ifx\undefined\eBook\else \markright{#1}\fi
-	\ifx\FancyBook\undefined\else\markright{#1}\fi
-}
-\fi
 
 %%% Sectioning macros 
 %%% except A4 size, limit float range and start new page
