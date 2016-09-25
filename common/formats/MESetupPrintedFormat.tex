@@ -40,33 +40,6 @@
 }
 {} % Glossary
 
-	% % Configure pgfplot diagram appearance
-	\pgfplotscreateplotcyclelist{my color list}{%
-	solid, color=webblue, every mark/.append style={solid, fill=webblue}, mark=*\\%
-	densely dashdotted, color=webgreen, every mark/.append style={solid, fill=webred},mark=diamond*\\%
-	densely dotted, color=webbrown, every mark/.append style={solid, fill=webgreen}, mark=triangle*\\%
-	loosely dashed, color=webred, every mark/.append style={solid, fill=webbrown},mark=*\\%
-	dotted, color=webblue, every mark/.append style={solid, fill=webyellow}, mark=square*\\%
-	densely dotted, color=webgreen, every mark/.append style={solid, fill=gray}, mark=otimes*\\%
-	dashed, color=webbrown, every mark/.append style={solid, fill=gray},mark=diamond*\\%
-	densely dashed, every mark/.append style={solid, fill=gray},mark=square*\\%
-	dashdotted, every mark/.append style={solid, fill=gray},mark=otimes*\\%
-	dasdotdotted, every mark/.append style={solid},mark=star\\%
-	}
-	
-	\pgfplotscreateplotcyclelist{my black white}{%
-	solid, every mark/.append style={solid, fill=gray}, mark=*\\%
-	densely dashdotted,every mark/.append style={solid, fill=gray},mark=diamond*\\%
-	densely dotted, every mark/.append style={solid, fill=gray}, mark=triangle*\\%
-	loosely dashed, every mark/.append style={solid, fill=gray},mark=*\\%
-	dotted, every mark/.append style={solid, fill=gray}, mark=square*\\%
-	densely dotted, every mark/.append style={solid, fill=gray}, mark=otimes*\\%
-	dashed, every mark/.append style={solid, fill=gray},mark=diamond*\\%
-	densely dashed, every mark/.append style={solid, fill=gray},mark=square*\\%
-	dashdotted, every mark/.append style={solid, fill=gray},mark=otimes*\\%
-	dasdotdotted, every mark/.append style={solid},mark=star\\%
-	}
-	
 			
 %%%http://tex.stackexchange.com/questions/20034/glossaries-print-first-occurence-by-using-acronym-desc
 %\AtBeginDocument{%
@@ -394,7 +367,7 @@ Első kiadás:                        & 2016 Szeptember \\
 		\fi
 		\IfFileExists{src/Glossary.tex}
 		{
-			\glossarystyle{altlisthypergroup}
+			\setglossarystyle{altlisthypergroup}
 			\ifx\DisableAcronyms\undefined
 			\clearpage
 			\printglossary[type=acronym]
