@@ -48,7 +48,6 @@
 	\floatname{solution}{\ifx\LectureLanguage\undefined A megoldások listája\else List of solutions\fi}
 \fi
 
-\ifx\DisableTikz\undefined
 \usepackage{tikz}   
 \usepackage{animate}
 \usetikzlibrary{
@@ -61,36 +60,18 @@
 	tikzmark,
 	shadows,
 	automata}
-\fi
+%%% A useful supplement when some node is defined during compilation,
+%%% see %% see http://www.tex.ac.uk/FAQ-isdef.html
+%%% http://tex.stackexchange.com/questions/37709/how-can-i-know-if-a-node-is-already-defined
+\makeatletter
+\long\def\ifnodedefined#1#2#3{%
+    \@ifundefined{pgf@sh@ns@#1}{#3}{#2}%
+}
+\makeatother
+
 	\usepackage{pgfplots}
 	\pgfplotsset{compat=1.13} 
 	\usepackage{pgfplotstable}
-% % Configure pgfplot diagram appearance
-\pgfplotscreateplotcyclelist{my color list}{%
-solid, color=webblue, every mark/.append style={solid, fill=webblue}, mark=*\\%
-densely dashdotted, color=webgreen, every mark/.append style={solid, fill=webred},mark=diamond*\\%
-densely dotted, color=webbrown, every mark/.append style={solid, fill=webgreen}, mark=triangle*\\%
-loosely dashed, color=webred, every mark/.append style={solid, fill=webbrown},mark=*\\%
-dotted, color=webblue, every mark/.append style={solid, fill=webyellow}, mark=square*\\%
-densely dotted, color=webgreen, every mark/.append style={solid, fill=gray}, mark=otimes*\\%
-dashed, color=webbrown, every mark/.append style={solid, fill=gray},mark=diamond*\\%
-densely dashed, every mark/.append style={solid, fill=gray},mark=square*\\%
-dashdotted, every mark/.append style={solid, fill=gray},mark=otimes*\\%
-dasdotdotted, every mark/.append style={solid},mark=star\\%
-}
-
-\pgfplotscreateplotcyclelist{my black white}{%
-solid, every mark/.append style={solid, fill=gray}, mark=*\\%
-densely dashdotted,every mark/.append style={solid, fill=gray},mark=diamond*\\%
-densely dotted, every mark/.append style={solid, fill=gray}, mark=triangle*\\%
-loosely dashed, every mark/.append style={solid, fill=gray},mark=*\\%
-dotted, every mark/.append style={solid, fill=gray}, mark=square*\\%
-densely dotted, every mark/.append style={solid, fill=gray}, mark=otimes*\\%
-dashed, every mark/.append style={solid, fill=gray},mark=diamond*\\%
-densely dashed, every mark/.append style={solid, fill=gray},mark=square*\\%
-dashdotted, every mark/.append style={solid, fill=gray},mark=otimes*\\%
-dasdotdotted, every mark/.append style={solid},mark=star\\%
-}
 
 	\usepackage{pdfrender}
 	 \usepackage[backend=bibtex]{biblatex}   	% for beamer bibliography
