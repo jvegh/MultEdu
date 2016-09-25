@@ -266,6 +266,8 @@
 {	% First draw the text box
 	\setkeys{MEMacros}{width=3cm,#1}% 
 	\setkeys{MEMacros}{color=deeppeach,#1}% 
+	\ifnodedefined{#2} %% see http://www.tex.ac.uk/FAQ-isdef.html
+	{ % is defined
    \begingroup%
   \tikz[remember picture,overlay]
   \node[rectangle, draw,  rounded corners,drop shadow,  align=left,  fill=\ME@color, text width=\ME@width, font=\lstsize] %\bfseries]
@@ -275,6 +277,9 @@
    \draw[->,thick,color=burntorange] 
     (#5.west) --  ($ (#5.west) + (-.2cm,0) $)  |- (#2.east)  ;
 	\endgroup
+	}
+	{% Do nothing if not defined
+	}
 }
 \makeatother
 
@@ -376,9 +381,9 @@
 	  	    		 }
 		\fi\mbox{}\phantomsection
 		\vskip-1\baselineskip
-		\begin{tabular}{p{.48\mywidth}p{.48\mywidth}}
+		\begin{tabular}{p{\mywidth}p{\mywidth}}
 		 \ifx\MayFloat\undefined
-		\lstinputlisting[label=#5, name=#5, linewidth=\mywidth ] {#2}&
+		\lstinputlisting[label=#5, name=#5,  ] {#2}&
 		\lstinputlisting[label=#5, name=#5, linewidth=\mywidth ] {#3}\\		 \else
 		\lstinputlisting[label=#5, name=#5, caption=#4, linewidth=\mywidth ] {#2}&
 		\lstinputlisting[label=#5, name=#5, caption=#4, linewidth=\mywidth ] {#3}\\\fi
@@ -418,7 +423,7 @@
 		\vglue-1.7\baselineskip
 		\fi\mbox{}\phantomsection
 		\vskip-.6\baselineskip\noindent
-		\begin{tabular}{p{.48\mywidth}p{.48\mywidth}}
+		\begin{tabular}{p{\mywidth}p{\mywidth}}
 		%		\ifx\MayFloat\undefined\else\caption{#3}\fi %\vglue-.7\baselineskip
 		\noindent\begingroup\protected@edef\x{\endgroup\noexpand
 			\lstinputlisting[language={\ME@language}, \ME@options, label=#5, name=#5, \ifx\MayFloat\undefined\else caption=#4,\fi 
