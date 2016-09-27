@@ -135,24 +135,6 @@ pdfpagemode=UseNone,pdfstartview=Fit
 }
 
 
-\IfGraphicFileExists{fig/PictureLogo}
-{ \def\TitlePictureLogo{\includegraphics[width=4cm]{fig/PictureLogo}}
-  \titlegraphic{\includegraphics[width=4cm]{fig/PictureLogo}}
-  \pgfdeclareimage[height=1.3cm]{MElogo}{fig/PictureLogo}
-}
-{ \def\TitlePictureLogo{\includegraphics[width=4cm]{../../common/images/LatexTalk}}
-  \titlegraphic{\includegraphics[width=4cm]{../../common/images/LatexTalk}}
-  \pgfdeclareimage[height=1.3cm]{MElogo}{../../common/images/LatexTalk}
-}
-\logo{\pgfuseimage{MElogo}}
-\IfGraphicFileExists{fig/TextLogo}
-{\def\TitleTextLogo{\includegraphics[height=1cm]{fig/TextLogo}}
-    \pgfdeclareimage[height=.5cm]{textlogo}{fig/TextLogo}
-   }
-{\def\TitleTextLogo{\includegraphics[height=1cm]{../../common/images/LatexText}}
-    \pgfdeclareimage[height=.5cm]{textlogo}{../../common/images/LatexText}
-    }
-
 \newcommand\MEfrontmatter{
 \MEfrontmatterRoot
 \twocolumn
