@@ -1,9 +1,0 @@
-%% This file is prepared by CMake, will be overwritten
-\def\FirstLanguage{english} % In dual language macros
-\def\SecondLanguage{magyar} % In dual language macros
-\def\LectureLanguage{magyar} % What you want to print
-\def\UseSecondLanguage{YES}   % Now make output in 'magyar'
-\def\Version{0.5.1}
-\def\EnableDebug{YES} % USE IT ONLY WHEN DEVELOPING FEATURES!!!
-\def\DisableWideScreen{YES} % I need 4:3 ratio
-\input{../../common/formats/beamer_ME}
