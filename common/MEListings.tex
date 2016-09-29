@@ -167,10 +167,12 @@
 %	\maxsizebox{\FigWidth}{.5\textheight}
 	{
 		\mbox{}\phantomsection
-        \ifx\MayFloat\undefined{\bfseries\scriptsize\textcolor{HeadingColor}#3}\fi
+        \ifx\MayFloat\undefined{\bfseries\scriptsize\textcolor{HeadingColor}#3}
+        \par\vskip-\parskip\vskip-\baselineskip
+        \fi
 		\noindent\begingroup\protected@edef\x{\endgroup\noexpand
 			\lstinputlisting[language={\ME@language}, \ME@options, label=#4, name=#4,
-			caption ={#3}
+		\ifx\MayFloat\undefined\else	caption ={#3}\fi
 			]{#2}}
 		\x
 		\ME@decorations % Decorating comments
