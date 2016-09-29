@@ -248,3 +248,58 @@ a csomag nem generál képet.
 }
 \index{MEchapterillustration@\bs MEchapterillustration}
 
+\MEDsection[Slides and printed]{Concerting text on slides and printed output}{Nyomtatott és vetített szöveg}{Nyomtatott és vetített szöveg összehangolása}
+
+\MEDframe{Concerting text on slides and printed outputs}
+{
+The printed outputs usually contain much more text, than the slides.
+This extra text can be placed in the source file
+inside an \lstinline|\\ao\{text\}| (article only) macro,
+where the extra text appears inside the macro.
+That text appears only in the printed output, and is not visible on the slides.
+Take case, the text must be reasonable in both version;
+especially if used within a sentence.
+}
+{Nyomtatott és vetített szöveg}
+{A nyomtatott anyag jelentősen több szöveget szokott tartalmazni, mint
+a diák. Ezt az extra szöveget úgy lehet a forrás fájlban elhelyezni,
+hogy az \lstinline|\\ao\{text\}| (article only) makró belsejében adjuk meg az extra szöveget.
+Az így megadott szöveg csak a nyomtatott változatban látható, 
+a diákon nem jelenik meg. 
+Vigyázzunk rá, hogy a szöveg mindkét változatban értelmes legyen,
+különösen, ha mondat belsejében használjuk.
+}
+
+
+\MEDsection[]{Floating objects}{}{Lebegő objektumok}
+
+\MEDframe{Floating objects}
+{
+\LaTeX{} might handle objects like figures, tables, program listings, etc.
+as "floating objects, i.e. they might appear at a place,
+where \LaTeX{} thinks to be optimal.
+This place is not necessarily  the place in the printed materials,
+what you expect based on the referece point in the source
+but they do on the slides.
+Because of this, do not refer to the listings like
+'In the following listing'.
+Instead, using something like  '\lstinline|In listing\ \\ref\{lst:hello.cpp\}|' is suggested.
+
+In contrast, on the slides the lobject appears in the right place,
+but has no number. Because of this the really good method of referencing
+is something like '\lstinline|In listing\ \\ao\{\\ref\{lst:hello.cpp\}\}|' 
+is the really good one.
+Take care of the meaning in the sentence, both on slides and printed output.
+
+}
+{Lebegő objektumok}
+{
+A \LaTeX{} bizonyos objektumokat, úgymint ábrákat, táblázatokat, programlistákat, stb. ún
+lebegő objektumként kezelhet, tehát nem feltétlenül a forrásnyelvi helynek 
+megfelelő helyen jelennek meg a nyomtatott változatban, viszont a dia képeken igen.
+Ezért a nyomtatott változatban nem érdemes 'A következő programlistán' módon hivatkozni. Helyette
+az '\lstinline|A\ \\ref\{lst:hello.cpp\}\ programlista|' mód javasolt.
+
+A dia képeken viszont  a megfelelő helyen van a lista, de nincs száma.
+Ezért az '\lstinline|A\ \\ao\{\\ref\{lst:hello.cpp\}\}\ programlista|' mód az igazi.
+}
