@@ -1,0 +1,140 @@
+%%%
+%%% This is the chapter about inserting figures with the MultEdu system
+
+\MEDchapter[Supplements]{Utilizing supplements}{Kiegészítések}{Kiegészítések használata}
+
+
+\MESetListingFormat[basicstyle=\ttfamily\color{black}\normalsize]{TeX}
+
+\MEDsection[Glossaries]{Acronyms and glossary}{Rövidítések}{Rövidítések és szómagyarázat használata}
+
+\MEDframe{What are acronyms and glossaries good for}
+{
+Especially in the case of technical courses, frequently occur abbreviations, mosaic words, unique interpretations of a term, etc. MultEdu can help you
+with using the \lstinline|glossaries| package, to provide your students 
+with a hyperlinked facility, to use those terms consequently.
+
+Such elements should be used in the text like \lstinline|\\gls\{ref\}|.
+Here \lstinline|ref| is a reference label, and in the text the short 
+name of the referenced item appears. In the case of acronyms, the 
+expansion also appears at the first occurrence of that acronym.
+Some examples are given below; for more explanation see package \lstinline|glossaries|.
+
+}
+{Mire jók a rövidítések és a szómagyarázat}
+{
+
+Különösen technikai jellegű tárgyak esetén, gyakran szerepelnek 
+rövidítések, betűszavak, illetve bizonyos fogalmak egyértelmű meghatározása.
+A MultEdu a \lstinline|glossaries| csomagot használva teszi lehetővé,
+hogy a dokumentumokban ilyeneket használjon, ráadásul hiper-hivatkozásként.
+ 
+Az ilyen elemeket a szövegben  a \lstinline|\\gls\{ref\}| módon kell elhelyezni.
+A szövegben ennek hatására megjelenik az elem rövid neve, és annak első
+előfordulásakor annak rövid leírása is. Bővebben lásd a \lstinline|glossaries| 
+csomag leírását.
+}
+
+\MEDframe{What are acronyms and glossaries good for}
+{
+Especially in the case of technical courses, frequently occur abbreviations, mosaic words, unique interpretations of a term, etc. MultEdu can help you
+with using the \lstinline|glossaries| package, to provide your students 
+with a hyperlinked facility, to use those terms consequently.
+
+References to such elements should be used in the text as \lstinline|\\gls\{ref\}|.
+Here \lstinline|ref| is a reference label, and in the text the short 
+name of the referenced item appears at that place. In the case of acronyms, the 
+expansion also appears at the first occurrence of that acronym.
+Some examples are given below; for more explanation see package \lstinline|glossaries|.
+}
+{Mire jók a rövidítések és a szómagyarázat}
+{
+
+Különösen technikai jellegű tárgyak esetén, gyakran szerepelnek 
+rövidítések, betűszavak, illetve bizonyos fogalmak egyértelmű meghatározása.
+A MultEdu a \lstinline|glossaries| csomagot használva teszi lehetővé,
+hogy a dokumentumokban ilyeneket használjon, ráadásul hiper-hivatkozásként.
+ 
+Az ilyen elemeket a szövegben  a \lstinline|\\gls\{ref\}| hivatkozásként kell elhelyezni,
+és a nyomtatott szövegben ennek hatására azon a helyen az elem rövid neve jelenik meg, és a rövidítések feloldására, a hivatkozás első
+előfordulásakor annak rövid leírása is. Bővebben lásd a \lstinline|glossaries| 
+csomag leírását.
+}
+
+\MEDsubsection[Utilization]{How to use acronyms and glossary}{Használatuk}{Rövidítések és szómagyarázat használata}
+
+\MEDframe{An example}
+{
+
+When as a \gls{sampleone} you use the term \gls{computer},
+where \gls{CPU} és \gls{DMA} also happens;
+in the text \lstinline|When as a \\gls\{sampleone\} you use the term, \\gls\{computer\} where \\gls\{CPU\} and \\gls\{DMA\} also happens| should appear. Multedu then appends chapters \lstinline|Acronyms| and \lstinline|Glossary| to the end of the document, and clicking on those hyperlinked words, you are taken
+to the explanation of the terms. When there, you migh click on the page number after the term, to go back.
+
+
+}
+{Egy példa}
+{
+
+Ha \gls{minta}ként használja a \gls{számítógép} fogalmát,
+ahol \gls{CPU} valamint \gls{DMA} is előfordul
+akkor a szövegben a \lstinline|Ha \\gls\{minta\}ként használja a \\gls\{számítógép\} fogalmát, ahol \\gls\{CPU\} valamint \gls\{DMA\} is előfordul| mintázatnak kell megjelennie.
+Ilyenkor a MultEdu hozzáfűzi a dokumentumhoz a \lstinline|Acronyms| and \lstinline|Glossary| fejezeteket, ahol a megjelölt hivatkozások kifejtése 
+található. A dokumentum olvasásakor a hivatkozásra kattintva, az olvasó 
+program a kifejtésre ugrik, ahonnét az oldalszámra kattintva, folytathatja
+az olvasást.
+
+}
+
+
+\MEDsubsection[Definition]{How to define acronyms and glossary}{Meghatározásuk}{Rövidítések és szómagyarázat meghatározása}
+
+
+\MEDframe{Definitions}
+{
+MultEdu expects that (if you want to use this facility) your project
+contains a file \lstinline|src/Glossary.tex|, where the expansion
+of the referred to items can be found. The entries corresponding 
+to the items used in the sample can be coded like
+
+\lstinline|\\ifthenelse\{\\equal\{\\LectureLanguage\}\{english\}\}
+  \{
+	\\newglossaryentry\{computer\}
+	\{
+		name=\{computer\},
+		description=\{is a programmable machine that receives input,
+			stores and manipulates data, and provides
+			output in a useful format\}
+	\}	
+	\\newglossaryentry\{sampleone\}\{name=\{sample\},description=\{a little example\}\}
+    \\newacronym\{CPU\}\{CPU\}\{Central Processing Unit\}
+    \\newacronym\{DMA\}\{DMA\}\{Direct Memory Access\}
+ \}	
+ \{\}|
+
+}
+{Egy példa}
+{
+A MultEdu azt várja, hogy (ha használni akar ilyen lehetőséget) a projekt
+tartalmaz egy \lstinline|src/Glossary.tex| fájlt,
+ahol a hivatkozások részletes kifejtése megtalálható.
+
+}
+
+
+\MEDsubsection[Utilization]{How to utilize acronyms and glossary}{Használatuk}{Rövidítések és szómagyarázat használata}
+
+\MEDframe{Utilization}
+{
+These facilities can of course be only reasonably used in printable formats.
+Formats based on \lstinline|beamer| do not generate such a list of terms,
+but the \lstinline|\\gls\{ref\}|  are of course usable.
+}
+{Használatuk}
+{
+Ezeknek a lehetőségeknek csak a nyomtatható változatok esetén van szerepe.
+A \lstinline|beamer| alapú formátumok nem generálnak ilyen jegyzékeket,
+de a \lstinline|\\gls\{ref\}| természetesen ott is használható.
+}
+
+\MEDsection[Indices]{Indices}{Indexek}{Indexek használata}

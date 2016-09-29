@@ -1,4 +1,6 @@
 
+\ifthenelse{\equal{\LectureLanguage}{english}}
+  {
 	\newglossaryentry{computer}
 	{
 		name={computer},
@@ -7,12 +9,24 @@
 			output in a useful format}
 	}
 	
-	\newglossaryentry{sampleone}{name={sampleone},description={another example}}
-	%\newglossaryentry{sample}{name={sample},description={an example}}
-	
-	\newacronym{abc}{ABC}{a sample acronym}
-	\newacronym{def}{DEF}{another sample acronym}
-%	\newacronym[type=better]{xyz}{XYZ}{another sample acronym}
-%	\newacronym[type=common]{xyzw}{XYZW}{yet another sample acronym}
-	\newacronym{xyz}{XYZ}{another sample acronym}
-	\newacronym{xyzw}{XYZW}{yet another sample acronym}
+	\newglossaryentry{sampleone}{name={sample},description={a little example}}
+
+    \newacronym{CPU}{CPU}{Central Processing Unit}
+    \newacronym{DMA}{DMA}{Direct Memory Access}
+ }	
+ {}
+\ifthenelse{\equal{\LectureLanguage}{magyar}}
+  {%% implement Hungarian documenting
+	\newglossaryentry{számítógép}
+	{
+		name={computer},
+		description={is a programmable machine that receives input,
+			stores and manipulates data, and provides
+			output in a useful format}
+	}
+	\newglossaryentry{minta}{name={minae},description={egy minta}}
+    \newacronym{CPU}{CPU}{Central Processing Unit, központi egység}
+    \newacronym{DMA}{DMA}{Direct Memory Access, közvetlen memória elérés}
+  }
+{
+}

@@ -32,6 +32,12 @@
 
 \usepackage[plainpages=false,pdfpagelabels,colorlinks=true,linkcolor=webgreen,citecolor=ForestGreen]{hyperref}
 
+\usepackage[toc,acronym%,indexonlyfirst
+]{glossaries}
+\ifx\LecturePrintable\undefined\else\makeglossaries\fi
+\setlength{\glslistdottedwidth}{\columnwidth} % adjust to suit
+			
+
 \input{../../common/formats/MEFancyTOC}
 \usepackage{midfloat}
 \IfFileExists{src/Glossary.tex}
@@ -258,6 +264,24 @@
 \makeoddhead{headings}{\color{burntorange}\scriptsize\slshape\rightmark}{}{\color{burntorange}\thepage}
 
 	\MEDebugMessage{MESetupPrintedFormat: frontmatter started to load}
+
+\IfGraphicFileExists{fig/PictureLogo}
+{ \def\TitlePictureLogo{\includegraphics[width=4cm]{fig/PictureLogo}}
+  \titlegraphic{\includegraphics[width=4cm]{fig/PictureLogo}}
+  \pgfdeclareimage[height=1.3cm]{MElogo}{fig/PictureLogo}
+}
+{ \def\TitlePictureLogo{\includegraphics[width=4cm]{../../common/images/LatexTalk}}
+  \titlegraphic{\includegraphics[width=4cm]{../../common/images/LatexTalk}}
+  \pgfdeclareimage[height=1.3cm]{MElogo}{../../common/images/LatexTalk}
+}
+\logo{\pgfuseimage{MElogo}}
+\IfGraphicFileExists{fig/TextLogo}
+{\def\TitleTextLogo{\includegraphics[height=1cm]{fig/TextLogo}}
+    \pgfdeclareimage[height=.5cm]{textlogo}{fig/TextLogo}
+   }
+{\def\TitleTextLogo{\includegraphics[height=1cm]{../../common/images/CC88x31}}
+    \pgfdeclareimage[height=.5cm]{textlogo}{../../common/images/CC88x31}
+    }
 %%			
 %%%	% % % A macro for representing the front matter needed in the selected form
 %
@@ -275,72 +299,72 @@
 		\pagenumbering{gobble}
 		\maketitle
 		\frontmatter
-{\footnotesize
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{\baselineskip}
-
-\ifx\DisableCopyright\undefined
-  \IfFileExists{src/Copyright.tex}
-  { % The user has his own copyright
-    \input{src/Copyright.tex}
-    \MEDebugMessage{MESetupPrintedFormat: Using user's copyright}
-  }
-  {
-	\input{../../common/defaults/Copyright.tex}
-    \MEDebugMessage{MESetupPrintedFormat: Using default copyright}
-  }
-\fi  
-
-\ifx\DisableAbstract\undefined
-	\IfFileExists{src/Abstract}
-	{
-	    {\bfseries \MEAbstract}\par
-	     \input{src/Abstract} %\vspace{2cm}
-	}
-	{\vspace{10cm}\MEDebugMessage{MESetupPrintedFormat: Abstract info not found}}
-\fi
-\vskip2\baselineskip
-}%of footnotesize
-
-
-\begin{center}
-  \ifthenelse{\equal{\LectureLanguage}{english}}
-  { % In English
-\begin{tabular}{ll}
-First edition:                        & August 2016 \\
-\end{tabular}
-  }% true
-  {% NOT english
-  }
-  \ifthenelse{\equal{\LectureLanguage}{magyar}}
-  { % In English
-\begin{tabular}{ll}
-Első kiadás:                        & 2016 Szeptember \\
-\end{tabular}
-  }% true
-  {% NOT magyar
-  }
-\end{center}
-\vfill
-\ifx\LectureLogo\undefined
-\else
-	\LectureLogo
-\fi
-\vfill
-\noindent
-
-
-\begin{center}
-{\small \LectureRevision\\
-10 09 08 07 06 05 04 03 02 01\hspace{2em}19 18 17 16 15 14 13}
-\end{center}
-
-\clearpage
+		{\footnotesize
+		\setlength{\parindent}{0pt}
+		\setlength{\parskip}{\baselineskip}
 		
-\pagenumbering{roman}			
-\ifx\DisableTableOfContents\undefined
-	\tableofcontents	
-\fi
+		\ifx\DisableCopyright\undefined
+		  \IfFileExists{src/Copyright.tex}
+		  { % The user has his own copyright
+		    \input{src/Copyright.tex}
+		    \MEDebugMessage{MESetupPrintedFormat: Using user's copyright}
+		  }
+		  {
+			\input{../../common/defaults/Copyright.tex}
+		    \MEDebugMessage{MESetupPrintedFormat: Using default copyright}
+		  }
+		\fi  
+		
+		\ifx\DisableAbstract\undefined
+			\IfFileExists{src/Abstract}
+			{
+			    {\bfseries \MEAbstract}\par
+			     \input{src/Abstract} %\vspace{2cm}
+			}
+			{\vspace{10cm}\MEDebugMessage{MESetupPrintedFormat: Abstract info not found}}
+		\fi
+		\vskip2\baselineskip
+		}%of footnotesize
+
+		
+		\begin{center}
+		  \ifthenelse{\equal{\LectureLanguage}{english}}
+		  { % In English
+		\begin{tabular}{ll}
+		First edition:                        & August 2016 \\
+		\end{tabular}
+		  }% true
+		  {% NOT english
+		  }
+		  \ifthenelse{\equal{\LectureLanguage}{magyar}}
+		  { % In English
+		\begin{tabular}{ll}
+		Első kiadás:                        & 2016 Szeptember \\
+		\end{tabular}
+		  }% true
+		  {% NOT magyar
+		  }
+		\end{center}
+		\vfill
+		\ifx\LectureLogo\undefined
+		\else
+			\LectureLogo
+		\fi
+		\vfill
+		\noindent
+		
+		
+		\begin{center}
+		{\small \LectureRevision\\
+		10 09 08 07 06 05 04 03 02 01\hspace{2em}19 18 17 16 15 14 13}
+		\end{center}
+		
+		\clearpage
+				
+		\pagenumbering{roman}			
+		\ifx\DisableTableOfContents\undefined
+			\tableofcontents	
+		\fi
 }
 {
 \MEDebugMessage{MESetupPrintedFormat: Title page not generated}
@@ -360,7 +384,8 @@ Első kiadás:                        & 2016 Szeptember \\
 	\MEDebugMessage{MESetupPrintedFormat: backmatter started to execute}
 		% http://tex.stackexchange.com/questions/472/how-can-i-have-two-or-more-distinct-indexes
 		% http://www.latex-community.org/forum/viewtopic.php?f=51&t=8096
-		\ifx\DisableIndex\undefined		
+		\ifx\DisableIndex\undefined	
+			\ifx\undefined\eBook\else\onecolumn\fi	
 			\clearpage\printindex
 		\else 
 			\MEDebugMessage{Index printing disabled}
