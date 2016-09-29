@@ -1,7 +1,8 @@
 
-%%% This is the chapter about sectioning documents for the MultEdu system
+%%% This is the chapter about compiling documents for the MultEdu system
 
 \MEDchapter[Compiling]{Compiling document}{Fordítás}{A dokumentum fordítása}
+\label{sec:compiling}
 
 
 \MESetListingFormat{TeX}
@@ -9,21 +10,6 @@
 
 \MEDsection[Manual]{Manual mode compiling}{Kézi}{Kézi fordítás}
 
-\MEDframe{Settings}
-{
-The MultEdu system works perfectly with its default settings, but it cannot read your mind.
-The settings can be changed using definitions of form \lstinline|\\def\{\\xxx\}|.
-The place where the settings can be changed, depends on the compilation mode.
-The next two sections shows the utilization of the compilation modes,
-while the third one describes the settings in details.
-}
-{Beállítások}
-{
-A MultEdu rendszer tökéletesen működik alapértelmezett beállításokkal is,
-de nem gondolatolvasó. A beállításokat \lstinline|\\def\{\\xxx\}| formájú definíciókkal
-lehet megváltoztatni. A beállítások helye üzemmódtól függ. A következő két szakasz 
-az üzemmódok használatát mutatja be, a harmadik pedig a beállításokat ismerteti részletesen.
-}
 
 \MEDframe{The file Main.tex}
 {
@@ -112,9 +98,28 @@ a következő kötegelt fordítás majd helyreállítja. (azaz a következő for
 
 \MEDframe{Changing default settings}
 {
+Settings of MultEdu can be defined using \lstinline|\\def\{OptionName\}| macros.
+If the compiler does not find the corresponding macro, the default setting will be used.
+The settings differ in the cases of manual and batch compiling.
+During batch processing the compiler uses settings from file
+\lstinline|build/build/src/Defines.tex|, which is newly created based on
+the settings in \lstinline|CMakeFiles.txt|.
+During manual compilation, the settings from fájl \lstinline|src/Defines.tex|
+are used. These two setting files should have the same (or at least similar) content,
+but the latter one is only handled by the user.
 }
 {Az alapbeállítások megváltoztatása}
 {
+A MultEdu alap-beállításait \lstinline|\\def\{OptionName\}| utasításokkal
+lehet meghatározni. Amennyiben a fordítás előtt a fordítóprogram nem talál
+ilyen meghatározást, az alapbeállítást használja.
+A kézi és a kötegelt fordítás beállításai különböznek. A kötegelt feldolgozás
+esetén a fordítóprogram a \lstinline|CMakeFiles.txt| fájlban megadott
+beállításokkal újonnan létrehozott \lstinline|build/build/src/Defines.tex|
+meghatározásokat használja, a kézi fordítás pedig a \lstinline|src/Defines.tex|
+meghatározásokat. Ezek célszerűen megegyeznek, de az utóbbi beállításokat 
+a felhasználónak kell megadni.
+
 }
 
 \MEDsubsection[Versioning]{Versioning}{Verziók}{A verziók kezelése}

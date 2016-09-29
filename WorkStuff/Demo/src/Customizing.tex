@@ -1,0 +1,227 @@
+
+%%% This is the chapter about customizing output documents for the MultEdu system
+
+\MEDchapter[Customizing]{Customizing document}{Méretre alakítás}{Méretre alakítás}
+
+
+\MESetListingFormat{TeX}
+\lstset{ basicstyle=\ttfamily\color{black}\normalsize}
+
+
+\MEDframe{Customizing document}
+{
+The MultEdu system works perfectly with its default settings, but it cannot read your mind.
+The settings can be changed using definitions of form \lstinline|\\def\{\\xxx\}|.
+The place where the settings can be changed, depends on the compilation mode,
+as described in chapter~\ref{sec:compiling}. The default values of the settings
+is given at the individual settings.
+The sections in this chapter provide a detailed description of the possible settings.
+}
+{Méretre alakítás}
+{
+A MultEdu rendszer tökéletesen működik alapértelmezett beállításokkal is,
+de nem gondolatolvasó. A beállításokat \lstinline|\\def\{\\xxx\}| formájú definíciókkal
+lehet megváltoztatni. A beállítások helye üzemmódtól függ,
+a részleteket lásd ~\aref{sec:compiling} szakaszban. 
+Az alapértelmezett beállítások az egyes beállítások hatásának részletes 
+leírásánál találhatók.
+A fejezet következő szakaszai 
+az üzemmódok használatát mutatja be.
+}
+
+
+\MEDsection[Defaults]{Default settings}{Alap beállítások}{Alap beállítások}
+
+\MEDframe{Facilities to set options for MultEdu}
+{
+The MultEdu system can interpret as an intention to change the default
+behavior either the presence of a file at a predefined file with a predefined name,
+or the thesence of definition of form \lstinline|\\def\{Option\{Value\}\}|.
+In the absence of such occurrences, Multedu uses the default settings 
+when generating the output file.
+}
+{A MultEdu csomag beállítási lehetőségei}
+{
+A MultEdu beállítási lehetőségként vagy fájlok megadott helyen és néven 
+való előfordulását, vagy pedig \lstinline|\\def\{Option\{Value\}\}| formájú definiciók előfordulását tudja értelmezni. Ezek hiánya esetén az alapértelmezett
+viselkedés lét életbe az eredmény fájl előállítása során. 
+
+A beállítási lehetőségek lehetnek kötelezően használandók;
+az eredmény fájlt nagy mértékben befolyásolók, vagy csak kisebb
+finomítást jelentők;
+csak bizonyos típusú eredmény fájl készítésekor hatásosak.
+}
+
+
+\MEDsection[Options]{Options for using package MultEdu}{Beállítások}{A MultEdu csomag beállítási lehetőségei}
+
+
+\MEDsubsection[Beamer]{Options for Beamer-based formats}{Beamer}{Beamer alapú formátum beállítások}
+
+\MEDframe{Screen width}
+{
+Multedu allows to utilize two popular screen widths.
+The default is the spreading format with aspect ratio 16:9.
+To set ratio 4:3, use
+\noindent\vskip-\parskip\lstinline|\{\\def\\DisableWideScreen\{YES\}\}|\par
+}
+{Képernyő szélesség}
+{
+A Multedu lehetővé teszi kétféle elterjedt formátum használatát.
+Egyre gyakoribb 16:9  arányú képformátum így az az alap beállítás.
+A 4:3 arányú képformátumot a 
+\noindent\vskip-\parskip\lstinline|\{\\def\\DisableWideScreen\{YES\}\}|\par
+definiálásával lehet beállítani.
+}
+
+\MEDframe{Table of contents}
+{
+Sometimes (mainly in the case of short presentations) the table of contents is not necessary at all.
+It can be disabled through defining 
+\noindent\vskip-\parskip\lstinline|\{\\def\\DisableTOC\{YES\}\}|\par
+It might also happen, that chapter-level TOC is still needed, but the section level not.
+This can be reached through defining
+\noindent\vskip-\parskip\lstinline|\{\\def\\DisableSectionTOC\{YES\}\}|\par
+}
+{Tartalomjegyzék}
+{
+Néha (főként rövid bemutatók esetén) egyáltalán nincs szükség tartalomjegyzékre.
+Ezt a 
+\noindent\vskip-\parskip\lstinline|\{\\def\\DisableTOC\{YES\}\}|\par
+definiálásával lehet elérni. Az is előfordul, hogy a fejezet-szintű
+tartalomjegyzék még szükséges, de a szakasz szintű már nem. Ezt a
+\noindent\vskip-\parskip\lstinline|\{\\def\\DisableSectionTOC\{YES\}\}|\par
+definiálásával lehet elérni.
+}
+
+
+\MEDsection[Files]{Files for package MultEdu}{Fájlok}{A MultEdu csomag fájljai}
+
+\MEDframe{Location of the files}
+{
+The files affecting the appearance of your documents must fit the 
+overall structure of files, as described in section~\ref{sec:subdirectories}.
+It is a good policy to change files only in your project subdirectory,
+since the commonly used files of the package are overwritten when using batch compile.
+}
+{A fájlok helye}
+{
+A használt fájloknak illeszkedni kell a fájlok általános rendszerébe,
+lásd \ref{sec:subdirectories} szakasz.
+Tanácsos csak a projekt könyvtárba tartozó fájlokat változtatni,
+mivel a csomag közösen használt fájljai a kötegelt feldolgozás során
+felülíródnak.
+}
+
+\MEDsubsection[Heading]{\lstinline{src/Heading}}{Alapértelmezett}{Alapértelmezett}
+
+\MEDframe{File \ctext{Heading}}
+{
+Some kind of heading usually belongs to the document.
+As an example see file \ctext{src/Heading.tex} of this user's guide.
+%\begin{lstlisting}
+%\ifthenelse{\equal{\LectureLanguage}{english}}
+%  { % In English
+%	\def\LectureAuthor{J\'anos V\'egh}
+%	\def\LectureTitle{How to use package MultEdu}
+%	\def\LectureSubtitle{(How to prepare interesting and attractive teaching material)}
+%	 %Optional
+%%	\def\LecturePublisher{Miskolc University Faculty of \dots and Informatics}
+%	\def\LectureRevision{V\Version\ (using \MERevision) \at 2016.08.19}
+%  }% true
+%  {% NOT english
+%  }
+%\end{lstlisting}
+}
+{A \ctext{Heading} file}
+{
+A dokumentumokhoz tartozik néhány fejzet leíró definíció.
+Mintaként a felhasználói leírás \ctext{src/Heading.tex} fájlja szolgál.
+%  \ifthenelse{\equal{\LectureLanguage}{magyar}}
+%  {	% in Hungarian
+%	\def\LectureAuthor{V\'egh J\'anos}
+%	\def\LectureTitle{Hogyan haszn\'aljuk\\ a MultEdu csomagot} 
+%	\def\LectureSubtitle{(Hogyan k\'esz\'\i{}ts\"unk \'erdekes\\ \'es vonz\'o tananyagot)} %opcionális
+%%	\def\LecturePublisher{Miskolci Egyetem \dots és Informatikai Kara}
+%	\def\LectureRevision{V\Version\ (a \MERevision\ felhaszn\'al\'as\'aval) \at 2016.08.19}
+%  }% true
+%  {% NOT magyar
+%  }
+
+}
+\index{Heading.texx}
+\index{src/Heading.tex}
+
+
+\MEDframe{File \ctext{Heading}}
+{
+Line \lstinline|\\def\\LectureAuthor\{J\\'anos V\\'egh\}| defines the author,
+lines \lstinline|\\def\\LectureTitle\{How to use package MultEdu\}|
+and \lstinline|\\def\\LectureSubtitle\{(How to prepare interesting and attractive teaching material)\}| the main title and its subtitle.
+Also a university name or conference name can be defined in \lstinline|\\def\\LecturePublisher\{University or conference\}| line.
+It is good practice to define \lstinline|\\def\\LectureRevision\{V\\Version\\ (using \\MERevision) \\at year.mm.dd\}|, too.
+
+}
+{A \ctext{Heading} file}
+{
+\ao{A fejzetet olyan fázisban olvassa a program, amikor még nem használhatók
+a magyar ékezetes betűk, ezért azokat a szokásos \LaTeX{} kódolással kell írni.}
+A fejzet tartalma:
+
+A \lstinline|\\def\\LectureAuthor\{V\\'egh J\\'anos\}| sor adja meg a szerzőt,
+a \lstinline|\\def\\LectureTitle\{Hogyan haszn\\'aljuk\\\\ a MultEdu csomagot\}|
+a címét, a \lstinline|\\def\\LectureSubtitle\{(Hogyan k\\'esz\\'\\i\{\}ts\\"unk \\'erdekes\\\\ \\'es vonz\\'o tananyagot)\}| pedig a dokumentum címét és alcímét.
+Megadhatunk egy \lstinline|\\def\\LecturePublisher\{Egyetem neve vagy konferencia neve\}| meghatározást is.
+Javasolt egy \lstinline|\\def\\LectureRevision\{V\\Version\\ (a \\MERevision\\ felhaszn\\'al\\'as\\'aval) \\at year.mm.dd\}| formájú sor használata is
+
+}
+
+\MEDframe{File \ctext{Heading}}
+{ When using dual-language source files, one has to prepare the source
+in a form which allows to select source lines depending on the language.
+To prepare dual-language documents, the definitions should be put in frame 
+like 
+\noindent\lstinline|\\ifthenelse\{\\equal\{\\LectureLanguage\}\{english\}\}|\par
+\noindent\vskip-\parskip\lstinline|  \{\% in English|\par
+\noindent\vskip-\parskip\lstinline|  \}\% true|\par
+\noindent\vskip-\parskip\lstinline|  \{\% NOT english|\par
+\noindent\vskip-\parskip\lstinline|  \}|\par
+}
+{A \ctext{Heading} file}
+{ Kétnyelvű dokumentumok készítéséhez a fentieket
+\noindent\lstinline|\\ifthenelse\{\\equal\{\\LectureLanguage\}\{magyar\}\}|\par
+\noindent\vskip-\parskip\lstinline|  \{\% in Hungarian|\par
+\noindent\vskip-\parskip\lstinline|  \}\% true|\par
+\noindent\vskip-\parskip\lstinline|  \{\% NOT magyar|\par
+\noindent\vskip-\parskip\lstinline|  \}|\par
+blokkban kell elhelyezni.
+}
+
+\MEDframe{File \ctext{Heading}}
+{
+Also here you can give e-mail address
+
+\lstinline|\\def\\LectureEmail\{Janos.Vegh\\at unideb.hu\}|
+
+Furthermore, one can provide  \ctext{BibTeX},
+even conditionally, depending on the language or the presence of some files
+
+\noindent\vskip-\parskip\lstinline|\\IfFileExists\{src/Bibliographyhu\}|\par
+\noindent\vskip-\parskip\lstinline|\{\\def\\LectureBibliography\{src/Bibliography
+,src/Bibliographyhu\}\}|\par
+\noindent\vskip-\parskip\lstinline|\{\\def\\LectureBibliography\{src/Bibliography\}\}|\par
+ 
+}
+{A \ctext{Heading} file}
+{
+Megadhatunk számítógépes címet is
+
+\lstinline|\\def\\LectureEmail\{Janos.Vegh\\at unideb.hu\}|
+
+Ugyancsak itt célszerű megadni a dokumentumban használt \ctext{BibTeX} fájlokat, akár a nyelv, vagy a fájl tényleges fellelhetősége alapján:
+
+\noindent\vskip-\parskip\lstinline|\\IfFileExists\{src/Bibliographyhu\}|\par
+\noindent\vskip-\parskip\lstinline|\{\\def\\LectureBibliography\{src/Bibliography, src/Bibliographyhu\}\}|\par
+\noindent\vskip-\parskip\lstinline|\{\\def\\LectureBibliography\{src/Bibliography\}\}|\par
+ 
+}
