@@ -37,7 +37,7 @@
 	  %% The user want a plain frame, no further options considered
 	  \def\startframe{\begin{frame}[plain] {\framelabel}{}}
 		%message("Just plain")
-	\else %@plain
+	\else %not @plain
 	  %% Not plain, consider if to shrink
 	  \ifKV@MEMacros@shrink
 			  \def\startframe{\begin{frame}[shrink] {\framelabel}{}}
@@ -48,7 +48,8 @@
 	  \fi %@shrink	  
 	\fi %@plain		
 \startframe
-#3
+%\maxsizebox{\textwidth}{\textheight}
+{#3}
 \end{frame}
 %\par\phantom{-}\vskip-5\parskip
 } % \MEframe
