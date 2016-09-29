@@ -138,6 +138,12 @@
 \input{../../common/MEPackages}	% Use the common packets
 \input{../../common/MEMacros}
 \usepackage{midfloat}
+
+\usepackage[toc,acronym%,indexonlyfirst
+]{glossaries}
+\ifx\LecturePrintable\undefined\else\makeglossaries\fi
+\setlength{\glslistdottedwidth}{\columnwidth} % adjust to suit
+			
 	\IfFileExists{src/Glossary.tex}
 	{
 		\input{src/Glossary}

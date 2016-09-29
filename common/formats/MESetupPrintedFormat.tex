@@ -37,8 +37,7 @@
 \ifx\LecturePrintable\undefined\else\makeglossaries\fi
 \setlength{\glslistdottedwidth}{\columnwidth} % adjust to suit
 			
-
-\input{../../common/formats/MEFancyTOC}
+\ifx\eBook\undefined \input{../../common/formats/MEFancyTOC}\fi
 \usepackage{midfloat}
 \IfFileExists{src/Glossary.tex}
 {

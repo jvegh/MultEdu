@@ -83,23 +83,28 @@ set(MyFormatList ${MyFormatList} beamer_ME)
 set(MyFormatList ${MyFormatList} eBook)
 set(MyFormatList ${MyFormatList} WEB)
 set(MyFormatList ${MyFormatList} A4Fancy)
-  
+ 
+set(VersionFile "${CMAKE_BINARY_DIR}/src/Version.tex.in" )
+file(WRITE  "${VersionFile}"  "%% Project file version; prepared by CMake, will be overwritten\n")
+file(APPEND  "${VersionFile}"  "\\def\\Version{" "${PROJECT_VERSION}" "}\n")
+configure_file("${VersionFile}" "${CMAKE_BINARY_DIR}/src/Version.tex")
+ 
 ### The beginning of the output generating loop
 foreach(MyLanguage ${MyLanguageList})
 foreach(MyFormat ${MyFormatList})
   ### Prepare a new config file
   #
-  set(ConfigFile "${CMAKE_SOURCE_DIR}/src/Defines.tex.in" )
+  set(ConfigFile "${CMAKE_BINARY_DIR}/src/Defines.tex.in" )
   file(WRITE "${ConfigFile}" "%% This file is prepared by CMake, will be overwritten\n")
 ## Handle the language(s)
   file(APPEND  "${ConfigFile}"  "\\def\\FirstLanguage{"  "${FirstLanguage}"  "} % In dual language macros\n")
   file(APPEND  "${ConfigFile}"  "\\def\\SecondLanguage{" "${SecondLanguage}" "} % In dual language macros\n")
-  file(APPEND  "${ConfigFile}"  "\\def\\LectureLanguage{" "${MyLanguage}" "} % What you want to print\n")
+  file(APPEND  "${ConfigFile}"  "\\def\\LectureLanguage{" "${MyLanguage}" "} % Define language features\n")
   if(USE_SECOND_LANGUAGE)
     file(APPEND  "${ConfigFile}"  "\\def\\UseSecondLanguage{YES}   % Now make output in '" "${MyLanguage}"   "'\n")
   endif(USE_SECOND_LANGUAGE)
-  file(APPEND  "${ConfigFile}"  "\\def\\Version{" "${PROJECT_VERSION}" "}\n")
-  file(APPEND  "${ConfigFile}"  "\\def\\EnableDebug{YES} % USE IT ONLY WHEN DEVELOPING FEATURES!!!\n")
+    file(APPEND  "${ConfigFile}"  "\\def\\EnableDebug{YES} % USE IT ONLY WHEN DEVELOPING FEATURES!!!\n")
+  file(APPEND  "${ConfigFile}"  "\\input{src/Version.tex} % Read the CMake-generated version\n")
   
 if( ${MyFormat} MATCHES  "beamer")
   ## Make beamer-only settings
@@ -185,7 +190,6 @@ set(cmake_generated ${CMAKE_BINARY_DIR}/CMakeCache.txt
 )
 
 foreach(file ${cmake_generated})
-
   if (EXISTS ${file})
      file(REMOVE_RECURSE ${file})
   endif()
