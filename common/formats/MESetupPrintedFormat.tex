@@ -32,6 +32,12 @@
 
 \usepackage[plainpages=false,pdfpagelabels,colorlinks=true,linkcolor=webgreen,citecolor=ForestGreen]{hyperref}
 
+\usepackage[toc,acronym%,indexonlyfirst
+]{glossaries}
+\ifx\LecturePrintable\undefined\else\makeglossaries\fi
+\setlength{\glslistdottedwidth}{\columnwidth} % adjust to suit
+			
+
 \input{../../common/formats/MEFancyTOC}
 \usepackage{midfloat}
 \IfFileExists{src/Glossary.tex}
