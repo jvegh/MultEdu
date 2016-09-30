@@ -108,7 +108,7 @@ a fejezet elején használok egy
 
 Program listings can be displayed using macro
 \par\noindent\lstinline|\\MESourceFile[keys] \{filename\} \{caption\} \{label\}\{scale\}|.
-Possible keys: \lstinline|wide,decorations|.
+Possible keys: \lstinline|wide[=false],decorations[=\{\}]|.
 
 \MESourceFile[language={[ISO]C++}]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way}{lst:hello.cpp}{}
 
@@ -122,7 +122,7 @@ Possible keys: \lstinline|wide,decorations|.
 A
 \par\noindent\lstinline|\\MESourceFile[keys] \{filename\} \{caption\} \{label\}\{scale\}|
 \par\noindent makróval jeleníthetők meg programlisták.
-Lehetséges kulcs: \lstinline|wide,decorations|.
+Lehetséges kulcs: \lstinline|wide[=false],decorations[=\{\}]|.
 A \ao{\ref{lst:hello.cpp}} programlista megjelenítéshez használt programsor:
 \par\noindent\lstinline|\\MESourceFile[language=\{[ISO]C++\}] \{lst/HelloWorld.cpp\} \{A "Hello World"- C++ program\} \{lst:hello.cpp\}\{\}|
 
@@ -138,7 +138,7 @@ Many times one needs wider program listings.
 In the case of the two-column printing, 
 the listing shall fill the width of the two columns.
 In the case of one-column printing, the narrow list extend to 70\% of the text width,
-while the wide lists 
+while the wide lists span the width of both columns.
 
 The wide listings can be placed even hardly on the printed page
 (the first proper place, relative to the appearance of the macro
@@ -211,8 +211,8 @@ decorations=\{
 list of decorations
 \}
 ] \{source file\} \{caption\} \{label\}\{\}|
-\par\noindent ahol a dekorációk listája a szakaszban felsorolt 
-bármelyik fajta dekorációt tartalmazhatja.\ao{\footnote{
+\par\noindent ahol a díszítések listája a szakaszban felsorolt 
+bármelyik fajta díszítést tartalmazhatja.\ao{\footnote{
 A program az első menetben elhelyezi a programlistát és egy újabb fordítás során tudja 
 a díszítéseket is felrakni.}}
 Az \lstinline|options| argumentumaként a 'listings' csomagban használt bármely opció használható.
@@ -299,6 +299,7 @@ Possible keys, with defaults are:
 Az előbbi programlistán a kijelöléshez megjegyzést is fűzhetünk.
 Ennek formája 
 \par\noindent\lstinline|\\MEBalloonComment[keys]\{BallonName\} \{ShiftPosition\} \{Comment\} \{CommentShape\}|
+\par\noindent 
 amivel az előzőleg felrajzolt ballonhoz fűzhetünk megjegyzést.
 Itt \lstinline|BallonName| az \lstinline|\\MEHighlightLines| első argumentuma,
 \lstinline|ShiftPosition| a megjegyzésdoboz eltolása, \lstinline|Comment| pedig maga 
@@ -320,7 +321,7 @@ decorations=\{
 \MESourceFile[language={[ISO]C++},wide,
 decorations={
 \MESourcelinesHighlight{HelloCBalloon}{lst:HLChello.cpp}{6}{8}
-\MESourceBalloonComment{HelloCBalloon}{0cm,0cm}{This is the body}{CommentShape}
+\MESourceBalloonComment{HelloCBalloon}{-1cm,0cm}{This is the body}{CommentShape}
 }
 ]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, remark to the highlighing}{lst:HLChello.cpp}{}
 \index{MESourceFile!highlighting@\bs MESourceFile highlighting}
@@ -334,7 +335,7 @@ decorations=\{
 \\MESourcelinesHighlight \{HelloBalloon\} \{lst:HLChello.cpp\} \{6\}\{8\}
 \\MESourceBalloonComment \{HelloCBalloon\} \{0cm,0cm\} \{This is the body\} \{CommentShape\}
 \} 
-] \{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way
+] \{lst/HelloWorld.cpp\} \{"Hello World" -- egy C++ program
 %, megjegyzés a kijelöléshez
 \} \{lst:HLhello.cpp\}\{\}|
 
@@ -345,9 +346,9 @@ parancsot kell kiadni.
 \MESourceFile[language={[ISO]C++},wide,
 decorations={
 \MESourcelinesHighlight{HelloBalloonC}{lst:HLChello.cpp}{6}{8}
-\MESourceBalloonComment{HelloBalloonC}{0cm,0cm}{This is the body}{CommentShape}
+\MESourceBalloonComment{HelloBalloonC}{-1cm,0cm}{Ez a csoport}{CommentShape}
 }
-]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way %, megjegyzés a kijelöléshez
+]{lst/HelloWorld.cpp}{"Hello World" -- egy C++ program %, megjegyzés a kijelöléshez
 }{lst:HLChello.cpp}{}
 %\index{MESourceFile!tartomány kijelölés@\bs MESourceFile tartomány kijelölés}
 }
@@ -362,14 +363,14 @@ To produce it, the command was:
 \par\noindent\lstinline|
 \\MESourceFile[language=\{[ISO]C++\},wide,
 decorations=\{
-\\MESourcelineComment\{lst:Chello.cpp\} \{6\} \{0cm,0cm\} \{This is a comment\} \{CommentShape\}
+\\MESourcelineComment\{lst:Chello.cpp\} \{6\} \{-1cm,0cm\} \{This is a comment\} \{CommentShape\}
 \}
 ]\{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, commenting source lines\} \{lst:Chello.cpp\}\{\}
 |
 
 \MESourceFile[language={[ISO]C++},wide,
 decorations={
-\MESourcelineComment{lst:Chello.cpp}{6}{0cm,0cm}{This is a comment}{CommentShape}
+\MESourcelineComment{lst:Chello.cpp}{6}{-1cm,0cm}{This is a comment}{CommentShape}
 }
 ]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, commenting source lines}{lst:Chello.cpp}{}
 \index{MESourceFile!commenting@\bs MESourceFile commenting}
@@ -381,7 +382,7 @@ Ehhez a
 \par\noindent\lstinline|
 \\MESourceFile[language=\{[ISO]C++\},wide,
 decorations=\{
-\\MESourcelineComment\{lst:Chello.cpp\} \{6\} \{0cm,0cm\} \{This is a comment\} \{CommentShape\}
+\\MESourcelineComment\{lst:Chello.cpp\} \{6\} \{-1cm,0cm\} \{This is a comment\} \{CommentShape\}
 \}
 ]\{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, commenting source lines\} \{lst:Chello.cpp\}\{\}
 |
@@ -389,10 +390,10 @@ utasítást kellett kiadni.
 
 \MESourceFile[language={[ISO]C++},wide,
 decorations={
-\MESourcelineComment{lst:Chello.cpp}{6}{0cm,0cm}{This is a comment}{CommentShape}
+\MESourcelineComment{lst:Chello.cpp}{6}{-1cm,0cm}{This is a comment}{CommentShape}
 }
 ]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, megjegyzés a forráskód sorához}{lst:Chello.cpp}{}
-%\index{MESourceFile!megjegyzés@\bs MESourceFile megjegyzés}
+\index{MESourceFile!megjegyzés@\bs MESourceFile megjegyzés}
 }
 \index{MESourcelineComment@\bs MESourcelineComment}
 
@@ -516,7 +517,7 @@ decorations=\{
 
 \MESourceFile[language={Verilog},wide,
 decorations={
-\MESourcelineFigure[width=5.2cm]{lst:forloops.v}{8}{3.0,-.3}{fig/forloops}
+\MESourcelineFigure[width=5.2cm]{lst:forloops.v}{3}{2.7,-.1}{fig/forloops}
 }
 ]{lst/forloops.v}{Implementing \ctext{for} loop with repeating HW}{lst:forloops.v}{}
 }
@@ -532,7 +533,7 @@ decorations=\{
 
 \MESourceFile[language={Verilog},wide,
 decorations={
-\MESourcelineFigure[width=5.2cm]{lst:forloops.v}{8}{3.0,-.3}{fig/forloops}
+\MESourcelineFigure[width=5.2cm]{lst:forloops.v}{3}{2.7,-.1}{fig/forloops}
 }
 ]{lst/forloops.v}{'for'
 ciklus megvalósítása HW ismétléssel}{lst:forloops.v}{}
@@ -592,7 +593,7 @@ The macro
 
  For producing Listing \ao{\ref{lst:calculatorwithresult}}
 the command 
-\par\noindent\lstinline|\\MESourceFileWithResult [language=C++,wide,decorations=\{
+\par\noindent\lstinline|\\MESourceFileWithResult [language=C++,wide, decorations=\{
 	\\MESourcelineListBalls \{lst:calculatorwithresult\} \{13,14,16,18,19\}
 \}] \{lst/expensive_calculator.cpp\}
 \{lst/calculatorresult.txt\} \{The calculator program with its result\} \{lst:calculatorwithresult\}|
@@ -602,8 +603,8 @@ the command
 {
 A \ao{\ref{lst:calculatorwithresult}} program lista
 a 
-\par\noindent\lstinline|\\MESourceFileWithResult[language=C++,wide,decorations=\{
-	\\MESourcelineListBalls\{lst:calculatorwithresult\} \{13,14,16,18,19\}
+\par\noindent\lstinline|\\MESourceFileWithResult[language=C++,wide, decorations=\{
+	\\MESourcelineListBalls \{lst:calculatorwithresult\} \{13,14,16,18,19\}
 \}] \{lst/expensive_calculator.cpp\}
 \{lst/calculatorresult.txt\} \{The calculator program with its result\} \{lst:calculatorwithresult\}|
 \par\noindent utasítás eredménye.

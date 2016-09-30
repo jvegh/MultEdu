@@ -65,6 +65,7 @@ Correspondingly, the biggest unit is the 'chapter'.
 Usage:\par
 \noindent\lstinline|\\MEchapter[short title]\{long title\}|
 
+When preparing slides, it is transformed to \lstinline|\\section|
 }
 {Fejezet}
 {
@@ -73,6 +74,8 @@ A dokumentum legnagyobb egysége a fejezet.
 
 Használata:\par
 \noindent\lstinline|\\MEchapter[short title]\{long title\}|
+
+Ha diákat készítünk,  \lstinline|\\section| lesz belőle.
 
 }
 \index{MEchapter@\bs MEchapter}
@@ -85,8 +88,14 @@ The next, smaller unit is the 'section'.
 Usage:\par
 \noindent\lstinline|\\MEsection[short title]\{long title\}|
 
-In a similar way, there exists \lstinline|\\MEsubsection[short title]\{long title\}|
-and \lstinline|\\MEsubsubsection[short title]\{long title\}|; the latter one is
+In a similar way, there exists
+
+\lstinline|\\MEsubsection [short title] \{long title\}|
+and
+
+\lstinline|\\MEsubsubsection [short title] \{long title\}|
+
+ the latter one is
 transformed for slides to \lstinline|\\paragraph|.
 }
 {Fejezet}
@@ -95,8 +104,15 @@ A következő, kisebb egység a szakasz
 Használata:\par
 \noindent\lstinline|\\MEsection[r\"ovid cím]\{hosszú cím\}|
 
-Hasonló módon létezik \lstinline|\\MEsubsection[rövid cím]\{hosszú cím\}|
-és \lstinline|\\MEsubsubsection[rövid cím]\{hosszú cím\}|; 
+Hasonló módon létezik
+
+\lstinline|\\MEsubsection [rövid cím] \{hosszú cím\}|
+
+
+és
+
+\lstinline|\\MEsubsubsection [rövid cím] \{hosszú cím\}|; 
+
 ez utóbbi dia készítés esetén \lstinline|\\paragraph| alakot ölt.
 
 }
@@ -137,7 +153,7 @@ Usage:
 
 \noindent\lstinline|\\UseSecondLanguage\{YES\}|
 
-\noindent where the argument \lstinline|\{\}| is not relevant, only if this macro is defined or not.
+\noindent where the argument in \lstinline|\{\}| is not relevant, only if this macro is defined or not.
 
 The two kinds of macros can be mixed, but only the 'D' macros 
 are sensitive to changing the language.
@@ -149,7 +165,7 @@ Használata:
 
 \noindent\lstinline|\\UseSecondLanguage\{YES\}|
 
-\noindent ahol az \lstinline|\{\}| nem számít, csak az, hogy definiálva van-e ez a makro.
+\noindent ahol az \lstinline|\{\}|-ben megjelenő argumentum nem számít, csak az, hogy definiálva van-e ez a makro.
 
 A kétféle makrókészlet keverhető, de csak a 'D' makrók reagálnak 
 a nyelv változtatásra.
@@ -181,12 +197,14 @@ Although that point of view has less importance, when presenting a conference ta
 it is very important to properly utilize the available time.
 \gls{MultEdu} can support this through displaying a chrono time on the slides. An example:
 
-\lstinline|\\MEframe\{Frame title \\ifx\\EnableTimer\\undefined\\else\\initclock\\fi\}|
+\lstinline|\\MEframe\{Frame title \\ifx\\EnableTimer\\undefined \\else \\initclock\\fi\}|
 
 The \gls{MultEdu} also warns the with changing the color of the time value,
 if we are approaching the end of the lecture.
 The maximum time can be set using instruction \lstinline|\\def\\LectureTime\{minutes\}|,
 the default value is \lstinline|15|.
+\ao{The timer starts when the second slide is projected, and is reset, when
+the lecturer returns to that slide.}
 \index{time on slides}
 }
 {Időmérés diasorozat vetítésekor}
@@ -199,7 +217,7 @@ célszerűen a \lstinline|src/Defines.tex| fájlban.
 Ezt az utasítást célszerű az első "valódi" keret címében elhelyezni, különben üres keretet eredményezhet.
 Példa:
 
-\lstinline|\\MEframe\{Keret cim \\ifx\\EnableTimer\\undefined\\else\\initclock\\fi\}|
+\lstinline|\\MEframe\{Keret cim \\ifx\\EnableTimer\\undefined \\else \\initclock\\fi\}|
 
 A \gls{MultEdu} a kijelzett idő színének megváltoztásával figyelmezteti az előadót, ha az előadás végéhez közel kerül. A maximális értéket
 
@@ -207,6 +225,8 @@ A \gls{MultEdu} a kijelzett idő színének megváltoztásával figyelmezteti az
 
 utasítással 
 lehet beállítani, az alapértelmezett érték \lstinline|15|.
+\ao{Az időmérés a második dia megjelenytésekor indul, az idő újra indul,
+ha oda visszamegyünk.}
 \index{idő kijelzése dián}
 }
 \index{src/Defines.tex}
@@ -226,6 +246,9 @@ Usage:\par
 \par\noindent\lstinline|\\MEchapter[short title1]\{long title1\}| or
 \par\noindent\lstinline|\\MEchapter[short title2]\{long title2\}| calls,
 \par\noindent depending on whether \lstinline|\\UseSecondLanguage| is or is not defined.
+
+The usage of the lower units is absolutely analogous.
+
 }
 {Fejezet}
 {
@@ -238,20 +261,11 @@ Használata:\par
 \par\noindent\lstinline|\\MEchapter[rövid cím1]\{hosszú cím1\}| vagy
 \par\noindent\lstinline|\\MEchapter[rövid cím2]\{hosszú cím2\}| 
 \par\noindent attól függően, hogy  \lstinline|\\UseSecondLanguage| definiált vagy sem.
+
+Teljesen hasonló a kisebb formázási egységek használata is.
+
 }
 \index{MEDchapter@\bs MEDchapter}
-
-
-\MEDsubsection{Section and below}{}{Szakasz és az alatt}
-
-\MEDframe{Section and below}
-{
-The usage of the lower units is absolutely analogous.
-}
-{Szakasz és az alatt}
-{
-Teljesen hasonló a kisebb formázási egységek használata is.
-}
 \index{MEDsection@\bs MEDsection}
 
 \MEDsection[]{Chapter illustration}{}{Fejezet illusztráció}
@@ -264,7 +278,7 @@ Some book styles also allow presenting some illustration at the beginning of the
 
 \noindent For slides, the illustration appears in a 'plain' style style.
 For books, the picture is placed at the beginning of the chapter.
-If the file name is empty, a 'fig/DefaultIllustration.png' file is searched.
+If the file name is empty, a \lstinline|fig/DefaultIllustration.png| file is searched.
 If the file not found, no illustration generated.
 
 If macro \lstinline|\\DisableChapterIllustration| is defined, no picture generated.
@@ -279,7 +293,7 @@ Néhány könyv stílus lehetővé teszi, hogy a fejezetek elején egy illusztr�
 \noindent Dia készítéskor, a kép egy 'plain' dián jelenik meg.
 Nyomtatható változatban a fejezet elején jelenik meg a kép.
 
-Ha a fájl név üres, a csomag a 'fig/DefaultIllustration.png' képet keresi.
+Ha a fájl név üres, a csomag a \lstinline|fig/DefaultIllustration.png| képet keresi.
 Ha a fájl nem található, nem készül illusztráció.
 
 Ha definiáljuk a  \lstinline|\\DisableChapterIllustration|  makrót,
@@ -337,7 +351,9 @@ A \LaTeX{} bizonyos objektumokat, úgymint ábrákat, táblázatokat, programlis
 lebegő objektumként kezelhet, tehát nem feltétlenül a forrásnyelvi helynek 
 megfelelő helyen jelennek meg a nyomtatott változatban, viszont a dia képeken igen.
 Ezért a nyomtatott változatban nem érdemes 'A következő programlistán' módon hivatkozni. Helyette
-az '\lstinline|A\ \\ref\{lst:hello.cpp\}\ programlista|' mód javasolt.
+az '\lstinline|\\Aref\{lst:hello.cpp\}\ programlista|' mód javasolt.
+\ao{Az \lstinline|\\Aref| formájó makró csak magyarul használatos
+és az objektum számának megfelelő névelőt használ.}
 
 A dia képeken viszont  a megfelelő helyen van a lista, de nincs száma.
 Ezért az '\lstinline|A\ \\ao\{\\ref\{lst:hello.cpp\}\}\ programlista|' mód az igazi.

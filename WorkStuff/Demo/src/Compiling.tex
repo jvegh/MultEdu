@@ -13,7 +13,7 @@
 
 \MEDframe{The file Main.tex}
 {
-File \ctext{Main.tex} is the common part of the dual compilation system. 
+File \lstinline|Main.tex| is the common part of the dual compilation system. 
 This contains the real source code. Any setting in this file (as well as in the included files)
 overwrites the settings, in both the manual and the batch mode, so it is better
 not to use any settings here. The best policy is to collect all the settings
@@ -21,7 +21,7 @@ in a separate file, which is then included in the envelope file.
 }
 {A Main.tex fájl}
 {
-A \ctext{Main.tex} fájl a közös és a két fordítási módban egyformán használt rész:
+A \lstinline|Main.tex| fájl a közös és a két fordítási módban egyformán használt rész:
 ez tartalmazza a tényleges forráskódot. Az ebben a fájlban (továbbá az ide beolvasott fájlokban)
 szereplő bármely beállítás változtatás megváltoztatja a rendszer beállításait,
 azaz itt nem tanácsos bármiféle beállítást használni. Érdemes az összes beállítást 
@@ -92,6 +92,59 @@ Technikai okokból a tényleges fordítás előtt a rendszer saját másolatot
 készít a \gls{MultEdu} szükséges fájljairól a projekt \lstinline|common| alkönyvtárába.
 Ezzel a saját kópiával lehet kísérletezni, vagy akár törölni;
 a következő kötegelt fordítás majd helyreállítja. (azaz a következő fordítás előtt az értékes fejlesztést el kell menteni, akár a \lstinline|../../common| alkönyvtárba, ha azt másutt is használni akarjuk.)
+}
+
+\MEDframe{Batch mode compiling}
+{
+The compilation comproses three stages
+\begin{itemize}
+\item in the project directory in file  \lstinline|CMakeLists.txt| 
+edit settings for the actual compilation 
+\item change to subdirectory  \lstinline|build/build| 
+and give command \lstinline|cmake\ ../..|.
+\ao{In response \gls{MultEdu} prepares the respective configuration files
+and source files (and also displays on the screen which files will be prepared)}
+\item in the same directory give command \lstinline|make|, which actually starts compiling 
+\end{itemize}
+
+\ao{The batch compiling by default is longer than the manual one.
+It considers the worst case: recompiles everything, even when it would not
+strictly needed.
+Thsi time should be multiplied by the numebr of languages and number of formats,
+i.e. for longer documents it might require several minutes.
+
+However, since that compilation works independently, and \gls{MultEdu} 
+prepares its own copy used in the compilation, you may continue
+editing and/or compiling your files, even the ones used in the batch compilation.
+The handling of the source and result files is independent as well.
+\gls{MultEdu} prepares a separated source file for its own use and
+compiles it to its own output file.
+The file names of the own copies comprise codes of the language, format and version.
+}
+}
+{Kötegelt fordítás üzemmód}
+{
+A fordítás három lépésből áll.
+\begin{itemize}
+\item a projekt könyvtárban a \lstinline|CMakeLists.txt| fájlban
+be kell állítani az adott fordításban használni kívánt beállításokat
+\item a projekt \lstinline|build/build| alkönyvtárára váltani, majd kiadni a
+\lstinline|cmake\ ../..| parancsot. \ao{Ennek hatására a \gls{MultEdu} elkészíti
+a konfigurációs és forrás fájlokat (ki is írja, hogy milyen fájlokat fog elkészíteni)}
+\item ugyanitt adjuk ki a \lstinline|make| parancsot, aminek hatására
+a tényleges fordítás elindul. 
+\end{itemize}
+
+\ao{A fordítás alapértelmezetten is hosszabb, mint ami az IDE használata esetén megszokott. A kötegelt feldolgozás a legrosszabb esetre számít: mindent
+újrafordít, akkor is, ha tulajdonképpen nincs szükség rá. Ezt az időt szorozni kell a nyelvek és a formátumok számával, azaz hosszabb dokumentumok esetén 
+akár több perces fordításra számítsunk.
+
+Viszont, a fordítás függetlenül folyik, és a \gls{MultEdu} saját másolatot készít
+saját fordításához, azaz a kötegelt fordítás alatt további szerkesztéseket
+végezhetünk. Hasonlóan független a a forrás és eredményfájlok kezelése is.
+A \gls{MultEdu} elkészít magának egy saját forráskódot, a megfelelő beállításokkal, és azt fordítja le egy saját eredményfájllá.
+A saját másolatok nevei tartalmazzák a nyelv, a formátum és a verzió kódját is.
+}
 }
 
 \MEDsection[Settings]{Changing default settings}{Beállítások}{Az alapbeállítások megváltoztatása}
