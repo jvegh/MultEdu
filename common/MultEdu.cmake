@@ -74,6 +74,11 @@ if( ${MyFormat} MATCHES  "beamer")
     file(APPEND  "${ConfigFile}"  "\\def\\DisableSectionTOC{YES} % you need chapters but sections in Table of Contents\n")
     endif(DISABLE_SECTION_TOC)  
   endif(DISABLE_TOC)
+  if(ENABLE_TIMER)
+    file(APPEND  "${ConfigFile}"  "\\def\\EnableTimer{YES} %I need displaying time on slides\n")
+    file(APPEND  "${ConfigFile}"  "\\def\\LectureTime{" ${LECTURE_TIME_MAX} "} %Maximum time of my lecture\n")
+      
+  endif(ENABLE_TIMER)
 else( ${MyFormat} MATCHES  "beamer") 
   ## Make printed-only settings     
   set(MyIndex "USE_INDEX")

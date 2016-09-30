@@ -77,8 +77,8 @@ a kötegelt fordítás.) A kötegelt fordítás egy "minta" fájlt is készít \
 Batch processing serves (mainly) the goal to generate the output
 from the common source in the different formats and languages.
 
-From technical reasons, MultEdu prepares a private copy from
-the MultEdu files, in the subdirectory \lstinline|common|  of the project.
+From technical reasons, \gls{MultEdu} prepares a private copy from
+the \gls{MultEdu} files, in the subdirectory \lstinline|common|  of the project.
 You may safely experiment with this copy or also delete it; the next
 batch compile will recreate it. (I.e. one should save the valuable developments; possibly in subdirectory \lstinline|../../common|
 if you want to use it also by the other project groups.)
@@ -89,7 +89,7 @@ A kötegelt fordítás (főként) arra szolgál, hogy a közös forráskódból 
 előállítani a különféle formátumokban és nyelveken anyagainkat.
 
 Technikai okokból a tényleges fordítás előtt a rendszer saját másolatot
-készít a MultEdu szükséges fájljairól a projekt \lstinline|common| alkönyvtárába.
+készít a \gls{MultEdu} szükséges fájljairól a projekt \lstinline|common| alkönyvtárába.
 Ezzel a saját kópiával lehet kísérletezni, vagy akár törölni;
 a következő kötegelt fordítás majd helyreállítja. (azaz a következő fordítás előtt az értékes fejlesztést el kell menteni, akár a \lstinline|../../common| alkönyvtárba, ha azt másutt is használni akarjuk.)
 }
@@ -98,7 +98,7 @@ a következő kötegelt fordítás majd helyreállítja. (azaz a következő for
 
 \MEDframe{Changing default settings}
 {
-Settings of MultEdu can be defined using \lstinline|\\def\{OptionName\}| macros.
+Settings of \gls{MultEdu} can be defined using \lstinline|\\def\{OptionName\}| macros.
 If the compiler does not find the corresponding macro, the default setting will be used.
 The settings differ in the cases of manual and batch compiling.
 During batch processing the compiler uses settings from file
@@ -110,7 +110,7 @@ but the latter one is only handled by the user.
 }
 {Az alapbeállítások megváltoztatása}
 {
-A MultEdu alap-beállításait \lstinline|\\def\{OptionName\}| utasításokkal
+A \gls{MultEdu} alap-beállításait \lstinline|\\def\{OptionName\}| utasításokkal
 lehet meghatározni. Amennyiben a fordítás előtt a fordítóprogram nem talál
 ilyen meghatározást, az alapbeállítást használja.
 A kézi és a kötegelt fordítás beállításai különböznek. A kötegelt feldolgozás
@@ -127,10 +127,10 @@ a felhasználónak kell megadni.
 \MEDframe{Versioning}
 {
 Multedu uses three-level version numbering (major, minor and patch).
-The course materials prepared with MultEdu have two kinds of version numbers: the user maintains his/her own version numbers, and the 
-developer maintains version of MultEdu. 
+The course materials prepared with \gls{MultEdu} have two kinds of version numbers: the user maintains his/her own version numbers, and the 
+developer maintains version of \gls{MultEdu}. 
 
-Version number of MultEdu is located in file  \lstinline|../../common/MEMacros.tex|; better not to change it.
+Version number of \gls{MultEdu} is located in file  \lstinline|../../common/MEMacros.tex|; better not to change it.
 The own course material version number is held in file \lstinline|CMakeFiles.txt|, and that setting will be refreshed 
 in the generated source files (through file \lstinline|Defines.tex|) when batch compiling.
 The version number of the course material appears also in the name
@@ -141,10 +141,10 @@ Usage:
 }
 {A verziók kezelése}
 {
-A MultEdu a standard háromszintű verzió számozást használja (fő és alszám, valamint folt). A MultEduval készült anyagoknak kétféle 
-verziója van: a saját tananyagának verzióját a felhasználó tartja karban, a MultEdu változatát pedig a fejlesztő.
+A \gls{MultEdu} a standard háromszintű verzió számozást használja (fő és alszám, valamint folt). A \gls{MultEdu}val készült anyagoknak kétféle 
+verziója van: a saját tananyagának verzióját a felhasználó tartja karban, a \gls{MultEdu} változatát pedig a fejlesztő.
 
-A Multedu verziószáma a \lstinline|../../common/MEMacros.tex| fájlban található; célszerű változatlanul hagyni. 
+A \gls{MultEdu} verziószáma a \lstinline|../../common/MEMacros.tex| fájlban található; célszerű változatlanul hagyni. 
 A saját kurzus anyag verzióját a \lstinline|CMakeFiles.txt| file tartalmazza, az minden kötegelt fordítás alkalmával frissül a
 \lstinline|Defines.tex| fájlban. A kézi fordításnak saját beállításai vannak, de célszerű azt átvenni a generált fájlból.
 
@@ -157,14 +157,14 @@ tehát érdemes következetesen használni azt. Használata:
 
 \MEDframe{Languages}
 {
-MultEdu can handle single- and dual-language documents.
+\gls{MultEdu} can handle single- and dual-language documents.
 Different spelling, section name, captions belong to the different languages. In the settings file the language must be specified,
 like using setting \lstinline|\\LectureLanguage\{english\}| (this is the default).
 The name of the selected language appears also in the name of the result file.
 }
 {Nyelvek}
 {
-A MultEdu egy- és két-nyelvű dokumentumokat tud kezelni.
+A \gls{MultEdu} egy- és két-nyelvű dokumentumokat tud kezelni.
 A különböző nyelvekhez különböző helyesírás, fejezetcímek, feliratok tartoznak. A beállításoknál kell megadni a nyelvet: ezt pl. a \lstinline|\\LectureLanguage\{magyar\}| beállítással lehet megtenni
 (enélkül az alapbeállítás \lstinline|\\LectureLanguage\{english\}|).
 

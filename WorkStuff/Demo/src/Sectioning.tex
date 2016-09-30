@@ -13,16 +13,16 @@
 Basically, the document must be organized as 'beamer' needs it,
 but to print it in a book-like form, the sectioning must be changed,
 and also the package 'beamerarticle' must be used.
-In order to provide a uniform wrapper around sectioning, MultEdu introduces
-its own sectioning units.
+In order to provide a uniform wrapper around sectioning, \gls{MultEdu} introduces
+its own sectioning units. The source text itself comprises 'frames'.
 }
 {Dokumentum egységek}
 {
 A dokumentumot a 'beamer' csomag követelményeinek megfelelően kell szervezni.
-A nyomtatható formában való megjelenítéshez a MultEdu  a 'beamerarticle' csomagot használja,
+A nyomtatható formában való megjelenítéshez a \gls{MultEdu}  a 'beamerarticle' csomagot használja,
 és a tagolást is megfelelően változtatni kell.
-Ennek érdekében a MultEdu saját tagolási egységeket vezet be, amelyek valójában
-a 'book' formátumnak felelnek meg, és amelyeket dia készítéshez megfelelően átalakít.
+Ennek érdekében a \gls{MultEdu} saját tagolási egységeket vezet be, amelyek valójában
+a 'book' formátumnak felelnek meg és amelyeket dia készítéshez megfelelően átalakít. A szöveg viszont 'diakeret' egységekből áll össze.
 }
 \index{package!beamer}
 \index{package!beamerarticle}
@@ -31,7 +31,7 @@ a 'book' formátumnak felelnek meg, és amelyeket dia készítéshez megfelelőe
 \MEDframe{Frames}
 {
 These units actually correspond to the ones used in format 'book',
-and MultEdu transforms them properly when preparing slides.
+and \gls{MultEdu} transforms them properly when preparing slides.
 
 Usage:\par
 \noindent\lstinline|\\MEframe[keys]\{subtitle\}\{content\}|
@@ -174,6 +174,45 @@ használatával kiválasztja az egyik nyelvet.
 }
 
 \index{MEDframe@\bs MEDframe}
+
+\MEDframe{Timing for presenting slide series}
+{
+Although that point of view has less importance, when presenting a conference talk,
+it is very important to properly utilize the available time.
+\gls{MultEdu} can support this through displaying a chrono time on the slides. An example:
+
+\lstinline|\\MEframe\{Frame title \\ifx\\EnableTimer\\undefined\\else\\initclock\\fi\}|
+
+The \gls{MultEdu} also warns the with changing the color of the time value,
+if we are approaching the end of the lecture.
+The maximum time can be set using instruction \lstinline|\\def\\LectureTime\{minutes\}|,
+the default value is \lstinline|15|.
+\index{time on slides}
+}
+{Időmérés diasorozat vetítésekor}
+{
+Bár tananyag készítésekor kevésbé fontos szempont, egy konferencia előadás bemutatásakor
+nagyon fontos az előadásra szánt idő megfelelő felhasználása.
+A \gls{MultEdu} a kivetített diákon a felhasznált idő  kivetítésével tudja ezt támogatni.
+Ez a lehetőség alapállapotban tiltott, külön engedélyezni kell \lstinline|\\def\\EnableTimer\{YES\}| utasítással,
+célszerűen a \lstinline|src/Defines.tex| fájlban.
+Ezt az utasítást célszerű az első "valódi" keret címében elhelyezni, különben üres keretet eredményezhet.
+Példa:
+
+\lstinline|\\MEframe\{Keret cim \\ifx\\EnableTimer\\undefined\\else\\initclock\\fi\}|
+
+A \gls{MultEdu} a kijelzett idő színének megváltoztásával figyelmezteti az előadót, ha az előadás végéhez közel kerül. A maximális értéket
+
+\lstinline|\\def\\LectureTime\{perc\}|
+
+utasítással 
+lehet beállítani, az alapértelmezett érték \lstinline|15|.
+\index{idő kijelzése dián}
+}
+\index{src/Defines.tex}
+\index{EnableTimer@\bs EnableTimer}
+\index{LectureTime@\bs LectureTime}
+
 
 \MEDsubsection{Chapter}{}{Fejezet}
 
