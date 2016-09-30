@@ -73,6 +73,7 @@ pdfpagemode=UseNone,pdfstartview=Fit
 	       {\bfseries\itshape\color{SeparatorColor}\fontsize{30pt}{40pt}\selectfont
 	       %	\LectureTitle\par}
 	       \LectureTitle\\\bfseries\color{\TitlePageColor}\fontsize{20pt}{30pt}\selectfont\LectureSubtitle}
+	       
 	    \end{mybox}
 	}}};
 
@@ -85,6 +86,7 @@ pdfpagemode=UseNone,pdfstartview=Fit
 	       {  \bfseries\fontsize{30pt}{40pt}\selectfont
 	       {\color{SeparatorColor}\LectureAuthor}\\
                \ifx\LecturePublisher\undefined\else\fontsize{20pt}{30pt}\selectfont\color{\TitlePageColor}\LecturePublisher\fi}
+               \tiny{ \copyright \LectureAuthor\ (\LectureEmail)}
 	    \end{mybox}
 	}}};
 
@@ -116,18 +118,21 @@ pdfpagemode=UseNone,pdfstartview=Fit
 		{
 \tikz[remember picture,overlay]%
         	\node[anchor=west]
-	        at ([yshift=.95cm,xshift=-20pt]current page.south west) (logo)
+	        at ([yshift=.95cm,xshift=-10pt]current page.south west) (logo)
 			{\TitlePictureLogo\TitleTextLogo \raisebox{.5ex}
-			{\tiny{\ \LectureRevision}) \ \copyright \LectureAuthor}};
+									{\begin{mybox}[]{\tiny{\ \LectureRevision}\  (\url{https://github.com/jvegh/MultEdu V\MEVersion}) }\end{mybox}}
+			};
 		}
 		{ % No user logo, use the default one
 \tikz[remember picture,overlay]%
 			\node[anchor=east] 
-			at ( [yshift=1.5cm,xshift=20pt]	current page.south east) (logo)
-			{ \TitlePictureLogo{\raisebox{-.5ex} 
+			at ( [yshift=1.48cm,xshift=50pt]	current page.south east) (logo)
+			{ \TitlePictureLogo{\raisebox{-.0ex} 
 			\TitleTextLogo
 			}
-						{\begin{mybox}[width=5cm]{\fontsize{9pt}{12pt}\selectfont{\ \LectureRevision}) \ \copyright \LectureAuthor\ (\LectureEmail)\quad\ }\end{mybox}}};
+									{\begin{mybox}[]{\tiny{\ \LectureRevision}\  (\url{https://github.com/jvegh/MultEdu V\MEVersion}) }\end{mybox}}
+									%						{\begin{mybox}[width=5cm]{\fontsize{9pt}{12pt}\selectfont{\ \LectureRevision}) \ \copyright \LectureAuthor\ (\LectureEmail)\quad\ }\end{mybox}}
+						};
 		}
 		
 	\fi
