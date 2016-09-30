@@ -23,7 +23,6 @@ else(NEED_BOTH_LANGUAGES)
     set(MyLanguageList ${FirstLanguage})
   endif(USE_SECOND_LANGUAGE)
 endif(NEED_BOTH_LANGUAGES)
- message("Multedu languages" ${MyLanguageList})
 
 ### Assemble which output formats to use
 #
@@ -39,7 +38,6 @@ endif(NEED_FORMAT_MEMOIR_eBook)
 if(NEED_FORMAT_MEMOIR_WEB)
 	set(MyFormatList ${MyFormatList} WEB)
 endif(NEED_FORMAT_MEMOIR_WEB)
-      message("Multedu formats" ${MyFormatList})
 
 ### Prepare a version file, as if were config file
 set(VersionFile "${CMAKE_BINARY_DIR}/src/Version.tex.in" )
@@ -76,6 +74,11 @@ if( ${MyFormat} MATCHES  "beamer")
     file(APPEND  "${ConfigFile}"  "\\def\\DisableSectionTOC{YES} % you need chapters but sections in Table of Contents\n")
     endif(DISABLE_SECTION_TOC)  
   endif(DISABLE_TOC)
+  if(ENABLE_TIMER)
+    file(APPEND  "${ConfigFile}"  "\\def\\EnableTimer{YES} %I need displaying time on slides\n")
+    file(APPEND  "${ConfigFile}"  "\\def\\LectureTime{" ${LECTURE_TIME_MAX} "} %Maximum time of my lecture\n")
+      
+  endif(ENABLE_TIMER)
 else( ${MyFormat} MATCHES  "beamer") 
   ## Make printed-only settings     
   set(MyIndex "USE_INDEX")

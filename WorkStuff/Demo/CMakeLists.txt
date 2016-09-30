@@ -44,6 +44,8 @@ option (DEBUG_MODE "Include debug support for lecture making"  ON)
   option ( DISABLE_WIDE_SCREEN "Use 4:3 screen rather than 16:9" OFF)
   option ( DISABLE_TOC "Disable table of contents, in Beamer only" OFF)
   option ( DISABLE_SECTION_TOC "Disable sections in table of contents, in Beamer only" OFF)
+  option ( ENABLE_TIMER "Display passed time, beamer only" OFF)
+  option ( LECTURE_TIME_MAX "Maximum time for the presentation" 15)
 
 ## Output format related settings
 #
