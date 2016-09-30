@@ -103,20 +103,20 @@ A bemutatott mintában a bejegyzések kódolása:
 \MEDframe{Definitions}
 {
 
-\lstinline|\\ifthenelse\{\\equal\{\\LectureLanguage\}\{english\}\}
-  \{
-	\\newglossaryentry\{computer\}
-	\{
-		name=\{computer\},
-		description=\{is a programmable machine that receives input,
-			stores and manipulates data, and provides
-			output in a useful format\}
-	\}	
-	\\newglossaryentry\{sampleone\}\{name=\{sample\},description=\{a little example\}\}
-    \\newacronym\{CPU\}\{CPU\}\{Central Processing Unit\}
-    \\newacronym\{DMA\}\{DMA\}\{Direct Memory Access\}
- \}	
- \{\}|
+\par\vskip-\parskip\noindent\lstinline*\\ifthenelse\{\\equal\{\\LectureLanguage\}\{english\}\}*
+\par\vskip-\parskip\noindent\lstinline*  \{*
+\par\vskip-\parskip\noindent\lstinline*	\\newglossaryentry\{computer\}*
+\par\vskip-\parskip\noindent\lstinline*	\{*
+\par\vskip-\parskip\noindent\lstinline*		name=\{computer\},*
+\par\vskip-\parskip\noindent\lstinline*		description=\{is a programmable machine that receives input,*
+\par\vskip-\parskip\noindent\lstinline*			stores and manipulates data, and provides*
+\par\vskip-\parskip\noindent\lstinline*			output in a useful format\}*
+\par\vskip-\parskip\noindent\lstinline*	\}*
+\par\vskip-\parskip\noindent\lstinline*	\\newglossaryentry\{sampleone\}\{name=\{sample\},description=\{a little example\}\}*
+\par\vskip-\parskip\noindent\lstinline*    \\newacronym\{CPU\}\{CPU\}\{Central Processing Unit\}*
+\par\vskip-\parskip\noindent\lstinline*    \\newacronym\{DMA\}\{DMA\}\{Direct Memory Access\}*
+\par\vskip-\parskip\noindent\lstinline* \}*
+\par\vskip-\parskip\noindent\lstinline* \{\}*
 
 }
 {Egy példa}
@@ -147,12 +147,19 @@ A bemutatott mintában a bejegyzések kódolása:
 These facilities can of course be only reasonably used in printable formats.
 Formats based on \lstinline|beamer| do not generate such a list of terms,
 but the \lstinline|\\gls\{ref\}|  are of course usable.
+
+An excellent facility for having acronym extension, term explanation, etc. always at hand, but without breaking the 
+continouous text.
 }
 {Használatuk}
 {
 Ezeknek a lehetőségeknek csak a nyomtatható változatok esetén van szerepe.
 A \lstinline|beamer| alapú formátumok nem generálnak ilyen jegyzékeket,
 de a \lstinline|\\gls\{ref\}| természetesen ott is használható.
+
+Nagyon jó lehetőség arra, hogy a rövidítés kifejtés, 
+fogalom magyarázat, stb. ne törje meg a szöveget, 
+de azért mindig kéznél legyen.
 }
 
 \MEDsection[Indices]{Indices}{Indexek}{Indexek használata}
