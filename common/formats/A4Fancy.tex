@@ -73,43 +73,23 @@ pdfpagemode=UseNone,pdfstartview=Fit
 %minimum width=\paperwidth,minimum height=5em,anchor=north]%
 %at (current page.north){\LectureSubtitle};
 	\node[anchor=north east]
-	at ([yshift=-60pt,xshift=-10pt]current page.north east) (subtitle)
+	at ([yshift=-60pt,xshift=-0pt]current page.north east) (subtitle)
 	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
 	       {\bfseries\itshape\color{SeparatorColor}\fontsize{30pt}{40pt}\selectfont
-	       %	\LectureTitle\par}
 	       \LectureTitle\\\bfseries\color{\TitlePageColor}\fontsize{20pt}{30pt}\selectfont\LectureSubtitle}
 	    \end{mybox}
 	}}};
 
 \fi
 
-%%% Bar across the bottom
-%\tikz[remember picture,overlay]%
-%\node[fill=HeadingColor,text=white,font=\LARGE\bfseries,text=cream,%
-%minimum width=\paperwidth,minimum height=5em,anchor=south]%
-%at (current page.south){\hfill%\Copyright 
-%\copyright\ 2010-\the\year\ (\LectureEmail)};
-%
-
-%\vspace*{-3\baselineskip}
-%  
-%
-%{\bfseries\itshape\color{HeadingColor}\fontsize{36pt}{46pt}\selectfont
-%	\LectureTitle\par}
-%
-%\vspace*{2\baselineskip}
-%
-%{\bfseries\LARGE\color{HeadingColor}
-%	\LectureAuthor\par
-%}
-%
 \tikz[remember picture,overlay]%
 	\node[anchor=east]
-	at ([yshift=85pt,xshift=-10pt]current page.south east) (subtitle)
+	at ([yshift=95pt,xshift=-0pt]current page.south east) (subtitle)
 	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
 	       {  \bfseries\fontsize{30pt}{40pt}\selectfont
 	       {\color{SeparatorColor}\LectureAuthor}\\
                \ifx\LecturePublisher\undefined\else\fontsize{20pt}{30pt}\selectfont\color{\TitlePageColor}\LecturePublisher\fi}
+               \tiny{ \copyright \LectureAuthor\ (\LectureEmail)}
 	    \end{mybox}
 	}}};
 
@@ -121,14 +101,18 @@ pdfpagemode=UseNone,pdfstartview=Fit
         	\node[anchor=west]
 	        at ([yshift=.95cm,xshift=-10pt]current page.south west) (logo)
 			{\TitlePictureLogo\TitleTextLogo \raisebox{.5ex}
-			{\tiny{\ \LectureRevision}) \ \copyright \LectureAuthor}};
+			{\tiny{\ \LectureRevision} \ \copyright \LectureAuthor}};
 		}
 		{ % No user logo, use the default one
 \tikz[remember picture,overlay]%
 			\node[anchor=east] 
 			at ( [yshift=1.6cm,xshift=-10pt]	current page.south east) (logo)
 			{\TitlePictureLogo{\raisebox{.5ex}\TitleTextLogo}
-						{\begin{mybox}[]{\fontsize{9pt}{12pt}\selectfont{\ \LectureRevision}) \\ \copyright \LectureAuthor\ (\LectureEmail)\quad\ }\end{mybox}}};
+			
+			\quad\hfill
+									{\begin{mybox}[]{\tiny{\ \LectureRevision}\  (\url{https://github.com/jvegh/MultEdu\  V\MEVersion}) }\end{mybox}}
+%						{\begin{mybox}[]{\fontsize{9pt}{12pt}\selectfont{\ \LectureRevision}) \\ \copyright \LectureAuthor\ (\LectureEmail)\quad\ }\end{mybox}}
+						};
 		}
 		
 	\fi
