@@ -10,7 +10,7 @@
 
 \MEDframe{What are acronyms and glossaries good for}
 {
-Especially in the case of technical courses, frequently occur abbreviations, mosaic words, unique interpretations of a term, etc. MultEdu can help you
+Especially in the case of technical courses, frequently occur abbreviations, mosaic words, unique interpretations of a term, etc. \gls{MultEdu} can help you
 with using the \lstinline|glossaries| package, to provide your students 
 with a hyperlinked facility, to use those terms consequently.
 
@@ -26,7 +26,7 @@ Some examples are given below; for more explanation see package \lstinline|gloss
 
 Különösen technikai jellegű tárgyak esetén, gyakran szerepelnek 
 rövidítések, betűszavak, illetve bizonyos fogalmak egyértelmű meghatározása.
-A MultEdu a \lstinline|glossaries| csomagot használva teszi lehetővé,
+A \gls{MultEdu} a \lstinline|glossaries| csomagot használva teszi lehetővé,
 hogy a dokumentumokban ilyeneket használjon, ráadásul hiper-hivatkozásként.
  
 Az ilyen elemeket a szövegben  a \lstinline|\\gls\{ref\}| módon kell elhelyezni.
@@ -37,7 +37,7 @@ csomag leírását.
 
 \MEDframe{What are acronyms and glossaries good for}
 {
-Especially in the case of technical courses, frequently occur abbreviations, mosaic words, unique interpretations of a term, etc. MultEdu can help you
+Especially in the case of technical courses, frequently occur abbreviations, mosaic words, unique interpretations of a term, etc. \gls{MultEdu} can help you
 with using the \lstinline|glossaries| package, to provide your students 
 with a hyperlinked facility, to use those terms consequently.
 
@@ -52,7 +52,7 @@ Some examples are given below; for more explanation see package \lstinline|gloss
 
 Különösen technikai jellegű tárgyak esetén, gyakran szerepelnek 
 rövidítések, betűszavak, illetve bizonyos fogalmak egyértelmű meghatározása.
-A MultEdu a \lstinline|glossaries| csomagot használva teszi lehetővé,
+A \gls{MultEdu} a \lstinline|glossaries| csomagot használva teszi lehetővé,
 hogy a dokumentumokban ilyeneket használjon, ráadásul hiper-hivatkozásként.
  
 Az ilyen elemeket a szövegben  a \lstinline|\\gls\{ref\}| hivatkozásként kell elhelyezni,
@@ -68,10 +68,13 @@ csomag leírását.
 
 When as a \gls{sampleone} you use the term \gls{computer},
 where \gls{CPU} és \gls{DMA} also happens;
-in the text \lstinline|When as a \\gls\{sampleone\} you use the term, \\gls\{computer\} where \\gls\{CPU\} and \\gls\{DMA\} also happens| should appear. Multedu then appends chapters \lstinline|Acronyms| and \lstinline|Glossary| to the end of the document, and clicking on those hyperlinked words, you are taken
+in the text \lstinline|When as a \\gls\{sampleone\} you use the term, \\gls\{computer\} where \\gls\{CPU\} and \\gls\{DMA\} also happens| should appear. \gls{Multedu} then appends chapters \lstinline|Acronyms| and \lstinline|Glossary| to the end of the document, and clicking on those hyperlinked words, you are taken
 to the explanation of the terms. When there, you migh click on the page number after the term, to go back.
 
-
+\gls{MultEdu} expects that (if you want to use this facility) your project
+contains a file \lstinline|src/Glossary.tex|, where the expansion
+of the referred to items can be found. The entries corresponding 
+to the items used in the sample can be coded like
 }
 {Egy példa}
 {
@@ -79,12 +82,17 @@ to the explanation of the terms. When there, you migh click on the page number a
 Ha \gls{minta}ként használja a \gls{szamitogep} fogalmát,
 ahol \gls{CPU} valamint \gls{DMA} is előfordul
 akkor a szövegben a \lstinline|Ha \\gls\{minta\}k\\'ent haszn\\'alja a \\gls\{szamitogep\} fogalm\\'at,
-ahol \\gls\{CPU\} valamint \\gls\{DMA\} is el\\H\{o\}fordul|.
-%\lstinline|Ha \\gls\{minta\}ként használja a \\gls\{számítógép\} fogalmát, ahol \\gls\{CPU\} valamint \gls\{DMA\} is előfordul| mintázatnak kell megjelennie.
-Ilyenkor a MultEdu hozzáfűzi a dokumentumhoz a \lstinline|Acronyms| and \lstinline|Glossary| fejezeteket, ahol a megjelölt hivatkozások kifejtése 
+ahol \\gls\{CPU\} valamint \\gls\{DMA\} is el\\H\{o\}fordul|
+módon kell azt használni.
+Ilyenkor a \gls{MultEdu} hozzáfűzi a dokumentumhoz a \lstinline|Acronyms| and \lstinline|Glossary| fejezeteket, ahol a megjelölt hivatkozások kifejtése 
 található. A dokumentum olvasásakor a hivatkozásra kattintva, az olvasó 
 program a kifejtésre ugrik, ahonnét az oldalszámra kattintva, folytathatja
 az olvasást.
+
+A \gls{MultEdu} azt várja, hogy (ha használni akar ilyen lehetőséget) a projekt
+tartalmaz egy \lstinline|src/Glossary.tex| fájlt,
+ahol a hivatkozások részletes kifejtése megtalálható.
+A bemutatott mintában a bejegyzések kódolása:
 
 }
 
@@ -94,10 +102,6 @@ az olvasást.
 
 \MEDframe{Definitions}
 {
-MultEdu expects that (if you want to use this facility) your project
-contains a file \lstinline|src/Glossary.tex|, where the expansion
-of the referred to items can be found. The entries corresponding 
-to the items used in the sample can be coded like
 
 \lstinline|\\ifthenelse\{\\equal\{\\LectureLanguage\}\{english\}\}
   \{
@@ -117,9 +121,21 @@ to the items used in the sample can be coded like
 }
 {Egy példa}
 {
-A MultEdu azt várja, hogy (ha használni akar ilyen lehetőséget) a projekt
-tartalmaz egy \lstinline|src/Glossary.tex| fájlt,
-ahol a hivatkozások részletes kifejtése megtalálható.
+
+\par\vskip-\parskip\noindent\lstinline*\\ifthenelse\{\\equal\{\\LectureLanguage\}\{english\}\}*
+\par\vskip-\parskip\noindent\lstinline*  \{*
+\par\vskip-\parskip\noindent\lstinline*	\\newglossaryentry\{computer\}*
+\par\vskip-\parskip\noindent\lstinline*	\{*
+\par\vskip-\parskip\noindent\lstinline*		name=\{computer\},*
+\par\vskip-\parskip\noindent\lstinline*		description=\{is a programmable machine that receives input,*
+\par\vskip-\parskip\noindent\lstinline*			stores and manipulates data, and provides*
+\par\vskip-\parskip\noindent\lstinline*			output in a useful format\}*
+\par\vskip-\parskip\noindent\lstinline*	\}*
+\par\vskip-\parskip\noindent\lstinline*	\\newglossaryentry\{sampleone\}\{name=\{sample\},description=\{a little example\}\}*
+\par\vskip-\parskip\noindent\lstinline*    \\newacronym\{CPU\}\{CPU\}\{Central Processing Unit\}*
+\par\vskip-\parskip\noindent\lstinline*    \\newacronym\{DMA\}\{DMA\}\{Direct Memory Access\}*
+\par\vskip-\parskip\noindent\lstinline* \}*
+\par\vskip-\parskip\noindent\lstinline* \{\}*
 
 }
 

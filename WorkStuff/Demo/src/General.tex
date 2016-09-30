@@ -88,11 +88,11 @@ Tapasztalt felhasználóként saját makrókat is készíthet (jó, ha azokat
 a letölthető anyaghoz hozzáadja), azaz aktívan részt vesz a fejlesztésben.
 }
 
-\MEDsection[Installing]{Installing and utilizing MultEdu}{Beüzemelés}{A MultEdu beüzemelése és használata}
+\MEDsection[Installing]{Installing and utilizing \lstinline|MultEdu|}{Beüzemelés}{A \lstinline|MultEdu| beüzemelése és használata}
 
-\MEDframe{Installing MultEdu}
+\MEDframe{Installing \lstinline|MultEdu|}
 {
-Multedu, as any package based on \LaTeX, assumes that the user has
+\gls{Multedu}, as any package based on \LaTeX, assumes that the user has
 experiences with using \LaTeX. I.e. some \LaTeX{} distribution must already be installed on the system of the user. If you want to use the
 batch processing facility, the CMake system must also be installed.
 
@@ -105,12 +105,12 @@ some features of the package. Then, it is worth at least to skim the user's manu
 At the beginning text only, later you can learn the advanced
 possibilities.
 \ao{Do not forget: LaTeX is hard, it needs accurate coding,
-and so is MultEdu, too.
+and so is \gls{MultEdu}, too.
 Frequent saving and using versioning can help a lot.}
 }
-{A MultEdu beüzemelése}
+{A \lstinline|MultEdu| beüzemelése}
 {
-A MultEdu (mint minden \LaTeX{} alapú rendszer) feltételezi, hogy 
+A \gls{MultEdu} (mint minden \LaTeX{} alapú rendszer) feltételezi, hogy 
 a felhasználó már rendelkezik tapasztalatokkal a \LaTeX{}  használatában.
 Azaz, a felhasználó rendszerén már működnie kell valamilyen \LaTeX{}
 rendszernek.
@@ -124,16 +124,16 @@ Ezután érdemes legalább átlapozni a
 felhasználói kézikönyvet, ami után már elkezdheti saját fejlesztését.
 Eleinte csak szöveget, aztán sorjában megtanulni a használni kívánt tulajdonságok programozását.
 \ao{Ne feledje: a LaTeX nehéz nyelv, pontos kódolást igényel,
-és ezért ilyen a MultEdu is. A gyakori mentések és a verziókövető rendszerek használata nagy segítséget jelentenek.}
+és ezért ilyen a \gls{MultEdu} is. A gyakori mentések és a verziókövető rendszerek használata nagy segítséget jelentenek.}
 }
 
-\MEDsection[Structure]{Structure of MultEdu}{Szerkezet}{A MultEdu könyvtár szerkezete}
+\MEDsection[Structure]{Structure of \lstinline|MultEdu|}{Szerkezet}{A \lstinline|MultEdu| könyvtár szerkezete}
 
 \MEDframe{Directory structure}
 {
-The MultEdu system is assumed to be used with the directory structure below.
+The \gls{MultEdu} system is assumed to be used with the directory structure below.
 It comes with two main subdirectories: \lstinline|./common| comprises all files of
-the MultEdu system, and  \lstinline|./Workstuff| models the users subdirectory structure.
+the \gls{MultEdu} system, and  \lstinline|./Workstuff| models the users subdirectory structure.
 \par\vskip-\parskip\noindent\lstinline*.*
 \par\vskip-\parskip\noindent\lstinline*|-- common*
 \par\vskip-\parskip\noindent\lstinline*|-- WorkStuff*
@@ -149,8 +149,8 @@ which directories have a subdirectory structure similar to that of \lstinline*|-
 }
 {Könyvtár szerkezet}
 {
-A MultEdu rendszert az alábbi könyvtár szerkezetben célszerű használni.
-Két fő könyvtára: a \lstinline|./common|, amely tartalmazza a MultEdu összes fájlját,
+A \gls{MultEdu} rendszert az alábbi könyvtár szerkezetben célszerű használni.
+Két fő könyvtára: a \lstinline|./common|, amely tartalmazza a \gls{MultEdu} összes fájlját,
  és a \lstinline|./Workstuff|, amely a felhasználói könyvtár szerkezetet modellezi.
 \par\vskip-\parskip\noindent\lstinline*.*
 \par\vskip-\parskip\noindent\lstinline*|-- common*
@@ -172,7 +172,7 @@ hasonló belső alkönyvtárai vannak
 \MEDframe{Directory structure of subdirectory \lstinline*common*}
 {
 Subdirectory \lstinline|./common| comprises some special subsubdirectories
-and general purpose macro files. \ao{MultEdu attempts to be as user-friendly as possible: it uses default settings, files, images, etc., to allow a quick start for a new development.}
+and general purpose macro files. \ao{\gls{MultEdu} attempts to be as user-friendly as possible: it uses default settings, files, images, etc., to allow a quick start for a new development.}
 \par\vskip-\parskip\noindent\lstinline*.*
 \par\vskip-\parskip\noindent\lstinline*|-- common*
 \par\vskip-\parskip\noindent\lstinline*|    |-- defaults*
@@ -180,7 +180,7 @@ and general purpose macro files. \ao{MultEdu attempts to be as user-friendly as 
 \par\vskip-\parskip\noindent\lstinline*|    |-- images*
 
 Subsubdirectory \lstinline|./defaults| contains some default text, like copyright.
-\ao{In general, if the user does not provide its own elements, MultEdu uses the defaults instead
+\ao{In general, if the user does not provide its own elements, \gls{MultEdu} uses the defaults instead
 (provided that using and presenting it is not disabled, see later.)}
 
 Subsubdirectory \lstinline|./formats| contains the possible format specification macros,
@@ -191,7 +191,7 @@ as defaults.
 }
 {A \lstinline*common* alkönyvtár szerkezete}
 {
-A \lstinline|./common| különleges célú al-alkönyvtárakat, valamint általános célú makró fájlokat tartalmaz.  \ao{A Multedu megpróbál a lehető legbarátságosabb lenni:
+A \lstinline|./common| különleges célú al-alkönyvtárakat, valamint általános célú makró fájlokat tartalmaz.  \ao{A \gls{Multedu} megpróbál a lehető legbarátságosabb lenni:
 alapértelmezett beállításokat, fájlokat, képeket, stb használ, hogy gyorsan el 
 lehessen kezdeni egy új fejlesztést.}
 \par\vskip-\parskip\noindent\lstinline*.*
@@ -203,7 +203,7 @@ lehessen kezdeni egy új fejlesztést.}
 A \lstinline|./defaults| al-alkönyvtár olyan alapértelmezett szöveget tárol, mint 
 a szerzői jogok.
 \ao{Alapértelmezetten, ha a felhasználó nem adja meg saját dokumentum elemeit,
-a MultEdu automatikusan az alapértelmezetteket használja helyettük
+a \gls{MultEdu} automatikusan az alapértelmezetteket használja helyettük
 (feltéve, hogy azok használata nincs megtiltva, lásd később).
 }
 
@@ -353,10 +353,10 @@ forrás fájlokat. Ezek is bármikor törölhetők, de akár 'kézi' fordításs
 %a
 %}
 
-\MEDsection[Distribution]{The MultEdu distribution kit}{A csomag}{A MultEdu csomagról}
+\MEDsection[Distribution]{The \lstinline|MultEdu| distribution kit}{A csomag}{A \lstinline|MultEdu| csomagról}
 
-\MEDframe{The MultEdu distribution kit}
-{The MultEdu package come with full source (and full faith).
+\MEDframe{The \lstinline|MultEdu| distribution kit}
+{The \lstinline|MultEdu| package come with full source (and full faith).
 The author is rather power user than \LaTeX{} expert. Many of the macros
 are adapted from ideas and solution on the Internet. The source contains
 references to the original publisher, but the users' guide does not waste space 
@@ -369,8 +369,8 @@ formats and languages. The file name do not contain the version number
 serving as users' guide) to allow the potential users to decide at a glance,
 whether they like the provided features.
 }
-{A MultEdu csomagról}
-{A MultEdu csomag teljes forráskódot tartalmaz (szépítgetés nélkül).
+{A \lstinline|MultEdu| csomagról}
+{A \lstinline|MultEdu| csomag teljes forráskódot tartalmaz (szépítgetés nélkül).
 A szerző nem \LaTeX{} szakértő, csak régi felhasználó.
 A makrók nagy része adaptált az Interneten megtalálható eredeti forrásokból.
 A forráskód tartalmazza a közlést az eredeti kódra, a felhasználói kézikönyv
@@ -385,17 +385,17 @@ hogy a leendő felhasználók gyorsan fel tudják mérni, ilyen tulajdonságokka
 rendelkező deokumentáló rendszert akarnak-e.
 }
 
-\MEDframe{The MultEdu distribution kit}
+\MEDframe{The \lstinline|MultEdu| distribution kit}
 {
-The package MultEdu is provided 'as is'. It is developed continuously
+The package \gls{MultEdu} is provided 'as is'. It is developed continuously
 and in a non-uniform way. I myself can develop course materials with it.
 Both macros and documention keep developing, but it requires (lot of) time.
 Reports on faults in operation or errors is documentation is evaluated
 as help in the development, even I might consider feature requests.
 }
-{A MultEdu csomagról}
+{A \lstinline|MultEdu| csomagról}
 {
-A MultEdu makró csomagot úgy tettem közzé, ahogy van ('as is').
+A \gls{MultEdu} makró csomagot úgy tettem közzé, ahogy van ('as is').
 Folyamatosan és egyenetlenül fejlesztem, én magam már jól tudok vele
 tananyagot fejleszteni. A makrókat és a dokumentációt is fejlesztem,
 de az (sok) időt igényel.
