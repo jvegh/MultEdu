@@ -26,7 +26,7 @@ set(SecondLanguage "magyar") # Usual setting language
 #
 # Choose if you need both languages
 #
-option (NEED_BOTH_LANGUAGES "Make both language versions of the course" OFF)
+option (NEED_BOTH_LANGUAGES "Make both language versions of the course" ON)
 #
 # Choose if to use the second or 1st language, if only one language
 #
@@ -51,7 +51,7 @@ option (DEBUG_MODE "Include debug support for lecture making"  ON)
 #
   option ( NEED_FORMAT_BEAMER_ME "Generate output in format beamer_ME " ON)
   option ( NEED_FORMAT_MEMOIR_A4FANCY "Generate output in format memoir A4Fancy " ON)
-  option ( NEED_FORMAT_MEMOIR_eBook "Generate output in format memoir eBook " OFF)
+  option ( NEED_FORMAT_MEMOIR_eBook "Generate output in format memoir eBook " ON)
   option ( NEED_FORMAT_MEMOIR_WEB "Generate output in format memoir WEB " ON)
 
 ###!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
