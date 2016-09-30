@@ -23,6 +23,7 @@ else(NEED_BOTH_LANGUAGES)
     set(MyLanguageList ${FirstLanguage})
   endif(USE_SECOND_LANGUAGE)
 endif(NEED_BOTH_LANGUAGES)
+ message("Multedu languages" ${MyLanguageList})
 
 ### Assemble which output formats to use
 #
@@ -38,6 +39,7 @@ endif(NEED_FORMAT_MEMOIR_eBook)
 if(NEED_FORMAT_MEMOIR_WEB)
 	set(MyFormatList ${MyFormatList} WEB)
 endif(NEED_FORMAT_MEMOIR_WEB)
+      message("Multedu formats" ${MyFormatList})
 
 ### Prepare a version file, as if were config file
 set(VersionFile "${CMAKE_BINARY_DIR}/src/Version.tex.in" )
