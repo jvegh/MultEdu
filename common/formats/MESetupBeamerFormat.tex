@@ -231,11 +231,11 @@
 {\def\TitleTextLogo{\includegraphics[height=1cm]{fig/TextLogo}}
     \pgfdeclareimage[height=.5cm]{textlogo}{fig/TextLogo}
    }
-{\def\TitleTextLogo{\includegraphics[height=1cm]{../../common/images/LatexText}}
-    \pgfdeclareimage[height=.5cm]{textlogo}{../../common/images/LatexText}
+{\def\TitleTextLogo{\includegraphics[height=1cm]{../../common/images/CC88x31}}
+    \pgfdeclareimage[height=.5cm]{textlogo}{../../common/images/CC88x31}
     }
 \setbeamertemplate{footline}{
-\raisebox{-2ex}{\pgfuseimage{textlogo}
+\raisebox{-1.5ex}{\pgfuseimage{textlogo}
 
 }
   \usebeamerfont{date in head/foot}\quad\ifx\LecturePublisher\undefined\else\small\bfseries\textcolor{\TitlePageColor}\LecturePublisher\fi\hfill
@@ -264,15 +264,16 @@
 	\node[anchor=east]
 	at ([yshift=-45pt,xshift=-5pt]current page.north east) (subtitle)
 	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
-	       { \bfseries\textcolor{\TitlePageColor}
+	       { \bfseries\textcolor{SeparatorColor}
 	       \LectureTitle\\\small\bfseries\textcolor{\TitlePageColor}\LectureSubtitle}
 	    \end{mybox}
 	}}};
 	\node[anchor=east]
-	at ([yshift=45pt,xshift=-5pt]current page.south east) (subtitle)
+	at ([yshift=50pt,xshift=-5pt]current page.south east) (subtitle)
 	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
-	       {  \bfseries\textcolor{\TitlePageColor}\LectureAuthor\\
+	       {  \bfseries\textcolor{SeparatorColor}\LectureAuthor\\
                \ifx\LecturePublisher\undefined\else\small\bfseries\textcolor{\TitlePageColor}\LecturePublisher\fi
+               \tiny{ \copyright \LectureAuthor\ (\LectureEmail)}
            }
 	    \end{mybox}
 	}}};
@@ -281,15 +282,15 @@
 		\IfGraphicFileExists{fig/TextLogo}
 		{
         	\node[anchor=west]
-	        at ([yshift=.95cm,xshift=-.18cm]current page.south west) (logo)
+	        at ([yshift=.74cm,xshift=-.6pt]current page.south west) (logo)
 			{\TitlePictureLogo\TitleTextLogo \raisebox{.5ex}
 			{\tiny{\ \LectureRevision} \ \copyright \LectureAuthor}};
 		}
 		{ % No user logo, use the default one
 			\node[anchor=east] 
-			at ( [yshift=.8cm,xshift=10pt]	current page.south east) (logo)
-			{\TitlePictureLogo{\raisebox{-.5ex}\TitleTextLogo}
-						{\begin{mybox}[]{\tiny{\ \LectureRevision}) \ \copyright \LectureAuthor\ (\LectureEmail)}\end{mybox}}};
+			at ( [yshift=.74cm,xshift=-6pt]	current page.south east) (logo)
+			{\TitlePictureLogo{\raisebox{-.5ex}\TitleTextLogo}\quad\hfill
+						{\begin{mybox}[]{\tiny{\ \LectureRevision}\  (\url{https://github.com/jvegh/MultEdu V\MEVersion}) }\end{mybox}}};
 		}
 		
 	\fi %DisableLogos
