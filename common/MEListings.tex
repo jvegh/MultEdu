@@ -131,6 +131,8 @@
 }%MESetListingFormat
 
 \newlength{\FigWidth}\newlength{\FigHeight}
+\newsavebox\listingboxname
+
 \makeatletter
 %% Insert a source file in the text, with optional decorations
 %%%Usage \MESourceFile[keys]{source file}{caption}{label}
@@ -156,27 +158,28 @@
 			  \setlength{\FigWidth}{\columnwidth}
 			\else
 			  \setlength{\FigWidth}{.7\textwidth}
-			 \fi
+			\fi
 			\def\startsource{\begin{program}[!bht]}
 			\def\stopsource{\end{program}}
 		\fi
 	\fi
 	%% Start printing the figure here:
-	\par
-	\noindent\startsource 
-%	\maxsizebox{\FigWidth}{.5\textheight}
-	{
+	
+		\startsource 	
 		\mbox{}\phantomsection
-        \ifx\MayFloat\undefined{\bfseries\scriptsize\textcolor{HeadingColor}#3}
-        \par\vskip-\parskip\vskip-\baselineskip
+        \ifx\MayFloat\undefined{\bfseries\scriptsize\textcolor{HeadingColor}{#3}}
+        \par\vskip-\parskip
         \fi
+	\begin{lrbox}{\listingboxname}
 		\noindent\begingroup\protected@edef\x{\endgroup\noexpand
 			\lstinputlisting[language={\ME@language}, \ME@options, label=#4, name=#4,
 		\ifx\MayFloat\undefined\else	caption ={#3}\fi
 			]{#2}}
 		\x
 		\ME@decorations % Decorating comments
-	}					
+    \end{lrbox}
+	\par\noindent\hspace{-1ex}\maxsizebox{\FigWidth}{.4\textheight}
+		{\usebox\listingboxname}
 	\stopsource
 }
 \makeatother
@@ -312,7 +315,8 @@
 %% Put a numbered ball in the text, to reference balls on a listing
 %% Usage: \MEBall{ListingLabel}{Number}
 \newcommand{\MEBall}[2]{%
-{\tiny#1}~\hskip-4pt\raisebox{-.08cm}{
+\ao{{\tiny#1} ~\hskip-4pt}
+\raisebox{-.03ex}{
 \tikz \node (1ex,1ex)
  [circle,draw,ball color=green, shading=ball,  font=\bfseries, scale=0.55] {#2};}%
 ~\hskip-4pt}% MEBall
@@ -387,8 +391,8 @@
 		 \ifx\MayFloat\undefined
 		\lstinputlisting[label=#5, name=#5,  ] {#2}&
 		\lstinputlisting[label=#5, name=#5, linewidth=\mywidth ] {#3}\\		 \else
-		\lstinputlisting[label=#5, name=#5, caption=#4, linewidth=\mywidth ] {#2}&
-		\lstinputlisting[label=#5, name=#5, caption=#4, linewidth=\mywidth ] {#3}\\\fi
+		\lstinputlisting[label=#5, name=#5, caption={#4}, linewidth=\mywidth ] {#2}&
+		\lstinputlisting[label=#5, name=#5, caption={#4}, linewidth=\mywidth ] {#3}\\\fi
 		\fi
 		\end{tabular}
 	\ifx\MayFloat\undefined	% nothing needed
@@ -417,7 +421,7 @@
 	
 	\ifx\MayFloat\undefined
 	{\par\vskip-\parskip
-	\color{HeadingColor}\bfseries\scriptsize #4}
+	\color{HeadingColor}\bfseries\scriptsize {#4}}
 	\else
 	{
 		\begin{program*}[h!btp]	%\caption{#4}\par\ifx\WEBBook\undefined\vskip-\baselineskip\else\fi
@@ -428,7 +432,7 @@
 		\begin{tabular}{p{\mywidth}p{\mywidth}}
 		%		\ifx\MayFloat\undefined\else\caption{#3}\fi %\vglue-.7\baselineskip
 		\noindent\begingroup\protected@edef\x{\endgroup\noexpand
-			\lstinputlisting[language={\ME@language}, \ME@options, label=#5, name=#5, \ifx\MayFloat\undefined\else caption=#4,\fi 
+			\lstinputlisting[language={\ME@language}, \ME@options, label=#5, name=#5, \ifx\MayFloat\undefined\else caption={#4},\fi 
 			linewidth=\mywidth,
 			]{#2}}
 		\x
@@ -438,7 +442,7 @@
 	\lstinputlisting[ linewidth=\mywidth,
 				 ]
 				 {#3}\\			\else 	
-			\lstinputlisting[ linewidth=\mywidth, caption=#4, 
+			\lstinputlisting[ linewidth=\mywidth, caption={#4}, 
 				 ]
 				 {#3}\\\fi
 		\end{tabular}

@@ -1,0 +1,8 @@
+%% This file is prepared by CMake, will be overwritten
+\def\FirstLanguage{english} % In dual language macros
+\def\SecondLanguage{magyar} % In dual language macros
+\def\LectureLanguage{magyar} % What you want to print
+\def\UseSecondLanguage{YES}   % Now make output in 'magyar'
+\def\Version{0.5.2}
+\def\EnableDebug{YES} % USE IT ONLY WHEN DEVELOPING FEATURES!!!
+\input{../../common/formats/A4Fancy}

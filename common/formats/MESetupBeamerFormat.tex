@@ -273,7 +273,7 @@
 	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
 	       {  \bfseries\textcolor{SeparatorColor}\LectureAuthor\\
                \ifx\LecturePublisher\undefined\else\small\bfseries\textcolor{\TitlePageColor}\LecturePublisher\fi
-               \tiny{ \copyright \LectureAuthor\ (\LectureEmail)}
+               \tiny{\vskip-.5\baselineskip \copyright \LectureAuthor\ (\LectureEmail)}
            }
 	    \end{mybox}
 	}}};
@@ -325,7 +325,7 @@
 %	{\parbox[t]{.19\paperwidth}{\raggedleft%
 %			\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}};
 	\node[anchor=east]
-	at ([yshift=35pt,xshift=-20pt]current page.east) (title)
+	at ([yshift=40pt,xshift=-20pt]current page.east) (title)
 	{\parbox[t]{\textwidth}{\raggedleft%
 			\usebeamerfont{author}\textcolor{SeparatorColor}{%
 				\textpdfrender{
@@ -340,8 +340,8 @@
 %	at ([yshift=-120pt,xshift=00pt]current page.west) (subtitle)
 %	{\parbox[t]{.8\paperwidth}{\raggedright\usebeamerfont{subtitle}\textcolor{black}{\scriptsize \copyright \LectureAuthor\ \\\LectureRevision\ \LectureEmail}}};
 	\node[anchor=east]
-	at ([yshift=50pt,xshift=-5pt]current page.south east) (subtitle)
-	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
+	at ([yshift=65pt,xshift=-5pt]current page.south east) (subtitle)
+	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}\quad{    \begin{mybox}[]
 	       {  \bfseries\textcolor{SeparatorColor}\LectureAuthor\\
                \ifx\LecturePublisher\undefined\else\small\bfseries\textcolor{\TitlePageColor}\LecturePublisher\fi\\
                \tiny{ \copyright \LectureAuthor\ (\LectureEmail)}

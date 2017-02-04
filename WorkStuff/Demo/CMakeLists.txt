@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.4)
 
 cmake_policy(SET CMP0048 NEW)
-PROJECT(Demo VERSION 0.05.04 LANGUAGES NONE)
+PROJECT(Demo VERSION 0.05.05 LANGUAGES NONE)
 
 set(MainFile "Demo.tex")	# Is used to define output file name
 file(GLOB_RECURSE InputFiles RELATIVE "${CMAKE_SOURCE_DIR}" src/*.tex)

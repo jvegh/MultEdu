@@ -1,11 +1,15 @@
 %% This file is prepared by CMake, will be overwritten
 \def\FirstLanguage{english} % In dual language macros
 \def\SecondLanguage{magyar} % In dual language macros
-\def\LectureLanguage{english} % Define language features
-%\def\UseSecondLanguage{YES}   % Now make output in 'magyar'
+\def\UseSecondLanguage{YES}   % Select if first or second text to use
+\ifx\UseSecondLanguage\undefined
+	\def\LectureLanguage{\FirstLanguage} % Define language features
+\else
+	\def\LectureLanguage{\SecondLanguage} % Define language features
+\fi
 \input{src/Version.tex} % Read the CMake-generated version
 \def\EnableDebug{YES} % USE IT ONLY WHEN DEVELOPING FEATURES!!!
-%\input{../../common/formats/A4Fancy}
-\input{../../common/formats/eBook}
+\input{../../common/formats/A4Fancy}
+%\input{../../common/formats/eBook}
 %\input{../../common/formats/WEB}
 %\input{../../common/formats/beamer_ME}

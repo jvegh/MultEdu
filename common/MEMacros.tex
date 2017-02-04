@@ -108,10 +108,11 @@
 	\ifKV@MEMacros@wide
 	
 		\begin{NoteBox}*[!htbp]
-					\maxsizebox{\textwidth}{.5\textheight}
+					\maxsizebox{\textwidth}{\textheight}
 					{
 						\begin{minipage}{\textwidth}
-							\ttext{\large #2}\par
+							\ttext{ %\large 
+							#2}\par
 							#3
 						\end{minipage}
 					}
@@ -121,7 +122,8 @@
 			\maxsizebox{\columnwidth}{.5\textheight}
 			{
 				\begin{minipage}{\columnwidth}
-					\ttext{\large #2}\par
+					\ttext{ %\large 
+					#2}\par
 					#3
 				\end{minipage}
 			}
@@ -159,10 +161,25 @@
 	\fi
 }
 
+\newlength{\MyBoxWidth}
+\ifx\MayFloat\undefined
+	\ifx\DisableWideScreen\undefined
+		\setlength{\MyBoxWidth}{.75\textwidth}
+	\else
+		\setlength{\MyBoxWidth}{.65\textwidth}
+	\fi
+\else    
+    \ifx\eBook\undefined
+		\setlength{\MyBoxWidth}{.8\textwidth}
+    \else
+		\setlength{\MyBoxWidth}{.62\textwidth}
+	\fi
+\fi
+
 \newtcolorbox{mybox}[1][]{
 %	\setkeys{MEMacros}{width=.8\textwidth,#1}%  
     ,arc=3mm,
-width=.62\textwidth,%    auto outer arc,
+width=\MyBoxWidth,%    auto outer arc,
     boxsep=0cm,
     toprule=1pt,
     leftrule=1pt,
