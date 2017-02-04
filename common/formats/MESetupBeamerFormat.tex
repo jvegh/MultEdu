@@ -273,7 +273,7 @@
 	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
 	       {  \bfseries\textcolor{SeparatorColor}\LectureAuthor\\
                \ifx\LecturePublisher\undefined\else\small\bfseries\textcolor{\TitlePageColor}\LecturePublisher\fi
-               \tiny{ \copyright \LectureAuthor\ (\LectureEmail)}
+               \tiny{\vskip-.5\baselineskip \copyright \LectureAuthor\ (\LectureEmail)}
            }
 	    \end{mybox}
 	}}};
@@ -304,41 +304,70 @@
 	\begin{tikzpicture}[remember picture,overlay]
 	\fill[\TitlePageColor]
 	([yshift=15pt]current page.west) rectangle (current page.south east);
-	\node[anchor=east] 
-	at ([yshift=-30pt]current page.north east) (author)
-	{\parbox[t]{.7\paperwidth}{\raggedleft%
-			\usebeamerfont{author}\textcolor{\TitlePageColor}{%
-				\textpdfrender{
-					TextRenderingMode=FillStroke,
-					FillColor=HeadingColor,
-					LineWidth=.1ex,
-				}{\LectureAuthor}}}};
-	\ifx\LecturePublisher\undefined
-	\else			
-		\node[anchor=north east] 
-		at ([yshift=-85pt]current page.north east) (institute)
-		{\parbox[t]{.78\paperwidth}{\raggedleft%
-				\usebeamerfont{institute}\textcolor{gray}{\LecturePublisher}\quad\TitleTextLogo}};
-	\fi		
-	\node[anchor=north west] 
-	at ([yshift=5pt,xshift=-5pt]current page.north west) (logo)
-	{\parbox[t]{.19\paperwidth}{\raggedleft%
-			\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}};
+%	\node[anchor=east] 
+%	at ([yshift=-30pt]current page.north east) (author)
+%	{\parbox[t]{.7\paperwidth}{\raggedleft%
+%			\usebeamerfont{author}\textcolor{\TitlePageColor}{%
+%				\textpdfrender{
+%					TextRenderingMode=FillStroke,
+%					FillColor=HeadingColor,
+%					LineWidth=.1ex,
+%				}{\LectureAuthor}}}};
+%	\ifx\LecturePublisher\undefined
+%	\else			
+%		\node[anchor=north east] 
+%		at ([yshift=-85pt]current page.north east) (institute)
+%		{\parbox[t]{.78\paperwidth}{\raggedleft%
+%				\usebeamerfont{institute}\textcolor{gray}{\LecturePublisher}\quad\TitleTextLogo}};
+%	\fi		
+%	\node[anchor=north west] 
+%	at ([yshift=5pt,xshift=-5pt]current page.north west) (logo)
+%	{\parbox[t]{.19\paperwidth}{\raggedleft%
+%			\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic}};
 	\node[anchor=east]
-	at ([yshift=-15pt,xshift=-20pt]current page.east) (title)
+	at ([yshift=40pt,xshift=-20pt]current page.east) (title)
 	{\parbox[t]{\textwidth}{\raggedleft%
-			\usebeamerfont{author}\textcolor{white}{%
+			\usebeamerfont{author}\textcolor{SeparatorColor}{%
 				\textpdfrender{
 					TextRenderingMode=FillStroke,
 					FillColor=white,
 					LineWidth=.1ex,
 				}{\Large\LectureTitle}}}};
 	\node[anchor=east]
-	at ([yshift=-65pt,xshift=-20pt]current page.east) (subtitle)
-	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}\textcolor{black}{\insertsubtitle}}};
-	\node[anchor=west]
-	at ([yshift=-120pt,xshift=00pt]current page.west) (subtitle)
-	{\parbox[t]{.8\paperwidth}{\raggedright\usebeamerfont{subtitle}\textcolor{black}{\scriptsize \copyright \LectureAuthor\ \\\LectureRevision\ \LectureEmail}}};
+	at ([yshift=5pt,xshift=-20pt]current page.east) (subtitle)
+	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}\textcolor{white}{\insertsubtitle}}};
+%	\node[anchor=west]
+%	at ([yshift=-120pt,xshift=00pt]current page.west) (subtitle)
+%	{\parbox[t]{.8\paperwidth}{\raggedright\usebeamerfont{subtitle}\textcolor{black}{\scriptsize \copyright \LectureAuthor\ \\\LectureRevision\ \LectureEmail}}};
+	\node[anchor=east]
+	at ([yshift=65pt,xshift=-5pt]current page.south east) (subtitle)
+	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}\quad{    \begin{mybox}[]
+	       {  \bfseries\textcolor{SeparatorColor}\LectureAuthor\\
+               \ifx\LecturePublisher\undefined\else\small\bfseries\textcolor{\TitlePageColor}\LecturePublisher\fi\\
+               \tiny{ \copyright \LectureAuthor\ (\LectureEmail)}
+           }
+	    \end{mybox}
+	}}};
+	\ifx\DisableLogos\undefined
+	  %% We can use logos, either custom logos or default ones
+		\IfGraphicFileExists{fig/TextLogo}
+		{
+        	\node[anchor=west]
+	        at ([yshift=.74cm,xshift=-.6pt]current page.south west) (logo)
+			{\TitlePictureLogo\TitleTextLogo \raisebox{.5ex}
+%			{\tiny{\ \LectureRevision} \ \copyright \LectureAuthor}
+						{\begin{mybox}[]{\tiny{\ \LectureRevision}\  (\url{https://github.com/jvegh/MultEdu} V\MEVersion) }\end{mybox}}
+			};
+		}
+		{ % No user logo, use the default one
+			\node[anchor=east] 
+			at ( [yshift=.74cm,xshift=-6pt]	current page.south east) (logo)
+			{\TitlePictureLogo{\raisebox{-.5ex}\TitleTextLogo}\quad\hfill
+						{\begin{mybox}[]{\tiny{\ \LectureRevision}\  (\url{https://github.com/jvegh/MultEdu} V\MEVersion) }\end{mybox}}
+						};
+		}
+		
+	\fi %DisableLogos
 	\end{tikzpicture}
   \end{frame}
 }

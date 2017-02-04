@@ -26,9 +26,6 @@ endif(NEED_BOTH_LANGUAGES)
 
 ### Assemble which output formats to use
 #
-if(NEED_FORMAT_BEAMER_ME)
-	set(MyFormatList ${MyFormatList} beamer_ME)
-endif(NEED_FORMAT_BEAMER_ME)
 if(NEED_FORMAT_MEMOIR_A4FANCY)
 	set(MyFormatList ${MyFormatList} A4Fancy)
 endif(NEED_FORMAT_MEMOIR_A4FANCY)
@@ -38,6 +35,9 @@ endif(NEED_FORMAT_MEMOIR_eBook)
 if(NEED_FORMAT_MEMOIR_WEB)
 	set(MyFormatList ${MyFormatList} WEB)
 endif(NEED_FORMAT_MEMOIR_WEB)
+if(NEED_FORMAT_BEAMER_ME)
+	set(MyFormatList ${MyFormatList} beamer_ME)
+endif(NEED_FORMAT_BEAMER_ME)
 
 ### Prepare a version file, as if were config file
 set(VersionFile "${CMAKE_BINARY_DIR}/src/Version.tex.in" )
@@ -55,9 +55,11 @@ foreach(MyFormat ${MyFormatList})
 ## Handle the language(s)
   file(APPEND  "${ConfigFile}"  "\\def\\FirstLanguage{"  "${FirstLanguage}"  "} % In dual language macros\n")
   file(APPEND  "${ConfigFile}"  "\\def\\SecondLanguage{" "${SecondLanguage}" "} % In dual language macros\n")
-  file(APPEND  "${ConfigFile}"  "\\def\\LectureLanguage{" "${MyLanguage}" "} % Define language features\n")
   if(USE_SECOND_LANGUAGE)
     file(APPEND  "${ConfigFile}"  "\\def\\UseSecondLanguage{YES}   % Now make output in '" "${MyLanguage}"   "'\n")
+	file(APPEND  "${ConfigFile}"  "\\def\\LectureLanguage{\\SecondLanguage} % Define '${MyLanguage}' language features'\n")
+  else()
+	file(APPEND  "${ConfigFile}"  "\\def\\LectureLanguage{\\FirstLanguage} % Define '${MyLanguage}' language features'\n")
   endif(USE_SECOND_LANGUAGE)
   file(APPEND  "${ConfigFile}"  "\\def\\EnableDebug{YES} % USE IT ONLY WHEN DEVELOPING FEATURES!!!\n")
   file(APPEND  "${ConfigFile}"  "\\input{src/Version.tex} % Read the CMake-generated version\n")
@@ -114,7 +116,7 @@ endif( ${MyFormat} MATCHES  "beamer")
     INPUTS     "${InputFiles}" 
     IMAGE_DIRS fig  			  # Allow to copy figures subdirectory
     CONFIGURE src/Defines.tex	  # Prepare a config file for manual compile
-#    BIBFILES src/Bibliography.bib # Use bibliography file
+    BIBFILES src/Bibliography.bib # Use bibliography file
     USE_GLOSSARY                  # Use glossary           
     ${MyIndex}                     # Use index, if not a beamer format
    )

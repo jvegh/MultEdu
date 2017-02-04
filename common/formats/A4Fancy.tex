@@ -39,6 +39,30 @@ pdfpagemode=UseNone,pdfstartview=Fit
 %\usepackage{dblfloatfix} % Allow to place two-column wide figs to bottom
 \usepackage{stfloats}	%% Allow to place 2-column figures at the bottom
 
+% http://tex.stackexchange.com/questions/46280/how-to-create-a-background-image-on-title-page-with-latex
+\usepackage{eso-pic}
+\newcommand\BackgroundPic{%
+\put(0,0){%
+\parbox[b][\paperheight]{\paperwidth}{%
+\vfill
+\centering
+\hspace*{-10cm}
+\ifx\LectureCoverIllustration\undefined
+  \IfGraphicFileExists{fig/CoverIllustration}
+  {
+	\includegraphics[width=2.1\paperwidth,height=2.1\paperheight,%
+	keepaspectratio]{fig/CoverIllustration}
+  }
+  {
+	\includegraphics[width=2.1\paperwidth,height=2.1\paperheight,%
+	keepaspectratio]{../../common/images/CoverIllustration}%  
+  }
+  \else
+	  \LectureCoverIllustration
+\fi % of CoverIllustration
+\vfill
+}}}
+
 
 %%%%%%%%%%%%%%
 %% Cover page
@@ -48,23 +72,22 @@ pdfpagemode=UseNone,pdfstartview=Fit
 %% No header nor footer on the cover
 \thispagestyle{empty}
 \onecolumn
-
-
-
-%% Cover illustration
-\ifx\LectureCoverIllustration\undefined
-  \IfGraphicFileExists{fig/CoverIllustration}
-  {
-    \ThisLLCornerWallPaper{1.4}{fig/CoverIllustration}
-  }
-  {
-    \ThisLLCornerWallPaper{1}{../../common/images/CoverIllustration}
-  }
-\else
-%  \ThisLLCornerWallPaper{1}{
-  \LectureCoverIllustration
-  %}
-\fi % of CoverIllustration
+%
+%%% Cover illustration
+%\ifx\LectureCoverIllustration\undefined
+%  \IfGraphicFileExists{fig/CoverIllustration}
+%  {
+%%\CenterWallPaper{2}{fig/CoverIllustration}  
+% \LRCornerWallPaper{2}{fig/CoverIllustration}
+%  }
+%  {
+%    \ThisLRCornerWallPaper{1}{../../common/images/CoverIllustration}
+%  }
+%\else
+%%  \ThisLLCornerWallPaper{1}{
+%  \LectureCoverIllustration
+%  %}
+%\fi % of CoverIllustration
 \ifx\LectureSubtitle\undefined
 \else
 %% Bar across the top
@@ -88,8 +111,8 @@ pdfpagemode=UseNone,pdfstartview=Fit
 	{\parbox[t]{.7\paperwidth}{\raggedleft\usebeamerfont{subtitle}{    \begin{mybox}[]
 	       {  \bfseries\fontsize{30pt}{40pt}\selectfont
 	       {\color{SeparatorColor}\LectureAuthor}\\
-               \ifx\LecturePublisher\undefined\else\fontsize{20pt}{30pt}\selectfont\color{\TitlePageColor}\LecturePublisher\fi}
-               \tiny{ \copyright \LectureAuthor\ (\LectureEmail)}
+               \ifx\LecturePublisher\undefined\else\fontsize{20pt}{30pt}\selectfont\color{\TitlePageColor}\LecturePublisher\\\fi}
+               \tiny{\copyright\LectureAuthor~(\LectureEmail)}
 	    \end{mybox}
 	}}};
 
@@ -120,6 +143,7 @@ pdfpagemode=UseNone,pdfstartview=Fit
 
 
 \newcommand\MEfrontmatter{
+\AddToShipoutPicture*{\BackgroundPic}
 \MEfrontmatterRoot
 \twocolumn
 }

@@ -72,11 +72,12 @@
 \fi % of CoverIllustration
 
 %% Bar across the top
+\ifx\LectureSubtitle\undefined\else
 \tikz[remember picture,overlay]%
 \node[fill=HeadingColor,text=white,font=\LARGE\bfseries,text=cream,%
 minimum width=\paperwidth,minimum height=2em,anchor=north]%
 at (current page.north){\tiny\LectureSubtitle};
-
+\fi
 	\begin{center}\normalfont\bfseries\color{HeadingColor}
 		\hspace*{.08cm}%
 		\ifx\DisableLogo\undefined

@@ -361,14 +361,14 @@ decorations={
 The individual source lines can also be commented, see Listing\ao{ \ref{lst:Chello.cpp}}.
 To produce it, the command was:
 \par\noindent\lstinline|
-\\MESourceFile[language=\{[ISO]C++\},wide,
+\\MESourceFile[language=\{[ISO]C++\},
 decorations=\{
 \\MESourcelineComment\{lst:Chello.cpp\} \{6\} \{-1cm,0cm\} \{This is a comment\} \{CommentShape\}
 \}
 ]\{lst/HelloWorld.cpp\} \{"Hello World" -- a C++ way, commenting source lines\} \{lst:Chello.cpp\}\{\}
 |
 
-\MESourceFile[language={[ISO]C++},wide,
+\MESourceFile[language={[ISO]C++},
 decorations={
 \MESourcelineComment{lst:Chello.cpp}{6}{-1cm,0cm}{This is a comment}{CommentShape}
 }
@@ -380,7 +380,7 @@ decorations={
 Az egyes forráskód sorokhoz is fűzhetünk megjegyzéseket, lásd\ao{  \ref{lst:Chello.cpp}} programlista.
 Ehhez a
 \par\noindent\lstinline|
-\\MESourceFile[language=\{[ISO]C++\},wide,
+\\MESourceFile[language=\{[ISO]C++\},
 decorations=\{
 \\MESourcelineComment\{lst:Chello.cpp\} \{6\} \{-1cm,0cm\} \{This is a comment\} \{CommentShape\}
 \}
@@ -388,9 +388,9 @@ decorations=\{
 |
 utasítást kellett kiadni.
 
-\MESourceFile[language={[ISO]C++},wide,
+\MESourceFile[language={[ISO]C++},
 decorations={
-\MESourcelineComment{lst:Chello.cpp}{6}{-1cm,0cm}{This is a comment}{CommentShape}
+\MESourcelineComment{lst:Chello.cpp}{6}{-1cm,0cm}{Ez megjegyzés}{CommentShape}
 }
 ]{lst/HelloWorld.cpp}{"Hello World" -- a C++ way, megjegyzés a forráskód sorához}{lst:Chello.cpp}{}
 \index{MESourceFile!megjegyzés@\bs MESourceFile megjegyzés}
@@ -438,11 +438,11 @@ Megjegyzések:
 \item Dia készítéskor az egyes golyók a egy dia sorozatra kerülnek
 \item A golyók elhelyezése csak geometria pozíció alapján történik, nem veszi figyelembe
 a 'firstline' paramétert.
-\item a golyók számozása a \lstinline|number[=1]| értékt ől indul.
+\item a golyók számozása a \lstinline|number[=1]| értéktől indul.
 \end{itemize}
 
 
-Az így megjelölt sorokra később így hivatkozhatunk: "(\MEBall{Listing~\ref{lst:LBhello.cpp}}{2})
+Az így megjelölt sorokra később így hivatkozhatunk: "(\MEBall{ Listing~\ref{lst:LBhello.cpp}}{2})
 a programtörzset lezáró visszatérési utasítás".
 Ehhez a 
 \par\noindent\lstinline|\\MEBall\{lst:LBhello.cpp\}\{2\}| makrót kell használnunk.
